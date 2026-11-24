@@ -34,11 +34,13 @@ El cuerpo usa marcado estilo Pandoc (`section.level1/2/3`, `<colgroup>`, `tr.odd
 - Foto: `figure.foto > div.foto-marco > img` con `onerror="this.parentNode.classList.add('sin-foto');this.remove()"`, más un enlace `a.foto-fallback` a Google Imágenes y un `<figcaption>`. Las imágenes se enlazan directamente desde `commons.wikimedia.org/wiki/Special:FilePath/<archivo>?width=900`. Para agregar una, copiá una figura existente.
 - Video: `a.video` con un `span.vthumb` (miniatura `mqdefault.jpg` de YouTube) y un `span.vtxt` con `data-url`, que el CSS de impresión muestra como URL. En general le sigue un segundo video, precedido por "Alternativa:".
 
-## Descarga de bibliografía (solo Geografía, por ahora)
+## Descarga de bibliografía
 
-- Los PDF están en `bibliografia/geografia/`, con nombres sin espacios ni tildes y con el prefijo de su abreviatura (`VS_`, `NES_`, `EP_`). Los originales están en `../bibliografia Geografia/`, fuera del repositorio.
-- La sección `#descargas` (al final de la introducción, con su enlace en el menú lateral) lista los PDF en `ul.descargas` y tiene un botón `#btn-descargas`. Ese botón hace clic en cada enlace `a[download]`, uno por uno y con una pausa.
-- Los estilos `ul.descargas` / `.btn-descargas` y el código del botón **solo existen en Geografía**: en ese punto el CSS y el JS ya no son idénticos a los de los otros dos archivos. Si se agrega la descarga a FEC o a Historia, copiar ese bloque.
+- Los PDF están en `bibliografia/`, con nombres sin espacios ni tildes y con el prefijo de su abreviatura (`VS_`, `HM_`, `NES_`):
+  - `comun/`: lo que usan las tres materias (VS, los 4 capítulos de HM y la Guía temática). Cada archivo está una sola vez.
+  - `geografia/`, `historia/` y `fec/`: el programa NES y los libros complementarios de cada materia.
+- Los originales están fuera del repositorio, en `../bibliografia Geografia/`, `../bibliografia de historia/` y `../bibliografia fec/`.
+- En cada página, la sección `#descargas` (al final de la introducción, con su enlace en el menú lateral) lista los PDF en `ul.descargas` y tiene un botón `#btn-descargas`. Ese botón hace clic en cada enlace `a[download]`, uno por uno y con una pausa.
 - Si agregás o quitás un PDF, actualizá la lista, el tamaño y el texto del botón ("Descargar todo (N archivos · X MB)").
 - El libro de Santillana pesa unos 90 MB. GitHub admite hasta 100 MB por archivo con `git push`, pero la subida desde la web admite solo 25 MB.
 

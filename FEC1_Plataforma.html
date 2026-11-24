@@ -117,6 +117,16 @@ section.claves.cerrado>*:not(h2):not(.toggle-claves){display:none}
 
 .arriba{position:fixed;right:18px;bottom:18px;background:#1d2233;color:#fff;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:15}
 
+/* descargas de bibliografía */
+ul.descargas{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+ul.descargas a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px 10px 46px;position:relative;font-size:15.5px;line-height:1.35;transition:.15s}
+ul.descargas a:before{content:"📄";position:absolute;left:14px;top:10px;font-size:20px}
+ul.descargas a:hover{border-color:var(--acc);transform:translateY(-2px)}
+ul.descargas b{color:var(--acc)}
+ul.descargas small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.btn-descargas{font:700 15px Nunito;background:var(--acc);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;margin:6px 0 10px}
+.btn-descargas:disabled{opacity:.6;cursor:wait}
+
 @media (max-width:980px){
   :root{--side:0px}
   #side{transform:translateX(-100%);width:290px;transition:.25s}
@@ -137,7 +147,7 @@ section.claves.cerrado>*:not(h2):not(.toggle-claves){display:none}
 @media print{
   @page{size:A4;margin:14mm 13mm 16mm}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #side,#burger,#progress,.arriba,.toggle-claves,#mtop,.hero .deco{display:none!important}
+  #side,#burger,#progress,.arriba,.toggle-claves,#mtop,.hero .deco,.btn-descargas{display:none!important}
   main{margin:0!important;padding:0!important} body{background:#fff;font-size:10.5pt;line-height:1.5}
   .wrap{max-width:none;padding:0}
   .hero{padding:60mm 10mm 20mm;min-height:250mm;break-after:page;border-radius:0}
@@ -168,6 +178,7 @@ section.claves.cerrado>*:not(h2):not(.toggle-claves){display:none}
   <div class="logo"><span>⚖️</span><div><b>FEC 1</b><small>Formación Ética y Ciudadana</small></div></div>
   <a href="#top">🏠 Inicio</a>
   <a class="nav-s nav-x" href="#intro">Bienvenidos a FEC</a>
+  <a class="nav-s nav-x" href="#descargas">📥 Descargar bibliografía</a>
 <a class="nav-u" href="#u1"><b>U1</b> Estado, gobierno y participación</a>
 <a class="nav-s" href="#s1"><i>1</i>El Estado y la legalidad del poder: la Constitución Nacional</a>
 <a class="nav-s" href="#s2"><i>2</i>Cómo se organiza el Estado argentino</a>
@@ -472,6 +483,25 @@ conviene comentar en familia.</li>
 (archivo libre). Si alguna no aparece, el recuadro muestra el epígrafe y
 un enlace para buscarla en Google Imágenes.</li>
 </ul>
+</section>
+<section id="descargas" class="level3">
+<h3>📥 Descargar la bibliografía</h3>
+<p>Acá están todos los materiales de la bibliografía. Podés bajarlos de
+a uno o todos juntos con el botón. Si el navegador pregunta si permitís
+<strong>descargar varios archivos</strong>, respondé que sí. La
+Constitución, las leyes y los tratados no están acá: se leen en InfoLEG.</p>
+<ul class="descargas">
+<li><a href="bibliografia/comun/VS_Ciencias_Sociales_1_Vale_Saber_Santillana.pdf" download><b>VS</b> · <em>Ciencias Sociales 1</em>, Serie Vale Saber (Santillana)<small>PDF · 90 MB</small></a></li>
+<li><a href="bibliografia/fec/NES_Programa_FEC_1.pdf" download><b>NES</b> · Programa de Formación Ética y Ciudadana 1.º<small>PDF · 144 KB</small></a></li>
+<li><a href="bibliografia/comun/HM_Cap1_El_comienzo.pdf" download><b>HM</b> · <em>Historia mundial</em>, cap. 1: El comienzo<small>Creación, Caída, Diluvio y Babel · PDF · 53 KB</small></a></li>
+<li><a href="bibliografia/comun/HM_Cap2_De_Sumeria_a_Canaan.pdf" download><b>HM</b> · <em>Historia mundial</em>, cap. 2: De Sumeria a Canaán<small>PDF · 67 KB</small></a></li>
+<li><a href="bibliografia/comun/HM_Cap3_Descenso_a_Egipto.pdf" download><b>HM</b> · <em>Historia mundial</em>, cap. 3: Descenso a Egipto<small>PDF · 57 KB</small></a></li>
+<li><a href="bibliografia/comun/HM_Cap4_Israel_en_su_tierra.pdf" download><b>HM</b> · <em>Historia mundial</em>, cap. 4: Israel en su tierra<small>PDF · 46 KB</small></a></li>
+<li><a href="bibliografia/fec/Ciudadania_en_practica_3_SM.pdf" download><b>Complementario</b> · <em>Ciudadanía en práctica 3</em> (SM)<small>PDF · 35 MB</small></a></li>
+<li><a href="bibliografia/fec/Libro_Ciudadania_1.pdf" download><b>Complementario</b> · <em>Ciudadanía 1</em><small>PDF · 15 MB</small></a></li>
+<li><a href="bibliografia/comun/Guia_tematica_Ciencias_Sociales_Grado_8.pdf" download><b>Guía</b> · Guía temática de Ciencias Sociales, grado 8<small>PDF · 989 KB</small></a></li>
+</ul>
+<button type="button" class="btn-descargas" id="btn-descargas">📥 Descargar todo (9 archivos · 141 MB)</button>
 </section>
 </section>
 
@@ -4622,6 +4652,13 @@ adorarlo es hacer de la apariencia lo más importante.</p>
     links.forEach(a=>a.classList.toggle('on',cur&&a.getAttribute('href')==='#'+cur.id));
   }
   addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  // descargar toda la bibliografía (de a un archivo, con pausa para que el navegador no las bloquee)
+  const bd=document.getElementById('btn-descargas');
+  if(bd){const txt=bd.textContent;bd.onclick=async()=>{
+    const as=[...document.querySelectorAll('ul.descargas a[download]')];bd.disabled=true;
+    for(let i=0;i<as.length;i++){bd.textContent='Descargando '+(i+1)+' de '+as.length+'…';as[i].click();await new Promise(r=>setTimeout(r,900));}
+    bd.textContent='✅ Listo: revisá tu carpeta de Descargas';setTimeout(()=>{bd.textContent=txt;bd.disabled=false;},5000);
+  };}
 })();
 </script>
 </body>
