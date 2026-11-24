@@ -10,6 +10,8 @@ Planificaciones de 1.º año de secundaria (NES, CABA, Argentina) con mirada de 
 - [Historia1_Plataforma.html](Historia1_Plataforma.html): Historia 1 (del Paleolítico al Feudalismo)
 - [Geografia1_Plataforma.html](Geografia1_Plataforma.html): Geografía 1
 
+[index.html](index.html) es la pantalla de inicio: muestra una tarjeta por materia y GitHub Pages la abre como página principal. Las tarjetas salen de la lista `MATERIAS` al principio de su `<script>`. Para sumar una materia, se agrega un objeto a esa lista. Si el campo `archivo` está vacío, la tarjeta aparece como "Próximamente". Si cambian el título, el color o las estadísticas de una plataforma, actualizá también su tarjeta. Cada plataforma tiene en el menú lateral un enlace "📚 Todas las materias" que vuelve a `index.html`.
+
 No hay paso de compilación, gestor de paquetes, linter ni tests. Para ver una página, abrí el `.html` en el navegador. Todo el contenido está en español rioplatense con voseo ("fijate", "armá", "leé") y está dirigido a chicos de 12 y 13 años. Mantené ese tono al editar.
 
 ## Estructura de cada página
