@@ -27,8 +27,8 @@ h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;line-height:1.2}
 
 /* tarjetas de materias */
 .materias{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px;margin:-56px 0 40px;position:relative}
-.materia{--c:var(--acc);display:flex;flex-direction:column;background:var(--card);border-radius:var(--radius);border-top:8px solid var(--c);padding:22px 24px 24px;text-decoration:none;color:var(--ink);box-shadow:0 2px 0 var(--line),0 10px 30px -18px rgba(30,35,60,.35);transition:.15s}
-a.materia:hover{transform:translateY(-4px);box-shadow:0 2px 0 var(--line),0 18px 36px -18px rgba(30,35,60,.45)}
+.materia{--c:var(--acc);position:relative;display:flex;flex-direction:column;background:var(--card);border-radius:var(--radius);border-top:8px solid var(--c);padding:22px 24px 24px;text-decoration:none;color:var(--ink);box-shadow:0 2px 0 var(--line),0 10px 30px -18px rgba(30,35,60,.35);transition:.15s}
+.materia:not(.pronto):hover{transform:translateY(-4px);box-shadow:0 2px 0 var(--line),0 18px 36px -18px rgba(30,35,60,.45)}
 .materia .ico{font-size:44px;line-height:1}
 .materia h2{font-size:26px;margin:12px 0 0;color:var(--c)}
 .materia .sub{font-family:Fredoka;font-weight:500;color:var(--muted);font-size:15px;margin:2px 0 10px}
@@ -36,7 +36,12 @@ a.materia:hover{transform:translateY(-4px);box-shadow:0 2px 0 var(--line),0 18px
 .materia .stats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
 .materia .stats span{background:var(--cs,#f2f2f2);border-radius:10px;padding:4px 10px;font-size:13px;font-weight:700;color:var(--c)}
 .materia .stats b{font-family:Fredoka;font-size:16px;margin-right:3px}
-.materia .ir{align-self:flex-start;background:var(--c);color:#fff;font-weight:800;font-size:15px;border-radius:99px;padding:9px 18px}
+.materia .acciones{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.materia .ir{background:var(--c);color:#fff;font-weight:800;font-size:15px;border-radius:99px;padding:9px 18px;text-decoration:none}
+.materia a.ir:after{content:"";position:absolute;inset:0;border-radius:var(--radius)} /* toda la tarjeta lleva a la materia */
+.materia .wa{position:relative;z-index:1;display:inline-flex;align-items:center;gap:7px;background:#25d366;color:#fff;font-weight:800;font-size:15px;border-radius:99px;padding:8px 16px 8px 12px;text-decoration:none;transition:.15s}
+.materia .wa:hover{background:#1da851}
+.materia .wa svg{width:20px;height:20px;fill:currentColor;flex:none}
 .materia.pronto{border-top-style:dashed;background:transparent;box-shadow:none;border:2px dashed var(--line);border-top:8px dashed var(--line)}
 .materia.pronto h2{color:var(--muted)}
 .materia.pronto .ir{background:var(--line);color:var(--muted)}
@@ -137,22 +142,36 @@ const MATERIAS = [
   }
 ];
 
+/* =========================================================================
+   TUTOR POR WHATSAPP
+   Número en formato internacional, solo dígitos y sin "+":
+   54 (Argentina) + 9 (celular) + 11 (característica) + número sin el 15.
+   Si se deja vacío (""), el botón de WhatsApp no aparece.
+   ========================================================================= */
+const WHATSAPP_TUTOR = "5491158641170";
+
 (function(){
   const cont = document.getElementById('materias');
+  const ICONO_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>';
+  const linkWa = m => 'https://wa.me/' + WHATSAPP_TUTOR + '?text=' + encodeURIComponent('Hola, necesito ayuda con ' + m.nombre + '.');
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   cont.innerHTML = MATERIAS.map(m => {
     const pronto = !m.archivo;
     const stats = Object.entries(m.stats || {}).map(([k,v]) => `<span><b>${esc(v)}</b>${esc(k)}</span>`).join('');
-    const tag = pronto ? 'div' : 'a';
-    const href = pronto ? '' : ` href="${esc(m.archivo)}"`;
-    return `<${tag} class="materia${pronto ? ' pronto' : ''}"${href} style="--c:${esc(m.color)};--cs:${esc(m.suave)}">
+    const ir = pronto
+      ? `<span class="ir">Próximamente</span>`
+      : `<a class="ir" href="${esc(m.archivo)}">Entrar →</a>`;
+    const wa = (WHATSAPP_TUTOR && !pronto)
+      ? `<a class="wa" href="${esc(linkWa(m))}" target="_blank" rel="noopener" title="Escribirle a un tutor de ${esc(m.nombre)} por WhatsApp">${ICONO_WA}Tutor</a>`
+      : '';
+    return `<div class="materia${pronto ? ' pronto' : ''}" style="--c:${esc(m.color)};--cs:${esc(m.suave)}">
       <div class="ico">${esc(m.icono)}</div>
       <h2>${esc(m.nombre)}</h2>
       <div class="sub">${esc(m.sub)}</div>
       <p class="desc">${esc(m.desc)}</p>
       ${stats ? `<div class="stats">${stats}</div>` : ''}
-      <span class="ir">${pronto ? 'Próximamente' : 'Entrar →'}</span>
-    </${tag}>`;
+      <div class="acciones">${ir}${wa}</div>
+    </div>`;
   }).join('');
 })();
 </script>
