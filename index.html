@@ -62,6 +62,13 @@ html{scroll-behavior:smooth}
 .biblia{background:var(--biblia);border:2px solid var(--biblia-b);border-radius:16px;padding:6px 22px 10px;margin:10px 0 60px;position:relative}
 .biblia:before{content:"🕊️";position:absolute;top:-18px;left:18px;font-size:26px;background:var(--biblia);border-radius:50%;padding:0 6px}
 .biblia p:first-child{margin-top:18px}
+/* enlace al staff de tutoras */
+.staff-link{display:flex;align-items:center;gap:18px;background:#1d2233;color:#fff;text-decoration:none;border-radius:var(--radius);padding:20px 26px;margin:-20px 0 50px;box-shadow:0 10px 30px -18px rgba(30,35,60,.6);transition:.15s}
+.staff-link:hover{transform:translateY(-3px);background:#2a3149}
+.staff-link .ico{font-size:40px;line-height:1}
+.staff-link .t{flex:1;color:#cfd5e6;font-size:15px}
+.staff-link .t b{display:block;font-family:Fredoka,Nunito,sans-serif;font-weight:600;font-size:23px;color:#fff;line-height:1.25}
+.staff-link .flecha{background:var(--gold);color:#1d2233;font-weight:800;font-size:22px;border-radius:50%;width:46px;height:46px;display:grid;place-items:center;flex:none}
 footer{text-align:center;color:var(--muted);font-size:14px;padding:0 0 40px}
 
 @media (max-width:700px){
@@ -101,6 +108,12 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding:0 0 40px}
   <div class="biblia">
     <p><strong>Para las familias:</strong> cada materia tiene un menú a la izquierda con todas las semanas (en el celular se abre con el botón ☰). Al principio de cada plataforma está la bibliografía para descargar, y al final, las claves de corrección para el adulto que acompaña.</p>
   </div>
+
+  <a class="staff-link" href="tutoras.html">
+    <span class="ico">👩‍🏫</span>
+    <span class="t"><b>Conocé a nuestro staff de tutoras</b>Las profes que acompañan a los chicos en cada materia</span>
+    <span class="flecha">→</span>
+  </a>
 </main>
 <footer>Planificaciones 8.º · Ciencias Sociales con los anteojos de la Biblia</footer>
 
