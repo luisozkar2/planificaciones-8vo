@@ -41,6 +41,17 @@ a.materia:hover{transform:translateY(-4px);box-shadow:0 2px 0 var(--line),0 18px
 .materia.pronto h2{color:var(--muted)}
 .materia.pronto .ir{background:var(--line);color:var(--muted)}
 
+/* video tutorial */
+html{scroll-behavior:smooth}
+.hero .ver-video{display:inline-block;margin-top:22px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;font-weight:800;border-radius:99px;padding:9px 18px;font-size:15px;transition:.15s}
+.hero .ver-video:hover{background:var(--gold);color:#1d2233;border-color:var(--gold)}
+.tutorial{background:var(--card);border-radius:var(--radius);border-top:8px solid var(--gold);padding:8px 34px 28px;margin:0 0 44px;box-shadow:0 2px 0 var(--line),0 10px 30px -18px rgba(30,35,60,.35)}
+.tutorial h2{font-size:28px;margin:22px 0 4px}
+.tutorial p{margin:0 0 16px;color:var(--muted)}
+.tutorial video{display:block;width:100%;border-radius:14px;background:#1d2233;aspect-ratio:16/9}
+.tutorial .bajar{display:inline-block;margin-top:14px;font-weight:800;font-size:15px;color:var(--acc);text-decoration:none}
+.tutorial .bajar:hover{text-decoration:underline}
+
 /* nota para las familias */
 .biblia{background:var(--biblia);border:2px solid var(--biblia-b);border-radius:16px;padding:6px 22px 10px;margin:10px 0 60px;position:relative}
 .biblia:before{content:"🕊️";position:absolute;top:-18px;left:18px;font-size:26px;background:var(--biblia);border-radius:50%;padding:0 6px}
@@ -52,6 +63,7 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding:0 0 40px}
   .hero{padding:48px 0 84px}
   .hero .deco{font-size:80px}
   .materias{grid-template-columns:1fr;gap:18px}
+  .tutorial{padding:6px 18px 22px}
 }
 </style>
 </head>
@@ -62,11 +74,22 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding:0 0 40px}
     <span class="chip">8.º grado · 1.º año NES · CABA</span>
     <h1>Elegí tu materia</h1>
     <p>Todas las planificaciones del cuatrimestre en un solo lugar: lecturas, actividades, videos, pruebas y bibliografía para descargar, semana por semana.</p>
+    <a class="ver-video" href="#como-usar">▶ ¿Primera vez? Mirá cómo se usa (3 min)</a>
   </div>
 </header>
 
 <main class="wrap">
   <div class="materias" id="materias"></div>
+
+  <section class="tutorial" id="como-usar">
+    <h2>🎬 Cómo usar la plataforma</h2>
+    <p>En 3 minutos: cómo navegar por las semanas, descargar la bibliografía y aprovechar cada parte de la planificación.</p>
+    <video controls preload="metadata" poster="video/portada_video.jpg">
+      <source src="video/Como_usar_la_plataforma.mp4" type="video/mp4">
+      Tu navegador no puede reproducir el video. <a href="video/Como_usar_la_plataforma.mp4">Descargalo acá</a>.
+    </video>
+    <a class="bajar" href="video/Como_usar_la_plataforma.mp4" download>📥 Descargar el video (12 MB)</a>
+  </section>
 
   <div class="biblia">
     <p><strong>Para las familias:</strong> cada materia tiene un menú a la izquierda con todas las semanas (en el celular se abre con el botón ☰). Al principio de cada plataforma está la bibliografía para descargar, y al final, las claves de corrección para el adulto que acompaña.</p>
