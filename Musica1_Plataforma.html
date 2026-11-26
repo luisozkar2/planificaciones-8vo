@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Música 1 · Escuchar y entender la música</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee; --card:#ffffff; --ink:#1f2330; --muted:#5d6475; --line:#e6e1d8;
+  --u1:#c7373f; --u1s:#fdeaea;
+  --u2:#6a4bc4; --u2s:#efeafc;
+  --u3:#2f6fd6; --u3s:#e7effd;
+  --u4:#139a8c; --u4s:#e3f6f3;
+  --u5:#e0782f; --u5s:#fff1e6;
+  --acc:#2f6fd6; --accs:#e7effd;
+  --gold:#f2b632; --biblia:#fff8e1; --biblia-b:#e8b923;
+  --radius:18px; --side:290px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+@media (max-width:980px){html{scroll-padding-top:76px}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Nunito,system-ui,sans-serif}
+a{color:var(--acc)}
+h1,h2,h3,h4{font-family:Fredoka,Nunito,sans-serif;line-height:1.2;margin:1.4em 0 .5em}
+
+/* ---------- barra lateral ---------- */
+#side{position:fixed;inset:0 auto 0 0;width:var(--side);background:#1d2233;color:#cfd5e6;overflow-y:auto;padding:22px 14px 40px;z-index:20}
+#side .logo{display:flex;gap:10px;align-items:center;padding:4px 8px 18px;border-bottom:1px solid #303750;margin-bottom:12px}
+#side .logo span{font-size:30px}
+#side .logo b{font-family:Fredoka;font-size:20px;color:#fff;display:block;line-height:1.1}
+#side .logo small{color:#8f98b3;font-size:12px}
+#side a{display:block;text-decoration:none;color:inherit;border-radius:10px;padding:6px 10px;font-size:14px;line-height:1.3}
+#side a:hover{background:#2a3149;color:#fff}
+#side a.on{background:#fff;color:#1d2233;font-weight:700}
+#side .nav-u{margin-top:14px;font-family:Fredoka;font-weight:600;color:#fff;font-size:15px}
+#side .nav-u b{display:inline-block;background:var(--gold);color:#1d2233;border-radius:7px;padding:0 6px;margin-right:6px;font-size:13px}
+#side .nav-s{display:flex;gap:8px;padding-left:14px}
+#side .nav-s i{font-style:normal;min-width:22px;height:22px;border-radius:50%;background:#303750;color:#fff;font-size:11px;display:grid;place-items:center;font-weight:800;flex:none}
+#side .nav-x{color:var(--gold)}
+#burger{display:none}
+#mtop{display:none;position:fixed;top:0;left:0;right:0;height:64px;background:#1d2233;color:#fff;z-index:35;align-items:center;padding-left:70px;font-family:Fredoka;font-size:18px}
+
+/* ---------- contenido ---------- */
+main{margin-left:var(--side);padding:0 0 80px}
+.wrap{max-width:900px;margin:0 auto;padding:0 28px}
+#progress{position:fixed;top:0;z-index:36;left:var(--side);right:0;height:5px;background:transparent;z-index:30}
+#progress div{height:100%;width:0;background:linear-gradient(90deg,var(--u1),var(--u2),var(--u3),var(--u4));border-radius:0 4px 4px 0}
+
+.hero{background:radial-gradient(circle at 85% 20%,#3b4a7a 0,#1d2233 60%);color:#fff;padding:64px 28px 56px;position:relative;overflow:hidden}
+.hero .wrap{position:relative}
+.hero .chip{display:inline-block;background:var(--gold);color:#1d2233;font-weight:800;border-radius:99px;padding:4px 14px;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.hero h1{font-size:clamp(32px,5vw,52px);margin:.35em 0 .2em}
+.hero p{font-size:19px;color:#d6dcf0;max-width:640px;margin:0}
+.hero .deco{position:absolute;right:-10px;top:-20px;font-size:120px;opacity:.18;letter-spacing:-20px;user-select:none}
+.hero .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .stats div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:10px 16px;font-size:14px}
+.hero .stats b{font-family:Fredoka;font-size:26px;display:block;color:#fff;line-height:1}
+
+/* secciones de unidad */
+section.level1{--c:var(--acc);--cs:var(--accs)}
+section.level1[data-color=u1]{--c:var(--u1);--cs:var(--u1s)}
+section.level1[data-color=u2]{--c:var(--u2);--cs:var(--u2s)}
+section.level1[data-color=u3]{--c:var(--u3);--cs:var(--u3s)}
+section.level1[data-color=u4]{--c:var(--u4);--cs:var(--u4s)}
+section.level1[data-color=u5]{--c:var(--u5);--cs:var(--u5s)}
+section.level1>h1{background:var(--c);color:#fff;margin:56px 0 0;padding:34px 30px 28px;border-radius:var(--radius) var(--radius) 0 0;font-size:clamp(26px,3.6vw,36px)}
+section.level1>blockquote{margin:0 0 30px;background:var(--cs);border-radius:0 0 var(--radius) var(--radius);padding:18px 30px 20px;border:2px solid var(--c);border-top:0;font-size:16px}
+section.level1>blockquote p{margin:.35em 0}
+
+/* tarjetas de semana */
+section.level2{background:var(--card);border-radius:var(--radius);padding:8px 34px 30px;margin:0 0 34px;box-shadow:0 2px 0 var(--line),0 10px 30px -18px rgba(30,35,60,.35);border-top:8px solid var(--c,var(--acc))}
+#intro{border-top-color:var(--gold)}
+section.level2>h2{font-size:28px;margin-top:26px;color:var(--c,var(--ink))}
+section.level2>h2:before{content:attr(data-badge);}
+section.level2>table:first-of-type{background:var(--cs,#f5f5f5);border-radius:12px;overflow:hidden;font-size:15px}
+section.level2>table:first-of-type thead,section.level2>table:first-of-type colgroup{display:none}
+section.level2>table:first-of-type{table-layout:auto}
+section.level2>table:first-of-type td:first-child{width:170px;font-weight:700;color:var(--c,var(--ink))}
+section.level3>h3, section.level2>h3{font-size:21px;border-bottom:2px dashed var(--line);padding-bottom:6px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px;display:block;overflow-x:auto}
+@media (min-width:700px){table{display:table}}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--cs,#f2f2f2);font-family:Fredoka;font-weight:600}
+blockquote{margin:16px 0}
+
+/* recuadro bíblico */
+.biblia{background:var(--biblia);border:2px solid var(--biblia-b);border-radius:16px;padding:6px 22px 10px 22px;margin:26px 0;position:relative}
+.biblia:before{content:"🕊️";position:absolute;top:-18px;left:18px;font-size:26px;background:var(--biblia);border-radius:50%;padding:0 6px}
+.biblia p:first-child{margin-top:18px}
+
+/* fotos */
+figure.foto{margin:24px 0;background:#f2efe9;border-radius:16px;overflow:hidden}
+.foto-marco{position:relative;min-height:60px;background:#e9e4da}
+.foto-marco img{display:block;width:100%;max-height:440px;object-fit:cover}
+.foto-fallback{display:none}
+.sin-foto .foto-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:180px;text-decoration:none;font-size:42px;background:repeating-linear-gradient(45deg,#ece6db,#ece6db 12px,#e4ddd0 12px,#e4ddd0 24px)}
+.sin-foto .foto-fallback span{font-size:15px;font-weight:800;background:#fff;border-radius:99px;padding:4px 14px}
+figcaption{padding:10px 16px 12px;font-size:14.5px;color:#3c4253;font-style:italic}
+figcaption .glink{font-style:normal;font-size:13px;white-space:nowrap;margin-left:4px}
+
+/* video */
+a.video{display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;margin:8px 0;max-width:560px;transition:.15s}
+a.video:hover{border-color:#e33;transform:translateY(-2px)}
+.vthumb{flex:none;width:136px;aspect-ratio:16/9;border-radius:10px;background:#222 center/cover;display:grid;place-items:center}
+.vthumb b{background:#e33;color:#fff;border-radius:10px;padding:2px 12px;font-size:14px}
+.vtxt{font-weight:700;font-size:15px;line-height:1.3}
+.vtxt small{display:block;color:#e33;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+/* pruebas */
+section.prueba{background:#fff;border:2px dashed var(--c,var(--acc));border-top-width:8px;border-top-style:solid}
+section.prueba>h2{display:flex;align-items:center;gap:10px}
+section.claves{border-top-color:#1d2233}
+.toggle-claves{font:700 15px Nunito;background:#1d2233;color:#fff;border:0;border-radius:99px;padding:10px 18px;cursor:pointer;margin:6px 0 10px}
+section.claves.cerrado>*:not(h2):not(.toggle-claves){display:none}
+
+.arriba{position:fixed;right:18px;bottom:18px;background:#1d2233;color:#fff;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:15}
+
+/* descargas de bibliografía */
+ul.descargas{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+ul.descargas a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px 10px 46px;position:relative;font-size:15.5px;line-height:1.35;transition:.15s}
+ul.descargas a:before{content:"📄";position:absolute;left:14px;top:10px;font-size:20px}
+ul.descargas a:hover{border-color:var(--acc);transform:translateY(-2px)}
+ul.descargas b{color:var(--acc)}
+ul.descargas small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.btn-descargas{font:700 15px Nunito;background:var(--acc);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;margin:6px 0 10px}
+.btn-descargas:disabled{opacity:.6;cursor:wait}
+
+@media (max-width:980px){
+  :root{--side:0px}
+  #side{transform:translateX(-100%);width:290px;transition:.25s}
+  body.menu #side{transform:none}
+  #burger{display:grid;place-items:center;position:fixed;top:11px;left:10px;z-index:40;width:46px;height:42px;border-radius:12px;border:0;background:#303750;color:#fff;font-size:22px}
+  .wrap{padding:0 16px}
+  section.level2{padding:6px 18px 22px}
+  section.level1>h1{padding:26px 18px 20px}
+  section.level1>blockquote{padding:14px 18px}
+  .hero{padding:80px 16px 40px}
+  section.level2>table:first-of-type,section.level2>table:first-of-type tbody,section.level2>table:first-of-type tr,section.level2>table:first-of-type td{display:block;width:auto!important;border:0}
+  section.level2>table:first-of-type td:first-child{padding-bottom:0}
+  section.level2>table:first-of-type tr{border-bottom:1px solid var(--line)}
+  main{padding-top:64px}
+  #mtop{display:flex}
+  .vthumb{width:104px}
+}
+@media print{
+  @page{size:A4;margin:14mm 13mm 16mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #side,#burger,#progress,.arriba,.toggle-claves,#mtop,.hero .deco,.btn-descargas{display:none!important}
+  main{margin:0!important;padding:0!important} body{background:#fff;font-size:10.5pt;line-height:1.5}
+  .wrap{max-width:none;padding:0}
+  .hero{padding:60mm 10mm 20mm;min-height:250mm;break-after:page;border-radius:0}
+  .hero h1{font-size:40pt}
+  section.level1{break-before:page}
+  section.level1>h1{margin-top:0}
+  section.level2{box-shadow:none;break-before:page;padding:2mm 6mm 4mm;margin:0;border-radius:10px}
+  section.level1>section.level2:first-of-type{break-before:avoid}
+  #intro{break-before:avoid}
+  h2,h3{break-after:avoid}
+  table,figure,.biblia,a.video,li{break-inside:avoid}
+  figure.foto .foto-marco img{max-height:85mm}
+  .sin-foto .foto-fallback{height:28mm;font-size:22pt}
+  section.claves.cerrado>*{display:block!important}
+  section.claves.cerrado>table{display:table!important}
+  a{color:inherit;text-decoration:none}
+  a.video{border:1px solid #ccc;max-width:none}
+  a.video .vtxt:after{content:attr(data-url);display:block;font-weight:400;font-size:8pt;color:#555;word-break:break-all}
+  figcaption .glink{display:none}
+}
+</style>
+</head>
+<body>
+<button id="burger" aria-label="Menú" onclick="document.body.classList.toggle('menu')">☰</button>
+<div id="mtop">🎵 Música 1</div>
+<div id="progress"><div></div></div>
+<nav id="side">
+  <div class="logo"><span>🎵</span><div><b>Música 1</b><small>12 semanas · 2 h por semana</small></div></div>
+  <a href="index.html">📚 Todas las materias</a>
+  <a href="#top">⬆️ Portada</a>
+  <a class="nav-s nav-x" href="#intro">Bienvenidos a Música</a>
+  <a class="nav-s nav-x" href="#descargas">📥 Descargar bibliografía</a>
+<a class="nav-u" href="#u1"><b>U1</b> El sonido</a>
+<a class="nav-s" href="#s1"><i>1</i>Sonido, ruido y silencio</a>
+<a class="nav-s" href="#s2"><i>2</i>Las cualidades del sonido</a>
+<a class="nav-s" href="#s3"><i>3</i>Fuentes sonoras e instrumentos</a>
+<a class="nav-s" href="#s4"><i>4</i>Nuevas tecnologías en la música</a>
+<a class="nav-u" href="#u2"><b>U2</b> Ritmo y discurso musical</a>
+<a class="nav-s" href="#s5"><i>5</i>Pulso y compás</a>
+<a class="nav-s" href="#s6"><i>6</i>Subdivisión binaria y ternaria</a>
+<a class="nav-s" href="#s7"><i>7</i>La forma musical</a>
+<a class="nav-s" href="#s8"><i>8</i>Textura y tonalidad</a>
+<a class="nav-u" href="#u3"><b>U3</b> Entrenamiento y análisis</a>
+<a class="nav-s" href="#s9"><i>9</i>Timbres y texturas</a>
+<a class="nav-s" href="#s10"><i>10</i>Ritmo y contexto tonal</a>
+<a class="nav-s" href="#s11"><i>11</i>Música folklórica argentina</a>
+<a class="nav-s" href="#s12"><i>12</i>Análisis integral</a>
+</nav>
+<main>
+  <header class="hero" id="top">
+    <div class="deco">🎵🥁🎸</div>
+    <div class="wrap">
+      <span class="chip">1.º año · NES · CABA</span>
+      <h1>Escuchar y entender la música</h1>
+      <p>El sonido, el ritmo, la forma y la textura, y un viaje por el folklore argentino: 12 semanas para aprender a escuchar con atención.</p>
+      <div class="stats">
+        <div><b>3</b>meses</div><div><b>12</b>semanas</div><div><b>24</b>horas</div><div><b>36</b>ejercicios</div>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+  <section id="intro" class="level2">
+<h2>Bienvenidos a Música</h2>
+<p>En estas <strong>12 semanas</strong> vamos a avanzar paso a paso por los contenidos del programa: comprender los
+conceptos musicales, <strong>desarrollar la escucha</strong> y la percepción auditiva, y aplicar lo aprendido al análisis de
+obras populares y folklóricas.</p>
+<section id="cómo-está-organizada-cada-semana" class="level3">
+<h3>Cómo organizar las 2 horas semanales</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Tiempo</th>
+<th>Momento</th>
+<th>Qué se hace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>40 minutos</td>
+<td><strong>Teoría</strong></td>
+<td>Leer, comprender y resumir los conceptos.</td>
+</tr>
+<tr class="even">
+<td>50 minutos</td>
+<td><strong>Práctica auditiva</strong></td>
+<td>Escuchar canciones y reconocer sonidos, ritmos e instrumentos.</td>
+</tr>
+<tr class="odd">
+<td>30 minutos</td>
+<td><strong>Actividades</strong></td>
+<td>Responder preguntas, hacer ejercicios y repasar.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Cada semana tiene la teoría para estudiar, videos de apoyo y tres ejercicios prácticos. Al final de cada mes hay una
+actividad de cierre.</p>
+</section>
+<section id="mapa-del-año" class="level3">
+<h3>Mapa de las 12 semanas</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Semana</th>
+<th>Contenidos</th>
+<th>Actividades</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#s1">1</a></td>
+<td>Sonido, ruido y silencio. Contaminación sonora. Rango auditivo humano.</td>
+<td>Definiciones, ejemplos cotidianos y ejercicios de escucha.</td>
+</tr>
+<tr class="even">
+<td><a href="#s2">2</a></td>
+<td>Cualidades del sonido: altura, intensidad, timbre y duración.</td>
+<td>Reconocer las cuatro cualidades escuchando distintos sonidos.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s3">3</a></td>
+<td>Fuentes sonoras. Clasificación tradicional y Hornbostel-Sachs.</td>
+<td>Clasificar instrumentos y objetos según cómo producen el sonido.</td>
+</tr>
+<tr class="even">
+<td><a href="#s4">4</a></td>
+<td>Nuevas tecnologías en la producción musical.</td>
+<td>Conocer recursos digitales para crear y modificar sonidos. Repaso del módulo 1.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s5">5</a></td>
+<td>Pulso y compás. Ritmo libre y ritmo pulsado.</td>
+<td>Escuchar canciones, marcar el pulso con palmas y reconocer el compás.</td>
+</tr>
+<tr class="even">
+<td><a href="#s6">6</a></td>
+<td>Compases de subdivisión binaria y ternaria.</td>
+<td>Escuchar ejemplos de distintos géneros. Practicar ritmos y frases rítmicas.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s7">7</a></td>
+<td>Forma musical. Forma binaria y ternaria. Introducción, interludio y coda.</td>
+<td>Escuchar canciones e identificar sus partes: A, B y cierre.</td>
+</tr>
+<tr class="even">
+<td><a href="#s8">8</a></td>
+<td>Textura musical: monodía y melodía acompañada. Tonalidad pentatónica y tonal.</td>
+<td>Comparar ejemplos musicales y aprender a distinguir las texturas y los contextos tonales.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s9">9</a></td>
+<td>Percepción y diferenciación de timbres y texturas.</td>
+<td>Escuchar obras folklóricas y populares. Reconocer instrumentos y distinguir monodía de melodía acompañada.</td>
+</tr>
+<tr class="even">
+<td><a href="#s10">10</a></td>
+<td>Trabajo rítmico y armónico. Pulso, compás, ritmo binario y diferenciación pentatónica/tonal.</td>
+<td>Imitar ritmos y frases rítmicas. Comparar canciones.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s11">11</a></td>
+<td>Música folklórica argentina: región Noroeste y Noreste.</td>
+<td>Investigar dos obras, sus compositores, instrumentos, géneros y contexto cultural.</td>
+</tr>
+<tr class="even">
+<td><a href="#s12">12</a></td>
+<td>Análisis integral y preparación para el examen.</td>
+<td>Analizar canciones, reconocer sus elementos y realizar una práctica de examen.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notas-bibliográficas" class="level3">
+<h3>Bibliografía recomendada</h3>
+<ul>
+<li><strong>Texto principal</strong> · Agudelo, Graciela; Bárcena Alcaraz, Patricia, y Vellido Peralta, Graciela.
+<em>El mundo y la música 1</em>. Grupo Editorial Patria, 2011 (168 págs., ISBN 978-607-438-280-8). Aporta: de los sonidos
+a la música; ritmo, cuerpo y movimiento; la voz y el canto; del objeto sonoro al instrumento. Acompaña especialmente
+sonido, ritmo, fuentes sonoras e instrumentos, con actividades de escucha y creación. No desarrolla en profundidad todos
+los contenidos del plan (por ejemplo, cada sistema de clasificación o las escalas): para esos puntos vale la teoría de
+esta plataforma.</li>
+<li><strong>Complemento</strong> · Schafer, R. Murray. <em>Hacia una educación sonora: 100 ejercicios de audición y
+producción sonora</em>. Pedagogías Musicales Abiertas, 1994 (147 págs., ISBN 978-987-950860-2). Ejercicios de percepción
+auditiva, escucha del entorno y paisaje sonoro, útiles para las actividades de escucha.</li>
+<li>Si se va a indicar un solo libro, conviene priorizar <em>El mundo y la música 1</em>. La disponibilidad de las
+ediciones puede variar: conviene consultar bibliotecas o librerías antes de comprarlos.</li>
+<li><strong>Videos</strong> · Algunos enlaces son <strong>búsquedas de YouTube</strong> y no un video fijo. Conviene que
+un adulto elija y mire el video antes.</li>
+</ul>
+</section>
+<section id="descargas" class="level3">
+<h3>📥 Descargar la bibliografía</h3>
+<p>Acá está el plan de estudio completo. Los libros recomendados no se pueden descargar: se consiguen en bibliotecas o librerías.</p>
+<ul class="descargas">
+<li><a href="bibliografia/musica/Plan_de_estudio_Musica_1.docx" download><b>Plan</b> · Plan de estudio de Música · 1.º año<small>Documento de Word · 49 KB</small></a></li>
+</ul>
+</section>
+</section>
+
+<section id="u1" class="level1 unidad" data-color="u1">
+<h1 class="unidad" data-color="u1">Mes 1 · Módulo 1: El sonido y las fuentes sonoras</h1>
+<blockquote>
+<p><strong>Objetivo:</strong> Comprender qué es el sonido y reconocer sus características. <strong>Semanas 1 a 4</strong>, con 2 horas por semana.</p>
+</blockquote>
+<section id="s1" class="level2">
+<h2>Semana 1 · Sonido, ruido y silencio</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Sonido, ruido y silencio. Contaminación sonora. Rango auditivo humano.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Definiciones, ejemplos cotidianos y ejercicios de escucha.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s1" class="level3">
+<h3>📖 Teoría para estudiar</h3>
+<p><strong>¿Qué es el sonido?.</strong> El sonido es un fenómeno que se produce cuando un cuerpo vibra y esa vibración se transmite por un medio, como el aire, hasta llegar al oído. En música, los sonidos se organizan con una intención expresiva. El ruido suele percibirse como no deseado o desordenado, aunque también puede utilizarse con intención musical. El silencio es la ausencia de sonido perceptible o una pausa dentro de una obra. La contaminación sonora aparece cuando los sonidos del ambiente alcanzan niveles o duraciones que afectan el bienestar y la audición.</p>
+</section>
+<section id="ejercicios-s1" class="level3">
+<h3>✏️ Ejercicios · Exploradores de sonidos</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Anotá 8 sonidos que escuches en tu casa o en la calle. Clasificalos como sonidos musicales, ruidos o momentos de silencio.</li>
+<li>Escuchá el ambiente durante un minuto sin hablar. Escribí qué sonidos aparecieron y cuáles podrían considerarse contaminación sonora.</li>
+<li>Explicá con tus palabras por qué el silencio también puede ser importante en una canción.</li>
+</ol>
+</section>
+</section>
+<section id="s2" class="level2">
+<h2>Semana 2 · Las cualidades del sonido</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Cualidades del sonido: altura, intensidad, timbre y duración.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Reconocer las cuatro cualidades escuchando distintos sonidos.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s2" class="level3">
+<h3>📖 Teoría para estudiar</h3>
+<p><strong>Las cualidades del sonido.</strong> <strong>Altura:</strong> permite distinguir sonidos graves y agudos. Se relaciona con la frecuencia de vibración. <strong>Intensidad:</strong> permite distinguir sonidos fuertes y suaves; se relaciona con la amplitud de la vibración. <strong>Timbre:</strong> es la cualidad que permite reconocer qué voz, instrumento u objeto produce un sonido, incluso cuando interpreta la misma nota que otro. <strong>Duración:</strong> indica cuánto tiempo se mantiene un sonido, desde sonidos breves hasta sonidos largos.</p>
+</section>
+<section id="videos-s2" class="level3">
+<h3>🎬 Videos de apoyo</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=SNCRSaMgPIs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/SNCRSaMgPIs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=SNCRSaMgPIs"><small>YouTube</small>Cualidades del sonido: altura, intensidad, timbre y duración</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=2k8l3ZqVEtw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/2k8l3ZqVEtw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=2k8l3ZqVEtw"><small>YouTube</small>Cualidades del sonido: explicación educativa</span></a></p>
+<p><em>Después de mirar cada video, dedicá entre 5 y 10 minutos a escribir tres conceptos importantes, anotar ejemplos musicales y explicar con tus palabras qué aprendiste.</em></p>
+</section>
+<section id="ejercicios-s2" class="level3">
+<h3>✏️ Ejercicios · Detectives de las cualidades</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Escribí dos ejemplos de sonidos graves y dos de sonidos agudos. Luego, dos sonidos fuertes y dos suaves.</li>
+<li>Escuchá una guitarra y una flauta interpretando notas. ¿Qué cualidad te permite reconocer cuál es cuál?</li>
+<li>Buscá o producí un sonido breve y otro largo. Describí la diferencia de duración.</li>
+</ol>
+</section>
+</section>
+<section id="s3" class="level2">
+<h2>Semana 3 · Fuentes sonoras e instrumentos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Fuentes sonoras. Clasificación tradicional y Hornbostel-Sachs.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Clasificar instrumentos y objetos según cómo producen el sonido.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s3" class="level3">
+<h3>📖 Teoría para estudiar</h3>
+<p><strong>Fuentes sonoras e instrumentos.</strong> Una fuente sonora es aquello que produce un sonido: puede ser una voz, un instrumento, un objeto cotidiano o un dispositivo electrónico. La clasificación tradicional suele agrupar los instrumentos en familias como cuerda, viento y percusión. La clasificación de Hornbostel-Sachs los organiza según el modo en que se produce la vibración: <strong>idiófonos</strong> (vibra el cuerpo del instrumento), <strong>membranófonos</strong> (vibra una membrana), <strong>cordófonos</strong> (vibran cuerdas), <strong>aerófonos</strong> (vibra una columna de aire) y <strong>electrófonos</strong> (intervienen circuitos o medios electrónicos).</p>
+</section>
+<section id="videos-s3" class="level3">
+<h3>🎬 Video de apoyo</h3>
+<p>🔎 <a href="https://www.youtube.com/results?search_query=clasificacion+de+instrumentos+musicales+Hornbostel+Sachs+espanol" target="_blank" rel="noopener">Buscar en YouTube: <strong>Clasificación de instrumentos y fuentes sonoras</strong></a><br><em>Es una búsqueda: elegí un video corto y claro, y conviene que un adulto lo mire antes.</em></p>
+<p><em>Después de mirar cada video, dedicá entre 5 y 10 minutos a escribir tres conceptos importantes, anotar ejemplos musicales y explicar con tus palabras qué aprendiste.</em></p>
+</section>
+<section id="ejercicios-s3" class="level3">
+<h3>✏️ Ejercicios · Clasificación de instrumentos</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Clasificá estos instrumentos según la familia tradicional: guitarra, bombo, flauta, violín, piano y trompeta.</li>
+<li>Ubicá cinco instrumentos en las categorías de Hornbostel-Sachs: idiófonos, membranófonos, cordófonos, aerófonos o electrófonos.</li>
+<li>Dibujá o pegá imágenes de 10 instrumentos y escribí cómo producen el sonido.</li>
+</ol>
+</section>
+</section>
+<section id="s4" class="level2">
+<h2>Semana 4 · Nuevas tecnologías en la música</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Nuevas tecnologías en la producción musical.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Conocer recursos digitales para crear y modificar sonidos. Repaso del módulo 1.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s4" class="level3">
+<h3>📖 Teoría para estudiar</h3>
+<p><strong>Tecnología y producción musical.</strong> Las tecnologías permiten grabar, editar, combinar y transformar sonidos. Con micrófonos se captura el sonido; con programas o aplicaciones se pueden cortar fragmentos, modificar volumen, agregar efectos y superponer pistas. La tecnología amplía las posibilidades de creación y producción musical.</p>
+</section>
+<section id="ejercicios-s4" class="level3">
+<h3>✏️ Ejercicios · Tecnología musical</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Nombrá tres dispositivos o tecnologías que se usan para grabar o producir música.</li>
+<li>Explicá tres acciones que se pueden realizar con una aplicación de edición de audio.</li>
+<li>Imaginá que vas a grabar una canción en casa. ¿Qué elementos necesitarías y en qué orden los usarías?</li>
+</ol>
+</section>
+<section id="cierre-s4" class="level3">
+<h3>🗂️ Actividad de cierre del mes</h3>
+<p>Realizar una ficha con las cualidades del sonido y la clasificación de al menos 10 instrumentos.</p>
+</section>
+</section>
+</section>
+<section id="u2" class="level1 unidad" data-color="u2">
+<h1 class="unidad" data-color="u2">Mes 2 · Módulos 2 y 3: Ritmo y discurso musical</h1>
+<blockquote>
+<p><strong>Objetivo:</strong> Reconocer cómo se organiza la música y comprender sus elementos. <strong>Semanas 5 a 8</strong>, con 2 horas por semana.</p>
+</blockquote>
+<section id="s5" class="level2">
+<h2>Semana 5 · Pulso y compás</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Pulso y compás. Ritmo libre y ritmo pulsado.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Escuchar canciones, marcar el pulso con palmas y reconocer el compás.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s5" class="level3">
+<h3>📖 Teoría para estudiar</h3>
+<p><strong>Pulso, ritmo y compás.</strong> El <strong>pulso</strong> es una sucesión regular de tiempos que funciona como una referencia para organizar la música. El <strong>ritmo</strong> surge de la combinación de sonidos y silencios de distintas duraciones. El <strong>compás</strong> agrupa los pulsos en unidades que se repiten y se perciben mediante acentos. En el ritmo pulsado se reconoce una base regular; en el ritmo libre no se mantiene necesariamente una pulsación constante.</p>
+</section>
+<section id="videos-s5" class="level3">
+<h3>🎬 Video de apoyo</h3>
+<p>🔎 <a href="https://www.youtube.com/results?search_query=pulso+y+compas+binario+y+ternario+musica" target="_blank" rel="noopener">Buscar en YouTube: <strong>Pulso y compás binario y ternario</strong></a><br><em>Es una búsqueda: elegí un video corto y claro, y conviene que un adulto lo mire antes.</em></p>
+<p><em>Después de mirar cada video, dedicá entre 5 y 10 minutos a escribir tres conceptos importantes, anotar ejemplos musicales y explicar con tus palabras qué aprendiste.</em></p>
+</section>
+<section id="ejercicios-s5" class="level3">
+<h3>✏️ Ejercicios · Encontrar el pulso</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Elegí una canción y marcá el pulso con palmas durante 30 segundos. ¿Pudiste mantenerlo de manera regular?</li>
+<li>Explicá con un ejemplo la diferencia entre pulso y ritmo.</li>
+<li>Buscá un ejemplo de ritmo libre y otro de ritmo pulsado. Escribí qué diferencias escuchás.</li>
+</ol>
+</section>
+</section>
+<section id="s6" class="level2">
+<h2>Semana 6 · Subdivisión binaria y ternaria</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Compases de subdivisión binaria y ternaria.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Escuchar ejemplos de distintos géneros. Practicar ritmos y frases rítmicas.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s6" class="level3">
+<h3>📖 Teoría para estudiar</h3>
+<p><strong>Subdivisión binaria y ternaria.</strong> La subdivisión indica en cuántas partes se divide cada pulso. En la subdivisión <strong>binaria</strong>, cada pulso se divide en dos partes; en la <strong>ternaria</strong>, en tres. Se puede practicar escuchando canciones y marcando el pulso con palmas o pasos, prestando atención a cómo se agrupan y subdividen los tiempos.</p>
+</section>
+<section id="videos-s6" class="level3">
+<h3>🎬 Video de apoyo</h3>
+<p>🔎 <a href="https://www.youtube.com/results?search_query=pulso+y+compas+binario+y+ternario+musica" target="_blank" rel="noopener">Buscar en YouTube: <strong>Pulso y compás binario y ternario</strong></a><br><em>Es una búsqueda: elegí un video corto y claro, y conviene que un adulto lo mire antes.</em></p>
+<p><em>Después de mirar cada video, dedicá entre 5 y 10 minutos a escribir tres conceptos importantes, anotar ejemplos musicales y explicar con tus palabras qué aprendiste.</em></p>
+</section>
+<section id="ejercicios-s6" class="level3">
+<h3>✏️ Ejercicios · Binario o ternario</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Escuchá dos canciones de distinto género y tratá de marcar el pulso. Anotá si percibís una subdivisión binaria o ternaria y explicá por qué.</li>
+<li>Inventá una frase rítmica breve con subdivisión binaria y otra con subdivisión ternaria. Escribilas con sílabas (TA, ta-ta) y ejecutalas con palmas.</li>
+<li>Imitá una frase rítmica que escuches en una canción y repetila tres veces manteniendo el pulso.</li>
+</ol>
+</section>
+</section>
+<section id="s7" class="level2">
+<h2>Semana 7 · La forma musical</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Forma musical. Forma binaria y ternaria. Introducción, interludio y coda.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Escuchar canciones e identificar sus partes: A, B y cierre.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s7" class="level3">
+<h3>📖 Teoría para estudiar</h3>
+<p><strong>Forma musical.</strong> La forma musical es la organización de las partes de una obra. Una forma <strong>binaria</strong> presenta dos secciones principales, que pueden representarse como A-B. Una forma <strong>ternaria</strong> presenta tres secciones, frecuentemente A-B-A. La <strong>introducción</strong> aparece al comienzo y prepara la entrada de la canción; el <strong>interludio</strong> es un pasaje instrumental entre secciones; la <strong>coda</strong> es el fragmento final que da cierre a la obra. Al escuchar, se pueden reconocer cambios y repeticiones para identificar las partes.</p>
+</section>
+<section id="videos-s7" class="level3">
+<h3>🎬 Video de apoyo</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=SRMa3dLbUqM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/SRMa3dLbUqM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=SRMa3dLbUqM"><small>YouTube</small>Forma musical binaria y ternaria</span></a></p>
+<p><em>Después de mirar cada video, dedicá entre 5 y 10 minutos a escribir tres conceptos importantes, anotar ejemplos musicales y explicar con tus palabras qué aprendiste.</em></p>
+</section>
+<section id="ejercicios-s7" class="level3">
+<h3>✏️ Ejercicios · Armamos la forma</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Elegí una canción que conozcas. Identificá si escuchás secciones que se repiten o contrastan y representalas con letras A y B.</li>
+<li>Buscá en esa canción una posible introducción, un interludio y una coda. Si alguno no aparece, indicá que no lo encontraste.</li>
+<li>Explicá si la organización general se acerca más a una forma binaria o ternaria.</li>
+</ol>
+</section>
+</section>
+<section id="s8" class="level2">
+<h2>Semana 8 · Textura y tonalidad</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Textura musical: monodía y melodía acompañada. Tonalidad pentatónica y tonal.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Comparar ejemplos musicales y aprender a distinguir las texturas y los contextos tonales.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s8" class="level3">
+<h3>📖 Teoría para estudiar</h3>
+<p><strong>Textura musical.</strong> La textura describe cómo se relacionan las diferentes líneas o partes sonoras. En la <strong>monodía</strong> hay una sola línea melódica, sin acompañamiento armónico independiente. En la <strong>melodía acompañada</strong> se distingue una melodía principal sostenida por un acompañamiento, que puede estar realizado por acordes, bajo, ritmo u otros instrumentos.</p>
+<p><strong>Tonalidad pentatónica y tonal.</strong> Una escala <strong>pentatónica</strong> está formada por cinco sonidos diferentes dentro de la octava. La música basada en ella suele generar una sonoridad particular y puede reconocerse por el conjunto de notas que utiliza. En la música <strong>tonal</strong>, las notas se organizan alrededor de un centro tonal o nota principal, que produce una sensación de reposo y de tensión cuando la música se aleja de ese centro. Para diferenciarlas auditivamente, conviene escuchar melodías y comparar sus sonoridades, sin depender solamente de una explicación teórica.</p>
+</section>
+<section id="videos-s8" class="level3">
+<h3>🎬 Video de apoyo</h3>
+<p>🔎 <a href="https://www.youtube.com/results?search_query=textura+musical+monodia+melodia+acompanada+explicacion" target="_blank" rel="noopener">Buscar en YouTube: <strong>Textura musical: monodía y melodía acompañada</strong></a><br><em>Es una búsqueda: elegí un video corto y claro, y conviene que un adulto lo mire antes.</em></p>
+<p><em>Después de mirar cada video, dedicá entre 5 y 10 minutos a escribir tres conceptos importantes, anotar ejemplos musicales y explicar con tus palabras qué aprendiste.</em></p>
+</section>
+<section id="ejercicios-s8" class="level3">
+<h3>✏️ Ejercicios · Textura y tonalidad</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Escuchá un fragmento de voz sola y otro con voz e instrumentos. Indicá cuál presenta monodía y cuál melodía acompañada.</li>
+<li>Compará dos melodías: una que te parezca pentatónica y otra tonal. Anotá qué diferencias percibís al escucharlas.</li>
+<li>Explicá con tus palabras qué significa que una melodía tenga acompañamiento.</li>
+</ol>
+</section>
+<section id="cierre-s8" class="level3">
+<h3>🗂️ Actividad de cierre del mes</h3>
+<p>Elegir dos canciones y describir su ritmo, forma musical, textura y características tonales.</p>
+</section>
+</section>
+</section>
+<section id="u3" class="level1 unidad" data-color="u3">
+<h1 class="unidad" data-color="u3">Mes 3 · Módulo 4: Entrenamiento musical y análisis auditivo</h1>
+<blockquote>
+<p><strong>Objetivo:</strong> Integrar todos los conocimientos mediante la escucha y el análisis de obras musicales. <strong>Semanas 9 a 12</strong>, con 2 horas por semana.</p>
+</blockquote>
+<section id="s9" class="level2">
+<h2>Semana 9 · Timbres y texturas</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Percepción y diferenciación de timbres y texturas.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Escuchar obras folklóricas y populares. Reconocer instrumentos y distinguir monodía de melodía acompañada.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s9" class="level3">
+<h3>📖 Para repasar</h3>
+<p>Esta semana no hay teoría nueva: se aplica lo aprendido escuchando obras. Antes de empezar, repasá:</p>
+<ul>
+<li><a href="#teoria-s2">Semana 2</a>: las cualidades del sonido (timbre).</li>
+<li><a href="#teoria-s3">Semana 3</a>: las fuentes sonoras e instrumentos.</li>
+<li><a href="#teoria-s8">Semana 8</a>: la textura.</li>
+</ul>
+</section>
+<section id="ejercicios-s9" class="level3">
+<h3>✏️ Ejercicios · Escucha atenta</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Elegí una canción folklórica y anotá todos los instrumentos o fuentes sonoras que logres reconocer.</li>
+<li>Indicá si la canción presenta monodía o melodía acompañada. ¿La textura se mantiene o cambia durante la obra?</li>
+<li>Describí el timbre de dos instrumentos que escuchaste.</li>
+</ol>
+</section>
+</section>
+<section id="s10" class="level2">
+<h2>Semana 10 · Ritmo y contexto tonal</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Trabajo rítmico y armónico. Pulso, compás, ritmo binario y diferenciación pentatónica/tonal.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Imitar ritmos y frases rítmicas. Comparar canciones.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s10" class="level3">
+<h3>📖 Para repasar</h3>
+<p>Esta semana no hay teoría nueva: se aplica lo aprendido escuchando obras. Antes de empezar, repasá:</p>
+<ul>
+<li><a href="#teoria-s5">Semana 5</a>: pulso, ritmo y compás.</li>
+<li><a href="#teoria-s6">Semana 6</a>: la subdivisión binaria y ternaria.</li>
+<li><a href="#teoria-s8">Semana 8</a>: la tonalidad pentatónica y tonal.</li>
+</ul>
+</section>
+<section id="ejercicios-s10" class="level3">
+<h3>✏️ Ejercicios · Ritmo y contexto tonal</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Marcá el pulso de una canción y escribí si percibís subdivisión binaria o ternaria.</li>
+<li>Escuchá dos melodías contrastantes y anotá cuál te parece de contexto pentatónico y cuál tonal. Explicá qué escuchaste para diferenciarlas.</li>
+<li>Inventá una frase rítmica de cuatro pulsos, escribila con sílabas y ejecutala con palmas.</li>
+</ol>
+</section>
+</section>
+<section id="s11" class="level2">
+<h2>Semana 11 · Música folklórica argentina</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Música folklórica argentina: región Noroeste y Noreste.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Investigar dos obras, sus compositores, instrumentos, géneros y contexto cultural.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s11" class="level3">
+<h3>📖 Para repasar</h3>
+<p>Esta semana no hay teoría nueva: se aplica lo aprendido escuchando obras. Antes de empezar, repasá:</p>
+<ul>
+<li><a href="#teoria-s3">Semana 3</a>: las fuentes sonoras e instrumentos.</li>
+<li><a href="#teoria-s8">Semana 8</a>: la textura.</li>
+</ul>
+</section>
+<section id="ejercicios-s11" class="level3">
+<h3>✏️ Ejercicios · Investigación folklórica</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Elegí un estilo de música que te guste (a elección del alumno). Investigá cómo y dónde surgió.</li>
+<li>Describí sus características principales, los instrumentos más utilizados, artistas o referentes destacados y otros datos que te parezcan importantes.</li>
+<li>Presentá la investigación en una ficha, lámina o breve exposición. Incluí las fuentes consultadas.</li>
+</ol>
+</section>
+</section>
+<section id="s12" class="level2">
+<h2>Semana 12 · Análisis integral</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenidos</strong></td>
+<td>Análisis integral y preparación para el examen.</td>
+</tr>
+<tr class="even">
+<td><strong>Actividades</strong></td>
+<td>Analizar canciones, reconocer sus elementos y realizar una práctica de examen.</td>
+</tr>
+</tbody>
+</table>
+<section id="teoria-s12" class="level3">
+<h3>📖 Para repasar</h3>
+<p>Esta semana no hay teoría nueva: se aplica lo aprendido escuchando obras. Antes de empezar, repasá:</p>
+<ul>
+<li><a href="#teoria-s2">Semana 2</a>: las cualidades del sonido.</li>
+<li><a href="#teoria-s3">Semana 3</a>: las fuentes sonoras.</li>
+<li><a href="#teoria-s5">Semana 5</a>: pulso, ritmo y compás.</li>
+<li><a href="#teoria-s6">Semana 6</a>: la subdivisión.</li>
+<li><a href="#teoria-s7">Semana 7</a>: la forma.</li>
+<li><a href="#teoria-s8">Semana 8</a>: la textura y la tonalidad.</li>
+</ul>
+</section>
+<section id="ejercicios-s12" class="level3">
+<h3>✏️ Ejercicios · Simulacro de análisis</h3>
+<p>Resolvelos después de estudiar la teoría y hacer las escuchas. Escribí las respuestas en la carpeta.</p>
+<ol>
+<li>Escuchá una canción completa y describí: género, fuentes sonoras, timbres, pulso, compás o subdivisión que percibís, textura y forma.</li>
+<li>Buscá si aparecen tema A y tema B. Indicá qué parte se repite o contrasta.</li>
+<li>Realizá una exposición oral de dos minutos sobre la obra, utilizando vocabulario musical específico.</li>
+</ol>
+</section>
+<section id="cierre-s12" class="level3">
+<h3>🗂️ Actividad de cierre del mes</h3>
+<p>Preparar el análisis auditivo de obras folklóricas argentinas de dos regiones diferentes: Noroeste y Noreste.</p>
+</section>
+</section>
+</section>
+
+  </div>
+</main>
+<a class="arriba" href="#top" title="Volver arriba">↑</a>
+<script>
+(function(){
+  // cerrar menú al navegar en celular
+  document.querySelectorAll('#side a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu')));
+  // heredar color de la unidad en tarjetas
+  document.querySelectorAll('section.level1').forEach(u=>{
+    const c=u.getAttribute('data-color');
+    if(c) u.querySelectorAll('section.level2').forEach(s=>{s.style.setProperty('--c','var(--'+c+')');s.style.setProperty('--cs','var(--'+c+'s)')});
+  });
+  // claves plegables
+  const cl=document.querySelector('section.claves');
+  if(cl){cl.classList.add('cerrado');const b=document.createElement('button');b.className='toggle-claves';b.textContent='👩‍🏫 Mostrar claves (adulto que acompaña)';
+    cl.querySelector('h2').after(b);b.onclick=()=>{cl.classList.toggle('cerrado');b.textContent=cl.classList.contains('cerrado')?'👩‍🏫 Mostrar claves (adulto que acompaña)':'Ocultar claves';};}
+  // progreso + menú activo
+  const bar=document.querySelector('#progress div');
+  const links=[...document.querySelectorAll('#side a[href^="#"]')];
+  const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  function onScroll(){
+    const h=document.documentElement; bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+    let cur=secs[0]; for(const s of secs){ if(s.getBoundingClientRect().top<120) cur=s; }
+    links.forEach(a=>a.classList.toggle('on',cur&&a.getAttribute('href')==='#'+cur.id));
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  // descargar toda la bibliografía (de a un archivo, con pausa para que el navegador no las bloquee)
+  const bd=document.getElementById('btn-descargas');
+  if(bd){const txt=bd.textContent;bd.onclick=async()=>{
+    const as=[...document.querySelectorAll('ul.descargas a[download]')];bd.disabled=true;
+    for(let i=0;i<as.length;i++){bd.textContent='Descargando '+(i+1)+' de '+as.length+'…';as[i].click();await new Promise(r=>setTimeout(r,900));}
+    bd.textContent='✅ Listo: revisá tu carpeta de Descargas';setTimeout(()=>{bd.textContent=txt;bd.disabled=false;},5000);
+  };}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arte 1 · Mirar, dibujar y crear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee; --card:#ffffff; --ink:#1f2330; --muted:#5d6475; --line:#e6e1d8;
+  --u1:#d9642b; --u1s:#fdeee6;
+  --u2:#2f6fd6; --u2s:#e7effd;
+  --u3:#d23f7a; --u3s:#fdeaf2;
+  --u4:#6a4bc4; --u4s:#efeafc;
+  --u5:#139a8c; --u5s:#e3f6f3;
+  --acc:#2f6fd6; --accs:#e7effd;
+  --gold:#f2b632; --biblia:#fff8e1; --biblia-b:#e8b923;
+  --radius:18px; --side:290px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+@media (max-width:980px){html{scroll-padding-top:76px}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Nunito,system-ui,sans-serif}
+a{color:var(--acc)}
+h1,h2,h3,h4{font-family:Fredoka,Nunito,sans-serif;line-height:1.2;margin:1.4em 0 .5em}
+
+/* ---------- barra lateral ---------- */
+#side{position:fixed;inset:0 auto 0 0;width:var(--side);background:#1d2233;color:#cfd5e6;overflow-y:auto;padding:22px 14px 40px;z-index:20}
+#side .logo{display:flex;gap:10px;align-items:center;padding:4px 8px 18px;border-bottom:1px solid #303750;margin-bottom:12px}
+#side .logo span{font-size:30px}
+#side .logo b{font-family:Fredoka;font-size:20px;color:#fff;display:block;line-height:1.1}
+#side .logo small{color:#8f98b3;font-size:12px}
+#side a{display:block;text-decoration:none;color:inherit;border-radius:10px;padding:6px 10px;font-size:14px;line-height:1.3}
+#side a:hover{background:#2a3149;color:#fff}
+#side a.on{background:#fff;color:#1d2233;font-weight:700}
+#side .nav-u{margin-top:14px;font-family:Fredoka;font-weight:600;color:#fff;font-size:15px}
+#side .nav-u b{display:inline-block;background:var(--gold);color:#1d2233;border-radius:7px;padding:0 6px;margin-right:6px;font-size:13px}
+#side .nav-s{display:flex;gap:8px;padding-left:14px}
+#side .nav-s i{font-style:normal;min-width:22px;height:22px;border-radius:50%;background:#303750;color:#fff;font-size:11px;display:grid;place-items:center;font-weight:800;flex:none}
+#side .nav-x{color:var(--gold)}
+#burger{display:none}
+#mtop{display:none;position:fixed;top:0;left:0;right:0;height:64px;background:#1d2233;color:#fff;z-index:35;align-items:center;padding-left:70px;font-family:Fredoka;font-size:18px}
+
+/* ---------- contenido ---------- */
+main{margin-left:var(--side);padding:0 0 80px}
+.wrap{max-width:900px;margin:0 auto;padding:0 28px}
+#progress{position:fixed;top:0;z-index:36;left:var(--side);right:0;height:5px;background:transparent;z-index:30}
+#progress div{height:100%;width:0;background:linear-gradient(90deg,var(--u1),var(--u2),var(--u3),var(--u4));border-radius:0 4px 4px 0}
+
+.hero{background:radial-gradient(circle at 85% 20%,#3b4a7a 0,#1d2233 60%);color:#fff;padding:64px 28px 56px;position:relative;overflow:hidden}
+.hero .wrap{position:relative}
+.hero .chip{display:inline-block;background:var(--gold);color:#1d2233;font-weight:800;border-radius:99px;padding:4px 14px;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.hero h1{font-size:clamp(32px,5vw,52px);margin:.35em 0 .2em}
+.hero p{font-size:19px;color:#d6dcf0;max-width:640px;margin:0}
+.hero .deco{position:absolute;right:-10px;top:-20px;font-size:120px;opacity:.18;letter-spacing:-20px;user-select:none}
+.hero .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .stats div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:10px 16px;font-size:14px}
+.hero .stats b{font-family:Fredoka;font-size:26px;display:block;color:#fff;line-height:1}
+
+/* secciones de unidad */
+section.level1{--c:var(--acc);--cs:var(--accs)}
+section.level1[data-color=u1]{--c:var(--u1);--cs:var(--u1s)}
+section.level1[data-color=u2]{--c:var(--u2);--cs:var(--u2s)}
+section.level1[data-color=u3]{--c:var(--u3);--cs:var(--u3s)}
+section.level1[data-color=u4]{--c:var(--u4);--cs:var(--u4s)}
+section.level1[data-color=u5]{--c:var(--u5);--cs:var(--u5s)}
+section.level1>h1{background:var(--c);color:#fff;margin:56px 0 0;padding:34px 30px 28px;border-radius:var(--radius) var(--radius) 0 0;font-size:clamp(26px,3.6vw,36px)}
+section.level1>blockquote{margin:0 0 30px;background:var(--cs);border-radius:0 0 var(--radius) var(--radius);padding:18px 30px 20px;border:2px solid var(--c);border-top:0;font-size:16px}
+section.level1>blockquote p{margin:.35em 0}
+
+/* tarjetas de semana */
+section.level2{background:var(--card);border-radius:var(--radius);padding:8px 34px 30px;margin:0 0 34px;box-shadow:0 2px 0 var(--line),0 10px 30px -18px rgba(30,35,60,.35);border-top:8px solid var(--c,var(--acc))}
+#intro{border-top-color:var(--gold)}
+section.level2>h2{font-size:28px;margin-top:26px;color:var(--c,var(--ink))}
+section.level2>h2:before{content:attr(data-badge);}
+section.level2>table:first-of-type{background:var(--cs,#f5f5f5);border-radius:12px;overflow:hidden;font-size:15px}
+section.level2>table:first-of-type thead,section.level2>table:first-of-type colgroup{display:none}
+section.level2>table:first-of-type{table-layout:auto}
+section.level2>table:first-of-type td:first-child{width:170px;font-weight:700;color:var(--c,var(--ink))}
+section.level3>h3, section.level2>h3{font-size:21px;border-bottom:2px dashed var(--line);padding-bottom:6px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px;display:block;overflow-x:auto}
+@media (min-width:700px){table{display:table}}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--cs,#f2f2f2);font-family:Fredoka;font-weight:600}
+blockquote{margin:16px 0}
+
+/* recuadro bíblico */
+.biblia{background:var(--biblia);border:2px solid var(--biblia-b);border-radius:16px;padding:6px 22px 10px 22px;margin:26px 0;position:relative}
+.biblia:before{content:"🕊️";position:absolute;top:-18px;left:18px;font-size:26px;background:var(--biblia);border-radius:50%;padding:0 6px}
+.biblia p:first-child{margin-top:18px}
+
+/* fotos */
+figure.foto{margin:24px 0;background:#f2efe9;border-radius:16px;overflow:hidden}
+.foto-marco{position:relative;min-height:60px;background:#e9e4da}
+.foto-marco img{display:block;width:100%;max-height:440px;object-fit:cover}
+.foto-fallback{display:none}
+.sin-foto .foto-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:180px;text-decoration:none;font-size:42px;background:repeating-linear-gradient(45deg,#ece6db,#ece6db 12px,#e4ddd0 12px,#e4ddd0 24px)}
+.sin-foto .foto-fallback span{font-size:15px;font-weight:800;background:#fff;border-radius:99px;padding:4px 14px}
+figcaption{padding:10px 16px 12px;font-size:14.5px;color:#3c4253;font-style:italic}
+figcaption .glink{font-style:normal;font-size:13px;white-space:nowrap;margin-left:4px}
+
+/* video */
+a.video{display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;margin:8px 0;max-width:560px;transition:.15s}
+a.video:hover{border-color:#e33;transform:translateY(-2px)}
+.vthumb{flex:none;width:136px;aspect-ratio:16/9;border-radius:10px;background:#222 center/cover;display:grid;place-items:center}
+.vthumb b{background:#e33;color:#fff;border-radius:10px;padding:2px 12px;font-size:14px}
+.vtxt{font-weight:700;font-size:15px;line-height:1.3}
+.vtxt small{display:block;color:#e33;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+/* pruebas */
+section.prueba{background:#fff;border:2px dashed var(--c,var(--acc));border-top-width:8px;border-top-style:solid}
+section.prueba>h2{display:flex;align-items:center;gap:10px}
+section.claves{border-top-color:#1d2233}
+.toggle-claves{font:700 15px Nunito;background:#1d2233;color:#fff;border:0;border-radius:99px;padding:10px 18px;cursor:pointer;margin:6px 0 10px}
+section.claves.cerrado>*:not(h2):not(.toggle-claves){display:none}
+
+.arriba{position:fixed;right:18px;bottom:18px;background:#1d2233;color:#fff;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:15}
+
+/* descargas de bibliografía */
+ul.descargas{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+ul.descargas a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px 10px 46px;position:relative;font-size:15.5px;line-height:1.35;transition:.15s}
+ul.descargas a:before{content:"📄";position:absolute;left:14px;top:10px;font-size:20px}
+ul.descargas a:hover{border-color:var(--acc);transform:translateY(-2px)}
+ul.descargas b{color:var(--acc)}
+ul.descargas small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.btn-descargas{font:700 15px Nunito;background:var(--acc);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;margin:6px 0 10px}
+.btn-descargas:disabled{opacity:.6;cursor:wait}
+
+@media (max-width:980px){
+  :root{--side:0px}
+  #side{transform:translateX(-100%);width:290px;transition:.25s}
+  body.menu #side{transform:none}
+  #burger{display:grid;place-items:center;position:fixed;top:11px;left:10px;z-index:40;width:46px;height:42px;border-radius:12px;border:0;background:#303750;color:#fff;font-size:22px}
+  .wrap{padding:0 16px}
+  section.level2{padding:6px 18px 22px}
+  section.level1>h1{padding:26px 18px 20px}
+  section.level1>blockquote{padding:14px 18px}
+  .hero{padding:80px 16px 40px}
+  section.level2>table:first-of-type,section.level2>table:first-of-type tbody,section.level2>table:first-of-type tr,section.level2>table:first-of-type td{display:block;width:auto!important;border:0}
+  section.level2>table:first-of-type td:first-child{padding-bottom:0}
+  section.level2>table:first-of-type tr{border-bottom:1px solid var(--line)}
+  main{padding-top:64px}
+  #mtop{display:flex}
+  .vthumb{width:104px}
+}
+@media print{
+  @page{size:A4;margin:14mm 13mm 16mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #side,#burger,#progress,.arriba,.toggle-claves,#mtop,.hero .deco,.btn-descargas{display:none!important}
+  main{margin:0!important;padding:0!important} body{background:#fff;font-size:10.5pt;line-height:1.5}
+  .wrap{max-width:none;padding:0}
+  .hero{padding:60mm 10mm 20mm;min-height:250mm;break-after:page;border-radius:0}
+  .hero h1{font-size:40pt}
+  section.level1{break-before:page}
+  section.level1>h1{margin-top:0}
+  section.level2{box-shadow:none;break-before:page;padding:2mm 6mm 4mm;margin:0;border-radius:10px}
+  section.level1>section.level2:first-of-type{break-before:avoid}
+  #intro{break-before:avoid}
+  h2,h3{break-after:avoid}
+  table,figure,.biblia,a.video,li{break-inside:avoid}
+  figure.foto .foto-marco img{max-height:85mm}
+  .sin-foto .foto-fallback{height:28mm;font-size:22pt}
+  section.claves.cerrado>*{display:block!important}
+  section.claves.cerrado>table{display:table!important}
+  a{color:inherit;text-decoration:none}
+  a.video{border:1px solid #ccc;max-width:none}
+  a.video .vtxt:after{content:attr(data-url);display:block;font-weight:400;font-size:8pt;color:#555;word-break:break-all}
+  figcaption .glink{display:none}
+}
+</style>
+</head>
+<body>
+<button id="burger" aria-label="Menú" onclick="document.body.classList.toggle('menu')">☰</button>
+<div id="mtop">🎨 Arte 1</div>
+<div id="progress"><div></div></div>
+<nav id="side">
+  <div class="logo"><span>🎨</span><div><b>Arte 1</b><small>Arte plástica · 1.er trimestre</small></div></div>
+  <a href="index.html">📚 Todas las materias</a>
+  <a href="#top">⬆️ Portada</a>
+  <a class="nav-s nav-x" href="#intro">Bienvenidos a Arte</a>
+  <a class="nav-s nav-x" href="#descargas">📥 Descargar bibliografía</a>
+<a class="nav-u" href="#u1"><b>U1</b> Simetría, fondo y figura, color</a>
+<a class="nav-s" href="#s1"><i>1</i>Simetría bilateral o axial</a>
+<a class="nav-s" href="#s2"><i>2</i>Simetría central o radial</a>
+<a class="nav-s" href="#s3"><i>3</i>Fondo y figura</a>
+<a class="nav-s" href="#s4"><i>4</i>Monocromatismo y arte paleolítico</a>
+<a class="nav-u" href="#u2"><b>U2</b> Perspectiva geométrica</a>
+<a class="nav-s" href="#s5"><i>5</i>Perspectiva central: el trazado</a>
+<a class="nav-s" href="#s6"><i>6</i>Perspectiva central: muebles y tinta</a>
+<a class="nav-s" href="#s7"><i>7</i>Perspectiva angular: el trazado</a>
+<a class="nav-s" href="#s8"><i>8</i>Perspectiva angular: prismas y tinta</a>
+<a class="nav-u" href="#u3"><b>U3</b> Teoría del color</a>
+<a class="nav-s" href="#s9"><i>9</i>La temperatura del color</a>
+<a class="nav-s" href="#s10"><i>10</i>El color en obras de arte</a>
+<a class="nav-s" href="#s11"><i>11</i>Composición cromática mixta</a>
+<a class="nav-s" href="#s12"><i>12</i>Boceto en perspectiva central</a>
+</nav>
+<main>
+  <header class="hero" id="top">
+    <div class="deco">🎨✏️🖌️</div>
+    <div class="wrap">
+      <span class="chip">1.º año · NES · CABA</span>
+      <h1>Mirar, dibujar y crear</h1>
+      <p>Simetría, fondo y figura, perspectiva y color: un trimestre de trabajos prácticos para aprender a componer una obra.</p>
+      <div class="stats">
+        <div><b>3</b>unidades</div><div><b>12</b>semanas</div><div><b>12</b>trabajos</div>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+  <section id="intro" class="level2">
+<h2>Bienvenidos a Arte</h2>
+<p>En este primer trimestre vamos a <strong>mirar, dibujar y crear</strong>: aprender cómo se equilibra una composición
+con la simetría, cómo una figura se destaca sobre un fondo, cómo se representa la profundidad con la perspectiva y qué
+sensaciones transmiten los colores. Cada semana tiene un trabajo práctico.</p>
+<section id="cómo-está-organizada-cada-semana" class="level3">
+<h3>Cómo trabajamos</h3>
+<ul>
+<li>Todos los trabajos prácticos se hacen en <strong>hoja blanca tamaño oficio</strong>.</li>
+<li>Se trazan primero <strong>suave, con lápiz</strong>, y se terminan <strong>pasando tinta negra</strong> por las líneas definitivas
+(salvo los trabajos de color, que se pintan con témperas).</li>
+<li>Cada semana tiene la <strong>teoría para leer</strong> (y copiar en la carpeta), la <strong>consigna</strong> del trabajo
+práctico, los pasos para hacerlo y, a veces, un <strong>ejemplo de referencia</strong>. Los ejemplos sirven para entender la
+consigna: no hay que copiarlos.</li>
+<li>Las palabras «que ocupe gran parte de la hoja» están en casi todas las consignas: los trabajos tienen que aprovechar
+el espacio.</li>
+</ul>
+</section>
+<section id="mapa-del-año" class="level3">
+<h3>Mapa del trimestre</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Semana</th>
+<th>Unidad</th>
+<th>Trabajo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#s1">1</a></td>
+<td>Simetría, fondo y figura, color</td>
+<td>Simetría bilateral o axial</td>
+</tr>
+<tr class="even">
+<td><a href="#s2">2</a></td>
+<td>Simetría, fondo y figura, color</td>
+<td>Simetría central o radial</td>
+</tr>
+<tr class="odd">
+<td><a href="#s3">3</a></td>
+<td>Simetría, fondo y figura, color</td>
+<td>Fondo y figura</td>
+</tr>
+<tr class="even">
+<td><a href="#s4">4</a></td>
+<td>Simetría, fondo y figura, color</td>
+<td>Monocromatismo y arte paleolítico</td>
+</tr>
+<tr class="odd">
+<td><a href="#s5">5</a></td>
+<td>Perspectiva geométrica</td>
+<td>Perspectiva central: el trazado</td>
+</tr>
+<tr class="even">
+<td><a href="#s6">6</a></td>
+<td>Perspectiva geométrica</td>
+<td>Perspectiva central: muebles y tinta</td>
+</tr>
+<tr class="odd">
+<td><a href="#s7">7</a></td>
+<td>Perspectiva geométrica</td>
+<td>Perspectiva angular: el trazado</td>
+</tr>
+<tr class="even">
+<td><a href="#s8">8</a></td>
+<td>Perspectiva geométrica</td>
+<td>Perspectiva angular: prismas y tinta</td>
+</tr>
+<tr class="odd">
+<td><a href="#s9">9</a></td>
+<td>Teoría del color</td>
+<td>La temperatura del color</td>
+</tr>
+<tr class="even">
+<td><a href="#s10">10</a></td>
+<td>Teoría del color</td>
+<td>El color en obras de arte</td>
+</tr>
+<tr class="odd">
+<td><a href="#s11">11</a></td>
+<td>Teoría del color</td>
+<td>Composición cromática mixta</td>
+</tr>
+<tr class="even">
+<td><a href="#s12">12</a></td>
+<td>Teoría del color</td>
+<td>Boceto en perspectiva central</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notas-bibliográficas" class="level3">
+<h3>Notas bibliográficas</h3>
+<ul>
+<li><strong>Planificación del trimestre</strong> · Las consignas, la teoría y los ejemplos de esta plataforma son los del PDF
+del primer trimestre, que se puede descargar abajo.</li>
+<li><strong>Apunte de teoría</strong> · Incluye un apartado de volumetrías y perspectiva, y el <em>Cuadernillo de Educación
+Plástica</em> de la Prof. Liliana González Ríos (recopilación teórica, 2013): punto, línea, plano, forma, textura, color,
+composición e historia del arte. En cada semana se indica qué páginas leer.</li>
+</ul>
+</section>
+<section id="descargas" class="level3">
+<h3>📥 Descargar la bibliografía</h3>
+<p>Acá están la planificación del trimestre y el apunte de teoría.</p>
+<ul class="descargas">
+<li><a href="bibliografia/arte/Arte_plastica_primer_trimestre.pdf" download><b>Trimestre</b> · Arte plástica · Primer trimestre<small>Teoría, consignas y ejemplos de las 12 semanas · PDF · 1,2 MB</small></a></li>
+<li><a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf" download><b>Apunte</b> · Apunte de teoría de Arte plástica<small>Elementos del lenguaje visual, color, composición e historia del arte · PDF · 5,9 MB</small></a></li>
+</ul>
+<button type="button" class="btn-descargas" id="btn-descargas">📥 Descargar todo (2 archivos · 7 MB)</button>
+</section>
+</section>
+
+<section id="u1" class="level1 unidad" data-color="u1">
+<h1 class="unidad" data-color="u1">Unidad 1 · Simetría, fondo y figura y monocromía</h1>
+<blockquote>
+<p><em>El equilibrio en la composición: las simetrías, la relación entre la figura y el fondo, y la armonía de un solo color.</em> <strong>Una actividad por semana</strong>, siempre en hoja blanca tamaño oficio. <a href="bibliografia/arte/Arte_plastica_primer_trimestre.pdf#page=1" target="_blank" rel="noopener">Ver la unidad en el PDF del trimestre (págs. 1 a 4)</a>.</p>
+</blockquote>
+<section id="s1" class="level2">
+<h2>Semana 1 · Simetría bilateral o axial</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Simetría bilateral o axial</td>
+</tr>
+<tr class="even">
+<td><strong>Trabajo práctico</strong></td>
+<td>Figura especular con un eje central definido</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>Hoja blanca oficio, regla, compás, lápiz y tinta negra.</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s1" class="level3">
+<h3>📖 Para leer</h3>
+<p>Un factor importante en una composición plástica es <strong>el equilibrio</strong>, o sea la compensación de los distintos elementos para llegar, por medio del movimiento perceptivo, a una situación de reposo, de armonía.</p>
+<p>Uno de los recursos que podemos utilizar para lograr dicho equilibrio es la <strong>simetría</strong>: la «reflexión especular» (como si los elementos se vieran reflejados en un espejo) de los componentes con respecto a uno o dos ejes, o a un punto central, que puede ser visible o no.</p>
+<p><strong>Asimetría</strong> significa lo opuesto, lo no simétrico, aunque si la variación con respecto al eje no es grande puede considerarse como «simetría aproximada», siempre que presente la suficiente similitud entre las partes como para que el eje o el centro se sientan positivamente.</p>
+<p><strong>Simetría bilateral o axial:</strong> es la más simple. Consiste en la reflexión especular de elementos con respecto a un eje central, visible o no, que puede ser vertical u horizontal, o pueden cortarse ambos en ángulo recto.</p>
+<p>📚 <strong>En el apunte de teoría:</strong> <a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf#page=30" target="_blank" rel="noopener">Simetría y asimetría (pág. 30)</a>.</p>
+</section>
+<section id="trabajo-s1" class="level3">
+<h3>✏️ Trabajo práctico</h3>
+<p><strong>Soporte:</strong> Hoja blanca oficio · <strong>Técnica:</strong> Lápiz y tinta negra</p>
+<p><strong>Consigna:</strong> realizar una ejercitación de <strong>simetría bilateral</strong> —que ocupe gran parte de la hoja— con un eje simétrico definido y que la composición contenga rectas, curvas, círculos, arcos y diagonales (todos conformando una figura). Luego finalizar la obra pasándole tinta negra en las líneas.</p>
+</section>
+<section id="ejemplo-s1" class="level3">
+<h3>🖼️ Ejemplo de referencia</h3>
+<figure style="margin:24px 0"><img src="bibliografia/arte/img/ejemplo_semana_1.jpg" alt="Mariposa simétrica en tinta negra con eje vertical" loading="lazy" style="display:block;max-width:100%;max-height:420px;margin:0 auto;border-radius:12px"><figcaption><strong>Ejemplo de referencia.</strong> Figura simétrica respecto a un eje vertical central, combinando rectas, curvas, círculos, arcos y diagonales en tinta negra. Es orientativo: sirve para entender la consigna, no para copiarlo.</figcaption></figure>
+</section>
+</section>
+<section id="s2" class="level2">
+<h2>Semana 2 · Simetría central o radial</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Simetría central o radial</td>
+</tr>
+<tr class="even">
+<td><strong>Trabajo práctico</strong></td>
+<td>Figura simple de 4 direcciones iguales desde un punto central</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>Hoja blanca oficio, regla, compás, lápiz y tinta negra.</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s2" class="level3">
+<h3>📖 Para leer</h3>
+<p><strong>Simetría central o radial:</strong> es la más dinámica. Consiste en elementos colocados por rotación alrededor de un punto central, equidistantes (a igual distancia) entre sí y de dicho centro. Con solamente dos elementos se puede lograr una organización simétrica central; en este caso se la llama también <strong>simetría por oposición</strong>, ya que la imagen ha hecho un giro de 180° hasta quedar exactamente en forma opuesta sobre el eje de rotación.</p>
+<p>Repasá lo que es la simetría en la <a href="#para-leer-s1">semana 1</a>.</p>
+<p>📚 <strong>En el apunte de teoría:</strong> <a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf#page=30" target="_blank" rel="noopener">Simetría (pág. 30)</a>.</p>
+</section>
+<section id="trabajo-s2" class="level3">
+<h3>✏️ Trabajo práctico</h3>
+<p><strong>Soporte:</strong> Hoja blanca oficio · <strong>Técnica:</strong> Lápiz y tinta negra</p>
+<p><strong>Consigna:</strong> realizar una ejercitación de <strong>simetría radial</strong> —que ocupe gran parte de la hoja— partiendo de un punto central y trazando una figura simple de 4 direcciones iguales (sin necesidad de hacer un mandala complejo) que contenga rectas, curvas, círculos, arcos y diagonales. Luego finalizar la obra pasándole tinta negra en las líneas.</p>
+</section>
+<section id="ejemplo-s2" class="level3">
+<h3>🖼️ Ejemplo de referencia</h3>
+<figure style="margin:24px 0"><img src="bibliografia/arte/img/ejemplo_semana_2.jpg" alt="Figura radial de cuatro puntas en tinta negra" loading="lazy" style="display:block;max-width:100%;max-height:420px;margin:0 auto;border-radius:12px"><figcaption><strong>Ejemplo de referencia.</strong> Figura radial simple de 4 puntas equidistantes desde el centro, integrando rectas, diagonales, arcos, curvas y círculos en tinta negra. Es orientativo: sirve para entender la consigna, no para copiarlo.</figcaption></figure>
+</section>
+</section>
+<section id="s3" class="level2">
+<h2>Semana 3 · Fondo y figura</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Fondo y figura</td>
+</tr>
+<tr class="even">
+<td><strong>Trabajo práctico</strong></td>
+<td>Figura humana no realista inspirada en <em>Mujer en el espejo</em>, de Pablo Picasso</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>Hoja blanca oficio, lápiz y tinta negra.</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s3" class="level3">
+<h3>📖 Para leer</h3>
+<p>Si la línea se cierra sobre sí misma, actúa como <strong>perímetro</strong> (del griego <em>peri</em> = alrededor, y <em>metros</em> = medida: contorno de una figura) y se transforma en el contorno de una figura. La porción encerrada dentro de la línea es físicamente igual al resto del plano, pero desde el punto de vista psicológico resulta totalmente diferente.</p>
+<p>Mientras el área encerrada actúa como <strong>figura</strong> o forma, el resto del plano se convierte en <strong>fondo</strong> y parece continuar por debajo de ella. Se podría afirmar que todo objeto sensible existe contra un fondo; la figura tiene calidad de cosa, y el fondo, de sustancia; los límites nunca son comunes a ambos campos, sino que siempre se los percibe como pertenecientes a la figura.</p>
+<p>📚 <strong>En el apunte de teoría:</strong> <a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf#page=28" target="_blank" rel="noopener">Relación figura-fondo (pág. 28)</a>.</p>
+</section>
+<section id="trabajo-s3" class="level3">
+<h3>✏️ Trabajo práctico</h3>
+<p><strong>Soporte:</strong> Hoja blanca oficio · <strong>Técnica:</strong> Tinta negra sobre fondo blanco</p>
+<p><strong>Consigna:</strong> realizar una ejercitación de <strong>fondo y figura</strong> —que ocupe gran parte de la hoja— con tinta negra, en donde la composición figurativa sobre fondo blanco exprese una obra de Pablo Picasso: figura humana no realista, inspirada en <em>Mujer en el espejo</em>.</p>
+</section>
+<section id="ejemplo-s3" class="level3">
+<h3>🖼️ Ejemplo de referencia</h3>
+<figure style="margin:24px 0"><img src="bibliografia/arte/img/ejemplo_semana_3.jpg" alt="Figura humana no realista en tinta negra inspirada en Picasso" loading="lazy" style="display:block;max-width:100%;max-height:420px;margin:0 auto;border-radius:12px"><figcaption><strong>Ejemplo de referencia.</strong> Figura humana no realista con planos y contornos marcados en tinta negra sobre fondo blanco. Es orientativo: sirve para entender la consigna, no para copiarlo.</figcaption></figure>
+</section>
+</section>
+<section id="s4" class="level2">
+<h2>Semana 4 · Monocromatismo y arte paleolítico</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Monocromatismo y arte del Paleolítico</td>
+</tr>
+<tr class="even">
+<td><strong>Trabajo práctico</strong></td>
+<td>Pintura monocromática con la temática y la técnica del Paleolítico Superior</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>Hoja blanca oficio, témperas (un color base, blanco y negro) y pinceles.</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s4" class="level3">
+<h3>📖 Para leer</h3>
+<p><strong>Monocromía</strong> viene del griego: <em>monos</em> = único y <em>croma</em> = color. En la pintura, el color es un elemento de fundamental importancia. Los colores surgen a partir de las ondas luminosas, que componen la luz incolora: al encontrarse con un cuerpo, las células de la retina del ojo humano pueden percibir alrededor de cien matices de luminosidad y varios miles de diferencias de colores.</p>
+<p>Los colores con los que pintamos no son haces de luz, sino <strong>pigmentos</strong>: sustancias de colores que pueden mezclarse para producir diferentes composiciones cromáticas. Para que una composición resulte <strong>monocromática</strong> se usan todas las relaciones que pueden obtenerse con un solo color, con mezclas que alteren su valor y saturación (blanco, negro y grises): el resultado es una <strong>armonía monocromática</strong>, donde un color único actúa como armonizador.</p>
+<p>Es el trabajo más indicado para iniciarse en las mezclas en la paleta, porque el único cuidado es la gradación de valores del color elegido.</p>
+<p>📚 <strong>En el apunte de teoría:</strong> <a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf#page=26" target="_blank" rel="noopener">Paletas: acromática, monocromática y policromática (pág. 26)</a> · <a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf#page=33" target="_blank" rel="noopener">Prehistoria (pág. 33)</a>.</p>
+</section>
+<section id="trabajo-s4" class="level3">
+<h3>✏️ Trabajo práctico</h3>
+<p><strong>Soporte:</strong> Hoja blanca oficio · <strong>Técnica:</strong> Pintura monocromática (un color, más blanco y negro)</p>
+<p><strong>Consigna:</strong> realizar un dibujo y pintura usando la temática y la técnica del hombre del <strong>Paleolítico Superior</strong> (pintura lineal, formas planas y motivos como animales o manos), aplicando una <strong>armonía monocromática</strong>: elegir un único color y mezclar sus gradaciones de valor utilizando blanco y negro.</p>
+</section>
+<section id="ejemplo-s4" class="level3">
+<h3>🖼️ Ejemplo de referencia</h3>
+<figure style="margin:24px 0"><img src="bibliografia/arte/img/ejemplo_semana_4.jpg" alt="Manos y bisontes en tonos tierra al estilo paleolítico" loading="lazy" style="display:block;max-width:100%;max-height:420px;margin:0 auto;border-radius:12px"><figcaption><strong>Ejemplo de referencia.</strong> Escena de estética paleolítica con formas planas y lineales resuelta mediante distintos valores de un mismo tono tierra. Es orientativo: sirve para entender la consigna, no para copiarlo.</figcaption></figure>
+</section>
+</section>
+</section>
+<section id="u2" class="level1 unidad" data-color="u2">
+<h1 class="unidad" data-color="u2">Unidad 2 · Iniciación a la perspectiva geométrica</h1>
+<blockquote>
+<p><em>El primer acercamiento al dibujo técnico y espacial: cómo representar la profundidad en una hoja plana.</em> <strong>Dos trabajos prácticos de dos semanas cada uno.</strong> Se trazan primero con lápiz suave y se finalizan pasando tinta negra sobre las líneas definitivas. <a href="bibliografia/arte/Arte_plastica_primer_trimestre.pdf#page=5" target="_blank" rel="noopener">Ver la unidad en el PDF del trimestre (págs. 5 a 7)</a>.</p>
+</blockquote>
+<section id="s5" class="level2">
+<h2>Semana 5 · Perspectiva central: el trazado</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Trabajo práctico</strong></td>
+<td>TP N.º 1: Perspectiva central (semanas 5 y 6)</td>
+</tr>
+<tr class="even">
+<td><strong>Temática</strong></td>
+<td>El cuarto o dormitorio</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>Hoja blanca oficio, regla, lápiz HB/2B, goma, microfibra o lapicera de tinta negra.</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s5" class="level3">
+<h3>📖 Para leer</h3>
+<p>Cuatro conceptos clave antes de empezar:</p>
+<ul>
+<li><strong>Perspectiva:</strong> es un método de dibujo que permite representar objetos y espacios tridimensionales (con alto, ancho y profundidad) sobre una superficie plana como la hoja.</li>
+<li><strong>Línea de horizonte (LH):</strong> es una línea horizontal imaginaria que representa la altura de los ojos de quien mira. Todo lo que está por encima de la LH se ve desde abajo; todo lo que está por debajo se ve desde arriba.</li>
+<li><strong>Punto de fuga (PF):</strong> es un punto ubicado sobre la línea de horizonte donde parecen juntarse todas las líneas paralelas que se alejan hacia el fondo (como las vías de un tren).</li>
+<li><strong>Líneas auxiliares y líneas definitivas:</strong> las líneas que van hacia los puntos de fuga son líneas de construcción y deben hacerse muy suaves con lápiz. Al pasar a tinta negra, solo se remarcan las aristas visibles.</li>
+</ul>
+<p><strong>Perspectiva central:</strong> se utiliza un único punto de fuga sobre la LH. Las líneas de ancho quedan horizontales, las de altura quedan verticales y todas las líneas de profundidad fugan hacia ese único PF.</p>
+<p>📚 <strong>En el apunte de teoría:</strong> <a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf#page=1" target="_blank" rel="noopener">Volumetrías y perspectiva central (pág. 1)</a>.</p>
+</section>
+<section id="trabajo-s5" class="level3">
+<h3>✏️ Trabajo práctico · esta semana</h3>
+<p><strong>Consigna:</strong> realizar una ejercitación de <strong>perspectiva central</strong> —que ocupe gran parte de la hoja— con método, en lápiz y cuya temática sea el cuarto o dormitorio. Luego finalizar la obra pasándole tinta negra en las líneas de lápiz.</p>
+<p><strong>Esta semana:</strong> hacé primero un ensayo rápido en una hoja borrador para entender el recorrido de las líneas de fuga, y después empezá el trazado en la hoja oficio:</p>
+<ol>
+<li><strong>Horizonte y fuga:</strong> con la hoja oficio en posición horizontal, trazar suave la LH a mitad de altura y marcar el PF cerca del centro.</li>
+<li><strong>Pared del fondo:</strong> dibujar un rectángulo mediano alrededor del PF (con dos líneas horizontales y dos verticales).</li>
+<li><strong>Techo, piso y paredes laterales:</strong> unir las cuatro esquinas del rectángulo del fondo con el PF y prolongar esas líneas hasta los bordes de la hoja.</li>
+</ol>
+</section>
+</section>
+<section id="s6" class="level2">
+<h2>Semana 6 · Perspectiva central: muebles y tinta</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Trabajo práctico</strong></td>
+<td>TP N.º 1: Perspectiva central (semanas 5 y 6)</td>
+</tr>
+<tr class="even">
+<td><strong>Temática</strong></td>
+<td>El cuarto o dormitorio</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>Hoja blanca oficio, regla, lápiz HB/2B, goma, microfibra o lapicera de tinta negra.</td>
+</tr>
+</tbody>
+</table>
+<section id="trabajo-s6" class="level3">
+<h3>✏️ Trabajo práctico · esta semana</h3>
+<p>Continuamos el dormitorio de la <a href="#s5">semana 5</a> (repasá ahí la teoría):</p>
+<ol start="4">
+<li><strong>Muebles simples:</strong> sobre el piso y hacia un costado, trazar la base y la altura de una cama usando líneas horizontales, verticales y fugadas al PF. En la pared opuesta, dibujar una ventana o un cuadro siguiendo las mismas líneas hacia el PF.</li>
+<li><strong>Terminación en tinta:</strong> verificar que ocupe gran parte de la hoja y repasar con tinta negra solo los contornos definitivos de la habitación y los muebles.</li>
+</ol>
+<p><strong>Para revisar:</strong> ¿las líneas de ancho son horizontales y las de altura verticales? ¿Todas las de profundidad van al mismo punto de fuga? ¿Quedaron suaves las líneas auxiliares?</p>
+</section>
+</section>
+<section id="s7" class="level2">
+<h2>Semana 7 · Perspectiva angular: el trazado</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Trabajo práctico</strong></td>
+<td>TP N.º 2: Perspectiva angular (semanas 7 y 8)</td>
+</tr>
+<tr class="even">
+<td><strong>Temática</strong></td>
+<td>Seis cuerpos poliedros (prismas)</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>Hoja blanca oficio, regla, lápiz HB/2B, goma, microfibra o lapicera de tinta negra.</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s7" class="level3">
+<h3>📖 Para leer</h3>
+<p><strong>Perspectiva angular:</strong> el observador mira los cuerpos desde una esquina. Se utilizan dos puntos de fuga (PF1 y PF2) bien separados sobre la LH. Las alturas se trazan siempre con líneas verticales, mientras que los dos lados de cada cuerpo fugan uno hacia PF1 y el otro hacia PF2.</p>
+<p>Repasá los conceptos de línea de horizonte y punto de fuga en la <a href="#para-leer-s5">semana 5</a>.</p>
+<p>📚 <strong>En el apunte de teoría:</strong> <a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf#page=1" target="_blank" rel="noopener">Volumetrías y perspectiva (pág. 1)</a>.</p>
+</section>
+<section id="trabajo-s7" class="level3">
+<h3>✏️ Trabajo práctico · esta semana</h3>
+<p><strong>Consigna:</strong> realizar una ejercitación de <strong>perspectiva angular</strong> —que ocupe gran parte de la hoja— con método, en lápiz y cuya temática sean cuerpos poliedros (prismas): tres diferentes por encima de la LH y otros tres por debajo de ella. Luego finalizar la obra pasándole tinta negra en las líneas de lápiz.</p>
+<p><strong>Esta semana:</strong> ensayo rápido en hoja borrador y, en la hoja oficio:</p>
+<ol>
+<li><strong>LH y dos puntos de fuga:</strong> trazar la LH horizontal en el centro de la hoja. Ubicar PF1 cerca del borde izquierdo y PF2 cerca del borde derecho.</li>
+<li><strong>Tres prismas por encima de la LH:</strong> distribuir tres líneas verticales de distinta altura por arriba de la LH. Unir sus extremos con PF1 y PF2, y cerrar los costados con dos verticales más. Como están arriba de la LH, se verá la cara inferior (base) de cada prisma.</li>
+</ol>
+</section>
+</section>
+<section id="s8" class="level2">
+<h2>Semana 8 · Perspectiva angular: prismas y tinta</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Trabajo práctico</strong></td>
+<td>TP N.º 2: Perspectiva angular (semanas 7 y 8)</td>
+</tr>
+<tr class="even">
+<td><strong>Temática</strong></td>
+<td>Seis cuerpos poliedros (prismas)</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>Hoja blanca oficio, regla, lápiz HB/2B, goma, microfibra o lapicera de tinta negra.</td>
+</tr>
+</tbody>
+</table>
+<section id="trabajo-s8" class="level3">
+<h3>✏️ Trabajo práctico · esta semana</h3>
+<p>Continuamos los prismas de la <a href="#s7">semana 7</a>:</p>
+<ol start="3">
+<li><strong>Tres prismas por debajo de la LH:</strong> repetir el procedimiento en la mitad inferior de la hoja variando anchos y alturas (por ejemplo: uno alto y delgado, uno ancho y bajo, y uno mediano). Al estar debajo de la LH, se verá la cara superior (tapa) de cada cuerpo.</li>
+<li><strong>Terminación en tinta:</strong> pasar tinta negra únicamente a las aristas visibles de los seis prismas, dejando limpias las caras principales.</li>
+</ol>
+<p><strong>Para revisar:</strong> ¿cada lado de los prismas fuga hacia el punto que le corresponde? ¿Los de arriba muestran la base y los de abajo la tapa? ¿Son seis prismas distintos?</p>
+</section>
+</section>
+</section>
+<section id="u3" class="level1 unidad" data-color="u3">
+<h1 class="unidad" data-color="u3">Unidad 3 · Teoría del color: colores fríos y cálidos</h1>
+<blockquote>
+<p><em>La temperatura del color, su uso en obras de arte, una composición mixta y un boceto en perspectiva.</em> <strong>Dos clases por semana</strong>, de 60 a 75 minutos. <strong>Materiales:</strong> hojas blancas oficio, témperas, pinceles, lápiz, goma, regla y tinta negra. Usar témperas, no acuarela, y no aplicar agua al material pigmentario. <a href="bibliografia/arte/Arte_plastica_primer_trimestre.pdf#page=8" target="_blank" rel="noopener">Ver la unidad en el PDF del trimestre (págs. 8 a 14)</a>.</p>
+</blockquote>
+<section id="s9" class="level2">
+<h2>Semana 9 · La temperatura del color</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Comprender qué sensaciones transmiten los colores cálidos y los fríos, y reconocerlos en imágenes y objetos.</td>
+</tr>
+<tr class="even">
+<td><strong>Trabajos</strong></td>
+<td>Ejercicio 1 (clase 1) y ejercicio 2 (clase 2)</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s9" class="level3">
+<h3>📖 Teoría para leer y copiar</h3>
+<p>La <strong>temperatura del color</strong> es una reacción subjetiva que percibimos visualmente. Los colores pueden producir sensaciones relacionadas con el calor o con el frío.</p>
+<p><strong>Colores cálidos:</strong> se relacionan con el rojo, el naranja y el amarillo. Expresan alegría, actividad, movimiento, calor, diversión y acción. También pueden transmitir energía, expansión e iniciativa. Parecen acercarse y expandirse.</p>
+<p><strong>Colores fríos:</strong> se relacionan con el azul, el verde y el violeta. Producen sensaciones de serenidad, recogimiento, pasividad y frío. También pueden evocar lejanía y amplitud.</p>
+<p>Estas asociaciones se relacionan con fenómenos naturales —por ejemplo, rojo con fuego y azul con agua o hielo— y con reacciones emocionales. En general, los cálidos tienen mayor poder de atracción visual que los fríos.</p>
+<p>📚 <strong>En el apunte de teoría:</strong> <a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf#page=27" target="_blank" rel="noopener">Temperatura del color (pág. 27)</a> · <a href="bibliografia/arte/Apunte_teoria_Arte_plastica.pdf#page=24" target="_blank" rel="noopener">Círculo cromático (pág. 24)</a>.</p>
+</section>
+<section id="trabajo-s9" class="level3">
+<h3>✏️ Trabajos de la semana</h3>
+<h4>Clase 1 · Ejercicio 1: clasificar colores</h4>
+<p><strong>Consigna:</strong> dividir una hoja en dos partes. Titular una «Colores cálidos» y la otra «Colores fríos». Dibujar cinco elementos en cada lado y pintarlos con la familia de colores correspondiente.</p>
+<ol>
+<li>Trazar una línea vertical.</li>
+<li>Escribir los títulos.</li>
+<li>Elegir cinco elementos para cada lado.</li>
+<li>Dibujarlos con lápiz.</li>
+<li>Pintarlos con témperas.</li>
+</ol>
+<p><em>Ejemplo: en cálidos, un sol, una fogata, una naranja, una flor roja y hojas de otoño; en fríos, un cubo de hielo, el mar, una luna, montañas y un lago. Se pueden elegir otros objetos que representen esas sensaciones.</em></p>
+<h4>Clase 2 · Ejercicio 2: una imagen, dos temperaturas</h4>
+<p><strong>Consigna:</strong> dibujar un paisaje sencillo y dividirlo en dos partes. Pintar una mitad con colores cálidos y la otra con colores fríos.</p>
+<ol>
+<li>Dibujar una casa, árboles, montañas y cielo.</li>
+<li>Dividir la hoja en dos zonas.</li>
+<li>Pintar una zona con rojos, naranjas y amarillos.</li>
+<li>Pintar la otra con azules, verdes y violetas.</li>
+<li>Comparar qué sensación transmite cada mitad.</li>
+</ol>
+<p><em>Ejemplo: el mismo paisaje puede parecer un atardecer activo y caluroso en la mitad cálida, y un lugar tranquilo y fresco en la mitad fría.</em></p>
+</section>
+<section id="comprobar-s9" class="level3">
+<h3>❓ Para comprobar</h3>
+<ol>
+<li>¿Qué es la temperatura del color?</li>
+<li>¿Qué colores consideramos cálidos?</li>
+<li>¿Qué sensaciones producen los fríos?</li>
+<li>¿Por qué los cálidos suelen atraer más la mirada?</li>
+</ol>
+</section>
+</section>
+<section id="s10" class="level2">
+<h2>Semana 10 · El color en obras de arte</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Aplicar una familia de colores en la reproducción o ejercitación de una obra, observando sus formas y su composición.</td>
+</tr>
+<tr class="even">
+<td><strong>Trabajos</strong></td>
+<td>Ejercicio 3: Frida Kahlo (cálidos) · Ejercicio 4: Antonio Berni (fríos)</td>
+</tr>
+</tbody>
+</table>
+<section id="trabajo-s10" class="level3">
+<h3>✏️ Trabajos de la semana</h3>
+<h4>Clase 1 · Ejercicio 3: colores cálidos en un autorretrato</h4>
+<p><strong>Artista:</strong> Frida Kahlo. <strong>Obra:</strong> <em>Autorretrato</em>.</p>
+<p><strong>Consigna:</strong> realizar una ejercitación aplicando los <strong>colores cálidos</strong>, que ocupe gran parte de la hoja, en la obra pictórica de la pintora Frida Kahlo <em>Autorretrato</em>.</p>
+<ol>
+<li>Observar la obra y reconocer el rostro, el cabello, la ropa y el fondo.</li>
+<li>Realizar un dibujo de la composición.</li>
+<li>Elegir rojos, naranjas y amarillos.</li>
+<li>Aplicarlos en distintas zonas de la imagen.</li>
+<li>Procurar que la pintura ocupe gran parte de la hoja.</li>
+</ol>
+<p><em>Ejemplo: reproducir de manera sencilla el rostro y los elementos principales; usar naranja y amarillo en el fondo, rojo en algunas zonas de la ropa o los detalles. Lo importante es que predominen los cálidos.</em></p>
+<h4>Clase 2 · Ejercicio 4: colores fríos en «Manifestación»</h4>
+<p><strong>Artista:</strong> Antonio Berni. <strong>Obra:</strong> <em>Manifestación</em>.</p>
+<p><strong>Consigna:</strong> realizar una ejercitación aplicando los <strong>colores fríos</strong>, que ocupe gran parte de la hoja, en la obra pictórica del pintor Antonio Berni <em>Manifestación</em>.</p>
+<ol>
+<li>Observar la obra y reconocer las figuras, los rostros y el fondo.</li>
+<li>Realizar un dibujo de la composición.</li>
+<li>Seleccionar azules, verdes y violetas.</li>
+<li>Aplicarlos en la composición.</li>
+<li>Cubrir gran parte de la hoja con esos colores.</li>
+</ol>
+<p><em>Ejemplo: representar de manera simplificada varios rostros y figuras juntos; pintar algunas zonas con azul, otras con violeta y el fondo con verdes y azules. La condición principal es que predominen los fríos.</em></p>
+<p>Para ver las obras, buscalas en internet: <a href="https://www.google.com/search?tbm=isch&amp;q=Frida%20Kahlo%20autorretrato" target="_blank" rel="noopener">Frida Kahlo, <em>Autorretrato</em></a> · <a href="https://www.google.com/search?tbm=isch&amp;q=Antonio%20Berni%20Manifestaci%C3%B3n%201934" target="_blank" rel="noopener">Antonio Berni, <em>Manifestación</em></a>.</p>
+</section>
+<section id="comprobar-s10" class="level3">
+<h3>❓ Para comprobar</h3>
+<ol>
+<li>¿Qué artista corresponde a la actividad de colores cálidos?</li>
+<li>¿Qué obra se trabaja con colores fríos?</li>
+<li>¿Qué familia de colores debe predominar en cada trabajo?</li>
+</ol>
+</section>
+</section>
+<section id="s11" class="level2">
+<h2>Semana 11 · Composición cromática mixta</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Organizar una composición combinando colores cálidos y fríos según la ubicación indicada en la consigna.</td>
+</tr>
+<tr class="even">
+<td><strong>Trabajo</strong></td>
+<td>Ejercicio 5: composición basada en <em>Estructura en gris y rojo</em>, de Gunther Gerzso (clases 1 y 2)</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s11" class="level3">
+<h3>📖 Teoría para leer y copiar</h3>
+<p>Una <strong>composición cromática mixta</strong> combina colores cálidos y fríos dentro de una misma imagen. Un color cálido puede parecer más cercano, pesado y atrayente cuando se coloca junto a uno frío. A su vez, el color frío refuerza características opuestas, como la sensación de lejanía o serenidad.</p>
+</section>
+<section id="trabajo-s11" class="level3">
+<h3>✏️ Trabajo de la semana</h3>
+<p><strong>Artista:</strong> Gunther Gerzso. <strong>Obra:</strong> <em>Estructura en gris y rojo</em>.</p>
+<p><strong>Consigna:</strong> realizar una composición pictórica cromática mixta (cálidos + fríos). En los triángulos <strong>superior e inferior</strong> se pintará con colores <strong>cálidos</strong>, y en los triángulos <strong>laterales</strong>, con colores <strong>fríos</strong>.</p>
+<ol>
+<li>En una hoja blanca oficio, dibujar un rectángulo.</li>
+<li>Trazar las dos diagonales de esquina a esquina para formar cuatro triángulos.</li>
+<li>Pintar el triángulo superior con cálidos.</li>
+<li>Pintar el inferior también con cálidos.</li>
+<li>Pintar los dos laterales con fríos.</li>
+<li>Revisar que cada zona respete la consigna.</li>
+</ol>
+<p><em>Ejemplo: triángulo superior, amarillo y naranja; inferior, rojo y amarillo; izquierdo, azul y violeta; derecho, verde y azul. Son combinaciones posibles, no colores obligatorios.</em></p>
+</section>
+<section id="comprobar-s11" class="level3">
+<h3>❓ Para comprobar</h3>
+<ol>
+<li>¿Qué significa composición cromática mixta?</li>
+<li>¿Qué zonas llevan colores cálidos?</li>
+<li>¿Qué zonas llevan colores fríos?</li>
+<li>¿Qué efecto puede producir la cercanía entre un color cálido y uno frío?</li>
+</ol>
+</section>
+</section>
+<section id="s12" class="level2">
+<h2>Semana 12 · Boceto en perspectiva central</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Realizar un boceto de un ambiente interior y representar objetos a distintas profundidades mediante perspectiva central básica.</td>
+</tr>
+<tr class="even">
+<td><strong>Trabajo</strong></td>
+<td>Ejercicio 6: boceto de un ambiente interior, a mano alzada y en tinta negra</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s12" class="level3">
+<h3>📖 Teoría para leer y copiar</h3>
+<p>La <strong>perspectiva central</strong> es un recurso de representación que permite sugerir profundidad en una superficie plana. En este ejercicio se organiza el espacio interior de un ambiente y se usan líneas que se dirigen hacia un <strong>punto de fuga</strong>.</p>
+<p>Elementos que pide identificar la consigna: <strong>línea de horizonte</strong>, <strong>línea de tierra</strong> y <strong>líneas de profundidad</strong>. Para organizar el dibujo se marca también un punto de fuga, hacia el que se dirigen las líneas de profundidad. Repasá la <a href="#para-leer-s5">semana 5</a>.</p>
+</section>
+<section id="trabajo-s12" class="level3">
+<h3>✏️ Trabajo de la semana</h3>
+<p><strong>Consigna:</strong> realizar un boceto a mano alzada, en tinta negra, cuya temática compositiva sea el interior de un ambiente con objetos dispersos en diferentes profundidades. Utilizar una perspectiva central básica, indicando línea de horizonte, de tierra, de profundidad, etc.</p>
+<ol>
+<li>Dibujar suavemente el espacio de una habitación.</li>
+<li>Marcar la línea de horizonte.</li>
+<li>Elegir un punto de fuga sobre esa línea.</li>
+<li>Trazar líneas de profundidad que se dirijan al punto de fuga.</li>
+<li>Agregar objetos en distintas posiciones: por ejemplo, una cama, una mesa, una silla, una ventana o una lámpara.</li>
+<li>Revisar la sensación de profundidad.</li>
+<li>Repasar el boceto con tinta negra.</li>
+</ol>
+<p><em>Ejemplo: el interior de un dormitorio, con la cama en primer plano, un escritorio a media distancia y una ventana en la pared del fondo.</em></p>
+</section>
+<section id="cierre-s12" class="level3">
+<h3>✅ Cierre del trimestre</h3>
+<p>Revisá que estén hechos los cuatro trabajos prácticos obligatorios de la unidad: (1) Frida Kahlo con colores cálidos; (2) Antonio Berni con colores fríos; (3) composición mixta basada en Gunther Gerzso, con cálidos arriba y abajo y fríos a los lados; (4) boceto de interior con perspectiva central y tinta negra.</p>
+<h4>Preguntas para una evaluación oral o escrita</h4>
+<ol>
+<li>¿Qué es la temperatura del color?</li>
+<li>¿Qué sensaciones transmiten los colores cálidos?</li>
+<li>¿Qué sensaciones transmiten los colores fríos?</li>
+<li>¿Qué relación hay entre los colores cálidos y el poder de atracción visual?</li>
+<li>¿Qué obra se trabajó con colores cálidos?</li>
+<li>¿Qué obra se trabajó con colores fríos?</li>
+<li>¿Cómo se distribuyen los colores en la composición mixta?</li>
+<li>¿Qué es la perspectiva central?</li>
+<li>¿Qué función cumple el punto de fuga?</li>
+<li>¿Qué elementos deben aparecer en el boceto del ambiente interior?</li>
+</ol>
+</section>
+</section>
+</section>
+
+  </div>
+</main>
+<a class="arriba" href="#top" title="Volver arriba">↑</a>
+<script>
+(function(){
+  // cerrar menú al navegar en celular
+  document.querySelectorAll('#side a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu')));
+  // heredar color de la unidad en tarjetas
+  document.querySelectorAll('section.level1').forEach(u=>{
+    const c=u.getAttribute('data-color');
+    if(c) u.querySelectorAll('section.level2').forEach(s=>{s.style.setProperty('--c','var(--'+c+')');s.style.setProperty('--cs','var(--'+c+'s)')});
+  });
+  // claves plegables
+  const cl=document.querySelector('section.claves');
+  if(cl){cl.classList.add('cerrado');const b=document.createElement('button');b.className='toggle-claves';b.textContent='👩‍🏫 Mostrar claves (adulto que acompaña)';
+    cl.querySelector('h2').after(b);b.onclick=()=>{cl.classList.toggle('cerrado');b.textContent=cl.classList.contains('cerrado')?'👩‍🏫 Mostrar claves (adulto que acompaña)':'Ocultar claves';};}
+  // progreso + menú activo
+  const bar=document.querySelector('#progress div');
+  const links=[...document.querySelectorAll('#side a[href^="#"]')];
+  const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  function onScroll(){
+    const h=document.documentElement; bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+    let cur=secs[0]; for(const s of secs){ if(s.getBoundingClientRect().top<120) cur=s; }
+    links.forEach(a=>a.classList.toggle('on',cur&&a.getAttribute('href')==='#'+cur.id));
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  // descargar toda la bibliografía (de a un archivo, con pausa para que el navegador no las bloquee)
+  const bd=document.getElementById('btn-descargas');
+  if(bd){const txt=bd.textContent;bd.onclick=async()=>{
+    const as=[...document.querySelectorAll('ul.descargas a[download]')];bd.disabled=true;
+    for(let i=0;i<as.length;i++){bd.textContent='Descargando '+(i+1)+' de '+as.length+'…';as[i].click();await new Promise(r=>setTimeout(r,900));}
+    bd.textContent='✅ Listo: revisá tu carpeta de Descargas';setTimeout(()=>{bd.textContent=txt;bd.disabled=false;},5000);
+  };}
+})();
+</script>
+</body>
+</html>

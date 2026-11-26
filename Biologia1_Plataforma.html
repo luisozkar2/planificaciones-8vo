@@ -1,0 +1,1655 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biología 1 · Descubrir la vida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee; --card:#ffffff; --ink:#1f2330; --muted:#5d6475; --line:#e6e1d8;
+  --u1:#139a8c; --u1s:#e3f6f3;
+  --u2:#2e9b4e; --u2s:#e5f6ea;
+  --u3:#2f6fd6; --u3s:#e7effd;
+  --u4:#6a4bc4; --u4s:#efeafc;
+  --u5:#e0782f; --u5s:#fff1e6;
+  --acc:#2f6fd6; --accs:#e7effd;
+  --gold:#f2b632; --biblia:#fff8e1; --biblia-b:#e8b923;
+  --radius:18px; --side:290px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+@media (max-width:980px){html{scroll-padding-top:76px}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Nunito,system-ui,sans-serif}
+a{color:var(--acc)}
+h1,h2,h3,h4{font-family:Fredoka,Nunito,sans-serif;line-height:1.2;margin:1.4em 0 .5em}
+
+/* ---------- barra lateral ---------- */
+#side{position:fixed;inset:0 auto 0 0;width:var(--side);background:#1d2233;color:#cfd5e6;overflow-y:auto;padding:22px 14px 40px;z-index:20}
+#side .logo{display:flex;gap:10px;align-items:center;padding:4px 8px 18px;border-bottom:1px solid #303750;margin-bottom:12px}
+#side .logo span{font-size:30px}
+#side .logo b{font-family:Fredoka;font-size:20px;color:#fff;display:block;line-height:1.1}
+#side .logo small{color:#8f98b3;font-size:12px}
+#side a{display:block;text-decoration:none;color:inherit;border-radius:10px;padding:6px 10px;font-size:14px;line-height:1.3}
+#side a:hover{background:#2a3149;color:#fff}
+#side a.on{background:#fff;color:#1d2233;font-weight:700}
+#side .nav-u{margin-top:14px;font-family:Fredoka;font-weight:600;color:#fff;font-size:15px}
+#side .nav-u b{display:inline-block;background:var(--gold);color:#1d2233;border-radius:7px;padding:0 6px;margin-right:6px;font-size:13px}
+#side .nav-s{display:flex;gap:8px;padding-left:14px}
+#side .nav-s i{font-style:normal;min-width:22px;height:22px;border-radius:50%;background:#303750;color:#fff;font-size:11px;display:grid;place-items:center;font-weight:800;flex:none}
+#side .nav-x{color:var(--gold)}
+#burger{display:none}
+#mtop{display:none;position:fixed;top:0;left:0;right:0;height:64px;background:#1d2233;color:#fff;z-index:35;align-items:center;padding-left:70px;font-family:Fredoka;font-size:18px}
+
+/* ---------- contenido ---------- */
+main{margin-left:var(--side);padding:0 0 80px}
+.wrap{max-width:900px;margin:0 auto;padding:0 28px}
+#progress{position:fixed;top:0;z-index:36;left:var(--side);right:0;height:5px;background:transparent;z-index:30}
+#progress div{height:100%;width:0;background:linear-gradient(90deg,var(--u1),var(--u2),var(--u3),var(--u4));border-radius:0 4px 4px 0}
+
+.hero{background:radial-gradient(circle at 85% 20%,#3b4a7a 0,#1d2233 60%);color:#fff;padding:64px 28px 56px;position:relative;overflow:hidden}
+.hero .wrap{position:relative}
+.hero .chip{display:inline-block;background:var(--gold);color:#1d2233;font-weight:800;border-radius:99px;padding:4px 14px;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.hero h1{font-size:clamp(32px,5vw,52px);margin:.35em 0 .2em}
+.hero p{font-size:19px;color:#d6dcf0;max-width:640px;margin:0}
+.hero .deco{position:absolute;right:-10px;top:-20px;font-size:120px;opacity:.18;letter-spacing:-20px;user-select:none}
+.hero .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .stats div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:10px 16px;font-size:14px}
+.hero .stats b{font-family:Fredoka;font-size:26px;display:block;color:#fff;line-height:1}
+
+/* secciones de unidad */
+section.level1{--c:var(--acc);--cs:var(--accs)}
+section.level1[data-color=u1]{--c:var(--u1);--cs:var(--u1s)}
+section.level1[data-color=u2]{--c:var(--u2);--cs:var(--u2s)}
+section.level1[data-color=u3]{--c:var(--u3);--cs:var(--u3s)}
+section.level1[data-color=u4]{--c:var(--u4);--cs:var(--u4s)}
+section.level1[data-color=u5]{--c:var(--u5);--cs:var(--u5s)}
+section.level1>h1{background:var(--c);color:#fff;margin:56px 0 0;padding:34px 30px 28px;border-radius:var(--radius) var(--radius) 0 0;font-size:clamp(26px,3.6vw,36px)}
+section.level1>blockquote{margin:0 0 30px;background:var(--cs);border-radius:0 0 var(--radius) var(--radius);padding:18px 30px 20px;border:2px solid var(--c);border-top:0;font-size:16px}
+section.level1>blockquote p{margin:.35em 0}
+
+/* tarjetas de semana */
+section.level2{background:var(--card);border-radius:var(--radius);padding:8px 34px 30px;margin:0 0 34px;box-shadow:0 2px 0 var(--line),0 10px 30px -18px rgba(30,35,60,.35);border-top:8px solid var(--c,var(--acc))}
+#intro{border-top-color:var(--gold)}
+section.level2>h2{font-size:28px;margin-top:26px;color:var(--c,var(--ink))}
+section.level2>h2:before{content:attr(data-badge);}
+section.level2>table:first-of-type{background:var(--cs,#f5f5f5);border-radius:12px;overflow:hidden;font-size:15px}
+section.level2>table:first-of-type thead,section.level2>table:first-of-type colgroup{display:none}
+section.level2>table:first-of-type{table-layout:auto}
+section.level2>table:first-of-type td:first-child{width:170px;font-weight:700;color:var(--c,var(--ink))}
+section.level3>h3, section.level2>h3{font-size:21px;border-bottom:2px dashed var(--line);padding-bottom:6px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px;display:block;overflow-x:auto}
+@media (min-width:700px){table{display:table}}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--cs,#f2f2f2);font-family:Fredoka;font-weight:600}
+blockquote{margin:16px 0}
+
+/* recuadro bíblico */
+.biblia{background:var(--biblia);border:2px solid var(--biblia-b);border-radius:16px;padding:6px 22px 10px 22px;margin:26px 0;position:relative}
+.biblia:before{content:"🕊️";position:absolute;top:-18px;left:18px;font-size:26px;background:var(--biblia);border-radius:50%;padding:0 6px}
+.biblia p:first-child{margin-top:18px}
+
+/* fotos */
+figure.foto{margin:24px 0;background:#f2efe9;border-radius:16px;overflow:hidden}
+.foto-marco{position:relative;min-height:60px;background:#e9e4da}
+.foto-marco img{display:block;width:100%;max-height:440px;object-fit:cover}
+.foto-fallback{display:none}
+.sin-foto .foto-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:180px;text-decoration:none;font-size:42px;background:repeating-linear-gradient(45deg,#ece6db,#ece6db 12px,#e4ddd0 12px,#e4ddd0 24px)}
+.sin-foto .foto-fallback span{font-size:15px;font-weight:800;background:#fff;border-radius:99px;padding:4px 14px}
+figcaption{padding:10px 16px 12px;font-size:14.5px;color:#3c4253;font-style:italic}
+figcaption .glink{font-style:normal;font-size:13px;white-space:nowrap;margin-left:4px}
+
+/* video */
+a.video{display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;margin:8px 0;max-width:560px;transition:.15s}
+a.video:hover{border-color:#e33;transform:translateY(-2px)}
+.vthumb{flex:none;width:136px;aspect-ratio:16/9;border-radius:10px;background:#222 center/cover;display:grid;place-items:center}
+.vthumb b{background:#e33;color:#fff;border-radius:10px;padding:2px 12px;font-size:14px}
+.vtxt{font-weight:700;font-size:15px;line-height:1.3}
+.vtxt small{display:block;color:#e33;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+/* pruebas */
+section.prueba{background:#fff;border:2px dashed var(--c,var(--acc));border-top-width:8px;border-top-style:solid}
+section.prueba>h2{display:flex;align-items:center;gap:10px}
+section.claves{border-top-color:#1d2233}
+.toggle-claves{font:700 15px Nunito;background:#1d2233;color:#fff;border:0;border-radius:99px;padding:10px 18px;cursor:pointer;margin:6px 0 10px}
+section.claves.cerrado>*:not(h2):not(.toggle-claves){display:none}
+
+.arriba{position:fixed;right:18px;bottom:18px;background:#1d2233;color:#fff;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:15}
+
+/* descargas de bibliografía */
+ul.descargas{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+ul.descargas a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px 10px 46px;position:relative;font-size:15.5px;line-height:1.35;transition:.15s}
+ul.descargas a:before{content:"📄";position:absolute;left:14px;top:10px;font-size:20px}
+ul.descargas a:hover{border-color:var(--acc);transform:translateY(-2px)}
+ul.descargas b{color:var(--acc)}
+ul.descargas small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.btn-descargas{font:700 15px Nunito;background:var(--acc);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;margin:6px 0 10px}
+.btn-descargas:disabled{opacity:.6;cursor:wait}
+
+@media (max-width:980px){
+  :root{--side:0px}
+  #side{transform:translateX(-100%);width:290px;transition:.25s}
+  body.menu #side{transform:none}
+  #burger{display:grid;place-items:center;position:fixed;top:11px;left:10px;z-index:40;width:46px;height:42px;border-radius:12px;border:0;background:#303750;color:#fff;font-size:22px}
+  .wrap{padding:0 16px}
+  section.level2{padding:6px 18px 22px}
+  section.level1>h1{padding:26px 18px 20px}
+  section.level1>blockquote{padding:14px 18px}
+  .hero{padding:80px 16px 40px}
+  section.level2>table:first-of-type,section.level2>table:first-of-type tbody,section.level2>table:first-of-type tr,section.level2>table:first-of-type td{display:block;width:auto!important;border:0}
+  section.level2>table:first-of-type td:first-child{padding-bottom:0}
+  section.level2>table:first-of-type tr{border-bottom:1px solid var(--line)}
+  main{padding-top:64px}
+  #mtop{display:flex}
+  .vthumb{width:104px}
+}
+@media print{
+  @page{size:A4;margin:14mm 13mm 16mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #side,#burger,#progress,.arriba,.toggle-claves,#mtop,.hero .deco,.btn-descargas{display:none!important}
+  main{margin:0!important;padding:0!important} body{background:#fff;font-size:10.5pt;line-height:1.5}
+  .wrap{max-width:none;padding:0}
+  .hero{padding:60mm 10mm 20mm;min-height:250mm;break-after:page;border-radius:0}
+  .hero h1{font-size:40pt}
+  section.level1{break-before:page}
+  section.level1>h1{margin-top:0}
+  section.level2{box-shadow:none;break-before:page;padding:2mm 6mm 4mm;margin:0;border-radius:10px}
+  section.level1>section.level2:first-of-type{break-before:avoid}
+  #intro{break-before:avoid}
+  h2,h3{break-after:avoid}
+  table,figure,.biblia,a.video,li{break-inside:avoid}
+  figure.foto .foto-marco img{max-height:85mm}
+  .sin-foto .foto-fallback{height:28mm;font-size:22pt}
+  section.claves.cerrado>*{display:block!important}
+  section.claves.cerrado>table{display:table!important}
+  a{color:inherit;text-decoration:none}
+  a.video{border:1px solid #ccc;max-width:none}
+  a.video .vtxt:after{content:attr(data-url);display:block;font-weight:400;font-size:8pt;color:#555;word-break:break-all}
+  figcaption .glink{display:none}
+}
+</style>
+</head>
+<body>
+<button id="burger" aria-label="Menú" onclick="document.body.classList.toggle('menu')">☰</button>
+<div id="mtop">🧬 Biología 1</div>
+<div id="progress"><div></div></div>
+<nav id="side">
+  <div class="logo"><span>🧬</span><div><b>Biología 1</b><small>Evolución, células y genética</small></div></div>
+  <a href="index.html">📚 Todas las materias</a>
+  <a href="#top">⬆️ Portada</a>
+  <a class="nav-s nav-x" href="#intro">Bienvenidos a Biología</a>
+  <a class="nav-s nav-x" href="#descargas">📥 Descargar bibliografía</a>
+<a class="nav-u" href="#u1"><b>U1</b> Evolución</a>
+<a class="nav-s" href="#s1"><i>1</i>Introducción a la Biodiversidad y Primeras Ideas</a>
+<a class="nav-s" href="#s2"><i>2</i>La Historia de la Tierra y las Teorías Geológicas</a>
+<a class="nav-s" href="#s3"><i>3</i>Del Fijismo al Transformismo</a>
+<a class="nav-s" href="#s4"><i>4</i>El Evolucionismo y el Árbol de la Vida</a>
+<a class="nav-s" href="#s5"><i>5</i>Evidencias de la Evolución</a>
+<a class="nav-s" href="#s6"><i>6</i>Lamarck vs. Darwin y la Selección Natural</a>
+<a class="nav-s" href="#s7"><i>7</i>Objeciones a Darwin y la Teoría Sintética de la Evolución</a>
+<a class="nav-s" href="#s8"><i>8</i>El Concepto de Especie y Poblaciones</a>
+<a class="nav-s" href="#s9"><i>9</i>Mecanismos de la Selección Natural y Tipos</a>
+<a class="nav-s" href="#s10"><i>10</i>Adaptaciones y Especiación</a>
+<a class="nav-s" href="#s11"><i>11</i>Deriva Génica, Flujo Génico y Cierre de Sección</a>
+<a class="nav-u" href="#u2"><b>U2</b> Células y nutrición</a>
+<a class="nav-s" href="#s12"><i>12</i>Los Seres Vivos y sus Características</a>
+<a class="nav-s" href="#s13"><i>13</i>Niveles de Organización de la Materia</a>
+<a class="nav-s" href="#s14"><i>14</i>Introducción a la Célula y Modelos Científicos</a>
+<a class="nav-s" href="#s15"><i>15</i>Células Procariotas y Eucariotas</a>
+<a class="nav-s" href="#s16"><i>16</i>Diversidad y Estructura de Células Eucariotas (Membrana)</a>
+<a class="nav-s" href="#s17"><i>17</i>El Núcleo, el Citoplasma y el Citoesqueleto</a>
+<a class="nav-s" href="#s18"><i>18</i>Orgánulos Celulares y Sistemas de Endomembranas</a>
+<a class="nav-s" href="#s19"><i>19</i>Nutrición Celular y Transporte a través de la Membrana</a>
+<a class="nav-s" href="#s20"><i>20</i>Transporte en Masa y Tipos de Nutrición</a>
+<a class="nav-s" href="#s21"><i>21</i>Nutrición Autótrofa: Fotosíntesis</a>
+<a class="nav-s" href="#s22"><i>22</i>Obtención de Energía: Respiración Celular</a>
+<a class="nav-u" href="#u3"><b>U3</b> Genética y nutrición humana</a>
+<a class="nav-s" href="#s23"><i>23</i>Nutrición y Alimentación Humana</a>
+<a class="nav-s" href="#s24"><i>24</i>Alimentación Saludable y Requerimientos Nutricionales</a>
+<a class="nav-s" href="#s25"><i>25</i>El ADN y el Material Genético</a>
+<a class="nav-s" href="#s26"><i>26</i>Replicación del ADN y Síntesis Proteica</a>
+<a class="nav-s" href="#s27"><i>27</i>Genotipo, Fenotipo y Mutaciones</a>
+<a class="nav-s" href="#s28"><i>28</i>Ciclo Celular y Mitosis</a>
+<a class="nav-s" href="#s29"><i>29</i>Meiosis y Reproducción Sexual</a>
+<a class="nav-s" href="#s30"><i>30</i>Mecanismos Hereditarios (Leyes de Mendel) y Cierre Anual</a>
+</nav>
+<main>
+  <header class="hero" id="top">
+    <div class="deco">🧬🔬🌿</div>
+    <div class="wrap">
+      <span class="chip">1.º año · NES · CABA</span>
+      <h1>Descubrir la vida</h1>
+      <p>Evolución, células, nutrición y genética: 30 semanas para entender cómo funcionan y cómo cambian los seres vivos.</p>
+      <div class="stats">
+        <div><b>3</b>secciones</div><div><b>30</b>semanas</div><div><b>30</b>videos</div><div><b>60</b>preguntas</div>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+  <section id="intro" class="level2">
+<h2>Bienvenidos a Biología</h2>
+<p>Este año vamos a recorrer en <strong>30 semanas</strong> las grandes preguntas de la biología: ¿cómo surgió tanta
+diversidad de seres vivos? ¿Qué tienen en común todos ellos? ¿Cómo funciona una célula, cómo se alimenta y cómo
+obtiene energía? ¿Cómo se transmite la información de padres a hijos?</p>
+<p>Trabajamos con el libro <em>Biología 1</em> de la serie NES de Editorial Santillana, que se puede descargar más abajo.</p>
+<section id="cómo-está-organizada-cada-semana" class="level3">
+<h3>Cómo está organizada cada semana</h3>
+<ul>
+<li><strong>📖 Para leer:</strong> las páginas del libro y un resumen de lo que se trabaja.</li>
+<li><strong>🎬 Video recomendado:</strong> un video corto de YouTube sobre el tema.</li>
+<li><strong>✏️ Evaluación rápida:</strong> dos preguntas para responder en la carpeta y comprobar lo aprendido.</li>
+</ul>
+<p>El año se divide en tres secciones: <strong>la evolución</strong> (semanas 1 a 11), <strong>las células y la
+nutrición</strong> (semanas 12 a 22) y <strong>la información genética y la nutrición humana</strong> (semanas 23 a 30).</p>
+</section>
+<section id="mapa-del-año" class="level3">
+<h3>Mapa del año</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Semana</th>
+<th>Tema</th>
+<th>Páginas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#s1">1</a></td>
+<td>Introducción a la Biodiversidad y Primeras Ideas</td>
+<td>10 a 13</td>
+</tr>
+<tr class="even">
+<td><a href="#s2">2</a></td>
+<td>La Historia de la Tierra y las Teorías Geológicas</td>
+<td>13 y 14</td>
+</tr>
+<tr class="odd">
+<td><a href="#s3">3</a></td>
+<td>Del Fijismo al Transformismo</td>
+<td>14 a 16</td>
+</tr>
+<tr class="even">
+<td><a href="#s4">4</a></td>
+<td>El Evolucionismo y el Árbol de la Vida</td>
+<td>16 y 17</td>
+</tr>
+<tr class="odd">
+<td><a href="#s5">5</a></td>
+<td>Evidencias de la Evolución</td>
+<td>17 a 19</td>
+</tr>
+<tr class="even">
+<td><a href="#s6">6</a></td>
+<td>Lamarck vs. Darwin y la Selección Natural</td>
+<td>22 a 27</td>
+</tr>
+<tr class="odd">
+<td><a href="#s7">7</a></td>
+<td>Objeciones a Darwin y la Teoría Sintética de la Evolución</td>
+<td>28 a 30</td>
+</tr>
+<tr class="even">
+<td><a href="#s8">8</a></td>
+<td>El Concepto de Especie y Poblaciones</td>
+<td>34 a 36</td>
+</tr>
+<tr class="odd">
+<td><a href="#s9">9</a></td>
+<td>Mecanismos de la Selección Natural y Tipos</td>
+<td>37 a 39</td>
+</tr>
+<tr class="even">
+<td><a href="#s10">10</a></td>
+<td>Adaptaciones y Especiación</td>
+<td>39 a 42</td>
+</tr>
+<tr class="odd">
+<td><a href="#s11">11</a></td>
+<td>Deriva Génica, Flujo Génico y Cierre de Sección</td>
+<td>43 a 47</td>
+</tr>
+<tr class="even">
+<td><a href="#s12">12</a></td>
+<td>Los Seres Vivos y sus Características</td>
+<td>50 a 53</td>
+</tr>
+<tr class="odd">
+<td><a href="#s13">13</a></td>
+<td>Niveles de Organización de la Materia</td>
+<td>54 a 56</td>
+</tr>
+<tr class="even">
+<td><a href="#s14">14</a></td>
+<td>Introducción a la Célula y Modelos Científicos</td>
+<td>56 a 60</td>
+</tr>
+<tr class="odd">
+<td><a href="#s15">15</a></td>
+<td>Células Procariotas y Eucariotas</td>
+<td>64 a 68</td>
+</tr>
+<tr class="even">
+<td><a href="#s16">16</a></td>
+<td>Diversidad y Estructura de Células Eucariotas (Membrana)</td>
+<td>68 a 71</td>
+</tr>
+<tr class="odd">
+<td><a href="#s17">17</a></td>
+<td>El Núcleo, el Citoplasma y el Citoesqueleto</td>
+<td>72 y 73</td>
+</tr>
+<tr class="even">
+<td><a href="#s18">18</a></td>
+<td>Orgánulos Celulares y Sistemas de Endomembranas</td>
+<td>74 y 75</td>
+</tr>
+<tr class="odd">
+<td><a href="#s19">19</a></td>
+<td>Nutrición Celular y Transporte a través de la Membrana</td>
+<td>80 a 82</td>
+</tr>
+<tr class="even">
+<td><a href="#s20">20</a></td>
+<td>Transporte en Masa y Tipos de Nutrición</td>
+<td>83 a 85</td>
+</tr>
+<tr class="odd">
+<td><a href="#s21">21</a></td>
+<td>Nutrición Autótrofa: Fotosíntesis</td>
+<td>86 y 87</td>
+</tr>
+<tr class="even">
+<td><a href="#s22">22</a></td>
+<td>Obtención de Energía: Respiración Celular</td>
+<td>88 a 91</td>
+</tr>
+<tr class="odd">
+<td><a href="#s23">23</a></td>
+<td>Nutrición y Alimentación Humana</td>
+<td>94 a 102</td>
+</tr>
+<tr class="even">
+<td><a href="#s24">24</a></td>
+<td>Alimentación Saludable y Requerimientos Nutricionales</td>
+<td>112 a 122</td>
+</tr>
+<tr class="odd">
+<td><a href="#s25">25</a></td>
+<td>El ADN y el Material Genético</td>
+<td>126 a 129</td>
+</tr>
+<tr class="even">
+<td><a href="#s26">26</a></td>
+<td>Replicación del ADN y Síntesis Proteica</td>
+<td>130 a 135</td>
+</tr>
+<tr class="odd">
+<td><a href="#s27">27</a></td>
+<td>Genotipo, Fenotipo y Mutaciones</td>
+<td>136 a 141</td>
+</tr>
+<tr class="even">
+<td><a href="#s28">28</a></td>
+<td>Ciclo Celular y Mitosis</td>
+<td>142 a 147</td>
+</tr>
+<tr class="odd">
+<td><a href="#s29">29</a></td>
+<td>Meiosis y Reproducción Sexual</td>
+<td>148 a 153</td>
+</tr>
+<tr class="even">
+<td><a href="#s30">30</a></td>
+<td>Mecanismos Hereditarios (Leyes de Mendel) y Cierre Anual</td>
+<td>154 a 170</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notas-bibliográficas" class="level3">
+<h3>Notas bibliográficas</h3>
+<ul>
+<li><strong>Libro</strong> · <em>Biología 1</em>, serie NES, Editorial Santillana. Las páginas citadas son <strong>las
+del libro impreso</strong>, no las del visor de PDF. El PDF es una copia escaneada.</li>
+<li><strong>Videos</strong> · Son públicos en YouTube. <strong>Conviene que el adulto que acompaña los mire antes</strong>.
+Algunos son de otros países y pueden usar palabras distintas de las del libro.</li>
+</ul>
+</section>
+<section id="descargas" class="level3">
+<h3>📥 Descargar la bibliografía</h3>
+<p>Acá están el libro y la planificación anual. El libro es un archivo grande: conviene bajarlo con wifi.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" download><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+<li><a href="bibliografia/biologia/Planificacion_Biologia_30_semanas.docx" download><b>Planificación</b> · Planificación anual de Biología: 30 semanas<small>Documento de Word · 43 KB</small></a></li>
+</ul>
+<button type="button" class="btn-descargas" id="btn-descargas">📥 Descargar todo (2 archivos · 86 MB)</button>
+</section>
+</section>
+
+<section id="u1" class="level1 unidad" data-color="u1">
+<h1 class="unidad" data-color="u1">Sección I · La evolución de los seres vivos</h1>
+<blockquote>
+<p><em>Cómo se pensó la diversidad de la vida a lo largo de la historia y cómo la explica hoy la teoría de la evolución: fijismo, Lamarck, Darwin, la selección natural, las especies y la especiación.</em> <strong>Semanas 1 a 11.</strong></p>
+</blockquote>
+<section id="s1" class="level2">
+<h2>Semana 1 · Introducción a la Biodiversidad y Primeras Ideas</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 10 a 13</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Teorías de la evolución | Fijismo, Lamarck, Darwin</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s1" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 10 a 13</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos el concepto de biodiversidad en la naturaleza y cómo los antiguos pensadores griegos (como Aristóteles con su Scala naturae) intentaron ordenar las formas vivas. Contrastamos la visión creacionista occidental con las explicaciones orientales y el surgimiento del estudio geológico de los fósiles.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s1" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=CBAwcRaVzA4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/CBAwcRaVzA4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=CBAwcRaVzA4"><small>Mangel Ciencia</small>Teorías de la evolución | Fijismo, Lamarck, Darwin</span></a></p>
+</section>
+<section id="evaluacion-s1" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué diferencia principal existía entre la Scala naturae de Aristóteles y la idea de cambio?</li>
+<li>¿Qué rol cumplieron los fósiles según los primeros naturalistas?</li>
+</ol>
+</section>
+</section>
+<section id="s2" class="level2">
+<h2>Semana 2 · La Historia de la Tierra y las Teorías Geológicas</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 13 y 14</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Catastrofismo vs. Uniformismo - Expedición a La Tierra</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s2" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 13 y 14</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos cómo la geología aportó pistas fundamentales para entender la edad de la Tierra. Comparamos el uniformismo (procesos lentos y graduales) con el catastrofismo de Cuvier, quien demostró la existencia de extinciones a través del estudio de mamíferos gigantes.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s2" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=LTSw3pOQUls" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/LTSw3pOQUls/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=LTSw3pOQUls"><small>El Comander GEO</small>Catastrofismo vs. Uniformismo - Expedición a La Tierra</span></a></p>
+</section>
+<section id="evaluacion-s2" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿En qué se diferenciaba el uniformismo de Hutton y Lyell respecto del catastrofismo de Cuvier?</li>
+<li>¿Por qué los fósiles de animales gigantes impulsaron el concepto de extinción?</li>
+</ol>
+</section>
+</section>
+<section id="s3" class="level2">
+<h2>Semana 3 · Del Fijismo al Transformismo</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 14 a 16</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Explicación rápida y fácil de la Teoría de Lamarck</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s3" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 14 a 16</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos el sistema de nomenclatura binomial de Linneo y su postura fijista. Luego, estudiamos los cuestionamientos de Buffon y cómo Erasmus Darwin y Lamarck abrieron el camino hacia el transformismo, introduciendo la idea de que las especies cambian por adaptación al ambiente.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s3" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=_UDLQYb8-IY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_UDLQYb8-IY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_UDLQYb8-IY"><small>Random HD</small>Explicación rápida y fácil de la Teoría de Lamarck</span></a></p>
+</section>
+<section id="evaluacion-s3" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué sostenía la corriente fijista defendida por Linneo?</li>
+<li>¿Cuál era el mecanismo propuesto por Lamarck para explicar los cambios (ej. cuello de jirafas)?</li>
+</ol>
+</section>
+</section>
+<section id="s4" class="level2">
+<h2>Semana 4 · El Evolucionismo y el Árbol de la Vida</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 16 y 17</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>La Evolución de Darwin | Expedición y Teoría</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s4" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 16 y 17</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos cómo la expedición del Beagle permitió a Darwin recolectar evidencias que derrumbaron la escala lineal, reemplazándola por el concepto de &#x27;árbol de la vida&#x27; o ancestro común propuesto por Darwin y Haeckel.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s4" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=cxsCC3fj_lY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/cxsCC3fj_lY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=cxsCC3fj_lY"><small>Te lo Dibujo</small>La Evolución de Darwin | Expedición y Teoría</span></a></p>
+</section>
+<section id="evaluacion-s4" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué representa el &#x27;árbol filogenético&#x27; frente a la escala lineal tradicional?</li>
+<li>¿Por qué las observaciones de Darwin en Sudamérica fueron clave?</li>
+</ol>
+</section>
+</section>
+<section id="s5" class="level2">
+<h2>Semana 5 · Evidencias de la Evolución</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 17 a 19</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Pruebas científicas de la evolución</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s5" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 17 a 19</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos las principales pruebas científicas: cambios observables en polillas por contaminación industrial, distribución geográfica, registro fósil y homologías anatómicas. Desmitificamos la idea de que evolucionar es volverse &#x27;superior&#x27;.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s5" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=DXlVOxWzdwQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/DXlVOxWzdwQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=DXlVOxWzdwQ"><small>Ciencias con la Bióloga Elena</small>Pruebas científicas de la evolución</span></a></p>
+</section>
+<section id="evaluacion-s5" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué demuestran las estructuras homólogas en diferentes vertebrados?</li>
+<li>¿Por qué es incorrecto afirmar que la selección natural produce organismos &#x27;superiores&#x27;?</li>
+</ol>
+</section>
+</section>
+<section id="s6" class="level2">
+<h2>Semana 6 · Lamarck vs. Darwin y la Selección Natural</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 22 a 27</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Similitudes y diferencias entre Darwin y Lamarck</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s6" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 22 a 27</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Profundizamos en la selección natural. Analizamos cómo influyeron Malthus (recursos limitados) y la selección artificial. Contrastamos el rol del ambiente como impulsor (Lamarck) frente al ambiente como seleccionador de la variabilidad al azar (Darwin).</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s6" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=NKaZK8ifRbM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/NKaZK8ifRbM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=NKaZK8ifRbM"><small>Random HD</small>Similitudes y diferencias entre Darwin y Lamarck</span></a></p>
+</section>
+<section id="evaluacion-s6" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Cuál es la diferencia fundamental entre el papel del ambiente para Lamarck y para Darwin?</li>
+<li>¿Qué importancia tuvo Malthus para la selección natural?</li>
+</ol>
+</section>
+</section>
+<section id="s7" class="level2">
+<h2>Semana 7 · Objeciones a Darwin y la Teoría Sintética de la Evolución</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 28 a 30</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Neodarwinismo - Teoría Sintética de la Evolución</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s7" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 28 a 30</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos las críticas históricas a Darwin (falta de explicación sobre la herencia). Estudiamos cómo la combinación de la genética mendeliana y la paleontología dio origen a la Teoría Sintética de la Evolución.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s7" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=0K87kcYDu0E" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/0K87kcYDu0E/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=0K87kcYDu0E"><small>Nutrimente</small>Neodarwinismo - Teoría Sintética de la Evolución</span></a></p>
+</section>
+<section id="evaluacion-s7" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué vacío importante no pudo responder Darwin en su época sobre la herencia y variabilidad?</li>
+<li>¿Qué disciplinas se integraron en la Teoría Sintética?</li>
+</ol>
+</section>
+</section>
+<section id="s8" class="level2">
+<h2>Semana 8 · El Concepto de Especie y Poblaciones</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 34 a 36</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Variabilidad Genética y Cambio Evolutivo</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s8" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 34 a 36</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos el cambio en la definición de especie, pasando de la morfología al concepto biológico de Ernst Mayr (aislamiento reproductivo). Introducimos el estudio de poblaciones y variabilidad fenotípica (discretas y continuas).</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s8" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=2nJfs9X0pDY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/2nJfs9X0pDY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=2nJfs9X0pDY"><small>La X del poder</small>Variabilidad Genética y Cambio Evolutivo</span></a></p>
+</section>
+<section id="evaluacion-s8" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>Según Ernst Mayr, ¿qué condición debe cumplir un grupo para ser una misma especie?</li>
+<li>¿Cuál es la diferencia entre una variable fenotípica discreta y una continua?</li>
+</ol>
+</section>
+</section>
+<section id="s9" class="level2">
+<h2>Semana 9 · Mecanismos de la Selección Natural y Tipos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 37 a 39</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Selección natural: disruptiva, direccional y estabilizadora</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s9" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 37 a 39</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Profundizamos en los requisitos de la selección natural. Analizamos los tres tipos principales: estabilizadora (favorece el término medio), direccional (favorece un extremo) y disruptiva (favorece ambos extremos).</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s9" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=0THBgStm1UA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/0THBgStm1UA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=0THBgStm1UA"><small>Bióloga Elena</small>Selección natural: disruptiva, direccional y estabilizadora</span></a></p>
+</section>
+<section id="evaluacion-s9" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Por qué es indispensable la existencia previa de variabilidad?</li>
+<li>Describa en qué consiste la selección estabilizadora y dé un ejemplo.</li>
+</ol>
+</section>
+</section>
+<section id="s10" class="level2">
+<h2>Semana 10 · Adaptaciones y Especiación</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 39 a 42</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Tipos de Especiación: Simpátrica, Alopátrica y Parapátrica</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s10" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 39 a 42</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Distinguimos adaptaciones evolutivas (hereditarias) de aclimataciones. Estudiamos barreras de aislamiento reproductivo (precigóticas y postcigóticas) y procesos de especiación alopática y simpática.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s10" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=IzPTlksTeSo" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/IzPTlksTeSo/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=IzPTlksTeSo"><small>Bio en Casa</small>Tipos de Especiación: Simpátrica, Alopátrica y Parapátrica</span></a></p>
+</section>
+<section id="evaluacion-s10" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Cuál es la diferencia biológica entre una aclimatación y una adaptación evolutiva?</li>
+<li>Explique la diferencia entre aislamiento precigótico y postcigótico.</li>
+</ol>
+</section>
+</section>
+<section id="s11" class="level2">
+<h2>Semana 11 · Deriva Génica, Flujo Génico y Cierre de Sección</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 43 a 47</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Deriva génica, cuello de botella y efecto fundador</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s11" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 43 a 47</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Completamos el panorama estudiando mecanismos no selectivos: deriva génica (cuello de botella y efecto fundador) y flujo génico por migración. Actividades integradoras de cierre de sección.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s11" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=V3cICDUCQNE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/V3cICDUCQNE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=V3cICDUCQNE"><small>Khan Academy Español</small>Deriva génica, cuello de botella y efecto fundador</span></a></p>
+</section>
+<section id="evaluacion-s11" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿En qué se diferencia la deriva génica de la selección natural?</li>
+<li>¿Qué efecto produce el flujo génico en la variabilidad genética?</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="u2" class="level1 unidad" data-color="u2">
+<h1 class="unidad" data-color="u2">Sección II · Las células y la nutrición</h1>
+<blockquote>
+<p><em>Qué distingue a los seres vivos, los niveles de organización, la célula (procariota y eucariota, membrana, núcleo y orgánulos) y cómo se nutre: transporte, fotosíntesis y respiración celular.</em> <strong>Semanas 12 a 22.</strong></p>
+</blockquote>
+<section id="s12" class="level2">
+<h2>Semana 12 · Los Seres Vivos y sus Características</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 50 a 53</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Metabolismo y Rutas metabólicas: Anabolismo y Catabolismo</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s12" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 50 a 53</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos qué distingue la materia viva (rol del agua, homeostasis, metabolismo dividido en anabolismo y catabolismo).</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s12" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=ceOjoulQtXc" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/ceOjoulQtXc/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=ceOjoulQtXc"><small>Camach Learn</small>Metabolismo y Rutas metabólicas: Anabolismo y Catabolismo</span></a></p>
+</section>
+<section id="evaluacion-s12" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>Defina homeostasis y explique por qué es un proceso dinámico.</li>
+<li>¿Cuál es la diferencia entre una reacción anabólica y una catabólica?</li>
+</ol>
+</section>
+</section>
+<section id="s13" class="level2">
+<h2>Semana 13 · Niveles de Organización de la Materia</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 54 a 56</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Niveles de organización de la materia y los seres vivos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s13" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 54 a 56</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos la jerarquía y el concepto de propiedad emergente. Recorremos tejidos animales básicos (epitelial, muscular, nervioso, conectivo) hasta órganos y sistemas.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s13" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=mHpqQ7mZSvY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/mHpqQ7mZSvY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=mHpqQ7mZSvY"><small>Nutrimente</small>Niveles de organización de la materia y los seres vivos</span></a></p>
+</section>
+<section id="evaluacion-s13" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué es una &#x27;propiedad emergente&#x27; en biología?</li>
+<li>Mencione los cuatro tipos principales de tejidos en vertebrados.</li>
+</ol>
+</section>
+</section>
+<section id="s14" class="level2">
+<h2>Semana 14 · Introducción a la Célula y Modelos Científicos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 56 a 60</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>La Célula y la Teoría Celular</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s14" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 56 a 60</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos la célula como unidad estructural y funcional, la relación superficie-volumen que limita su tamaño y su comportamiento como sistema abierto.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s14" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=gO9GfZ8LcEI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/gO9GfZ8LcEI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=gO9GfZ8LcEI"><small>La Profe Joha</small>La Célula y la Teoría Celular</span></a></p>
+</section>
+<section id="evaluacion-s14" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Por qué las células mantienen un tamaño microscópico?</li>
+<li>Justifique por qué la célula es un sistema abierto.</li>
+</ol>
+</section>
+</section>
+<section id="s15" class="level2">
+<h2>Semana 15 · Células Procariotas y Eucariotas</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 64 a 68</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Células Procariotas y Eucariotas [Fácil y Rápido]</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s15" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 64 a 68</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Clasificamos tipos celulares. Profundizamos en procariotas (tinción de Gram) y estudiamos la Teoría Endosimbiótica de Lynn Margulis para el origen de orgánulos eucariotas.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s15" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=zWb9uStf6tI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/zWb9uStf6tI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=zWb9uStf6tI"><small>A Cierta Ciencia</small>Células Procariotas y Eucariotas [Fácil y Rápido]</span></a></p>
+</section>
+<section id="evaluacion-s15" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Cuál es la diferencia principal entre el ADN procariota y eucariota?</li>
+<li>Explique brevemente la teoría endosimbiótica.</li>
+</ol>
+</section>
+</section>
+<section id="s16" class="level2">
+<h2>Semana 16 · Diversidad y Estructura de Células Eucariotas (Membrana)</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 68 a 71</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Estructura de la membrana celular: mosaico fluido</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s16" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 68 a 71</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos diversidad morfofuncional celular. Estudiamos la membrana plasmática (modelo de mosaico fluido de Singer y Nicolson, fosfolípidos, proteínas) y la pared celular vegetal.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s16" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=mddpKx4NjZI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/mddpKx4NjZI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=mddpKx4NjZI"><small>Khan Academy Español</small>Estructura de la membrana celular: mosaico fluido</span></a></p>
+</section>
+<section id="evaluacion-s16" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿En qué consiste el modelo de mosaico fluido?</li>
+<li>¿Qué función cumple la pared celular vegetal y qué la compone?</li>
+</ol>
+</section>
+</section>
+<section id="s17" class="level2">
+<h2>Semana 17 · El Núcleo, el Citoplasma y el Citoesqueleto</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 72 y 73</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>El Núcleo Celular explicado: funciones y estructura</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s17" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 72 y 73</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Exploramos el núcleo (cromatina y cromosomas), el citosol y el citoesqueleto (microfilamentos y microtúbulos para soporte y movimiento con cilios/flagelos).</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s17" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=S-k8ST3VEkE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/S-k8ST3VEkE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=S-k8ST3VEkE"><small>Astraway</small>El Núcleo Celular explicado: funciones y estructura</span></a></p>
+</section>
+<section id="evaluacion-s17" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué diferencia hay entre cromatina y cromosomas?</li>
+<li>¿Qué funciones cumple el citoesqueleto?</li>
+</ol>
+</section>
+</section>
+<section id="s18" class="level2">
+<h2>Semana 18 · Orgánulos Celulares y Sistemas de Endomembranas</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 74 y 75</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Organelos celulares y sus funciones [Fácil y Rápido]</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s18" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 74 y 75</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos el sistema de endomembranas (RER, REL, Golgi, lisosomas) y las usinas energéticas: mitocondrias y cloroplastos.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s18" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=Oo57tMOx0pk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Oo57tMOx0pk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Oo57tMOx0pk"><small>A Cierta Ciencia</small>Organelos celulares y sus funciones [Fácil y Rápido]</span></a></p>
+</section>
+<section id="evaluacion-s18" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>Explique la función coordinada del RER y el complejo de Golgi.</li>
+<li>¿Por qué las mitocondrias son las usinas energéticas?</li>
+</ol>
+</section>
+</section>
+<section id="s19" class="level2">
+<h2>Semana 19 · Nutrición Celular y Transporte a través de la Membrana</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 80 a 82</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Transporte Activo y Pasivo en la Membrana Plasmática</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s19" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 80 a 82</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos los mecanismos de transporte: pasivo (difusión simple y facilitada) y activo (con gasto de ATP contra gradiente).</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s19" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=yzkohlVwaB8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/yzkohlVwaB8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=yzkohlVwaB8"><small>Random HD</small>Transporte Activo y Pasivo en la Membrana Plasmática</span></a></p>
+</section>
+<section id="evaluacion-s19" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Cuál es la diferencia entre transporte pasivo y activo?</li>
+<li>Dé un ejemplo de difusión simple y otro de facilitada.</li>
+</ol>
+</section>
+</section>
+<section id="s20" class="level2">
+<h2>Semana 20 · Transporte en Masa y Tipos de Nutrición</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 83 a 85</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Nutrición Celular: Transporte, Fagocitosis y Pinocitosis</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s20" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 83 a 85</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos transporte en masa (endocitosis, exocitosis) y clasificamos la nutrición en autótrofa y heterótrofa (digestión celular).</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s20" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=RmI5Qwfb0Xk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/RmI5Qwfb0Xk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=RmI5Qwfb0Xk"><small>Arriba la Ciencia</small>Nutrición Celular: Transporte, Fagocitosis y Pinocitosis</span></a></p>
+</section>
+<section id="evaluacion-s20" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿En qué se diferencian fagocitosis y pinocitosis?</li>
+<li>Describa la digestión celular en heterótrofas.</li>
+</ol>
+</section>
+</section>
+<section id="s21" class="level2">
+<h2>Semana 21 · Nutrición Autótrofa: Fotosíntesis</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 86 y 87</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Fotosíntesis: Fase Luminosa y Oscura - Ciclo de Calvin</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s21" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 86 y 87</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos la fase luminosa (en tilacoides, produce ATP, NADPH y O2) y la fase oscura o ciclo de Calvin (en estroma, fija CO2 y produce glucosa).</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s21" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=d2DB-kWxg-w" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/d2DB-kWxg-w/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=d2DB-kWxg-w"><small>A Cierta Ciencia</small>Fotosíntesis: Fase Luminosa y Oscura - Ciclo de Calvin</span></a></p>
+</section>
+<section id="evaluacion-s21" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué productos se obtienen al finalizar la fase luminosa?</li>
+<li>¿Por qué la escasez de agua disminuye el rendimiento fotosintético?</li>
+</ol>
+</section>
+</section>
+<section id="s22" class="level2">
+<h2>Semana 22 · Obtención de Energía: Respiración Celular</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 88 a 91</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Respiración celular: Glucólisis y Ciclo de Krebs</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s22" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 88 a 91</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos respiración aeróbica (glucólisis, ciclo de Krebs y cadena respiratoria) frente a respiración anaeróbica y fermentación.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s22" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=614QiGdC5Io" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/614QiGdC5Io/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=614QiGdC5Io"><small>Es Ciencia</small>Respiración celular: Glucólisis y Ciclo de Krebs</span></a></p>
+</section>
+<section id="evaluacion-s22" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Dónde ocurren la glucólisis y el ciclo de Krebs?</li>
+<li>¿Cuál es la diferencia entre respiración aeróbica y fermentación?</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="u3" class="level1 unidad" data-color="u3">
+<h1 class="unidad" data-color="u3">Sección III · La información genética y la nutrición humana</h1>
+<blockquote>
+<p><em>La nutrición y la alimentación humanas, el ADN, la síntesis de proteínas, las mutaciones, la mitosis, la meiosis y las leyes de Mendel.</em> <strong>Semanas 23 a 30.</strong></p>
+</blockquote>
+<section id="s23" class="level2">
+<h2>Semana 23 · Nutrición y Alimentación Humana</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 94 a 102</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Nutrición Humana y los 4 aparatos implicados</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s23" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 94 a 102</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Trasladamos la nutrición al organismo humano. Relación entre sistemas digestivo, circulatorio, respiratorio y urinario para la homeostasis.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s23" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=oxsE6aLsAuU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/oxsE6aLsAuU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=oxsE6aLsAuU"><small>Eva Fenoy García</small>Nutrición Humana y los 4 aparatos implicados</span></a></p>
+</section>
+<section id="evaluacion-s23" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué función cumple el sistema digestivo en la nutrición humana?</li>
+<li>¿Por qué se relacionan el sistema circulatorio y el respiratorio?</li>
+</ol>
+</section>
+</section>
+<section id="s24" class="level2">
+<h2>Semana 24 · Alimentación Saludable y Requerimientos Nutricionales</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 112 a 122</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Conceptos básicos de Nutrición y Alimentación</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s24" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 112 a 122</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Analizamos funciones de los nutrientes, dietas equilibradas, requerimientos calóricos, malnutrición y trastornos alimentarios.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s24" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=qHimbDfTXYg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/qHimbDfTXYg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=qHimbDfTXYg"><small>GuiaMed</small>Conceptos básicos de Nutrición y Alimentación</span></a></p>
+</section>
+<section id="evaluacion-s24" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Cuál es la diferencia entre nutrientes plásticos y energéticos?</li>
+<li>¿Qué diferencia hay entre malnutrición por déficit y por exceso?</li>
+</ol>
+</section>
+</section>
+<section id="s25" class="level2">
+<h2>Semana 25 · El ADN y el Material Genético</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 126 a 129</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Ácidos nucleicos ADN y ARN</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s25" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 126 a 129</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos ácidos nucleicos, estructura del ADN (Watson y Crick, doble hélice, nucleótidos) y el concepto de gen y genoma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s25" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=DSUguxKON3U" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/DSUguxKON3U/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=DSUguxKON3U"><small>Es Ciencia</small>Ácidos nucleicos ADN y ARN</span></a></p>
+</section>
+<section id="evaluacion-s25" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Cuáles son los componentes básicos de un nucleótido de ADN?</li>
+<li>Explique cómo se estructuran las bases nitrogenadas en la doble hélice.</li>
+</ol>
+</section>
+</section>
+<section id="s26" class="level2">
+<h2>Semana 26 · Replicación del ADN y Síntesis Proteica</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 130 a 135</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Síntesis de proteínas: Transcripción y traducción</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s26" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 130 a 135</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos replicación semiconservativa y el dogma central: transcripción (ADN a ARNm) y traducción (síntesis de proteínas en ribosomas).</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s26" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=cwLVh2JHRYI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/cwLVh2JHRYI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=cwLVh2JHRYI"><small>Camach Learn</small>Síntesis de proteínas: Transcripción y traducción</span></a></p>
+</section>
+<section id="evaluacion-s26" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Por qué la replicación es semiconservativa?</li>
+<li>¿Qué diferencia hay entre transcripción y traducción?</li>
+</ol>
+</section>
+</section>
+<section id="s27" class="level2">
+<h2>Semana 27 · Genotipo, Fenotipo y Mutaciones</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 136 a 141</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Mutaciones genéticas y cromosómicas</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s27" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 136 a 141</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Relación genotipo-fenotipo y ambiente. Mutaciones génicas y cromosómicas como fuente de variabilidad. Desmitificación de &#x27;razas&#x27; humanas.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s27" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=nNu34WSMZ9U" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/nNu34WSMZ9U/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=nNu34WSMZ9U"><small>La Profe Joha</small>Mutaciones genéticas y cromosómicas</span></a></p>
+</section>
+<section id="evaluacion-s27" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>Defina genotipo y fenotipo, indicando el rol del ambiente.</li>
+<li>¿Qué es una mutación y por qué importa para la evolución?</li>
+</ol>
+</section>
+</section>
+<section id="s28" class="level2">
+<h2>Semana 28 · Ciclo Celular y Mitosis</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 142 a 147</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Ciclo Celular: Interfase y Mitosis</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s28" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 142 a 147</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos el ciclo celular, fases de la mitosis y su importancia biológica para el crecimiento, reparación tisular y apoptosis.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s28" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=f-v0_nmPOjY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/f-v0_nmPOjY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=f-v0_nmPOjY"><small>La Profe Joha</small>Ciclo Celular: Interfase y Mitosis</span></a></p>
+</section>
+<section id="evaluacion-s28" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Cuál es el objetivo biológico de la mitosis en pluricelulares?</li>
+<li>Describa brevemente qué ocurre en la metafase.</li>
+</ol>
+</section>
+</section>
+<section id="s29" class="level2">
+<h2>Semana 29 · Meiosis y Reproducción Sexual</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 148 a 153</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Meiosis Paso a Paso</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s29" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 148 a 153</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Estudiamos meiosis I y II, reducción cromosómica (diploide a haploide) y los mecanismos de variabilidad en la reproducción sexual.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s29" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=awXSXrnK04s" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/awXSXrnK04s/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=awXSXrnK04s"><small>Es Ciencia</small>Meiosis Paso a Paso</span></a></p>
+</section>
+<section id="evaluacion-s29" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>¿Qué diferencia hay en el número de cromosomas entre mitosis y meiosis?</li>
+<li>¿Por qué la meiosis genera variabilidad genética?</li>
+</ol>
+</section>
+</section>
+<section id="s30" class="level2">
+<h2>Semana 30 · Mecanismos Hereditarios (Leyes de Mendel) y Cierre Anual</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Para leer</strong></td>
+<td>Páginas del libro: 154 a 170</td>
+</tr>
+<tr class="even">
+<td><strong>Evaluación rápida</strong></td>
+<td>2 preguntas</td>
+</tr>
+<tr class="odd">
+<td><strong>Video</strong></td>
+<td>Las Leyes de Mendel y Cuadro de Punnett paso a paso</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s30" class="level3">
+<h3>📖 Para leer</h3>
+<p>Leé las <strong>páginas 154 a 170</strong> del libro <em>Biología 1</em> (Santillana). Los números son los del libro impreso.</p>
+<p><strong>Resumen de trabajo:</strong> Leyes de Mendel. Herencia no mendeliana (dominancia incompleta, codominancia, grupos sanguíneos y ligada al sexo). Integración final.</p>
+<ul class="descargas">
+<li><a href="bibliografia/biologia/Libro_Biologia_1_NES_Santillana.pdf" target="_blank" rel="noopener"><b>Libro</b> · Biología 1 · NES · Santillana<small>El libro completo (escaneado) · PDF · 85,9 MB</small></a></li>
+</ul>
+</section>
+<section id="videos-s30" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=LXXK2l1pdv8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/LXXK2l1pdv8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=LXXK2l1pdv8"><small>A Cierta Ciencia</small>Las Leyes de Mendel y Cuadro de Punnett paso a paso</span></a></p>
+</section>
+<section id="evaluacion-s30" class="level3">
+<h3>✏️ Evaluación rápida</h3>
+<p>Respondé en la carpeta, con tus palabras y usando lo que leíste en el libro:</p>
+<ol>
+<li>Explique la Primera Ley de Mendel (segregación).</li>
+<li>¿Qué diferencia hay entre herencia mendeliana y codominancia?</li>
+</ol>
+</section>
+</section>
+</section>
+
+  </div>
+</main>
+<a class="arriba" href="#top" title="Volver arriba">↑</a>
+<script>
+(function(){
+  // cerrar menú al navegar en celular
+  document.querySelectorAll('#side a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu')));
+  // heredar color de la unidad en tarjetas
+  document.querySelectorAll('section.level1').forEach(u=>{
+    const c=u.getAttribute('data-color');
+    if(c) u.querySelectorAll('section.level2').forEach(s=>{s.style.setProperty('--c','var(--'+c+')');s.style.setProperty('--cs','var(--'+c+'s)')});
+  });
+  // claves plegables
+  const cl=document.querySelector('section.claves');
+  if(cl){cl.classList.add('cerrado');const b=document.createElement('button');b.className='toggle-claves';b.textContent='👩‍🏫 Mostrar claves (adulto que acompaña)';
+    cl.querySelector('h2').after(b);b.onclick=()=>{cl.classList.toggle('cerrado');b.textContent=cl.classList.contains('cerrado')?'👩‍🏫 Mostrar claves (adulto que acompaña)':'Ocultar claves';};}
+  // progreso + menú activo
+  const bar=document.querySelector('#progress div');
+  const links=[...document.querySelectorAll('#side a[href^="#"]')];
+  const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  function onScroll(){
+    const h=document.documentElement; bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+    let cur=secs[0]; for(const s of secs){ if(s.getBoundingClientRect().top<120) cur=s; }
+    links.forEach(a=>a.classList.toggle('on',cur&&a.getAttribute('href')==='#'+cur.id));
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  // descargar toda la bibliografía (de a un archivo, con pausa para que el navegador no las bloquee)
+  const bd=document.getElementById('btn-descargas');
+  if(bd){const txt=bd.textContent;bd.onclick=async()=>{
+    const as=[...document.querySelectorAll('ul.descargas a[download]')];bd.disabled=true;
+    for(let i=0;i<as.length;i++){bd.textContent='Descargando '+(i+1)+' de '+as.length+'…';as[i].click();await new Promise(r=>setTimeout(r,900));}
+    bd.textContent='✅ Listo: revisá tu carpeta de Descargas';setTimeout(()=>{bd.textContent=txt;bd.disabled=false;},5000);
+  };}
+})();
+</script>
+</body>
+</html>

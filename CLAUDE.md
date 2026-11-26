@@ -14,6 +14,9 @@ Sitio estático de la "Planificación 8vo año" (1.º año de secundaria, NES, C
 | [FEC1_Plataforma.html](FEC1_Plataforma.html) | Plataforma de Formación Ética y Ciudadana 1 |
 | [Lengua1_Plataforma.html](Lengua1_Plataforma.html) | Plataforma de Lengua 1 (Prácticas del Lenguaje, **anual**: 32 semanas) |
 | [Matematica1_Plataforma.html](Matematica1_Plataforma.html) | Plataforma de Matemática 1 (8.°, **anual**: 8 unidades de 4 semanas) |
+| [Biologia1_Plataforma.html](Biologia1_Plataforma.html) | Plataforma de Biología 1 (30 semanas en 3 secciones) |
+| [Musica1_Plataforma.html](Musica1_Plataforma.html) | Plataforma de Música 1 (12 semanas en 3 meses) |
+| [Arte1_Plataforma.html](Arte1_Plataforma.html) | Plataforma de Arte 1 (arte plástica, 1.er trimestre: 12 semanas en 3 unidades) |
 | [tutoras.html](tutoras.html) | Staff de tutoras |
 | `bibliografia/` | PDF para descargar (ver más abajo) |
 | `tutoras/web/` | Fotos de las tutoras ya recortadas |
@@ -46,7 +49,7 @@ Todo el contenido está en español rioplatense con voseo ("fijate", "armá", "t
 
 ## Plataformas de cada materia
 
-Los cinco archivos `*_Plataforma.html` comparten la misma plantilla. El CSS (en `<style>`) y el JS (el único `<script>`, al final) son **idénticos byte a byte**, salvo la paleta de las unidades (`--u1`…`--u5` y sus variantes suaves `--uNs` en `:root`). Un cambio de diseño, de estilos o de comportamiento hay que aplicarlo en los tres archivos. Se puede verificar con `diff` sobre los bloques `<style>` y `<script>`.
+Los ocho archivos `*_Plataforma.html` comparten la misma plantilla. El CSS (en `<style>`) y el JS (el único `<script>`, al final) son **idénticos byte a byte**, salvo la paleta de las unidades (`--u1`…`--u5` y sus variantes suaves `--uNs` en `:root`). Un cambio de diseño, de estilos o de comportamiento hay que aplicarlo en los tres archivos. Se puede verificar con `diff` sobre los bloques `<style>` y `<script>`.
 
 El cuerpo usa marcado estilo Pandoc (`section.level1/2/3`, `<colgroup>`, `tr.odd/even`). El repositorio no incluye la fuente que lo generó, así que se edita el HTML directamente y se respeta ese estilo de marcado.
 
@@ -82,6 +85,15 @@ Lengua usa la misma plantilla, pero su contenido está organizado de otra manera
 - El libro (`Libro_Matematica_F2_Effenberger.pdf`) está escaneado, sin texto.
 - Se generó con `../generador_matematica/generar.py` (ver su `LEEME.txt`). Desde entonces se edita el HTML directamente.
 
+### Diferencias de Biología, Música y Arte
+
+Las tres usan la misma plantilla, pero no tienen recuadros bíblicos, ni `#final`, ni `#claves`. Sus unidades son `#u1`…`#u3` y las subsecciones de cada semana tienen ids con sufijo (`para-leer-sN`, `videos-sN`, `trabajo-sN`, etc.).
+
+- **Biología 1:** 30 semanas en tres secciones (evolución 1-11, células y nutrición 12-22, genética y nutrición humana 23-30). Cada semana tiene las páginas del libro, un resumen, un video y una "evaluación rápida" de 2 preguntas. Todo sale del .docx de la planificación. El libro (`Libro_Biologia_1_NES_Santillana.pdf`, unos 86 MB) está escaneado. El título del .docx dice "Biología 2", pero el libro es *Biología 1* NES de Santillana.
+- **Música 1:** 12 semanas en 3 meses, con 2 h por semana. La teoría está escrita en la página. Las semanas 9 a 12 no tienen teoría nueva: enlazan a la de semanas anteriores. Tres de los "videos" son búsquedas de YouTube, no un video fijo. Los libros recomendados no están para descargar. En el .docx original, la teoría del mes 2 repite por error la del mes 1; en la página se usa la teoría correcta de ritmo, forma y textura.
+- **Arte 1:** 12 semanas en 3 unidades (simetría y color; perspectiva geométrica; teoría del color). Cada semana tiene la teoría, la consigna del trabajo práctico y los pasos. Las semanas 1 a 4 muestran imágenes de ejemplo (`bibliografia/arte/img/`) con `<figure>` y estilo en línea, para no tocar el CSS compartido. Los enlaces al apunte de teoría y al PDF del trimestre usan `#page=N`.
+- Las tres se generaron con `../generador_tres/generar.py` (ver su `LEEME.txt`). Desde entonces se editan en el HTML.
+
 ### Componentes de contenido reutilizables
 
 - Recuadro bíblico: `<div class="biblia">…</div>`. Termina con un `<p><strong>Para conversar:</strong> …</p>`.
@@ -105,13 +117,14 @@ Hay un bloque `@media print` completo para A4. Cada unidad y cada semana empieza
   - `comun/`: lo que usan las tres materias (VS, los 4 capítulos de HM y la Guía temática). Cada archivo está una sola vez.
   - `geografia/`, `historia/` y `fec/`: el programa NES y los libros complementarios de cada materia.
   - `lengua/`: `Planificacion_anual_Lengua_1.pdf`, `libro/LL_NN_*.pdf` (los 16 capítulos del libro *Lengua y Literatura 1*, Serie Llaves, Mandioca), `fichas/Ficha_semana_NN.pdf` (32), `diagnosticos/Diagnostico_N.pdf` (6) y `diagnosticos/claves/Diagnostico_N_Clave.pdf` (6).
+  - `biologia/`, `musica/` y `arte/`: libro y planificación de Biología; plan de estudio de Música (.docx); PDF del trimestre, apunte de teoría e imágenes de ejemplo de Arte. Los originales están en `Escritorio\PLANIFICACION 8tvo\Biologia`, `\Musica` y `\Arte`.
   - `matematica/`: `Programa_Matematica_8.pdf`, `Planificacion_semana_a_semana.pdf`, `Libro_Matematica_F2_Effenberger.pdf`, `Hojas_de_ejercitacion.pdf`, `Solucionario_hojas.pdf`, `Anexo_Teorema_de_Pitagoras.pdf` y `semanas/U#_S#.pdf` (32).
 - Los originales están fuera del repositorio: en `../bibliografia Geografia/`, `../bibliografia de historia/` y `../bibliografia fec/`; los de Lengua en `Escritorio\PLANIFICACION 8tvo\Lengua 1 - Material para familias\`, y los de Matemática en `Escritorio\PLANIFICACION 8tvo\8vo Home\`.
 - Si agregás o quitás un PDF, actualizá en esa plataforma la lista `ul.descargas`, el tamaño de cada archivo y el texto del botón ("Descargar todo (N archivos · X MB)").
 
 ## Video tutorial
 
-`video/Como_usar_la_plataforma.mp4` (3:35, 1920×1080, unos 14 MB) y `video/portada_video.jpg`. Muestra la pantalla de inicio, una plataforma (Historia como ejemplo), las descargas, cada parte de la semana, el celular, el botón "Tutor" y el staff de tutoras. **Conviene regenerarlo cuando cambia la navegación o el diseño.** La versión actual es anterior a Lengua 1 y Matemática 1: la narración nombra solo tres materias y las capturas muestran tres tarjetas.
+`video/Como_usar_la_plataforma.mp4` (3:35, 1920×1080, unos 14 MB) y `video/portada_video.jpg`. Muestra la pantalla de inicio, una plataforma (Historia como ejemplo), las descargas, cada parte de la semana, el celular, el botón "Tutor" y el staff de tutoras. **Conviene regenerarlo cuando cambia la navegación o el diseño.** La versión actual es anterior a Lengua, Matemática, Biología, Música y Arte: la narración nombra solo tres materias y las capturas muestran tres tarjetas.
 
 Se genera con los scripts de `../video/generador/`, fuera del repositorio (ver su `LEEME.txt`):
 
