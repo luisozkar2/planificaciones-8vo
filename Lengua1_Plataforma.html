@@ -1,0 +1,2286 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lengua 1 · Leer, escribir y descubrir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee; --card:#ffffff; --ink:#1f2330; --muted:#5d6475; --line:#e6e1d8;
+  --u1:#d23f7a; --u1s:#fdeaf2;
+  --u2:#2f6fd6; --u2s:#e7effd;
+  --u3:#139a8c; --u3s:#e3f6f3;
+  --u4:#6a4bc4; --u4s:#efeafc;
+  --u5:#e0782f; --u5s:#fff1e6;
+  --acc:#2f6fd6; --accs:#e7effd;
+  --gold:#f2b632; --biblia:#fff8e1; --biblia-b:#e8b923;
+  --radius:18px; --side:290px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+@media (max-width:980px){html{scroll-padding-top:76px}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Nunito,system-ui,sans-serif}
+a{color:var(--acc)}
+h1,h2,h3,h4{font-family:Fredoka,Nunito,sans-serif;line-height:1.2;margin:1.4em 0 .5em}
+
+/* ---------- barra lateral ---------- */
+#side{position:fixed;inset:0 auto 0 0;width:var(--side);background:#1d2233;color:#cfd5e6;overflow-y:auto;padding:22px 14px 40px;z-index:20}
+#side .logo{display:flex;gap:10px;align-items:center;padding:4px 8px 18px;border-bottom:1px solid #303750;margin-bottom:12px}
+#side .logo span{font-size:30px}
+#side .logo b{font-family:Fredoka;font-size:20px;color:#fff;display:block;line-height:1.1}
+#side .logo small{color:#8f98b3;font-size:12px}
+#side a{display:block;text-decoration:none;color:inherit;border-radius:10px;padding:6px 10px;font-size:14px;line-height:1.3}
+#side a:hover{background:#2a3149;color:#fff}
+#side a.on{background:#fff;color:#1d2233;font-weight:700}
+#side .nav-u{margin-top:14px;font-family:Fredoka;font-weight:600;color:#fff;font-size:15px}
+#side .nav-u b{display:inline-block;background:var(--gold);color:#1d2233;border-radius:7px;padding:0 6px;margin-right:6px;font-size:13px}
+#side .nav-s{display:flex;gap:8px;padding-left:14px}
+#side .nav-s i{font-style:normal;min-width:22px;height:22px;border-radius:50%;background:#303750;color:#fff;font-size:11px;display:grid;place-items:center;font-weight:800;flex:none}
+#side .nav-x{color:var(--gold)}
+#burger{display:none}
+#mtop{display:none;position:fixed;top:0;left:0;right:0;height:64px;background:#1d2233;color:#fff;z-index:35;align-items:center;padding-left:70px;font-family:Fredoka;font-size:18px}
+
+/* ---------- contenido ---------- */
+main{margin-left:var(--side);padding:0 0 80px}
+.wrap{max-width:900px;margin:0 auto;padding:0 28px}
+#progress{position:fixed;top:0;z-index:36;left:var(--side);right:0;height:5px;background:transparent;z-index:30}
+#progress div{height:100%;width:0;background:linear-gradient(90deg,var(--u1),var(--u2),var(--u3),var(--u4));border-radius:0 4px 4px 0}
+
+.hero{background:radial-gradient(circle at 85% 20%,#3b4a7a 0,#1d2233 60%);color:#fff;padding:64px 28px 56px;position:relative;overflow:hidden}
+.hero .wrap{position:relative}
+.hero .chip{display:inline-block;background:var(--gold);color:#1d2233;font-weight:800;border-radius:99px;padding:4px 14px;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.hero h1{font-size:clamp(32px,5vw,52px);margin:.35em 0 .2em}
+.hero p{font-size:19px;color:#d6dcf0;max-width:640px;margin:0}
+.hero .deco{position:absolute;right:-10px;top:-20px;font-size:120px;opacity:.18;letter-spacing:-20px;user-select:none}
+.hero .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .stats div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:10px 16px;font-size:14px}
+.hero .stats b{font-family:Fredoka;font-size:26px;display:block;color:#fff;line-height:1}
+
+/* secciones de unidad */
+section.level1{--c:var(--acc);--cs:var(--accs)}
+section.level1[data-color=u1]{--c:var(--u1);--cs:var(--u1s)}
+section.level1[data-color=u2]{--c:var(--u2);--cs:var(--u2s)}
+section.level1[data-color=u3]{--c:var(--u3);--cs:var(--u3s)}
+section.level1[data-color=u4]{--c:var(--u4);--cs:var(--u4s)}
+section.level1[data-color=u5]{--c:var(--u5);--cs:var(--u5s)}
+section.level1>h1{background:var(--c);color:#fff;margin:56px 0 0;padding:34px 30px 28px;border-radius:var(--radius) var(--radius) 0 0;font-size:clamp(26px,3.6vw,36px)}
+section.level1>blockquote{margin:0 0 30px;background:var(--cs);border-radius:0 0 var(--radius) var(--radius);padding:18px 30px 20px;border:2px solid var(--c);border-top:0;font-size:16px}
+section.level1>blockquote p{margin:.35em 0}
+
+/* tarjetas de semana */
+section.level2{background:var(--card);border-radius:var(--radius);padding:8px 34px 30px;margin:0 0 34px;box-shadow:0 2px 0 var(--line),0 10px 30px -18px rgba(30,35,60,.35);border-top:8px solid var(--c,var(--acc))}
+#intro{border-top-color:var(--gold)}
+section.level2>h2{font-size:28px;margin-top:26px;color:var(--c,var(--ink))}
+section.level2>h2:before{content:attr(data-badge);}
+section.level2>table:first-of-type{background:var(--cs,#f5f5f5);border-radius:12px;overflow:hidden;font-size:15px}
+section.level2>table:first-of-type thead,section.level2>table:first-of-type colgroup{display:none}
+section.level2>table:first-of-type{table-layout:auto}
+section.level2>table:first-of-type td:first-child{width:170px;font-weight:700;color:var(--c,var(--ink))}
+section.level3>h3, section.level2>h3{font-size:21px;border-bottom:2px dashed var(--line);padding-bottom:6px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px;display:block;overflow-x:auto}
+@media (min-width:700px){table{display:table}}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--cs,#f2f2f2);font-family:Fredoka;font-weight:600}
+blockquote{margin:16px 0}
+
+/* recuadro bíblico */
+.biblia{background:var(--biblia);border:2px solid var(--biblia-b);border-radius:16px;padding:6px 22px 10px 22px;margin:26px 0;position:relative}
+.biblia:before{content:"🕊️";position:absolute;top:-18px;left:18px;font-size:26px;background:var(--biblia);border-radius:50%;padding:0 6px}
+.biblia p:first-child{margin-top:18px}
+
+/* fotos */
+figure.foto{margin:24px 0;background:#f2efe9;border-radius:16px;overflow:hidden}
+.foto-marco{position:relative;min-height:60px;background:#e9e4da}
+.foto-marco img{display:block;width:100%;max-height:440px;object-fit:cover}
+.foto-fallback{display:none}
+.sin-foto .foto-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:180px;text-decoration:none;font-size:42px;background:repeating-linear-gradient(45deg,#ece6db,#ece6db 12px,#e4ddd0 12px,#e4ddd0 24px)}
+.sin-foto .foto-fallback span{font-size:15px;font-weight:800;background:#fff;border-radius:99px;padding:4px 14px}
+figcaption{padding:10px 16px 12px;font-size:14.5px;color:#3c4253;font-style:italic}
+figcaption .glink{font-style:normal;font-size:13px;white-space:nowrap;margin-left:4px}
+
+/* video */
+a.video{display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;margin:8px 0;max-width:560px;transition:.15s}
+a.video:hover{border-color:#e33;transform:translateY(-2px)}
+.vthumb{flex:none;width:136px;aspect-ratio:16/9;border-radius:10px;background:#222 center/cover;display:grid;place-items:center}
+.vthumb b{background:#e33;color:#fff;border-radius:10px;padding:2px 12px;font-size:14px}
+.vtxt{font-weight:700;font-size:15px;line-height:1.3}
+.vtxt small{display:block;color:#e33;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+/* pruebas */
+section.prueba{background:#fff;border:2px dashed var(--c,var(--acc));border-top-width:8px;border-top-style:solid}
+section.prueba>h2{display:flex;align-items:center;gap:10px}
+section.claves{border-top-color:#1d2233}
+.toggle-claves{font:700 15px Nunito;background:#1d2233;color:#fff;border:0;border-radius:99px;padding:10px 18px;cursor:pointer;margin:6px 0 10px}
+section.claves.cerrado>*:not(h2):not(.toggle-claves){display:none}
+
+.arriba{position:fixed;right:18px;bottom:18px;background:#1d2233;color:#fff;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:15}
+
+/* descargas de bibliografía */
+ul.descargas{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+ul.descargas a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px 10px 46px;position:relative;font-size:15.5px;line-height:1.35;transition:.15s}
+ul.descargas a:before{content:"📄";position:absolute;left:14px;top:10px;font-size:20px}
+ul.descargas a:hover{border-color:var(--acc);transform:translateY(-2px)}
+ul.descargas b{color:var(--acc)}
+ul.descargas small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.btn-descargas{font:700 15px Nunito;background:var(--acc);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;margin:6px 0 10px}
+.btn-descargas:disabled{opacity:.6;cursor:wait}
+
+@media (max-width:980px){
+  :root{--side:0px}
+  #side{transform:translateX(-100%);width:290px;transition:.25s}
+  body.menu #side{transform:none}
+  #burger{display:grid;place-items:center;position:fixed;top:11px;left:10px;z-index:40;width:46px;height:42px;border-radius:12px;border:0;background:#303750;color:#fff;font-size:22px}
+  .wrap{padding:0 16px}
+  section.level2{padding:6px 18px 22px}
+  section.level1>h1{padding:26px 18px 20px}
+  section.level1>blockquote{padding:14px 18px}
+  .hero{padding:80px 16px 40px}
+  section.level2>table:first-of-type,section.level2>table:first-of-type tbody,section.level2>table:first-of-type tr,section.level2>table:first-of-type td{display:block;width:auto!important;border:0}
+  section.level2>table:first-of-type td:first-child{padding-bottom:0}
+  section.level2>table:first-of-type tr{border-bottom:1px solid var(--line)}
+  main{padding-top:64px}
+  #mtop{display:flex}
+  .vthumb{width:104px}
+}
+@media print{
+  @page{size:A4;margin:14mm 13mm 16mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #side,#burger,#progress,.arriba,.toggle-claves,#mtop,.hero .deco,.btn-descargas{display:none!important}
+  main{margin:0!important;padding:0!important} body{background:#fff;font-size:10.5pt;line-height:1.5}
+  .wrap{max-width:none;padding:0}
+  .hero{padding:60mm 10mm 20mm;min-height:250mm;break-after:page;border-radius:0}
+  .hero h1{font-size:40pt}
+  section.level1{break-before:page}
+  section.level1>h1{margin-top:0}
+  section.level2{box-shadow:none;break-before:page;padding:2mm 6mm 4mm;margin:0;border-radius:10px}
+  section.level1>section.level2:first-of-type{break-before:avoid}
+  #intro{break-before:avoid}
+  h2,h3{break-after:avoid}
+  table,figure,.biblia,a.video,li{break-inside:avoid}
+  figure.foto .foto-marco img{max-height:85mm}
+  .sin-foto .foto-fallback{height:28mm;font-size:22pt}
+  section.claves.cerrado>*{display:block!important}
+  section.claves.cerrado>table{display:table!important}
+  a{color:inherit;text-decoration:none}
+  a.video{border:1px solid #ccc;max-width:none}
+  a.video .vtxt:after{content:attr(data-url);display:block;font-weight:400;font-size:8pt;color:#555;word-break:break-all}
+  figcaption .glink{display:none}
+}
+</style>
+</head>
+<body>
+<button id="burger" aria-label="Menú" onclick="document.body.classList.toggle('menu')">☰</button>
+<div id="mtop">📖 Lengua 1</div>
+<div id="progress"><div></div></div>
+<nav id="side">
+  <div class="logo"><span>📖</span><div><b>Lengua 1</b><small>Prácticas del Lenguaje</small></div></div>
+  <a href="index.html">📚 Todas las materias</a>
+  <a href="#top">⬆️ Portada</a>
+  <a class="nav-s nav-x" href="#intro">Bienvenidos a Lengua</a>
+  <a class="nav-s nav-x" href="#descargas">📥 Descargar bibliografía</a>
+<a class="nav-u" href="#u1"><b>U1</b> Bloque I · Literatura</a>
+<a class="nav-s" href="#s1"><i>1</i>Bienvenida: ¿qué es la literatura?</a>
+<a class="nav-s" href="#s2"><i>2</i>El mito</a>
+<a class="nav-s" href="#s3"><i>3</i>La leyenda</a>
+<a class="nav-s" href="#s4"><i>4</i>El cuento fantástico</a>
+<a class="nav-s nav-x" href="#p1">📝 Diagnóstico 1</a>
+<a class="nav-s" href="#s5"><i>5</i>El cuento de terror</a>
+<a class="nav-s" href="#s6"><i>6</i>El cuento realista</a>
+<a class="nav-s" href="#s7"><i>7</i>Los microrrelatos</a>
+<a class="nav-s" href="#s8"><i>8</i>El policial clásico (lectura)</a>
+<a class="nav-s nav-x" href="#p2">📝 Diagnóstico 2</a>
+<a class="nav-s" href="#s9"><i>9</i>El policial clásico (teoría)</a>
+<a class="nav-s" href="#s10"><i>10</i>La parodia</a>
+<a class="nav-s" href="#s11"><i>11</i>La poesía</a>
+<a class="nav-s" href="#s12"><i>12</i>La fábula</a>
+<a class="nav-s nav-x" href="#p3">📝 Diagnóstico 3</a>
+<a class="nav-s" href="#s13"><i>13</i>El texto teatral</a>
+<a class="nav-s" href="#s14"><i>14</i>Teatro e intertextualidad</a>
+<a class="nav-s" href="#s15"><i>15</i>Cierre del Bloque I</a>
+<a class="nav-u" href="#u2"><b>U2</b> Bloque II · Estudio y ciudadanía</a>
+<a class="nav-s" href="#s16"><i>16</i>El texto expositivo (lectura)</a>
+<a class="nav-s" href="#s17"><i>17</i>El texto expositivo (producción)</a>
+<a class="nav-s" href="#s18"><i>18</i>La exposición oral</a>
+<a class="nav-s" href="#s19"><i>19</i>La noticia (lectura y teoría)</a>
+<a class="nav-s nav-x" href="#p4">📝 Diagnóstico 4</a>
+<a class="nav-s" href="#s20"><i>20</i>La noticia (producción)</a>
+<a class="nav-s" href="#s21"><i>21</i>El texto de divulgación</a>
+<a class="nav-s" href="#s22"><i>22</i>La reseña (lectura y teoría)</a>
+<a class="nav-s" href="#s23"><i>23</i>La reseña (producción)</a>
+<a class="nav-s nav-x" href="#p5">📝 Diagnóstico 5</a>
+<a class="nav-s" href="#s24"><i>24</i>El texto normativo</a>
+<a class="nav-s" href="#s25"><i>25</i>Cierre del Bloque II</a>
+<a class="nav-u" href="#u3"><b>U3</b> Ortografía y proyecto final</a>
+<a class="nav-s" href="#s26"><i>26</i>Uso de b y v</a>
+<a class="nav-s" href="#s27"><i>27</i>Uso de g y j</a>
+<a class="nav-s" href="#s28"><i>28</i>Uso de c, s y z</a>
+<a class="nav-s" href="#s29"><i>29</i>Uso de la h y homófonos</a>
+<a class="nav-s nav-x" href="#p6">📝 Diagnóstico 6</a>
+<a class="nav-s" href="#s30"><i>30</i>Mayúsculas y guía integradora de ortografía</a>
+<a class="nav-s" href="#s31"><i>31</i>Presentación del proyecto</a>
+<a class="nav-u" href="#final">Evaluación final y claves</a>
+<a class="nav-s" href="#s32"><i>32</i>Evaluación final</a>
+<a class="nav-s nav-x" href="#claves">🔑 Claves de corrección (para el adulto que acompaña)</a>
+</nav>
+<main>
+  <header class="hero" id="top">
+    <div class="deco">📖✒️💬</div>
+    <div class="wrap">
+      <span class="chip">1.º año · NES · CABA</span>
+      <h1>Leer, escribir y descubrir</h1>
+      <p>Mitos, cuentos, poesía, teatro, noticias y reseñas: un año para leer con ganas, escribir con claridad y conocer cómo funciona nuestra lengua.</p>
+      <div class="stats">
+        <div><b>3</b>bloques</div><div><b>32</b>semanas</div><div><b>69</b>videos</div><div><b>6</b>diagnósticos</div>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+  <section id="intro" class="level2">
+<h2>Bienvenidos a Lengua</h2>
+<p>Este año vamos a <strong>leer mucho y escribir todavía más</strong>: mitos y leyendas, cuentos fantásticos,
+de terror y realistas, microrrelatos, policiales, poemas, fábulas y obras de teatro. También vamos a trabajar con
+los textos que usamos para estudiar y para informarnos: textos expositivos, noticias, artículos de divulgación,
+reseñas y reglamentos. Y en el camino vamos a descubrir <strong>cómo funciona nuestra lengua</strong>: las clases
+de palabras, la oración y la ortografía.</p>
+<p>Trabajamos con el libro <em>Lengua y Literatura 1, Prácticas del Lenguaje 7.°/1.°</em> (Serie Llaves,
+Editorial Mandioca). Todos sus capítulos se pueden descargar más abajo, y en cada semana está el enlace al capítulo
+que corresponde.</p>
+<section id="cómo-está-organizada-cada-semana" class="level3">
+<h3>Cómo está organizada cada semana</h3>
+<ul>
+<li><strong>📖 Para leer:</strong> la lectura y la teoría del libro, con las páginas exactas. Los números de página
+son los del libro impreso: cada capítulo en PDF dice qué páginas tiene.</li>
+<li><strong>✍️ Gramática u ortografía:</strong> un tema corto de la última parte del libro.</li>
+<li><strong>🎬 Videos:</strong> de uno a tres videos de YouTube para repasar.</li>
+<li><strong>✏️ Cierre:</strong> una guía del libro, un <strong>taller de producción</strong> (trae dos propuestas y
+el alumno elige una) o una evaluación.</li>
+<li><strong>🖨️ Ficha de la semana:</strong> una hoja para imprimir con todo lo anterior y los videos en código QR.</li>
+</ul>
+<p>Cada cuatro semanas hay un <strong>diagnóstico</strong> corto (después de las semanas 4, 8, 12, 19, 23 y 29), y
+hay evaluaciones de bloque en las semanas <strong>15</strong> y <strong>25</strong> y una evaluación final en la
+semana <strong>32</strong>. Desde la semana 26, el alumno arma su proyecto final: <strong>«Mi antología»</strong>,
+con lo mejor que escribió en el año.</p>
+</section>
+<section id="mapa-del-año" class="level3">
+<h3>Mapa del año</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Semana</th>
+<th>Tema</th>
+<th>Cierre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#s1">1</a></td>
+<td>Bienvenida: ¿qué es la literatura?</td>
+<td>Guías del libro</td>
+</tr>
+<tr class="even">
+<td><a href="#s2">2</a></td>
+<td>El mito</td>
+<td>Guías del libro</td>
+</tr>
+<tr class="odd">
+<td><a href="#s3">3</a></td>
+<td>La leyenda</td>
+<td>Taller pág. 25</td>
+</tr>
+<tr class="even">
+<td><a href="#s4">4</a></td>
+<td>El cuento fantástico</td>
+<td>Guías del libro + Diagnóstico 1</td>
+</tr>
+<tr class="odd">
+<td><a href="#s5">5</a></td>
+<td>El cuento de terror</td>
+<td>Taller pág. 41</td>
+</tr>
+<tr class="even">
+<td><a href="#s6">6</a></td>
+<td>El cuento realista</td>
+<td>Guías del libro</td>
+</tr>
+<tr class="odd">
+<td><a href="#s7">7</a></td>
+<td>Los microrrelatos</td>
+<td>Taller pág. 57</td>
+</tr>
+<tr class="even">
+<td><a href="#s8">8</a></td>
+<td>El policial clásico (lectura)</td>
+<td>Guías del libro + Diagnóstico 2</td>
+</tr>
+<tr class="odd">
+<td><a href="#s9">9</a></td>
+<td>El policial clásico (teoría)</td>
+<td>Guías del libro</td>
+</tr>
+<tr class="even">
+<td><a href="#s10">10</a></td>
+<td>La parodia</td>
+<td>Taller pág. 75</td>
+</tr>
+<tr class="odd">
+<td><a href="#s11">11</a></td>
+<td>La poesía</td>
+<td>Guías del libro</td>
+</tr>
+<tr class="even">
+<td><a href="#s12">12</a></td>
+<td>La fábula</td>
+<td>Taller pág. 91 + Diagnóstico 3</td>
+</tr>
+<tr class="odd">
+<td><a href="#s13">13</a></td>
+<td>El texto teatral</td>
+<td>Guías del libro</td>
+</tr>
+<tr class="even">
+<td><a href="#s14">14</a></td>
+<td>Teatro e intertextualidad</td>
+<td>Taller pág. 109</td>
+</tr>
+<tr class="odd">
+<td><a href="#s15">15</a></td>
+<td>Cierre del Bloque I</td>
+<td>Evaluación</td>
+</tr>
+<tr class="even">
+<td><a href="#s16">16</a></td>
+<td>El texto expositivo (lectura)</td>
+<td>Guías del libro</td>
+</tr>
+<tr class="odd">
+<td><a href="#s17">17</a></td>
+<td>El texto expositivo (producción)</td>
+<td>Taller pág. 123</td>
+</tr>
+<tr class="even">
+<td><a href="#s18">18</a></td>
+<td>La exposición oral</td>
+<td>Taller pág. 131</td>
+</tr>
+<tr class="odd">
+<td><a href="#s19">19</a></td>
+<td>La noticia (lectura y teoría)</td>
+<td>Guías del libro + Diagnóstico 4</td>
+</tr>
+<tr class="even">
+<td><a href="#s20">20</a></td>
+<td>La noticia (producción)</td>
+<td>Taller pág. 139</td>
+</tr>
+<tr class="odd">
+<td><a href="#s21">21</a></td>
+<td>El texto de divulgación</td>
+<td>Taller pág. 147</td>
+</tr>
+<tr class="even">
+<td><a href="#s22">22</a></td>
+<td>La reseña (lectura y teoría)</td>
+<td>Guías del libro</td>
+</tr>
+<tr class="odd">
+<td><a href="#s23">23</a></td>
+<td>La reseña (producción)</td>
+<td>Taller pág. 155 + Diagnóstico 5</td>
+</tr>
+<tr class="even">
+<td><a href="#s24">24</a></td>
+<td>El texto normativo</td>
+<td>Taller pág. 163</td>
+</tr>
+<tr class="odd">
+<td><a href="#s25">25</a></td>
+<td>Cierre del Bloque II</td>
+<td>Evaluación</td>
+</tr>
+<tr class="even">
+<td><a href="#s26">26</a></td>
+<td>Uso de b y v</td>
+<td>Proyecto</td>
+</tr>
+<tr class="odd">
+<td><a href="#s27">27</a></td>
+<td>Uso de g y j</td>
+<td>Proyecto</td>
+</tr>
+<tr class="even">
+<td><a href="#s28">28</a></td>
+<td>Uso de c, s y z</td>
+<td>Proyecto</td>
+</tr>
+<tr class="odd">
+<td><a href="#s29">29</a></td>
+<td>Uso de la h y homófonos</td>
+<td>Proyecto + Diagnóstico 6</td>
+</tr>
+<tr class="even">
+<td><a href="#s30">30</a></td>
+<td>Mayúsculas y guía integradora de ortografía</td>
+<td>Guías del libro</td>
+</tr>
+<tr class="odd">
+<td><a href="#s31">31</a></td>
+<td>Presentación del proyecto</td>
+<td>Exposición oral del proyecto</td>
+</tr>
+<tr class="even">
+<td><a href="#s32">32</a></td>
+<td>Evaluación final</td>
+<td>Evaluación</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notas-bibliográficas" class="level3">
+<h3>Notas bibliográficas</h3>
+<ul>
+<li><strong>LL</strong> · <em>Lengua y Literatura 1, Prácticas del Lenguaje 7.°/1.°</em>. Serie Llaves. Buenos
+Aires: Editorial Mandioca. Bloque I: ámbito de la literatura; Bloque II: ámbitos del estudio y de la formación
+ciudadana; Bloque III: gramática y ortografía. Las páginas citadas son <strong>las del libro impreso</strong>,
+no las del visor de PDF.</li>
+<li><strong>Fichas semanales</strong> · Una por semana, para imprimir. Resumen lo que hay que leer, el tema de
+gramática, los videos (con código QR para el celular) y el cierre.</li>
+<li><strong>Diagnósticos</strong> · Seis evaluaciones cortas con textos escritos especialmente para ellas. Sus
+claves de corrección están al final de la plataforma.</li>
+<li><strong>Videos</strong> · Son públicos en YouTube. <strong>Conviene que el adulto que acompaña los mire
+antes</strong>. Algunos canales son de España y dicen «complemento» donde en la Argentina decimos «objeto», o
+«llanas» donde decimos «graves».</li>
+<li><strong>Si preferís 30 semanas</strong> · Uní las semanas 8 y 9 (policial: lectura y teoría) y las semanas 22 y 23 (reseña: lectura y producción). Las fichas de gramática de esas semanas se dan juntas.</li>
+</ul>
+</section>
+<section id="descargas" class="level3">
+<h3>📥 Descargar la bibliografía</h3>
+<p>Acá están la planificación anual y todos los capítulos del libro. Podés bajarlos de a uno o todos juntos con el
+botón. Si el navegador pregunta si permitís <strong>descargar varios archivos</strong>, respondé que sí. Las
+fichas semanales y los diagnósticos están en cada semana.</p>
+<ul class="descargas">
+<li><a href="bibliografia/lengua/Planificacion_anual_Lengua_1.pdf" download><b>Planificación</b> · Planificación anual de Lengua 1<small>Las 32 semanas, con los talleres completos · PDF · 442 KB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_00_Indice_y_Que_es_la_literatura.pdf" download><b>LL</b> · Índice y ¿Qué es la literatura<small>Págs. 6-11 · PDF · 2,3 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_01_El_mito_y_la_leyenda.pdf" download><b>LL</b> · Bloque I, cap. 1: El mito y la leyenda<small>Págs. 12-27 · PDF · 5,6 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_02_Cuento_fantastico_y_de_terror.pdf" download><b>LL</b> · Bloque I, cap. 2: Cuento fantástico y de terror<small>Págs. 28-43 · PDF · 5,4 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_03_Cuento_realista_y_microrrelatos.pdf" download><b>LL</b> · Bloque I, cap. 3: Cuento realista y microrrelatos<small>Págs. 44-59 · PDF · 5,5 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_04_Policial_clasico_y_parodia.pdf" download><b>LL</b> · Bloque I, cap. 4: Policial clásico y parodia<small>Págs. 60-77 · PDF · 6,8 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_05_Poesia_y_fabula.pdf" download><b>LL</b> · Bloque I, cap. 5: Poesía y fábula<small>Págs. 78-93 · PDF · 5,2 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_06_Texto_teatral_e_intertextualidad.pdf" download><b>LL</b> · Bloque I, cap. 6: Texto teatral e intertextualidad<small>Págs. 94-112 · PDF · 6,4 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_07_El_texto_expositivo.pdf" download><b>LL</b> · Bloque II, cap. 1: El texto expositivo<small>Págs. 113-123 · PDF · 4,0 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_08_La_exposicion_oral.pdf" download><b>LL</b> · Bloque II, cap. 2: La exposición oral<small>Págs. 124-131 · PDF · 2,9 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_09_La_noticia.pdf" download><b>LL</b> · Bloque II, cap. 3: La noticia<small>Págs. 132-139 · PDF · 2,9 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_10_El_texto_de_divulgacion.pdf" download><b>LL</b> · Bloque II, cap. 4: El texto de divulgación<small>Págs. 140-147 · PDF · 2,7 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_11_La_resena.pdf" download><b>LL</b> · Bloque II, cap. 5: La reseña<small>Págs. 148-155 · PDF · 3,0 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_12_El_texto_normativo.pdf" download><b>LL</b> · Bloque II, cap. 6: El texto normativo<small>Págs. 156-164 · PDF · 3,0 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" download><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" download><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li>
+<li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" download><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li>
+</ul>
+<button type="button" class="btn-descargas" id="btn-descargas">📥 Descargar todo (17 archivos · 77 MB)</button>
+</section>
+</section>
+
+<section id="u1" class="level1 unidad" data-color="u1">
+<h1 class="unidad" data-color="u1">Bloque I · Ámbito de la literatura</h1>
+<blockquote>
+<p><em>Mitos y leyendas, cuentos fantásticos, de terror y realistas, microrrelatos, policiales, poesía, fábulas y teatro: leer, disfrutar y escribir literatura.</em> <strong>Libro:</strong> Bloque I, capítulos 1 a 6 (págs. 12-112). <strong>Gramática:</strong> sílaba y acento, clases de palabras y puntuación. <strong>Cierre:</strong> evaluación del bloque en la semana 15.</p>
+</blockquote>
+<section id="s1" class="level2">
+<h2>Semana 1 · Bienvenida: ¿qué es la literatura?</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>¿Qué es la literatura? (págs. 10-11): función poética, ficción y realidad, géneros literarios. ¿Qué es la gramática? (págs. 166-167).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Sílaba, acento, sílaba tónica y tilde (pág. 208).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>diagnóstico.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s1" class="level3">
+<h3>📖 Para leer</h3>
+<p>¿Qué es la literatura? (págs. 10-11): función poética, ficción y realidad, géneros literarios. ¿Qué es la gramática? (págs. 166-167).</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_00_Indice_y_Que_es_la_literatura.pdf" target="_blank" rel="noopener"><b>LL</b> · Índice y ¿Qué es la literatura<small>Págs. 6-11 · PDF · 2,3 MB</small></a></li><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s1" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Sílaba, acento, sílaba tónica y tilde (pág. 208).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s1" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=4KoU144az18" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/4KoU144az18/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=4KoU144az18"><small>InfoLibros · 5:03</small>Qué es la Literatura: Definición, Características &amp; Más</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Q9bh83Oc1lY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Q9bh83Oc1lY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Q9bh83Oc1lY"><small>Wayraeduca · 4:18</small>Géneros literarios</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=dfzlBAMVrBI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/dfzlBAMVrBI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=dfzlBAMVrBI"><small>Rocio Carreon · 6:22</small>¿Cómo acentuar? Agudas, graves, esdrújulas…</span></a></p>
+</section>
+<section id="cierre-s1" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> diagnóstico.</p>
+<ul>
+<li>Escribir media página sobre el libro o la historia favorita y explicar a qué género pertenece.</li>
+<li>Separar en sílabas y marcar la sílaba tónica de 15 palabras.</li>
+</ul>
+</section>
+<section id="ficha-s1" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_01.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 1: Bienvenida: ¿qué es la literatura?<small>Para imprimir, con los videos en código QR · PDF · 105 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s2" class="level2">
+<h2>Semana 2 · El mito</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lecturas: &quot;La creación del universo&quot; y &quot;Belerofonte y la Quimera&quot; (págs. 13-16). · Teoría: el mito, el marco narrativo, los personajes, la mitología china y la griega (págs. 17-19).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Formación de palabras y familias de palabras (págs. 168-169).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Guía de análisis literario (pág. 16) y Guía de estudio literario (pág. 19).</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s2" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lecturas: &quot;La creación del universo&quot; y &quot;Belerofonte y la Quimera&quot; (págs. 13-16).</li>
+<li>Teoría: el mito, el marco narrativo, los personajes, la mitología china y la griega (págs. 17-19).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_01_El_mito_y_la_leyenda.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 1: El mito y la leyenda<small>Págs. 12-27 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s2" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Formación de palabras y familias de palabras (págs. 168-169).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="videos-s2" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=jKxfJ1ORGkc" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/jKxfJ1ORGkc/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=jKxfJ1ORGkc"><small>Literatura de Entrecasa · 3:33</small>El mito (definición y resumen)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=AOPqKCO5zsI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/AOPqKCO5zsI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=AOPqKCO5zsI"><small>Mira la Historia · 3:46</small>Belerofonte y la Quimera</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=rKpwOGZlVLE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/rKpwOGZlVLE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=rKpwOGZlVLE"><small>Clases Particulares en Ávila · 3:25</small>La familia de palabras</span></a></p>
+</section>
+<section id="cierre-s2" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> Guía de análisis literario (pág. 16) y Guía de estudio literario (pág. 19).</p>
+</section>
+<section id="ficha-s2" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_02.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 2: El mito<small>Para imprimir, con los videos en código QR · PDF · 102 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s3" class="level2">
+<h2>Semana 3 · La leyenda</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lecturas: &quot;Leyenda del otoño y el loro&quot; y &quot;El falso médico&quot; (págs. 20-22). · Del mito a la leyenda y la leyenda urbana (pág. 23). Guía integradora (pág. 24). InformArte (pág. 26).</td>
+</tr>
+<tr class="even">
+<td><strong>Ortografía</strong></td>
+<td>Diptongo, triptongo e hiato (pág. 208).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 25). Escribir un relato a la manera de un mito heroico (propuesta 1) o de una leyenda (propuesta 2).</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s3" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lecturas: &quot;Leyenda del otoño y el loro&quot; y &quot;El falso médico&quot; (págs. 20-22).</li>
+<li>Del mito a la leyenda y la leyenda urbana (pág. 23). Guía integradora (pág. 24). InformArte (pág. 26).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_01_El_mito_y_la_leyenda.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 1: El mito y la leyenda<small>Págs. 12-27 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="ortografia-s3" class="level3">
+<h3>✍️ Ortografía</h3>
+<p>Diptongo, triptongo e hiato (pág. 208).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s3" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=pcoKtyp9Xi0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/pcoKtyp9Xi0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=pcoKtyp9Xi0"><small>TICMAS Educación · 2:22</small>Diferencias entre mito y leyenda</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=vFj1Hhr386Y" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/vFj1Hhr386Y/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=vFj1Hhr386Y"><small>Pakapaka · 12:59</small>Taller de historias: La leyenda de la yerba mate</span></a><br><em>Leyenda argentina</em></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=tKDeISjw328" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/tKDeISjw328/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=tKDeISjw328"><small>Clases Particulares en Ávila · 4:09</small>Diptongo, triptongo e hiato</span></a></p>
+</section>
+<section id="cierre-s3" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 25). Escribir un relato a la manera de un mito heroico (propuesta 1) o de una leyenda (propuesta 2).</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Relato a la manera de un mito heroico</h4>
+<ol>
+<li>Recordá una situación en la que un amigo se comportó como un héroe (por ejemplo, ganó un partido muy difícil).</li>
+<li>Planificá en un borrador: un tiempo y lugar imprecisos; un héroe con dos cualidades admirables; su deseo y los obstáculos; un dios con aspecto humano que lo ayuda; un antagonista humano.</li>
+<li>Escribí el relato: marco y protagonista, el deseo y el antagonista, las hazañas con la ayuda del dios, y el final.</li>
+<li>Releé, corregí la redacción y la ortografía, y pasalo en limpio.</li>
+</ol>
+<h4>Propuesta 2 · Relato a la manera de una leyenda</h4>
+<ol>
+<li>Elegí una imagen: un picaflor o una tormenta eléctrica.</li>
+<li>Buscá información sobre lo que elegiste.</li>
+<li>Inventá una explicación sobrenatural del fenómeno: por qué el picaflor toma néctar o tiene esos colores, o de dónde vienen los truenos y el rayo.</li>
+<li>Definí el marco, los personajes y un hecho sobrenatural que incluya una metamorfosis y les cambie la vida.</li>
+<li>Escribí el borrador, ponele título, corregilo y pasalo en limpio.</li>
+</ol>
+</section>
+<section id="ficha-s3" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_03.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 3: La leyenda<small>Para imprimir, con los videos en código QR · PDF · 131 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s4" class="level2">
+<h2>Semana 4 · El cuento fantástico</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>lectura de &quot;El vestido de terciopelo&quot;, de Silvina Ocampo (págs. 29-32). Teoría (págs. 33-35): maravilloso, fantástico y extraño, el autor y el narrador, el fantástico en la Argentina.</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>El sustantivo: clases, género y número (págs. 170-172).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>guías de las págs. 32 y 35. Al terminar la semana: Diagnóstico 1.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s4" class="level3">
+<h3>📖 Para leer</h3>
+<p>lectura de &quot;El vestido de terciopelo&quot;, de Silvina Ocampo (págs. 29-32). Teoría (págs. 33-35): maravilloso, fantástico y extraño, el autor y el narrador, el fantástico en la Argentina.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_02_Cuento_fantastico_y_de_terror.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 2: Cuento fantástico y de terror<small>Págs. 28-43 · PDF · 5,4 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s4" class="level3">
+<h3>✍️ Gramática</h3>
+<p>El sustantivo: clases, género y número (págs. 170-172).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="videos-s4" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=sN9mGKc4xqo" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/sN9mGKc4xqo/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=sN9mGKc4xqo"><small>Cuentos Que te Cuento · 11:15</small>&quot;El vestido de terciopelo&quot; (audiocuento)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=qXg_6CDiB8g" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/qXg_6CDiB8g/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=qXg_6CDiB8g"><small>Astraway · 5:18</small>¿Qué es el cuento fantástico?</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=LvL5v4OR4KQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/LvL5v4OR4KQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=LvL5v4OR4KQ"><small>Clases Particulares en Ávila · 5:14</small>El sustantivo y sus clases</span></a></p>
+</section>
+<section id="cierre-s4" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> guías de las págs. 32 y 35.</p>
+</section>
+<section id="ficha-s4" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_04.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 4: El cuento fantástico<small>Para imprimir, con los videos en código QR · PDF · 106 KB</small></a></li></ul>
+</section>
+</section>
+<section id="p1" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 1 · Semanas 1 a 4</h2>
+<p><strong>Evalúa:</strong> géneros literarios, mito y leyenda, cuento fantástico; sílaba y acento, diptongo e hiato, familias de palabras, sustantivo.</p>
+<p>Es una evaluación corta para hacer al terminar la semana 4. Imprimila y resolvela en la carpeta, sin mirar el libro. La clave de corrección está al final, en «Claves de corrección», y dice qué páginas repasar si algo sale mal.</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/diagnosticos/Diagnostico_1.pdf" target="_blank" rel="noopener"><b>Diagnóstico 1</b> · Semanas 1 a 4<small>Para imprimir · PDF · 108 KB</small></a></li></ul>
+</section>
+<section id="s5" class="level2">
+<h2>Semana 5 · El cuento de terror</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lectura de &quot;La alucinación de Staley Fleming&quot;, de Ambrose Bierce (págs. 36-38). · Del fantástico al terror (pág. 39). Guía integradora (pág. 40). InformArte (pág. 42).</td>
+</tr>
+<tr class="even">
+<td><strong>Ortografía</strong></td>
+<td>Reglas generales de tildación y el caso del hiato (pág. 209).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 41).</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s5" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lectura de &quot;La alucinación de Staley Fleming&quot;, de Ambrose Bierce (págs. 36-38).</li>
+<li>Del fantástico al terror (pág. 39). Guía integradora (pág. 40). InformArte (pág. 42).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_02_Cuento_fantastico_y_de_terror.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 2: Cuento fantástico y de terror<small>Págs. 28-43 · PDF · 5,4 MB</small></a></li></ul>
+</section>
+<section id="ortografia-s5" class="level3">
+<h3>✍️ Ortografía</h3>
+<p>Reglas generales de tildación y el caso del hiato (pág. 209).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s5" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=bKTbzGvDTvM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/bKTbzGvDTvM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=bKTbzGvDTvM"><small>Audiolibros cuentos para escuchar · 6:20</small>&quot;La alucinación de Staley Fleming&quot; (audiolibro)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=_YKj8s3alEk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_YKj8s3alEk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_YKj8s3alEk"><small>Profe Teatro · 5:52</small>Tipos de narradores</span></a><br><em>Repaso del narrador, pág. 34</em></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=69KYr9BaiYA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/69KYr9BaiYA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=69KYr9BaiYA"><small>Clases Particulares en Ávila · 6:39</small>Reglas de acentuación</span></a><br><em>Dice &quot;llanas&quot; por graves</em></p>
+</section>
+<section id="cierre-s5" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 41).</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Escribir un cuento fantástico</h4>
+<ol>
+<li>Imaginá un suceso inesperado: un doble que ocupa el lugar del protagonista, algo que solo él recuerda, o un personaje de un libro que cobra vida.</li>
+<li>Planificá en un borrador: tipo de narrador, marco narrativo, personajes, y cómo irrumpe lo fantástico y qué consecuencias trae.</li>
+<li>Escribí la primera versión, con algún hecho cotidiano para que lo fantástico impacte más.</li>
+<li>Elegí el final: mantener la duda hasta el final, o dar una explicación lógica y convertirlo en un cuento extraño.</li>
+<li>Revisá que se entienda y corregí la ortografía hasta la versión definitiva.</li>
+</ol>
+<h4>Propuesta 2 · Escribir un cuento de terror</h4>
+<ol>
+<li>Elegí un ambiente: una casona abandonada, la escuela de noche, un bosque oscuro o un museo muy antiguo.</li>
+<li>Decidí qué elemento de terror tendrá: alguien que pierde la razón, un monstruo, un objeto sobrenatural.</li>
+<li>Escribí el borrador: tipo de narrador, el ambiente con detalles espeluznantes, por qué están ahí los personajes, cómo irrumpe lo extraordinario y el final.</li>
+<li>Pasalo en limpio y revisá la ortografía.</li>
+<li>Organizá una lectura terrorífica en voz alta, con sonidos y objetos que ambienten.</li>
+</ol>
+</section>
+<section id="ficha-s5" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_05.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 5: El cuento de terror<small>Para imprimir, con los videos en código QR · PDF · 131 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s6" class="level2">
+<h2>Semana 6 · El cuento realista</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>lectura de &quot;Gran hermano&quot;, de Silvia Schujer (págs. 45-48). Teoría (págs. 49-51): lo verosímil, la secuencia narrativa, informantes e indicios.</td>
+</tr>
+<tr class="even">
+<td><strong>Ortografía</strong></td>
+<td>Tilde diacrítica en monosílabos y tildación de palabras compuestas (págs. 209-210).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>guías de las págs. 48 y 51.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s6" class="level3">
+<h3>📖 Para leer</h3>
+<p>lectura de &quot;Gran hermano&quot;, de Silvia Schujer (págs. 45-48). Teoría (págs. 49-51): lo verosímil, la secuencia narrativa, informantes e indicios.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_03_Cuento_realista_y_microrrelatos.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 3: Cuento realista y microrrelatos<small>Págs. 44-59 · PDF · 5,5 MB</small></a></li></ul>
+</section>
+<section id="ortografia-s6" class="level3">
+<h3>✍️ Ortografía</h3>
+<p>Tilde diacrítica en monosílabos y tildación de palabras compuestas (págs. 209-210).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s6" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=n-akbmGpPUk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/n-akbmGpPUk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=n-akbmGpPUk"><small>TICE · 5:59</small>&quot;Gran hermano&quot;, de Silvia Schujer (audiolibro, parte 1)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=dIDqP8_BQAE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/dIDqP8_BQAE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=dIDqP8_BQAE"><small>Yesi Kozachuk · 4:57</small>El cuento realista</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=xCN7lNFqnCY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/xCN7lNFqnCY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=xCN7lNFqnCY"><small>Clases Particulares en Ávila · 5:36</small>La tilde diacrítica</span></a></p>
+</section>
+<section id="cierre-s6" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> guías de las págs. 48 y 51.</p>
+</section>
+<section id="ficha-s6" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_06.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 6: El cuento realista<small>Para imprimir, con los videos en código QR · PDF · 102 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s7" class="level2">
+<h2>Semana 7 · Los microrrelatos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lecturas de Valenzuela, Panno y Shua (págs. 52-54). · El rol activo del lector (pág. 55). Guía integradora (pág. 56). InformArte (pág. 58).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>El adjetivo: clasificación y grados (págs. 173-174).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 57): escribir microrrelatos.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s7" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lecturas de Valenzuela, Panno y Shua (págs. 52-54).</li>
+<li>El rol activo del lector (pág. 55). Guía integradora (pág. 56). InformArte (pág. 58).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_03_Cuento_realista_y_microrrelatos.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 3: Cuento realista y microrrelatos<small>Págs. 44-59 · PDF · 5,5 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s7" class="level3">
+<h3>✍️ Gramática</h3>
+<p>El adjetivo: clasificación y grados (págs. 173-174).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="videos-s7" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=vn5f7vPaTgQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/vn5f7vPaTgQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=vn5f7vPaTgQ"><small>TICMAS Educación · 2:18</small>¿Qué es un microrrelato?</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=rmk5HleB3C4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/rmk5HleB3C4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=rmk5HleB3C4"><small>La palabra cuenta · 2:33</small>Tres microrrelatos de Ana María Shua</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=olffmbu59yI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/olffmbu59yI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=olffmbu59yI"><small>Clases Particulares en Ávila · 4:48</small>El adjetivo y sus grados</span></a></p>
+</section>
+<section id="cierre-s7" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 57): escribir microrrelatos.</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Crear un personaje realista</h4>
+<ol>
+<li>Elegí una de las dos fotos del libro: una chica en bicicleta mirando el celular, o un chico leyendo.</li>
+<li>Inventá los datos del personaje: nombre, edad, dónde y con quién vive, cómo es, y expresiones que muestren su forma de hablar.</li>
+<li>Explicá por qué está en esa situación: a dónde va, qué lee y por qué.</li>
+<li>Elegí el narrador: protagonista, testigo u omnisciente.</li>
+<li>Escribí la situación inicial de un cuento realista con ese narrador.</li>
+</ol>
+<h4>Propuesta 2 · Convertir un microrrelato en un cuento realista</h4>
+<ol>
+<li>Releé «Dama y rey», de Juan José Panno (pág. 53).</li>
+<li>Definí los tres momentos: situación inicial, conflicto y desenlace. El libro da un ejemplo con un partido de fútbol universitario.</li>
+<li>Escribí las acciones principales de cada momento y sumá acciones secundarias, con orden temporal y de causa y consecuencia.</li>
+<li>Escribí el borrador y revisá que sea verosímil.</li>
+<li>Pasalo en limpio y leelo en voz alta.</li>
+</ol>
+</section>
+<section id="ficha-s7" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_07.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 7: Los microrrelatos<small>Para imprimir, con los videos en código QR · PDF · 133 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s8" class="level2">
+<h2>Semana 8 · El policial clásico (lectura)</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>lectura de &quot;El diamante azul&quot;, de Arthur Conan Doyle (págs. 61-66). Es el mismo cuento que en otras traducciones se llama &quot;El carbunclo azul&quot;.</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Los artículos y sus casos especiales (págs. 174-175).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Guía de análisis literario (pág. 66). Al terminar la semana: Diagnóstico 2.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s8" class="level3">
+<h3>📖 Para leer</h3>
+<p>lectura de &quot;El diamante azul&quot;, de Arthur Conan Doyle (págs. 61-66). Es el mismo cuento que en otras traducciones se llama &quot;El carbunclo azul&quot;.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_04_Policial_clasico_y_parodia.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 4: Policial clásico y parodia<small>Págs. 60-77 · PDF · 6,8 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s8" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Los artículos y sus casos especiales (págs. 174-175).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="videos-s8" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=dbxzpFPDvLM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/dbxzpFPDvLM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=dbxzpFPDvLM"><small>Aula365 · 4:36</small>¿Qué es el género policial?</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=yqJ8h4kD81o" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/yqJ8h4kD81o/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=yqJ8h4kD81o"><small>flasherlock · 4:53</small>Sherlock Holmes: El carbunclo azul</span></a><br><em>Fragmento, revisalo antes</em></p>
+</section>
+<section id="cierre-s8" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> Guía de análisis literario (pág. 66).</p>
+</section>
+<section id="ficha-s8" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_08.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 8: El policial clásico (lectura)<small>Para imprimir, con los videos en código QR · PDF · 99 KB</small></a></li></ul>
+</section>
+</section>
+<section id="p2" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 2 · Semanas 5 a 8</h2>
+<p><strong>Evalúa:</strong> narrador, cuento de terror, cuento realista, microrrelato, policial clásico; reglas de tildación, tilde diacrítica, adjetivo, artículo.</p>
+<p>Es una evaluación corta para hacer al terminar la semana 8. Imprimila y resolvela en la carpeta, sin mirar el libro. La clave de corrección está al final, en «Claves de corrección», y dice qué páginas repasar si algo sale mal.</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/diagnosticos/Diagnostico_2.pdf" target="_blank" rel="noopener"><b>Diagnóstico 2</b> · Semanas 5 a 8<small>Para imprimir · PDF · 110 KB</small></a></li></ul>
+</section>
+<section id="s9" class="level2">
+<h2>Semana 9 · El policial clásico (teoría)</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>el policial clásico (págs. 67-69): un enigma con dos historias, la investigación deductiva, la descripción en la narración, el éxito del policial.</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Los pronombres personales, posesivos, demostrativos, interrogativos y exclamativos (págs. 176-178).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Guía de estudio literario (pág. 69). Además, inventar un enigma corto con tres pistas para que otro lo resuelva.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s9" class="level3">
+<h3>📖 Para leer</h3>
+<p>el policial clásico (págs. 67-69): un enigma con dos historias, la investigación deductiva, la descripción en la narración, el éxito del policial.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_04_Policial_clasico_y_parodia.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 4: Policial clásico y parodia<small>Págs. 60-77 · PDF · 6,8 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s9" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Los pronombres personales, posesivos, demostrativos, interrogativos y exclamativos (págs. 176-178).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="videos-s9" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=J6QXkxJ5P_k" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/J6QXkxJ5P_k/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=J6QXkxJ5P_k"><small>Hojas Borrador · 4:51</small>Policial de enigma: origen y características</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=fDaZCjQ01C4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/fDaZCjQ01C4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=fDaZCjQ01C4"><small>Astraway · 7:33</small>Los pronombres: tipos y ejemplos</span></a></p>
+</section>
+<section id="cierre-s9" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> Guía de estudio literario (pág. 69). Además, inventar un enigma corto con tres pistas para que otro lo resuelva.</p>
+</section>
+<section id="ficha-s9" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_09.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 9: El policial clásico (teoría)<small>Para imprimir, con los videos en código QR · PDF · 94 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s10" class="level2">
+<h2>Semana 10 · La parodia</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lectura de &quot;El gran detective&quot;, de Stephen Leacock (págs. 70-72). · El humor como estrategia (pág. 73). Guía integradora (pág. 74). InformArte (pág. 76).</td>
+</tr>
+<tr class="even">
+<td><strong>Ortografía</strong></td>
+<td>El punto, la coma y el punto y coma (pág. 211).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 75).</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s10" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lectura de &quot;El gran detective&quot;, de Stephen Leacock (págs. 70-72).</li>
+<li>El humor como estrategia (pág. 73). Guía integradora (pág. 74). InformArte (pág. 76).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_04_Policial_clasico_y_parodia.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 4: Policial clásico y parodia<small>Págs. 60-77 · PDF · 6,8 MB</small></a></li></ul>
+</section>
+<section id="ortografia-s10" class="level3">
+<h3>✍️ Ortografía</h3>
+<p>El punto, la coma y el punto y coma (pág. 211).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s10" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=v0FxCrIR9I0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/v0FxCrIR9I0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=v0FxCrIR9I0"><small>Lengua, Literatura y Más · 10:15</small>Ironía, sátira y parodia en la literatura</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=2Bs6tknaLJQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/2Bs6tknaLJQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=2Bs6tknaLJQ"><small>Clases Particulares en Ávila · 6:58</small>Signos de puntuación</span></a></p>
+</section>
+<section id="cierre-s10" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 75).</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Escribir un cuento policial</h4>
+<ol>
+<li>Pensá un misterio. El libro sugiere: alguien cambió los exámenes por hojas en blanco; todos los días se corta la luz cinco minutos; desaparece una mochila que vuelve intacta.</li>
+<li>Definí dónde será la investigación, qué pistas aparecen y quién es el culpable.</li>
+<li>Creá al detective y a su ayudante. El detective resuelve con pensamiento deductivo.</li>
+<li>Escribí la situación inicial: el lugar y el momento, cómo se enteran del misterio y por qué el detective se involucra.</li>
+<li>Escribí el resto del cuento.</li>
+<li>Revisá: ¿se entiende el enigma?, ¿son claras las pistas?, ¿se explica el caso al final?</li>
+<li>Pasalo en limpio y juntá los cuentos en una antología de policiales.</li>
+</ol>
+<h4>Propuesta 2 · Crear un personaje parodiado</h4>
+<ol>
+<li>Recordá que en «El gran detective» los policías son ridiculizados frente a la sagacidad del detective.</li>
+<li>Imaginá un policía que interviene en el caso: por qué el detective se burlaría de él, cómo es, su rutina.</li>
+<li>Pensá cómo entra al despacho del detective: con disfraz, con una forma de caminar particular, a los gritos.</li>
+<li>Escribí su descripción con adjetivos, adverbios y comparaciones (pág. 68) y los recursos de humor (pág. 73).</li>
+<li>Revisala y pasala en limpio.</li>
+<li>Actuá la escena: el policía entra al despacho del gran detective.</li>
+</ol>
+</section>
+<section id="ficha-s10" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_10.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 10: La parodia<small>Para imprimir, con los videos en código QR · PDF · 128 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s11" class="level2">
+<h2>Semana 11 · La poesía</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>lectura de poemas de M. C. Ramos, Fernández Moreno, Neruda y Storni (págs. 79-82). Teoría (págs. 83-85): recursos sonoros y semánticos, campos semánticos, poesía y música.</td>
+</tr>
+<tr class="even">
+<td><strong>Ortografía</strong></td>
+<td>Los dos puntos, las comillas y la raya (págs. 212-213).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>guías de las págs. 82 y 85. Además, recitar un poema y grabarlo en audio.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s11" class="level3">
+<h3>📖 Para leer</h3>
+<p>lectura de poemas de M. C. Ramos, Fernández Moreno, Neruda y Storni (págs. 79-82). Teoría (págs. 83-85): recursos sonoros y semánticos, campos semánticos, poesía y música.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_05_Poesia_y_fabula.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 5: Poesía y fábula<small>Págs. 78-93 · PDF · 5,2 MB</small></a></li></ul>
+</section>
+<section id="ortografia-s11" class="level3">
+<h3>✍️ Ortografía</h3>
+<p>Los dos puntos, las comillas y la raya (págs. 212-213).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s11" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=6RAVpcJ0aGY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/6RAVpcJ0aGY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=6RAVpcJ0aGY"><small>Clases Particulares en Ávila · 5:20</small>Los recursos literarios</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=FmuEYpiIbgs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/FmuEYpiIbgs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=FmuEYpiIbgs"><small>Canal Encuentro · 2:44</small>Alfonsina Storni (1892-1938)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=i0IQlaDmadM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/i0IQlaDmadM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=i0IQlaDmadM"><small>Blog de Lengua · 9:12</small>Cómo se usan las rayas en narraciones y diálogos</span></a></p>
+</section>
+<section id="cierre-s11" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> guías de las págs. 82 y 85. Además, recitar un poema y grabarlo en audio.</p>
+</section>
+<section id="ficha-s11" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_11.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 11: La poesía<small>Para imprimir, con los videos en código QR · PDF · 99 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s12" class="level2">
+<h2>Semana 12 · La fábula</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lecturas de Pombo e Iriarte (págs. 86-88). · Fábulas de ayer, refranes de hoy y la poesía narrativa (pág. 89). Guía integradora (pág. 90). · InformArte (pág. 92).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Verbos regulares e irregulares (pág. 179). Paradigma de los verbos regulares (págs. 220-222).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 91). Al terminar la semana: Diagnóstico 3.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s12" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lecturas de Pombo e Iriarte (págs. 86-88).</li>
+<li>Fábulas de ayer, refranes de hoy y la poesía narrativa (pág. 89). Guía integradora (pág. 90).</li>
+<li>InformArte (pág. 92).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_05_Poesia_y_fabula.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 5: Poesía y fábula<small>Págs. 78-93 · PDF · 5,2 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s12" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Verbos regulares e irregulares (pág. 179). Paradigma de los verbos regulares (págs. 220-222).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s12" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=LvRgOAiYxzo" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/LvRgOAiYxzo/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=LvRgOAiYxzo"><small>Escuela de Aprendices · 2:07</small>La fábula y sus características</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=5cdBwCXKkRw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/5cdBwCXKkRw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=5cdBwCXKkRw"><small>Aprende con Talía Lund · 5:19</small>Verbos regulares e irregulares</span></a></p>
+</section>
+<section id="cierre-s12" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 91).</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Reescribir un poema con un tema nuevo</h4>
+<ol>
+<li>Elegí un animal ligado a la suerte para reescribir «Gato negro», de María Cristina Ramos: el grillo, el cuervo o la abeja.</li>
+<li>Copiá las estrofas 1, 2 y 5 del poema.</li>
+<li>Anotá al lado de cada estrofa qué cambiará según el animal elegido.</li>
+<li>Subrayá las palabras ligadas al gato y buscá otras del campo semántico del nuevo animal.</li>
+<li>Escribí el poema nuevo: cada estrofa empieza igual que el original y el resto puede cambiar.</li>
+<li>Corregilo, pasalo en limpio y leelo en voz alta.</li>
+</ol>
+<h4>Propuesta 2 · Escribir una fábula a partir de un refrán</h4>
+<ol>
+<li>Elegí un refrán, que será la moraleja: «Más vale pájaro en mano que cien volando», «Rana que no canta algo tiene en la garganta», «El pez por la boca muere», u otro.</li>
+<li>Creá animales personificados. Cada uno representa una cualidad positiva o negativa (astucia, codicia, bondad).</li>
+<li>Armá la secuencia: dónde empieza, cuál es el conflicto y cómo se resuelve.</li>
+<li>Escribí la fábula en prosa y poné el refrán al final.</li>
+<li>Revisala y pasala en limpio.</li>
+<li>Leela y conversá: qué actitudes se destacan o se condenan, y si compartís esos valores.</li>
+</ol>
+</section>
+<section id="ficha-s12" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_12.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 12: La fábula<small>Para imprimir, con los videos en código QR · PDF · 129 KB</small></a></li></ul>
+</section>
+</section>
+<section id="p3" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 3 · Semanas 9 a 12</h2>
+<p><strong>Evalúa:</strong> policial y parodia, poesía, fábula; pronombres, puntuación, raya y comillas, verbos regulares e irregulares.</p>
+<p>Es una evaluación corta para hacer al terminar la semana 12. Imprimila y resolvela en la carpeta, sin mirar el libro. La clave de corrección está al final, en «Claves de corrección», y dice qué páginas repasar si algo sale mal.</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/diagnosticos/Diagnostico_3.pdf" target="_blank" rel="noopener"><b>Diagnóstico 3</b> · Semanas 9 a 12<small>Para imprimir · PDF · 109 KB</small></a></li></ul>
+</section>
+<section id="s13" class="level2">
+<h2>Semana 13 · El texto teatral</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>lectura de Cyrano de Bergerac (fragmento), de Rostand (págs. 95-100). Teoría (págs. 101-103): una obra, dos textos, la estructura, los personajes, el hecho teatral, el teatro clásico.</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Categorías verbales, verboides y tiempos verbales en la narración (págs. 180-182).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>guías de las págs. 100 y 103.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s13" class="level3">
+<h3>📖 Para leer</h3>
+<p>lectura de Cyrano de Bergerac (fragmento), de Rostand (págs. 95-100). Teoría (págs. 101-103): una obra, dos textos, la estructura, los personajes, el hecho teatral, el teatro clásico.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_06_Texto_teatral_e_intertextualidad.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 6: Texto teatral e intertextualidad<small>Págs. 94-112 · PDF · 6,4 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s13" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Categorías verbales, verboides y tiempos verbales en la narración (págs. 180-182).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="videos-s13" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=ry_Gl_uDH1k" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/ry_Gl_uDH1k/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=ry_Gl_uDH1k"><small>Aula365 · 4:07</small>¿Qué es el texto teatral?</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=OVFTeoQuUhU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/OVFTeoQuUhU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=OVFTeoQuUhU"><small>Ignacio Ross · 7:19</small>Escena del balcón de Cyrano de Bergerac (en español)</span></a><br><em>Fragmento de una película, revisalo antes</em></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=n9BBfhGb90M" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/n9BBfhGb90M/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=n9BBfhGb90M"><small>Rocio Carreon · 3:01</small>Infinitivo, gerundio y participio</span></a></p>
+</section>
+<section id="cierre-s13" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> guías de las págs. 100 y 103.</p>
+</section>
+<section id="ficha-s13" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_13.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 13: El texto teatral<small>Para imprimir, con los videos en código QR · PDF · 111 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s14" class="level2">
+<h2>Semana 14 · Teatro e intertextualidad</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lecturas: Romeo y Julieta (fragmento), de Shakespeare, y &quot;Romeo frente al cadáver de Julieta&quot;, de Denevi (págs. 104-106). · Relaciones intertextuales (pág. 107). Guía integradora (pág. 108). InformArte (pág. 110).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Los adverbios y las locuciones adverbiales (págs. 183-184).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 109).</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s14" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lecturas: Romeo y Julieta (fragmento), de Shakespeare, y &quot;Romeo frente al cadáver de Julieta&quot;, de Denevi (págs. 104-106).</li>
+<li>Relaciones intertextuales (pág. 107). Guía integradora (pág. 108). InformArte (pág. 110).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_06_Texto_teatral_e_intertextualidad.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 6: Texto teatral e intertextualidad<small>Págs. 94-112 · PDF · 6,4 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s14" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Los adverbios y las locuciones adverbiales (págs. 183-184).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="videos-s14" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=0BLBoSOS_n8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/0BLBoSOS_n8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=0BLBoSOS_n8"><small>TikTak Draw · 4:39</small>Romeo y Julieta</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=KrxHbJkW2L4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/KrxHbJkW2L4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=KrxHbJkW2L4"><small>Literama · 4:31</small>Intertextualidad</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=5bpnW-WKqzY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/5bpnW-WKqzY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=5bpnW-WKqzY"><small>Clases Particulares en Ávila · 5:19</small>Los adverbios y sus clases</span></a></p>
+</section>
+<section id="cierre-s14" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 109).</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Una escena clásica en versión actual</h4>
+<ol>
+<li>Imaginá a Cyrano, Christian y Roxana como chicos de 16 años de hoy. El libro trae una ficha de cada uno.</li>
+<li>Elegí una escena: Roxana le cuenta todo a Cyrano (escena 1), o Cyrano ayuda a Christian a declararse (escenas 6 y 7).</li>
+<li>Releé la escena, decidí dónde ocurre y escribí una acotación inicial que describa ese espacio.</li>
+<li>Escribí el diálogo con los parlamentos y las acotaciones de cómo actúan.</li>
+<li>Corregí, pasalo en limpio y actuá la escena.</li>
+</ol>
+<h4>Propuesta 2 · Continuar un texto teatral</h4>
+<ol>
+<li>Leé la explicación del final original: Julieta despierta, ve a Romeo muerto y se mata con su puñal.</li>
+<li>Escribí una continuación humorística del texto de Denevi: «Julieta frente al cadáver de Romeo».</li>
+<li>Pensá: qué cambia en la acotación inicial, la primera reacción de Julieta, qué piensa de lo que pasó, qué le dice al público y qué pasa con ella al final.</li>
+<li>Escribí el borrador, corregilo, pasalo en limpio y ponele título.</li>
+</ol>
+</section>
+<section id="ficha-s14" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_14.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 14: Teatro e intertextualidad<small>Para imprimir, con los videos en código QR · PDF · 134 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s15" class="level2">
+<h2>Semana 15 · Cierre del Bloque I</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Mapa de géneros literarios (pág. 112). Las palabras y sus clases: guía integradora (pág. 188).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Preposiciones y conjunciones y sus diferencias (págs. 185-187).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>EVALUACIÓN DEL BLOQUE I.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>1 video</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s15" class="level3">
+<h3>📖 Para leer</h3>
+<p>Mapa de géneros literarios (pág. 112). Las palabras y sus clases: guía integradora (pág. 188).</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_06_Texto_teatral_e_intertextualidad.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque I, cap. 6: Texto teatral e intertextualidad<small>Págs. 94-112 · PDF · 6,4 MB</small></a></li><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s15" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Preposiciones y conjunciones y sus diferencias (págs. 185-187).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_13_Las_palabras_y_sus_clases.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 1: Las palabras y sus clases<small>Págs. 165-189 · PDF · 8,4 MB</small></a></li></ul>
+</section>
+<section id="videos-s15" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=VEgD7BOPMLk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/VEgD7BOPMLk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=VEgD7BOPMLk"><small>Aula chachi · 5:22</small>Preposiciones y conjunciones</span></a></p>
+</section>
+<section id="cierre-s15" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> EVALUACIÓN DEL BLOQUE I.</p>
+<ul>
+<li>Leer un cuento nuevo y reconocer su género.</li>
+<li>Responder preguntas de análisis.</li>
+<li>Reconocer las clases de palabras en un fragmento.</li>
+</ul>
+</section>
+<section id="ficha-s15" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_15.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 15: Cierre del Bloque I<small>Para imprimir, con los videos en código QR · PDF · 93 KB</small></a></li></ul>
+</section>
+</section>
+</section>
+<section id="u2" class="level1 unidad" data-color="u2">
+<h1 class="unidad" data-color="u2">Bloque II · Ámbitos del estudio y de la formación ciudadana</h1>
+<blockquote>
+<p><em>Textos para aprender y para informarse: el texto expositivo, la exposición oral, la noticia, la divulgación científica, la reseña y el texto normativo.</em> <strong>Libro:</strong> Bloque II, capítulos 1 a 6 (págs. 113-164). <strong>Gramática:</strong> la oración simple y sus construcciones. <strong>Cierre:</strong> evaluación del bloque en la semana 25.</p>
+</blockquote>
+<section id="s16" class="level2">
+<h2>Semana 16 · El texto expositivo (lectura)</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>¿Qué es el discurso? (págs. 114-115). Lectura de &quot;La mitología nórdica&quot; (págs. 116-117). Teoría (págs. 118-119): organización de la información, recursos expositivos, paratexto.</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Oraciones unimembres y bimembres (págs. 190-191).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Guía de análisis discursivo (pág. 117).</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s16" class="level3">
+<h3>📖 Para leer</h3>
+<p>¿Qué es el discurso? (págs. 114-115). Lectura de &quot;La mitología nórdica&quot; (págs. 116-117). Teoría (págs. 118-119): organización de la información, recursos expositivos, paratexto.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_07_El_texto_expositivo.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 1: El texto expositivo<small>Págs. 113-123 · PDF · 4,0 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s16" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Oraciones unimembres y bimembres (págs. 190-191).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s16" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=gG64_pL1q0M" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/gG64_pL1q0M/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=gG64_pL1q0M"><small>Escuela de Aprendices · 4:48</small>Textos expositivos: características, estructura y tipos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=-Vd1DrN8Uc4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/-Vd1DrN8Uc4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=-Vd1DrN8Uc4"><small>Academia Play · 7:33</small>Mitología nórdica</span></a><br><em>Une con los mitos de la semana 2</em></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=9sIyWoR6SlU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/9sIyWoR6SlU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=9sIyWoR6SlU"><small>Clases Particulares en Ávila · 4:30</small>Oraciones bimembres y unimembres</span></a></p>
+</section>
+<section id="cierre-s16" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> Guía de análisis discursivo (pág. 117).</p>
+</section>
+<section id="ficha-s16" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_16.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 16: El texto expositivo (lectura)<small>Para imprimir, con los videos en código QR · PDF · 102 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s17" class="level2">
+<h2>Semana 17 · El texto expositivo (producción)</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>de la teoría al texto (págs. 119-121). Técnica de estudio: la selección de la información (pág. 122).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Sujeto y predicado, tipos de sujeto y de predicado (págs. 192-194).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 123).</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s17" class="level3">
+<h3>📖 Para leer</h3>
+<p>de la teoría al texto (págs. 119-121). Técnica de estudio: la selección de la información (pág. 122).</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_07_El_texto_expositivo.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 1: El texto expositivo<small>Págs. 113-123 · PDF · 4,0 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s17" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Sujeto y predicado, tipos de sujeto y de predicado (págs. 192-194).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s17" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=71w00FtHBak" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/71w00FtHBak/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=71w00FtHBak"><small>Elcira Gimenez · 6:22</small>Recursos del texto expositivo-explicativo</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=vSd85wovq3I" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/vSd85wovq3I/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=vSd85wovq3I"><small>Clases Particulares en Ávila · 5:46</small>El sujeto y el predicado y cómo identificarlos</span></a></p>
+</section>
+<section id="cierre-s17" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 123).</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Escribir un texto expositivo</h4>
+<ol>
+<li>Elegí un tema que te entusiasme: un estadio, un género musical, los dinosaurios, una red social.</li>
+<li>Anotá los aspectos que serán los subtemas. Por ejemplo, para una red social: definición, características, usuarios, historia.</li>
+<li>Investigá cada subtema y elegí imágenes.</li>
+<li>Definí el título y los subtítulos.</li>
+<li>Escribí: introducción, un desarrollo por subtítulo, imágenes con epígrafe y palabras clave destacadas.</li>
+<li>Revisá las cuatro propiedades textuales y pasalo en limpio.</li>
+<li>Leelo en voz alta y juntá los textos en una pequeña enciclopedia.</li>
+</ol>
+<h4>Propuesta 2 · Escribir un bestiario</h4>
+<ol>
+<li>Inventá un animal fantástico a la manera de los mitos nórdicos.</li>
+<li>Respondé: cómo se llama y de dónde viene su nombre, cómo es, dónde vive, qué come, qué función mágica cumple y qué otras habilidades tiene.</li>
+<li>Dibujá las imágenes que acompañan la entrada.</li>
+<li>Escribí la entrada enciclopédica con introducción, desarrollo, subtítulos e imágenes con epígrafe.</li>
+<li>Revisá que sea coherente, cohesiva y correcta, y pasala en limpio.</li>
+<li>Juntá las entradas en un bestiario ilustrado.</li>
+</ol>
+</section>
+<section id="ficha-s17" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_17.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 17: El texto expositivo (producción)<small>Para imprimir, con los videos en código QR · PDF · 126 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s18" class="level2">
+<h2>Semana 18 · La exposición oral</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lectura de &quot;Las fallas geológicas&quot; (págs. 124-125). · Teoría (págs. 126-129): la exposición oral y la situación y el circuito de la comunicación. · Técnica de estudio: el subrayado (pág. 130).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Construcciones sustantivas: modificador directo e indirecto (pág. 195).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 131). Dar una exposición oral de 3 minutos, en vivo o grabada.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s18" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lectura de &quot;Las fallas geológicas&quot; (págs. 124-125).</li>
+<li>Teoría (págs. 126-129): la exposición oral y la situación y el circuito de la comunicación.</li>
+<li>Técnica de estudio: el subrayado (pág. 130).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_08_La_exposicion_oral.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 2: La exposición oral<small>Págs. 124-131 · PDF · 2,9 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s18" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Construcciones sustantivas: modificador directo e indirecto (pág. 195).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s18" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=h03WIe0lG8w" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/h03WIe0lG8w/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=h03WIe0lG8w"><small>Isabel Moyá · 2:07</small>Cómo hacer una buena exposición oral</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=lkZlFjUluyE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/lkZlFjUluyE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=lkZlFjUluyE"><small>Aula365 · 3:48</small>El circuito de la comunicación</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=e4GrKIHz-58" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/e4GrKIHz-58/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=e4GrKIHz-58"><small>Homemade Videos · 2:40</small>El sujeto: modificador directo, indirecto y aposición</span></a></p>
+</section>
+<section id="cierre-s18" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 131). Dar una exposición oral de 3 minutos, en vivo o grabada.</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Exposición oral sobre un pintor</h4>
+<ol>
+<li>Elegí un artista de las secciones InformArte del Bloque I: Magritte, Frida Kahlo, Antonio Berni, Chagall o Degas.</li>
+<li>Planificá los subtemas: vida, movimiento artístico, obras principales, relación con otros artistas y un dato curioso.</li>
+<li>Buscá el material en internet o en la biblioteca.</li>
+<li>Subrayá las ideas principales y escribí un guion: presentación, desarrollo de los subtemas, cierre y preguntas.</li>
+<li>Prepará el material de apoyo (proyección, cartulinas) y marcá en el guion cuándo lo mostrás.</li>
+<li>Ensayá midiendo el tiempo y presentá.</li>
+</ol>
+<h4>Propuesta 2 · Una charla temática al estilo TED</h4>
+<ol>
+<li>Elegí un tema que conozcas bien: videojuegos, una saga de libros, tu equipo de fútbol, tu deporte.</li>
+<li>Anotá: de qué vas a hablar, por qué lo elegiste, qué es, qué aspectos vas a desarrollar y qué anécdotas propias tenés.</li>
+<li>Buscá material de apoyo: fotos, fragmentos de textos, videos breves.</li>
+<li>Escribí la charla tal como la vas a decir, de 6 a 8 minutos, y ponele título.</li>
+<li>Ensayá frente a un familiar o al espejo, midiendo el tiempo.</li>
+<li>Presentala en un ciclo de charlas.</li>
+</ol>
+</section>
+<section id="ficha-s18" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_18.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 18: La exposición oral<small>Para imprimir, con los videos en código QR · PDF · 136 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s19" class="level2">
+<h2>Semana 19 · La noticia (lectura y teoría)</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>lectura de &quot;El titanosaurio &#x27;argentino&#x27;… llegó a Nueva York&quot; (págs. 132-133). Teoría (págs. 134-135): paratextos, organización de la información, procedimientos de cohesión.</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Modificador indirecto comparativo, aposición, las construcciones en la oración (págs. 196-197).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Guía de análisis discursivo (pág. 133). Al terminar la semana: Diagnóstico 4.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s19" class="level3">
+<h3>📖 Para leer</h3>
+<p>lectura de &quot;El titanosaurio &#x27;argentino&#x27;… llegó a Nueva York&quot; (págs. 132-133). Teoría (págs. 134-135): paratextos, organización de la información, procedimientos de cohesión.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_09_La_noticia.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 3: La noticia<small>Págs. 132-139 · PDF · 2,9 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s19" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Modificador indirecto comparativo, aposición, las construcciones en la oración (págs. 196-197).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s19" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=ztHa235TPog" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/ztHa235TPog/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=ztHa235TPog"><small>Eduardo R. S. · 7:36</small>La pirámide invertida: la noticia</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=_1oxTNm9Ycs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_1oxTNm9Ycs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_1oxTNm9Ycs"><small>Museo Paleontológico Egidio Feruglio (canal oficial) · 8:21</small>Los desafíos para armar a un gigante: Patagotitan</span></a><br><em>Es el mismo dinosaurio de la noticia, armado en otro museo de EE. UU.</em></p>
+</section>
+<section id="cierre-s19" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> Guía de análisis discursivo (pág. 133).</p>
+</section>
+<section id="ficha-s19" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_19.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 19: La noticia (lectura y teoría)<small>Para imprimir, con los videos en código QR · PDF · 101 KB</small></a></li></ul>
+</section>
+</section>
+<section id="p4" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 4 · Semanas 16 a 19</h2>
+<p><strong>Evalúa:</strong> texto expositivo y sus recursos, subrayado, circuito de la comunicación, paratextos de la noticia; oraciones unimembres y bimembres, sujeto y predicado, modificadores y aposición.</p>
+<p>Es una evaluación corta para hacer al terminar la semana 19. Imprimila y resolvela en la carpeta, sin mirar el libro. La clave de corrección está al final, en «Claves de corrección», y dice qué páginas repasar si algo sale mal.</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/diagnosticos/Diagnostico_4.pdf" target="_blank" rel="noopener"><b>Diagnóstico 4</b> · Semanas 16 a 19<small>Para imprimir · PDF · 95 KB</small></a></li></ul>
+</section>
+<section id="s20" class="level2">
+<h2>Semana 20 · La noticia (producción)</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>de la teoría al texto (págs. 136-137). Técnica de estudio: la subjetividad en un texto (pág. 138).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>El objeto directo (págs. 198-199).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 139): escribir una noticia sobre algo real de la casa o del barrio.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>1 video</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s20" class="level3">
+<h3>📖 Para leer</h3>
+<p>de la teoría al texto (págs. 136-137). Técnica de estudio: la subjetividad en un texto (pág. 138).</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_09_La_noticia.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 3: La noticia<small>Págs. 132-139 · PDF · 2,9 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s20" class="level3">
+<h3>✍️ Gramática</h3>
+<p>El objeto directo (págs. 198-199).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s20" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=kOqFOfvsHPw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/kOqFOfvsHPw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=kOqFOfvsHPw"><small>Profe Jorge Villafuerte · 11:39</small>OD, OI, MD y MI</span></a><br><em>Usa la terminología argentina</em></p>
+</section>
+<section id="cierre-s20" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 139): escribir una noticia sobre algo real de la casa o del barrio.</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Escribir una noticia a partir de una imagen</h4>
+<ol>
+<li>Observá la imagen del libro: un animal extraño sobre un árbol.</li>
+<li>Respondé en un borrador: qué ocurrió, dónde y cuándo, quiénes participaron y qué se va a hacer.</li>
+<li>Pensá el título, la volanta y el copete.</li>
+<li>Escribí el cuerpo con la pirámide invertida: primero lo general y después los detalles. Podés incluir testimonios.</li>
+<li>Escribí el epígrafe de la imagen.</li>
+<li>Revisá la cohesión y quitá las palabras subjetivas para que sea lo más objetiva posible.</li>
+<li>Compará con otras noticias escritas sobre la misma imagen.</li>
+</ol>
+<h4>Propuesta 2 · La portada de un diario inventado</h4>
+<ol>
+<li>Leé en el libro cómo es la portada de un diario: noticias jerarquizadas, paratextos y avisos.</li>
+<li>Inventá noticias a partir de cuentos leídos o películas, por ejemplo una sobre «El vestido de terciopelo».</li>
+<li>Decidí cuál es la principal, elegí su imagen con epígrafe, sumá avisos y ponele nombre y fecha al diario.</li>
+<li>Armá la portada en una cartulina o en la computadora.</li>
+<li>Exhibila para que otros la lean.</li>
+</ol>
+</section>
+<section id="ficha-s20" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_20.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 20: La noticia (producción)<small>Para imprimir, con los videos en código QR · PDF · 122 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s21" class="level2">
+<h2>Semana 21 · El texto de divulgación</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lectura de &quot;Proponen usar videojuegos para ayudar a controlar la salud&quot; (págs. 140-141). · Teoría: el texto de divulgación y las variedades lingüísticas, registros y lectos (págs. 142-145). · Técnica de estudio: el mapa conceptual (pág. 146).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>El objeto indirecto y los pronombres en función de objeto (pág. 199).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 147). Además, armar un mapa conceptual del texto leído.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s21" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lectura de &quot;Proponen usar videojuegos para ayudar a controlar la salud&quot; (págs. 140-141).</li>
+<li>Teoría: el texto de divulgación y las variedades lingüísticas, registros y lectos (págs. 142-145).</li>
+<li>Técnica de estudio: el mapa conceptual (pág. 146).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_10_El_texto_de_divulgacion.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 4: El texto de divulgación<small>Págs. 140-147 · PDF · 2,7 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s21" class="level3">
+<h3>✍️ Gramática</h3>
+<p>El objeto indirecto y los pronombres en función de objeto (pág. 199).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s21" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=dsUnWv0NsWA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/dsUnWv0NsWA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=dsUnWv0NsWA"><small>Escuela de Aprendices · 3:46</small>Artículo de divulgación científica y sus partes</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=68QK-AXGO-Q" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/68QK-AXGO-Q/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=68QK-AXGO-Q"><small>Educar Portal · 1:13</small>Los lectos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=eSA0ekcIKjU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/eSA0ekcIKjU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=eSA0ekcIKjU"><small>Educatutos · 5:10</small>Mapa conceptual en 5 pasos</span></a></p>
+</section>
+<section id="cierre-s21" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 147). Además, armar un mapa conceptual del texto leído.</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Escribir un texto de divulgación</h4>
+<ol>
+<li>Elegí un tema: desarrollo de videojuegos, casas inteligentes, la sonda espacial Juno o la realidad virtual.</li>
+<li>Investigá en la biblioteca, con profesores de ciencias y en diarios o revistas recientes. Anotá lo más relevante.</li>
+<li>Escribí el texto: información clara y precisa, citas de autoridad, y causas y consecuencias, definiciones y ejemplos.</li>
+<li>Intercambialo con otra persona para comprobar que se entiende, y ajustalo.</li>
+<li>Compartilo en una jornada de ciencias.</li>
+</ol>
+<h4>Propuesta 2 · Inventar un descubrimiento científico</h4>
+<ol>
+<li>Inventá un descubrimiento a partir de la frase de Arthur C. Clarke: «Toda tecnología lo suficientemente avanzada es indistinguible de la magia».</li>
+<li>Anotá: qué es y de qué ciencia, quién lo descubrió y cómo, para qué sirve y cómo se usa.</li>
+<li>Escribí el artículo: introducción con quién, cómo, cuándo y dónde; aplicaciones en la vida cotidiana; y una cita de autoridad inventada con vocabulario especializado.</li>
+<li>Corregilo y pasalo en limpio.</li>
+<li>Armá una revista de divulgación con título, imágenes y tapa.</li>
+</ol>
+</section>
+<section id="ficha-s21" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_21.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 21: El texto de divulgación<small>Para imprimir, con los videos en código QR · PDF · 134 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s22" class="level2">
+<h2>Semana 22 · La reseña (lectura y teoría)</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>lectura de reseñas de El señor de los anillos y Los juegos del hambre (págs. 148-149). Teoría (págs. 150-153): tipos de reseña y las tramas textuales.</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Los circunstanciales (págs. 200-201).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>guías de las págs. 149 y 153.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s22" class="level3">
+<h3>📖 Para leer</h3>
+<p>lectura de reseñas de El señor de los anillos y Los juegos del hambre (págs. 148-149). Teoría (págs. 150-153): tipos de reseña y las tramas textuales.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_11_La_resena.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 5: La reseña<small>Págs. 148-155 · PDF · 3,0 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s22" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Los circunstanciales (págs. 200-201).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s22" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=k3EzQI3juKY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/k3EzQI3juKY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=k3EzQI3juKY"><small>Rocio Carreon · 2:19</small>Reseña: elementos y características</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=O7Ld9SCjL7M" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/O7Ld9SCjL7M/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=O7Ld9SCjL7M"><small>Profe Jorge Villafuerte · 14:14</small>Los circunstanciales (1.° año)</span></a></p>
+</section>
+<section id="cierre-s22" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> guías de las págs. 149 y 153.</p>
+</section>
+<section id="ficha-s22" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_22.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 22: La reseña (lectura y teoría)<small>Para imprimir, con los videos en código QR · PDF · 104 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s23" class="level2">
+<h2>Semana 23 · La reseña (producción)</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>técnica de estudio: el resumen (pág. 154).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>Voz activa y voz pasiva (págs. 202-203).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 155): escribir la reseña de un libro o una película que haya elegido el alumno. Al terminar la semana: Diagnóstico 5.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s23" class="level3">
+<h3>📖 Para leer</h3>
+<p>técnica de estudio: el resumen (pág. 154).</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_11_La_resena.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 5: La reseña<small>Págs. 148-155 · PDF · 3,0 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s23" class="level3">
+<h3>✍️ Gramática</h3>
+<p>Voz activa y voz pasiva (págs. 202-203).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s23" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=wurBExpZiBk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/wurBExpZiBk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=wurBExpZiBk"><small>Profesor Paolo Astorga · 7:19</small>Cómo hacer un buen resumen paso a paso</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=_G-wv7L87Hc" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_G-wv7L87Hc/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_G-wv7L87Hc"><small>Profe Jorge Villafuerte · 4:16</small>Voz activa y pasiva (1.° año)</span></a></p>
+</section>
+<section id="cierre-s23" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 155): escribir la reseña de un libro o una película que haya elegido el alumno.</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Reseña crítica de una antología</h4>
+<ol>
+<li>Imaginá que una editorial publicó Historias ilustradas con los textos de un capítulo del Bloque I, y que una revista te encarga su reseña.</li>
+<li>Elegí el capítulo. Sus dos historias serán el libro reseñado.</li>
+<li>Completá la ficha técnica: autores, ilustradores, editorial y año. Lo que falte se puede inventar.</li>
+<li>Escribí la sinopsis de cada texto sin contar el final.</li>
+<li>Da una opinión favorable o desfavorable con argumentos, incluidas las ilustraciones.</li>
+<li>Agregá una introducción y una conclusión que recomiende o no la lectura.</li>
+<li>Corregí, pasala en limpio y ponele título y firma.</li>
+</ol>
+<h4>Propuesta 2 · Reseña informativa de una película</h4>
+<ol>
+<li>Elegí una película, nueva o vieja, animada o con actores, y volvé a verla.</li>
+<li>Escribí la síntesis argumental para la cartelera online de un cine: hechos en orden, sin juicios de valor.</li>
+<li>Agregá la ficha técnica: dirección, guion, música, elenco, duración y calificación.</li>
+<li>Buscá un afiche de la película.</li>
+<li>Revisala y pasala en limpio.</li>
+<li>Comentá oralmente las reseñas como si fueran usuarios de la cartelera.</li>
+</ol>
+</section>
+<section id="ficha-s23" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_23.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 23: La reseña (producción)<small>Para imprimir, con los videos en código QR · PDF · 130 KB</small></a></li></ul>
+</section>
+</section>
+<section id="p5" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 5 · Semanas 20 a 23</h2>
+<p><strong>Evalúa:</strong> subjetividad, variedades lingüísticas, reseña, tramas textuales, resumen; objeto directo e indirecto, circunstanciales, voz activa y pasiva.</p>
+<p>Es una evaluación corta para hacer al terminar la semana 23. Imprimila y resolvela en la carpeta, sin mirar el libro. La clave de corrección está al final, en «Claves de corrección», y dice qué páginas repasar si algo sale mal.</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/diagnosticos/Diagnostico_5.pdf" target="_blank" rel="noopener"><b>Diagnóstico 5</b> · Semanas 20 a 23<small>Para imprimir · PDF · 121 KB</small></a></li></ul>
+</section>
+<section id="s24" class="level2">
+<h2>Semana 24 · El texto normativo</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Lectura del reglamento y los carteles del camping Los Lagos (págs. 156-157). · Teoría (págs. 158-161): los verbos en la prescripción y las funciones del lenguaje. · Técnica de estudio: el cuadro comparativo (pág. 162).</td>
+</tr>
+<tr class="even">
+<td><strong>Gramática</strong></td>
+<td>El predicativo subjetivo obligatorio (págs. 204-205).</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Taller de producción (pág. 163).</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>3 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s24" class="level3">
+<h3>📖 Para leer</h3>
+<ul>
+<li>Lectura del reglamento y los carteles del camping Los Lagos (págs. 156-157).</li>
+<li>Teoría (págs. 158-161): los verbos en la prescripción y las funciones del lenguaje.</li>
+<li>Técnica de estudio: el cuadro comparativo (pág. 162).</li>
+</ul>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_12_El_texto_normativo.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 6: El texto normativo<small>Págs. 156-164 · PDF · 3,0 MB</small></a></li></ul>
+</section>
+<section id="gramatica-s24" class="level3">
+<h3>✍️ Gramática</h3>
+<p>El predicativo subjetivo obligatorio (págs. 204-205).</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s24" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=LxqZZXtcY-0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/LxqZZXtcY-0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=LxqZZXtcY-0"><small>Javier Lengua · 6:26</small>Textos normativos y textos instructivos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=_7sIvY80YPM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_7sIvY80YPM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_7sIvY80YPM"><small>Blog de Lengua · 7:15</small>Las funciones del lenguaje de Jakobson</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=SXe1cAVJuUw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/SXe1cAVJuUw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=SXe1cAVJuUw"><small>Profe Jorge Villafuerte · 9:20</small>Predicativo subjetivo obligatorio y no obligatorio</span></a></p>
+</section>
+<section id="cierre-s24" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> Taller de producción (pág. 163).</p>
+<p>Elegí <strong>una</strong> de las dos propuestas. Las que son para hacer en grupo se pueden hacer con un familiar o grabadas.</p>
+<h4>Propuesta 1 · Un video normativo</h4>
+<ol>
+<li>Elegí un tema: normas para aprovechar el recreo, para una tarde en casa de los abuelos o para una pijamada.</li>
+<li>Escribí las normas numeradas, todas con la misma forma verbal, claras y sin lugar a dudas. Ese texto es el guion.</li>
+<li>Pensá una escena que ejemplifique cada norma.</li>
+<li>Filmá con el celular: una voz en off lee cada norma, con música de fondo si querés, y después se unen las escenas.</li>
+<li>Compartí el video.</li>
+</ol>
+<h4>Propuesta 2 · Un instructivo absurdo</h4>
+<ol>
+<li>Mirá el video de las «Instrucciones para subir una escalera», de Julio Cortázar (el libro trae un código QR) y comentá por qué son absurdas.</li>
+<li>Elegí una actividad sencilla: lavarse los dientes, ponerse un pulóver, sonarse la nariz.</li>
+<li>Anotá todos los pasos.</li>
+<li>Convertilo en absurdo: escribilo para alguien que nunca lo hizo, con pasos obvios incluidos.</li>
+<li>Pasalo en limpio y corregilo.</li>
+<li>Ilustrá cada paso y filmá la lectura.</li>
+<li>Compartilo.</li>
+</ol>
+</section>
+<section id="ficha-s24" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_24.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 24: El texto normativo<small>Para imprimir, con los videos en código QR · PDF · 133 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s25" class="level2">
+<h2>Semana 25 · Cierre del Bloque II</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>Mapa de géneros discursivos (pág. 164). La sintaxis: guía integradora (pág. 206). Mapa de sintaxis y clases de palabras (pág. 223).</td>
+</tr>
+<tr class="even">
+<td><strong>Cierre</strong></td>
+<td>EVALUACIÓN DEL BLOQUE II.</td>
+</tr>
+<tr class="odd">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s25" class="level3">
+<h3>📖 Para leer</h3>
+<p>Mapa de géneros discursivos (pág. 164). La sintaxis: guía integradora (pág. 206). Mapa de sintaxis y clases de palabras (pág. 223).</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_12_El_texto_normativo.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 6: El texto normativo<small>Págs. 156-164 · PDF · 3,0 MB</small></a></li><li><a href="bibliografia/lengua/libro/LL_14_La_sintaxis.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 2: La sintaxis<small>Págs. 190-207 · PDF · 5,6 MB</small></a></li><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s25" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=qmAIFlyy5YU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/qmAIFlyy5YU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=qmAIFlyy5YU"><small>Profe Jorge Villafuerte · 12:20</small>Análisis sintáctico de la oración simple (ejercitación)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=I_lKPXJ05Wg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/I_lKPXJ05Wg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=I_lKPXJ05Wg"><small>Jorge Cogollo · 3:50</small>¿Qué es un cuadro comparativo?</span></a></p>
+</section>
+<section id="cierre-s25" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> EVALUACIÓN DEL BLOQUE II.</p>
+<ul>
+<li>Leer un texto expositivo o una noticia nueva y resumirla.</li>
+<li>Hacer un cuadro comparativo de los géneros discursivos.</li>
+<li>Analizar la sintaxis de 5 oraciones.</li>
+</ul>
+</section>
+<section id="ficha-s25" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_25.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 25: Cierre del Bloque II<small>Para imprimir, con los videos en código QR · PDF · 99 KB</small></a></li></ul>
+</section>
+</section>
+</section>
+<section id="u3" class="level1 unidad" data-color="u3">
+<h1 class="unidad" data-color="u3">Cierre del año · Ortografía y proyecto final</h1>
+<blockquote>
+<p><em>Cada semana suma una ficha de ortografía, que se aplica a corregir los textos del año.</em> <strong>Proyecto final «Mi antología»:</strong> el alumno junta, corrige y pasa en limpio lo mejor que escribió en el año: un mito o una leyenda, un cuento, microrrelatos, un poema, una noticia, una reseña. <strong>Libro:</strong> Bloque III, capítulo 3, Ortografía y normativa (págs. 208-223).</p>
+</blockquote>
+<section id="s26" class="level2">
+<h2>Semana 26 · Uso de b y v</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>fichas de ortografía (pág. 214).</td>
+</tr>
+<tr class="even">
+<td><strong>Proyecto</strong></td>
+<td>elegir los textos de la antología y releerlos.</td>
+</tr>
+<tr class="odd">
+<td><strong>Videos</strong></td>
+<td>1 video</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s26" class="level3">
+<h3>📖 Para leer</h3>
+<p>fichas de ortografía (pág. 214).</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s26" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=M3jq1cZ6ySI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/M3jq1cZ6ySI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=M3jq1cZ6ySI"><small>Voligoma Argentina · 5:41</small>Cómo saber cuándo usar b o v, explicado con memes</span></a></p>
+</section>
+<section id="cierre-s26" class="level3">
+<h3>🗂️ Proyecto</h3>
+<p><strong>Proyecto «Mi antología»:</strong> elegir los textos de la antología y releerlos.</p>
+</section>
+<section id="ficha-s26" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_26.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 26: Uso de b y v<small>Para imprimir, con los videos en código QR · PDF · 84 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s27" class="level2">
+<h2>Semana 27 · Uso de g y j</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>pág. 214.</td>
+</tr>
+<tr class="even">
+<td><strong>Proyecto</strong></td>
+<td>corregir y reescribir los textos de ficción.</td>
+</tr>
+<tr class="odd">
+<td><strong>Videos</strong></td>
+<td>1 video</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s27" class="level3">
+<h3>📖 Para leer</h3>
+<p>pág. 214.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s27" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=k_GiO_nkVUg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/k_GiO_nkVUg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=k_GiO_nkVUg"><small>Clases Particulares en Ávila · 5:39</small>Usos de la g y la j</span></a></p>
+</section>
+<section id="cierre-s27" class="level3">
+<h3>🗂️ Proyecto</h3>
+<p><strong>Proyecto «Mi antología»:</strong> corregir y reescribir los textos de ficción.</p>
+</section>
+<section id="ficha-s27" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_27.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 27: Uso de g y j<small>Para imprimir, con los videos en código QR · PDF · 83 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s28" class="level2">
+<h2>Semana 28 · Uso de c, s y z</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>pág. 215.</td>
+</tr>
+<tr class="even">
+<td><strong>Proyecto</strong></td>
+<td>corregir la noticia y la reseña.</td>
+</tr>
+<tr class="odd">
+<td><strong>Videos</strong></td>
+<td>1 video</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s28" class="level3">
+<h3>📖 Para leer</h3>
+<p>pág. 215.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s28" class="level3">
+<h3>🎬 Video recomendado</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=Z6uotoxBRRY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Z6uotoxBRRY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Z6uotoxBRRY"><small>Recursos para Aprender · 4:02</small>¿Cuándo se usa c, s o z?</span></a></p>
+</section>
+<section id="cierre-s28" class="level3">
+<h3>🗂️ Proyecto</h3>
+<p><strong>Proyecto «Mi antología»:</strong> corregir la noticia y la reseña.</p>
+</section>
+<section id="ficha-s28" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_28.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 28: Uso de c, s y z<small>Para imprimir, con los videos en código QR · PDF · 83 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s29" class="level2">
+<h2>Semana 29 · Uso de la h y homófonos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>págs. 215-216.</td>
+</tr>
+<tr class="even">
+<td><strong>Proyecto</strong></td>
+<td>armar el índice, la tapa y un prólogo escrito por el alumno.</td>
+</tr>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>Al terminar la semana: Diagnóstico 6.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s29" class="level3">
+<h3>📖 Para leer</h3>
+<p>págs. 215-216.</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s29" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=M26AnHTB9dc" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/M26AnHTB9dc/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=M26AnHTB9dc"><small>Aprende con Talía Lund · 3:05</small>Uso de la h</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Bs1AFYJm4k4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Bs1AFYJm4k4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Bs1AFYJm4k4"><small>Canal Encuentro · 1:54</small>La punta de la lengua: Homónimos</span></a></p>
+</section>
+<section id="cierre-s29" class="level3">
+<h3>🗂️ Proyecto</h3>
+<p><strong>Proyecto «Mi antología»:</strong> armar el índice, la tapa y un prólogo escrito por el alumno.</p>
+</section>
+<section id="ficha-s29" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_29.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 29: Uso de la h y homófonos<small>Para imprimir, con los videos en código QR · PDF · 92 KB</small></a></li></ul>
+</section>
+</section>
+<section id="p6" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 6 · Semanas 24 a 29</h2>
+<p><strong>Evalúa:</strong> texto normativo, funciones del lenguaje, cuadro comparativo; predicativo subjetivo obligatorio, análisis de la oración simple; usos de b y v, g y j, c, s y z, h, y homófonos.</p>
+<p>Es una evaluación corta para hacer al terminar la semana 29. Imprimila y resolvela en la carpeta, sin mirar el libro. La clave de corrección está al final, en «Claves de corrección», y dice qué páginas repasar si algo sale mal.</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/diagnosticos/Diagnostico_6.pdf" target="_blank" rel="noopener"><b>Diagnóstico 6</b> · Semanas 24 a 29<small>Para imprimir · PDF · 113 KB</small></a></li></ul>
+</section>
+<section id="s30" class="level2">
+<h2>Semana 30 · Mayúsculas y guía integradora de ortografía</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>uso de la mayúscula (pág. 216). Guías (págs. 217-218).</td>
+</tr>
+<tr class="even">
+<td><strong>Cierre</strong></td>
+<td>guía integradora de ortografía (pág. 218). La antología queda terminada.</td>
+</tr>
+<tr class="odd">
+<td><strong>Videos</strong></td>
+<td>2 videos</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s30" class="level3">
+<h3>📖 Para leer</h3>
+<p>uso de la mayúscula (pág. 216). Guías (págs. 217-218).</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_15_Ortografia_y_normativa.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque III, cap. 3: Ortografía y normativa<small>Págs. 208-223 · PDF · 6,6 MB</small></a></li></ul>
+</section>
+<section id="videos-s30" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=dwl6kpKB-l4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/dwl6kpKB-l4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=dwl6kpKB-l4"><small>MissStephy · 3:42</small>Reglas para el uso de las mayúsculas</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=mtMF_4LFrMk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/mtMF_4LFrMk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=mtMF_4LFrMk"><small>Canal Encuentro · 2:07</small>La punta de la lengua: Ortografía</span></a></p>
+</section>
+<section id="cierre-s30" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> guía integradora de ortografía (pág. 218). La antología queda terminada.</p>
+</section>
+<section id="ficha-s30" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_30.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 30: Mayúsculas y guía integradora de ortografía<small>Para imprimir, con los videos en código QR · PDF · 91 KB</small></a></li></ul>
+</section>
+</section>
+<section id="s31" class="level2">
+<h2>Semana 31 · Presentación del proyecto</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Lectura y teoría</strong></td>
+<td>repaso de la exposición oral (págs. 126-131).</td>
+</tr>
+<tr class="even">
+<td><strong>Cierre</strong></td>
+<td>presentar la antología en una exposición oral de 5 minutos, ante la familia o grabada. El alumno cuenta qué eligió, por qué y qué le costó más.</td>
+</tr>
+<tr class="odd">
+<td><strong>Videos</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<section id="para-leer-s31" class="level3">
+<h3>📖 Para leer</h3>
+<p>repaso de la exposición oral (págs. 126-131).</p>
+<p>Abrí el capítulo del libro (los números de página son los del libro impreso):</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/libro/LL_08_La_exposicion_oral.pdf" target="_blank" rel="noopener"><b>LL</b> · Bloque II, cap. 2: La exposición oral<small>Págs. 124-131 · PDF · 2,9 MB</small></a></li></ul>
+</section>
+<section id="cierre-s31" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Trabajo práctico:</strong> presentar la antología en una exposición oral de 5 minutos, ante la familia o grabada. El alumno cuenta qué eligió, por qué y qué le costó más.</p>
+</section>
+<section id="ficha-s31" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_31.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 31: Presentación del proyecto<small>Para imprimir · PDF · 74 KB</small></a></li></ul>
+</section>
+</section>
+</section>
+<section id="final" class="level1 unidad" data-color="u5">
+<h1 class="unidad" data-color="u5">Evaluación final y claves</h1>
+<blockquote>
+<p><em>La evaluación final integradora del año y las claves de corrección de los diagnósticos para el adulto que acompaña.</em></p>
+</blockquote>
+<section id="s32" class="level2">
+<h2>Semana 32 · Evaluación final</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Cierre</strong></td>
+<td>EVALUACIÓN FINAL INTEGRADORA.</td>
+</tr>
+<tr class="even">
+<td><strong>Videos</strong></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<section id="cierre-s32" class="level3">
+<h3>✏️ Cierre de la semana</h3>
+<p><strong>Cierre:</strong> EVALUACIÓN FINAL INTEGRADORA.</p>
+<ul>
+<li>Lectura y análisis de un texto literario y uno no literario.</li>
+<li>Sintaxis de la oración simple.</li>
+<li>Ortografía y tildación.</li>
+<li>Una producción breve.</li>
+<li>Autoevaluación del año.</li>
+</ul>
+</section>
+<section id="ficha-s32" class="level3">
+<h3>🖨️ Ficha de la semana</h3>
+<ul class="descargas"><li><a href="bibliografia/lengua/fichas/Ficha_semana_32.pdf" target="_blank" rel="noopener"><b>Ficha</b> · Semana 32: Evaluación final<small>Para imprimir · PDF · 77 KB</small></a></li></ul>
+</section>
+</section>
+<section id="claves" class="level2 claves">
+<h2 class="claves">🔑 Claves de corrección (para el adulto que acompaña)</h2>
+<p>Cada clave tiene las respuestas esperadas de su diagnóstico y una tabla <strong>«Si falla, repasar»</strong>, que indica qué tema, qué páginas del libro y qué semana conviene volver a ver según los ítems que salieron mal. En las preguntas abiertas hay más de una respuesta posible: se valora que el alumno justifique con el texto.</p>
+<ul class="descargas"><li><a href="bibliografia/lengua/diagnosticos/claves/Diagnostico_1_Clave.pdf" target="_blank" rel="noopener"><b>Clave</b> · Diagnóstico 1 (semanas 1 a 4)<small>Respuestas y «Si falla, repasar» · PDF · 102 KB</small></a></li><li><a href="bibliografia/lengua/diagnosticos/claves/Diagnostico_2_Clave.pdf" target="_blank" rel="noopener"><b>Clave</b> · Diagnóstico 2 (semanas 5 a 8)<small>Respuestas y «Si falla, repasar» · PDF · 117 KB</small></a></li><li><a href="bibliografia/lengua/diagnosticos/claves/Diagnostico_3_Clave.pdf" target="_blank" rel="noopener"><b>Clave</b> · Diagnóstico 3 (semanas 9 a 12)<small>Respuestas y «Si falla, repasar» · PDF · 108 KB</small></a></li><li><a href="bibliografia/lengua/diagnosticos/claves/Diagnostico_4_Clave.pdf" target="_blank" rel="noopener"><b>Clave</b> · Diagnóstico 4 (semanas 16 a 19)<small>Respuestas y «Si falla, repasar» · PDF · 121 KB</small></a></li><li><a href="bibliografia/lengua/diagnosticos/claves/Diagnostico_5_Clave.pdf" target="_blank" rel="noopener"><b>Clave</b> · Diagnóstico 5 (semanas 20 a 23)<small>Respuestas y «Si falla, repasar» · PDF · 116 KB</small></a></li><li><a href="bibliografia/lengua/diagnosticos/claves/Diagnostico_6_Clave.pdf" target="_blank" rel="noopener"><b>Clave</b> · Diagnóstico 6 (semanas 24 a 29)<small>Respuestas y «Si falla, repasar» · PDF · 124 KB</small></a></li></ul>
+</section>
+</section>
+
+  </div>
+</main>
+<a class="arriba" href="#top" title="Volver arriba">↑</a>
+<script>
+(function(){
+  // cerrar menú al navegar en celular
+  document.querySelectorAll('#side a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu')));
+  // heredar color de la unidad en tarjetas
+  document.querySelectorAll('section.level1').forEach(u=>{
+    const c=u.getAttribute('data-color');
+    if(c) u.querySelectorAll('section.level2').forEach(s=>{s.style.setProperty('--c','var(--'+c+')');s.style.setProperty('--cs','var(--'+c+'s)')});
+  });
+  // claves plegables
+  const cl=document.querySelector('section.claves');
+  if(cl){cl.classList.add('cerrado');const b=document.createElement('button');b.className='toggle-claves';b.textContent='👩‍🏫 Mostrar claves (adulto que acompaña)';
+    cl.querySelector('h2').after(b);b.onclick=()=>{cl.classList.toggle('cerrado');b.textContent=cl.classList.contains('cerrado')?'👩‍🏫 Mostrar claves (adulto que acompaña)':'Ocultar claves';};}
+  // progreso + menú activo
+  const bar=document.querySelector('#progress div');
+  const links=[...document.querySelectorAll('#side a[href^="#"]')];
+  const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  function onScroll(){
+    const h=document.documentElement; bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+    let cur=secs[0]; for(const s of secs){ if(s.getBoundingClientRect().top<120) cur=s; }
+    links.forEach(a=>a.classList.toggle('on',cur&&a.getAttribute('href')==='#'+cur.id));
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  // descargar toda la bibliografía (de a un archivo, con pausa para que el navegador no las bloquee)
+  const bd=document.getElementById('btn-descargas');
+  if(bd){const txt=bd.textContent;bd.onclick=async()=>{
+    const as=[...document.querySelectorAll('ul.descargas a[download]')];bd.disabled=true;
+    for(let i=0;i<as.length;i++){bd.textContent='Descargando '+(i+1)+' de '+as.length+'…';as[i].click();await new Promise(r=>setTimeout(r,900));}
+    bd.textContent='✅ Listo: revisá tu carpeta de Descargas';setTimeout(()=>{bd.textContent=txt;bd.disabled=false;},5000);
+  };}
+})();
+</script>
+</body>
+</html>
