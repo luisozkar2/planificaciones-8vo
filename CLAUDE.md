@@ -13,6 +13,7 @@ Sitio estático de la "Planificación 8vo año" (1.º año de secundaria, NES, C
 | [Geografia1_Plataforma.html](Geografia1_Plataforma.html) | Plataforma de Geografía 1 |
 | [FEC1_Plataforma.html](FEC1_Plataforma.html) | Plataforma de Formación Ética y Ciudadana 1 |
 | [Lengua1_Plataforma.html](Lengua1_Plataforma.html) | Plataforma de Lengua 1 (Prácticas del Lenguaje, **anual**: 32 semanas) |
+| [Matematica1_Plataforma.html](Matematica1_Plataforma.html) | Plataforma de Matemática 1 (8.°, **anual**: 8 unidades de 4 semanas) |
 | [tutoras.html](tutoras.html) | Staff de tutoras |
 | `bibliografia/` | PDF para descargar (ver más abajo) |
 | `tutoras/web/` | Fotos de las tutoras ya recortadas |
@@ -45,7 +46,7 @@ Todo el contenido está en español rioplatense con voseo ("fijate", "armá", "t
 
 ## Plataformas de cada materia
 
-Los cuatro archivos `*_Plataforma.html` comparten la misma plantilla. El CSS (en `<style>`) y el JS (el único `<script>`, al final) son **idénticos byte a byte**, salvo la paleta de las unidades (`--u1`…`--u5` y sus variantes suaves `--uNs` en `:root`). Un cambio de diseño, de estilos o de comportamiento hay que aplicarlo en los tres archivos. Se puede verificar con `diff` sobre los bloques `<style>` y `<script>`.
+Los cinco archivos `*_Plataforma.html` comparten la misma plantilla. El CSS (en `<style>`) y el JS (el único `<script>`, al final) son **idénticos byte a byte**, salvo la paleta de las unidades (`--u1`…`--u5` y sus variantes suaves `--uNs` en `:root`). Un cambio de diseño, de estilos o de comportamiento hay que aplicarlo en los tres archivos. Se puede verificar con `diff` sobre los bloques `<style>` y `<script>`.
 
 El cuerpo usa marcado estilo Pandoc (`section.level1/2/3`, `<colgroup>`, `tr.odd/even`). El repositorio no incluye la fuente que lo generó, así que se edita el HTML directamente y se respeta ese estilo de marcado.
 
@@ -70,6 +71,17 @@ Lengua usa la misma plantilla, pero su contenido está organizado de otra manera
 - Los enlaces a PDF dentro de las semanas, los diagnósticos y las claves usan `ul.descargas` **sin** el atributo `download` (se abren en otra pestaña). Así el botón "Descargar todo", que toma `ul.descargas a[download]`, baja solo la lista de `#descargas` (la planificación y los 16 capítulos).
 - La plataforma se generó una vez con los scripts de `../generador_lengua/` (ver su `LEEME.txt`). Desde entonces se edita el HTML directamente; si se vuelve a generar, se pierden los cambios hechos a mano.
 
+### Diferencias de Matemática 1
+
+- 8 unidades (`#u1`…`#u8`) de 4 semanas (`#s1`…`#s32`). La paleta solo define `u1`…`u5`, así que las unidades 5 a 8 repiten los colores `u1`…`u4`. `#final` (color `u5`) contiene solo `#claves`, el solucionario de las hojas. No hay `pN`: la cuarta semana de cada unidad es de integración y evaluación.
+- No tiene recuadros bíblicos.
+- Cada semana tiene una tabla (Objetivo / Libro / Materiales / Hoja de ejercitación) y las subsecciones `clases-sN` (tabla de las 5 clases), `teoria-sN` (enlace al PDF de la semana, que trae teoría, ejercicios y su propio solucionario), `videos-sN` (la etiqueta chica dice para qué clase es cada video) y `hoja-sN`.
+- La teoría **no** está pasada a HTML: queda en `bibliografia/matematica/semanas/U#_S#.pdf`, porque tiene fórmulas, tablas y figuras y su formato cambia entre unidades.
+- Las hojas de ejercitación y sus soluciones están todas en un PDF cada una (`Hojas_de_ejercitacion.pdf`, `Solucionario_hojas.pdf`). Cada hoja se enlaza con `#page=N` a la página donde empieza.
+- En el material original faltan las páginas del libro de la semana 8 ("págs. ______ a ______") y de las semanas 12, 20 y 28. En la página se muestra tal cual o "Repaso de toda la unidad."
+- El libro (`Libro_Matematica_F2_Effenberger.pdf`) está escaneado, sin texto.
+- Se generó con `../generador_matematica/generar.py` (ver su `LEEME.txt`). Desde entonces se edita el HTML directamente.
+
 ### Componentes de contenido reutilizables
 
 - Recuadro bíblico: `<div class="biblia">…</div>`. Termina con un `<p><strong>Para conversar:</strong> …</p>`.
@@ -93,12 +105,13 @@ Hay un bloque `@media print` completo para A4. Cada unidad y cada semana empieza
   - `comun/`: lo que usan las tres materias (VS, los 4 capítulos de HM y la Guía temática). Cada archivo está una sola vez.
   - `geografia/`, `historia/` y `fec/`: el programa NES y los libros complementarios de cada materia.
   - `lengua/`: `Planificacion_anual_Lengua_1.pdf`, `libro/LL_NN_*.pdf` (los 16 capítulos del libro *Lengua y Literatura 1*, Serie Llaves, Mandioca), `fichas/Ficha_semana_NN.pdf` (32), `diagnosticos/Diagnostico_N.pdf` (6) y `diagnosticos/claves/Diagnostico_N_Clave.pdf` (6).
-- Los originales están fuera del repositorio: en `../bibliografia Geografia/`, `../bibliografia de historia/` y `../bibliografia fec/`, y los de Lengua en `Escritorio\PLANIFICACION 8tvo\Lengua 1 - Material para familias\`.
+  - `matematica/`: `Programa_Matematica_8.pdf`, `Planificacion_semana_a_semana.pdf`, `Libro_Matematica_F2_Effenberger.pdf`, `Hojas_de_ejercitacion.pdf`, `Solucionario_hojas.pdf`, `Anexo_Teorema_de_Pitagoras.pdf` y `semanas/U#_S#.pdf` (32).
+- Los originales están fuera del repositorio: en `../bibliografia Geografia/`, `../bibliografia de historia/` y `../bibliografia fec/`; los de Lengua en `Escritorio\PLANIFICACION 8tvo\Lengua 1 - Material para familias\`, y los de Matemática en `Escritorio\PLANIFICACION 8tvo\8vo Home\`.
 - Si agregás o quitás un PDF, actualizá en esa plataforma la lista `ul.descargas`, el tamaño de cada archivo y el texto del botón ("Descargar todo (N archivos · X MB)").
 
 ## Video tutorial
 
-`video/Como_usar_la_plataforma.mp4` (3:35, 1920×1080, unos 14 MB) y `video/portada_video.jpg`. Muestra la pantalla de inicio, una plataforma (Historia como ejemplo), las descargas, cada parte de la semana, el celular, el botón "Tutor" y el staff de tutoras. **Conviene regenerarlo cuando cambia la navegación o el diseño.** La versión actual es anterior a Lengua 1: la narración nombra solo tres materias y las capturas muestran tres tarjetas.
+`video/Como_usar_la_plataforma.mp4` (3:35, 1920×1080, unos 14 MB) y `video/portada_video.jpg`. Muestra la pantalla de inicio, una plataforma (Historia como ejemplo), las descargas, cada parte de la semana, el celular, el botón "Tutor" y el staff de tutoras. **Conviene regenerarlo cuando cambia la navegación o el diseño.** La versión actual es anterior a Lengua 1 y Matemática 1: la narración nombra solo tres materias y las capturas muestran tres tarjetas.
 
 Se genera con los scripts de `../video/generador/`, fuera del repositorio (ver su `LEEME.txt`):
 

@@ -1,0 +1,3048 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matemática 1 · Pensar, calcular y resolver</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee; --card:#ffffff; --ink:#1f2330; --muted:#5d6475; --line:#e6e1d8;
+  --u1:#6a4bc4; --u1s:#efeafc;
+  --u2:#2f6fd6; --u2s:#e7effd;
+  --u3:#139a8c; --u3s:#e3f6f3;
+  --u4:#e0782f; --u4s:#fff1e6;
+  --u5:#d23f7a; --u5s:#fdeaf2;
+  --acc:#2f6fd6; --accs:#e7effd;
+  --gold:#f2b632; --biblia:#fff8e1; --biblia-b:#e8b923;
+  --radius:18px; --side:290px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+@media (max-width:980px){html{scroll-padding-top:76px}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Nunito,system-ui,sans-serif}
+a{color:var(--acc)}
+h1,h2,h3,h4{font-family:Fredoka,Nunito,sans-serif;line-height:1.2;margin:1.4em 0 .5em}
+
+/* ---------- barra lateral ---------- */
+#side{position:fixed;inset:0 auto 0 0;width:var(--side);background:#1d2233;color:#cfd5e6;overflow-y:auto;padding:22px 14px 40px;z-index:20}
+#side .logo{display:flex;gap:10px;align-items:center;padding:4px 8px 18px;border-bottom:1px solid #303750;margin-bottom:12px}
+#side .logo span{font-size:30px}
+#side .logo b{font-family:Fredoka;font-size:20px;color:#fff;display:block;line-height:1.1}
+#side .logo small{color:#8f98b3;font-size:12px}
+#side a{display:block;text-decoration:none;color:inherit;border-radius:10px;padding:6px 10px;font-size:14px;line-height:1.3}
+#side a:hover{background:#2a3149;color:#fff}
+#side a.on{background:#fff;color:#1d2233;font-weight:700}
+#side .nav-u{margin-top:14px;font-family:Fredoka;font-weight:600;color:#fff;font-size:15px}
+#side .nav-u b{display:inline-block;background:var(--gold);color:#1d2233;border-radius:7px;padding:0 6px;margin-right:6px;font-size:13px}
+#side .nav-s{display:flex;gap:8px;padding-left:14px}
+#side .nav-s i{font-style:normal;min-width:22px;height:22px;border-radius:50%;background:#303750;color:#fff;font-size:11px;display:grid;place-items:center;font-weight:800;flex:none}
+#side .nav-x{color:var(--gold)}
+#burger{display:none}
+#mtop{display:none;position:fixed;top:0;left:0;right:0;height:64px;background:#1d2233;color:#fff;z-index:35;align-items:center;padding-left:70px;font-family:Fredoka;font-size:18px}
+
+/* ---------- contenido ---------- */
+main{margin-left:var(--side);padding:0 0 80px}
+.wrap{max-width:900px;margin:0 auto;padding:0 28px}
+#progress{position:fixed;top:0;z-index:36;left:var(--side);right:0;height:5px;background:transparent;z-index:30}
+#progress div{height:100%;width:0;background:linear-gradient(90deg,var(--u1),var(--u2),var(--u3),var(--u4));border-radius:0 4px 4px 0}
+
+.hero{background:radial-gradient(circle at 85% 20%,#3b4a7a 0,#1d2233 60%);color:#fff;padding:64px 28px 56px;position:relative;overflow:hidden}
+.hero .wrap{position:relative}
+.hero .chip{display:inline-block;background:var(--gold);color:#1d2233;font-weight:800;border-radius:99px;padding:4px 14px;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.hero h1{font-size:clamp(32px,5vw,52px);margin:.35em 0 .2em}
+.hero p{font-size:19px;color:#d6dcf0;max-width:640px;margin:0}
+.hero .deco{position:absolute;right:-10px;top:-20px;font-size:120px;opacity:.18;letter-spacing:-20px;user-select:none}
+.hero .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .stats div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:10px 16px;font-size:14px}
+.hero .stats b{font-family:Fredoka;font-size:26px;display:block;color:#fff;line-height:1}
+
+/* secciones de unidad */
+section.level1{--c:var(--acc);--cs:var(--accs)}
+section.level1[data-color=u1]{--c:var(--u1);--cs:var(--u1s)}
+section.level1[data-color=u2]{--c:var(--u2);--cs:var(--u2s)}
+section.level1[data-color=u3]{--c:var(--u3);--cs:var(--u3s)}
+section.level1[data-color=u4]{--c:var(--u4);--cs:var(--u4s)}
+section.level1[data-color=u5]{--c:var(--u5);--cs:var(--u5s)}
+section.level1>h1{background:var(--c);color:#fff;margin:56px 0 0;padding:34px 30px 28px;border-radius:var(--radius) var(--radius) 0 0;font-size:clamp(26px,3.6vw,36px)}
+section.level1>blockquote{margin:0 0 30px;background:var(--cs);border-radius:0 0 var(--radius) var(--radius);padding:18px 30px 20px;border:2px solid var(--c);border-top:0;font-size:16px}
+section.level1>blockquote p{margin:.35em 0}
+
+/* tarjetas de semana */
+section.level2{background:var(--card);border-radius:var(--radius);padding:8px 34px 30px;margin:0 0 34px;box-shadow:0 2px 0 var(--line),0 10px 30px -18px rgba(30,35,60,.35);border-top:8px solid var(--c,var(--acc))}
+#intro{border-top-color:var(--gold)}
+section.level2>h2{font-size:28px;margin-top:26px;color:var(--c,var(--ink))}
+section.level2>h2:before{content:attr(data-badge);}
+section.level2>table:first-of-type{background:var(--cs,#f5f5f5);border-radius:12px;overflow:hidden;font-size:15px}
+section.level2>table:first-of-type thead,section.level2>table:first-of-type colgroup{display:none}
+section.level2>table:first-of-type{table-layout:auto}
+section.level2>table:first-of-type td:first-child{width:170px;font-weight:700;color:var(--c,var(--ink))}
+section.level3>h3, section.level2>h3{font-size:21px;border-bottom:2px dashed var(--line);padding-bottom:6px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px;display:block;overflow-x:auto}
+@media (min-width:700px){table{display:table}}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--cs,#f2f2f2);font-family:Fredoka;font-weight:600}
+blockquote{margin:16px 0}
+
+/* recuadro bíblico */
+.biblia{background:var(--biblia);border:2px solid var(--biblia-b);border-radius:16px;padding:6px 22px 10px 22px;margin:26px 0;position:relative}
+.biblia:before{content:"🕊️";position:absolute;top:-18px;left:18px;font-size:26px;background:var(--biblia);border-radius:50%;padding:0 6px}
+.biblia p:first-child{margin-top:18px}
+
+/* fotos */
+figure.foto{margin:24px 0;background:#f2efe9;border-radius:16px;overflow:hidden}
+.foto-marco{position:relative;min-height:60px;background:#e9e4da}
+.foto-marco img{display:block;width:100%;max-height:440px;object-fit:cover}
+.foto-fallback{display:none}
+.sin-foto .foto-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:180px;text-decoration:none;font-size:42px;background:repeating-linear-gradient(45deg,#ece6db,#ece6db 12px,#e4ddd0 12px,#e4ddd0 24px)}
+.sin-foto .foto-fallback span{font-size:15px;font-weight:800;background:#fff;border-radius:99px;padding:4px 14px}
+figcaption{padding:10px 16px 12px;font-size:14.5px;color:#3c4253;font-style:italic}
+figcaption .glink{font-style:normal;font-size:13px;white-space:nowrap;margin-left:4px}
+
+/* video */
+a.video{display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;margin:8px 0;max-width:560px;transition:.15s}
+a.video:hover{border-color:#e33;transform:translateY(-2px)}
+.vthumb{flex:none;width:136px;aspect-ratio:16/9;border-radius:10px;background:#222 center/cover;display:grid;place-items:center}
+.vthumb b{background:#e33;color:#fff;border-radius:10px;padding:2px 12px;font-size:14px}
+.vtxt{font-weight:700;font-size:15px;line-height:1.3}
+.vtxt small{display:block;color:#e33;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+/* pruebas */
+section.prueba{background:#fff;border:2px dashed var(--c,var(--acc));border-top-width:8px;border-top-style:solid}
+section.prueba>h2{display:flex;align-items:center;gap:10px}
+section.claves{border-top-color:#1d2233}
+.toggle-claves{font:700 15px Nunito;background:#1d2233;color:#fff;border:0;border-radius:99px;padding:10px 18px;cursor:pointer;margin:6px 0 10px}
+section.claves.cerrado>*:not(h2):not(.toggle-claves){display:none}
+
+.arriba{position:fixed;right:18px;bottom:18px;background:#1d2233;color:#fff;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:15}
+
+/* descargas de bibliografía */
+ul.descargas{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+ul.descargas a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px 10px 46px;position:relative;font-size:15.5px;line-height:1.35;transition:.15s}
+ul.descargas a:before{content:"📄";position:absolute;left:14px;top:10px;font-size:20px}
+ul.descargas a:hover{border-color:var(--acc);transform:translateY(-2px)}
+ul.descargas b{color:var(--acc)}
+ul.descargas small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.btn-descargas{font:700 15px Nunito;background:var(--acc);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;margin:6px 0 10px}
+.btn-descargas:disabled{opacity:.6;cursor:wait}
+
+@media (max-width:980px){
+  :root{--side:0px}
+  #side{transform:translateX(-100%);width:290px;transition:.25s}
+  body.menu #side{transform:none}
+  #burger{display:grid;place-items:center;position:fixed;top:11px;left:10px;z-index:40;width:46px;height:42px;border-radius:12px;border:0;background:#303750;color:#fff;font-size:22px}
+  .wrap{padding:0 16px}
+  section.level2{padding:6px 18px 22px}
+  section.level1>h1{padding:26px 18px 20px}
+  section.level1>blockquote{padding:14px 18px}
+  .hero{padding:80px 16px 40px}
+  section.level2>table:first-of-type,section.level2>table:first-of-type tbody,section.level2>table:first-of-type tr,section.level2>table:first-of-type td{display:block;width:auto!important;border:0}
+  section.level2>table:first-of-type td:first-child{padding-bottom:0}
+  section.level2>table:first-of-type tr{border-bottom:1px solid var(--line)}
+  main{padding-top:64px}
+  #mtop{display:flex}
+  .vthumb{width:104px}
+}
+@media print{
+  @page{size:A4;margin:14mm 13mm 16mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #side,#burger,#progress,.arriba,.toggle-claves,#mtop,.hero .deco,.btn-descargas{display:none!important}
+  main{margin:0!important;padding:0!important} body{background:#fff;font-size:10.5pt;line-height:1.5}
+  .wrap{max-width:none;padding:0}
+  .hero{padding:60mm 10mm 20mm;min-height:250mm;break-after:page;border-radius:0}
+  .hero h1{font-size:40pt}
+  section.level1{break-before:page}
+  section.level1>h1{margin-top:0}
+  section.level2{box-shadow:none;break-before:page;padding:2mm 6mm 4mm;margin:0;border-radius:10px}
+  section.level1>section.level2:first-of-type{break-before:avoid}
+  #intro{break-before:avoid}
+  h2,h3{break-after:avoid}
+  table,figure,.biblia,a.video,li{break-inside:avoid}
+  figure.foto .foto-marco img{max-height:85mm}
+  .sin-foto .foto-fallback{height:28mm;font-size:22pt}
+  section.claves.cerrado>*{display:block!important}
+  section.claves.cerrado>table{display:table!important}
+  a{color:inherit;text-decoration:none}
+  a.video{border:1px solid #ccc;max-width:none}
+  a.video .vtxt:after{content:attr(data-url);display:block;font-weight:400;font-size:8pt;color:#555;word-break:break-all}
+  figcaption .glink{display:none}
+}
+</style>
+</head>
+<body>
+<button id="burger" aria-label="Menú" onclick="document.body.classList.toggle('menu')">☰</button>
+<div id="mtop">📐 Matemática 1</div>
+<div id="progress"><div></div></div>
+<nav id="side">
+  <div class="logo"><span>📐</span><div><b>Matemática 1</b><small>8.° grado · anual</small></div></div>
+  <a href="index.html">📚 Todas las materias</a>
+  <a href="#top">⬆️ Portada</a>
+  <a class="nav-s nav-x" href="#intro">Bienvenidos a Matemática</a>
+  <a class="nav-s nav-x" href="#descargas">📥 Descargar bibliografía</a>
+<a class="nav-u" href="#u1"><b>U1</b> Números enteros</a>
+<a class="nav-s" href="#s1"><i>1</i>Bienvenida: naturales y números enteros</a>
+<a class="nav-s" href="#s2"><i>2</i>Operaciones con enteros: reglas de signos</a>
+<a class="nav-s" href="#s3"><i>3</i>Potenciación y radicación de enteros</a>
+<a class="nav-s" href="#s4"><i>4</i>Integración y cierre de la unidad</a>
+<a class="nav-u" href="#u2"><b>U2</b> Números racionales</a>
+<a class="nav-s" href="#s5"><i>5</i>Números racionales: fracciones, decimales y aproximación</a>
+<a class="nav-s" href="#s6"><i>6</i>Operaciones con fracciones y decimales</a>
+<a class="nav-s" href="#s7"><i>7</i>Potenciación y radicación en Q, cálculos combinados</a>
+<a class="nav-s" href="#s8"><i>8</i>Integración y cierre de la unidad</a>
+<a class="nav-u" href="#u3"><b>U3</b> Expresiones algebraicas y ecuaciones</a>
+<a class="nav-s" href="#s9"><i>9</i>Lenguaje simbólico y expresiones algebraicas</a>
+<a class="nav-s" href="#s10"><i>10</i>Ecuaciones con números enteros</a>
+<a class="nav-s" href="#s11"><i>11</i>Ecuaciones con fracciones e inecuaciones</a>
+<a class="nav-s" href="#s12"><i>12</i>Integración y ampliación</a>
+<a class="nav-u" href="#u4"><b>U4</b> Funciones</a>
+<a class="nav-s" href="#s13"><i>13</i>Ejes cartesianos y gráficos</a>
+<a class="nav-s" href="#s14"><i>14</i>Funciones y función lineal</a>
+<a class="nav-s" href="#s15"><i>15</i>Proporcionalidad directa e inversa</a>
+<a class="nav-s" href="#s16"><i>16</i>Integración y evaluación</a>
+<a class="nav-u" href="#u5"><b>U5</b> Segmentos, circunferencias y ángulos</a>
+<a class="nav-s" href="#s17"><i>17</i>Mediatriz, circunferencia y rectas paralelas y perpendiculares</a>
+<a class="nav-s" href="#s18"><i>18</i>Sistema sexagesimal, medición de ángulos y bisectriz</a>
+<a class="nav-s" href="#s19"><i>19</i>Pares de ángulos y ángulos entre paralelas y una transversal</a>
+<a class="nav-s" href="#s20"><i>20</i>Integración y evaluación</a>
+<a class="nav-u" href="#u6"><b>U6</b> Figuras planas</a>
+<a class="nav-s" href="#s21"><i>21</i>Triángulos: clasificación, construcción, ángulos y alturas/medianas</a>
+<a class="nav-s" href="#s22"><i>22</i>Puntos notables y criterios de igualdad de triángulos</a>
+<a class="nav-s" href="#s23"><i>23</i>Cuadriláteros: clasificación y propiedades</a>
+<a class="nav-s" href="#s24"><i>24</i>Círculo, superficie de figuras, integración y evaluación</a>
+<a class="nav-u" href="#u7"><b>U7</b> Rectas paralelas y perpendiculares: ángulos, Pitágoras e irracionales</a>
+<a class="nav-s" href="#s25"><i>25</i>Ángulos entre paralelas y una transversal</a>
+<a class="nav-s" href="#s26"><i>26</i>Ecuaciones con medidas de ángulos</a>
+<a class="nav-s" href="#s27"><i>27</i>Graficar rectas: paralelas y perpendiculares</a>
+<a class="nav-s" href="#s28"><i>28</i>Pitágoras, números irracionales y evaluación</a>
+<a class="nav-u" href="#u8"><b>U8</b> Cuerpos geométricos, estadística y probabilidad</a>
+<a class="nav-s" href="#s29"><i>29</i>Cuerpos geométricos: clasificación y superficie</a>
+<a class="nav-s" href="#s30"><i>30</i>Volumen, capacidad y peso</a>
+<a class="nav-s" href="#s31"><i>31</i>Estadística: datos, tablas, parámetros y gráficos</a>
+<a class="nav-s" href="#s32"><i>32</i>Probabilidad: casos posibles y casos favorables</a>
+<a class="nav-u" href="#final">Solucionario</a>
+<a class="nav-s nav-x" href="#claves">🔑 Soluciones de las hojas (para el adulto que acompaña)</a>
+</nav>
+<main>
+  <header class="hero" id="top">
+    <div class="deco">📐➗📊</div>
+    <div class="wrap">
+      <span class="chip">8.º grado · 1.º año NES · CABA</span>
+      <h1>Pensar, calcular y resolver</h1>
+      <p>Números, álgebra, funciones, geometría, estadística y probabilidad: un año para entender por qué funciona cada cuenta y animarse a resolver problemas.</p>
+      <div class="stats">
+        <div><b>8</b>unidades</div><div><b>32</b>semanas</div><div><b>142</b>videos</div><div><b>32</b>hojas de ejercicios</div>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+  <section id="intro" class="level2">
+<h2>Bienvenidos a Matemática</h2>
+<p>Este año vamos a <strong>pensar, calcular y resolver</strong>: de los números enteros y racionales al álgebra y
+las ecuaciones; de los gráficos y las funciones a la geometría (ángulos, triángulos, cuadriláteros, el teorema de
+Pitágoras y los cuerpos), y para cerrar, estadística y probabilidad. En cada tema la idea es la misma:
+<strong>entender por qué</strong> funciona cada procedimiento, no solo aplicarlo.</p>
+<p>Trabajamos con el libro <em>Matemática F2</em>, de Pablo Effenberger, que se puede descargar más abajo. En cada
+semana se indican las páginas (son las del libro impreso).</p>
+<section id="cómo-está-organizada-cada-semana" class="level3">
+<h3>Cómo está organizado el año</h3>
+<p>Son <strong>8 unidades</strong>, y cada una está pensada para <strong>un mes</strong>: 4 semanas de 5 clases
+(20 bloques). Se puede trabajar un bloque por día, de lunes a viernes, o tres clases por semana (por ejemplo, lunes
+los bloques 1 y 2, miércoles el 3 y el 4, y viernes el 5).</p>
+<p>Cada semana tiene:</p>
+<ul>
+<li><strong>🗓️ Clase a clase:</strong> qué tema se ve en cada una de las 5 clases y qué se hace.</li>
+<li><strong>📖 Teoría y ejercicios:</strong> un PDF con la explicación del tema, ejemplos, ejercicios y, en la última
+página, su solucionario.</li>
+<li><strong>🎬 Videos:</strong> videos cortos de YouTube, indicados para cada clase.</li>
+<li><strong>✏️ Hoja de ejercitación:</strong> una carilla con ejercicios nuevos para practicar. Sus respuestas están
+en el solucionario, al final de la plataforma.</li>
+</ul>
+<p>La <strong>cuarta semana</strong> de cada unidad es de integración y evaluación.</p>
+</section>
+<section id="mapa-del-año" class="level3">
+<h3>Mapa del año</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Unidad</th>
+<th>Título</th>
+<th>Contenidos</th>
+<th>Semanas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#u1">1</a></td>
+<td>Números enteros</td>
+<td>A. Números naturales y operaciones; B. Números enteros y recta numérica; C. Adición y sustracción de enteros; D. Multiplicación y división; E. Potenciación de enteros y propiedades; F. Radicación de enteros y propiedades.</td>
+<td><a href="#s1">1</a>, <a href="#s2">2</a>, <a href="#s3">3</a>, <a href="#s4">4</a></td>
+</tr>
+<tr class="even">
+<td><a href="#u2">2</a></td>
+<td>Números racionales</td>
+<td>A. El conjunto de los números racionales (densidad, racional como cociente); B. Aproximación y notación científica; C. Adición y sustracción en Q; D. Multiplicación y división; E. Potenciación en Q; F. Radicación y cálculos combinados.</td>
+<td><a href="#s5">5</a>, <a href="#s6">6</a>, <a href="#s7">7</a>, <a href="#s8">8</a></td>
+</tr>
+<tr class="odd">
+<td><a href="#u3">3</a></td>
+<td>Expresiones algebraicas y ecuaciones</td>
+<td>A. Lenguaje simbólico; B. Expresiones algebraicas; C. Ecuaciones con números enteros; D. Ecuaciones con fracciones e inecuaciones, propiedad distributiva.</td>
+<td><a href="#s9">9</a>, <a href="#s10">10</a>, <a href="#s11">11</a>, <a href="#s12">12</a></td>
+</tr>
+<tr class="even">
+<td><a href="#u4">4</a></td>
+<td>Funciones</td>
+<td>A. Ejes cartesianos y gráficos; B. Funciones y función lineal; C. Función de proporcionalidad directa; D. Función de proporcionalidad inversa.</td>
+<td><a href="#s13">13</a>, <a href="#s14">14</a>, <a href="#s15">15</a>, <a href="#s16">16</a></td>
+</tr>
+<tr class="odd">
+<td><a href="#u5">5</a></td>
+<td>Segmentos, circunferencias y ángulos</td>
+<td>A. Mediatriz de un segmento y circunferencia; B. Posiciones relativas de dos rectas en el plano; C. Sistema sexagesimal; D. Ángulos, clasificación y bisectriz; E. Pares de ángulos especiales; F. Ángulos determinados por dos rectas y una transversal.</td>
+<td><a href="#s17">17</a>, <a href="#s18">18</a>, <a href="#s19">19</a>, <a href="#s20">20</a></td>
+</tr>
+<tr class="even">
+<td><a href="#u6">6</a></td>
+<td>Figuras planas</td>
+<td>A. Triángulos y clasificación; B. Propiedades de los triángulos; C. Puntos notables de un triángulo; D. Criterios de igualdad de triángulos; E. Cuadriláteros y clasificación; F. Propiedades de los cuadriláteros; G. Circunferencia y círculo, superficie de figuras.</td>
+<td><a href="#s21">21</a>, <a href="#s22">22</a>, <a href="#s23">23</a>, <a href="#s24">24</a></td>
+</tr>
+<tr class="odd">
+<td><a href="#u7">7</a></td>
+<td>Rectas paralelas y perpendiculares: ángulos, Pitágoras e irracionales</td>
+<td>A. Ángulos entre paralelas y una transversal, con ecuaciones; B. Suma de los ángulos de un triángulo; C. Rectas en el plano cartesiano, rectas paralelas y perpendiculares; D. Teorema de Pitágoras, noción de número irracional.</td>
+<td><a href="#s25">25</a>, <a href="#s26">26</a>, <a href="#s27">27</a>, <a href="#s28">28</a></td>
+</tr>
+<tr class="even">
+<td><a href="#u8">8</a></td>
+<td>Cuerpos geométricos, estadística y probabilidad</td>
+<td>A. Poliedros y redondos; B. Superficie; C. Volumen; D. Capacidad y peso; E. Poblaciones y variables; F. Tablas y frecuencias; G. Gráficos; H. Sucesos y probabilidad.</td>
+<td><a href="#s29">29</a>, <a href="#s30">30</a>, <a href="#s31">31</a>, <a href="#s32">32</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notas-bibliográficas" class="level3">
+<h3>Notas bibliográficas</h3>
+<ul>
+<li><strong>Libro</strong> · Effenberger, Pablo. <em>Matemática F2</em>. Las páginas citadas son <strong>las del
+libro impreso</strong>, no las del visor de PDF. El PDF es una copia escaneada.</li>
+<li><strong>Material de cada semana</strong> · Explicación, ejemplos, ejercicios y solucionario, alineados con las
+clases de la planificación. Los videos aparecen también en código QR para el celular.</li>
+<li><strong>Hojas de ejercitación</strong> · Ejercicios de elaboración propia, que no corresponden a actividades del
+libro: se pueden reemplazar o completar con las del capítulo. Cada hoja ocupa una carilla.</li>
+<li><strong>Videos</strong> · Son públicos en YouTube. <strong>Conviene que el adulto que acompaña los mire
+antes</strong>. Algunos son de otros países y usan otros nombres o notaciones: si algo no coincide con lo que dice el
+libro, vale la pena conversarlo.</li>
+</ul>
+</section>
+<section id="descargas" class="level3">
+<h3>📥 Descargar la bibliografía</h3>
+<p>Acá están el programa, la planificación, el libro, las hojas de ejercitación y el anexo de Pitágoras. Podés
+bajarlos de a uno o todos juntos con el botón. Si el navegador pregunta si permitís <strong>descargar varios
+archivos</strong>, respondé que sí. El material de cada semana está en su semana, y el solucionario, al final.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Programa_Matematica_8.pdf" download><b>Programa</b> · Programa de Matemática 8.°<small>Las 8 unidades con sus contenidos · PDF · 201 KB</small></a></li>
+<li><a href="bibliografia/matematica/Planificacion_semana_a_semana.pdf" download><b>Planificación</b> · Semana a semana<small>Objetivos de cada unidad y las 160 clases · PDF · 399 KB</small></a></li>
+<li><a href="bibliografia/matematica/Libro_Matematica_F2_Effenberger.pdf" download><b>Libro</b> · Matemática F2, Pablo Effenberger<small>El libro completo (escaneado) · PDF · 16,6 MB</small></a></li>
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf" download><b>Hojas</b> · Hojas de ejercitación semanales<small>Las 32 hojas, una por semana · PDF · 805 KB</small></a></li>
+<li><a href="bibliografia/matematica/Anexo_Teorema_de_Pitagoras.pdf" download><b>Anexo</b> · Demostración geométrica del teorema de Pitágoras<small>Guía visual para la unidad 7 · PDF · 520 KB</small></a></li>
+</ul>
+<button type="button" class="btn-descargas" id="btn-descargas">📥 Descargar todo (5 archivos · 18 MB)</button>
+</section>
+</section>
+
+<section id="u1" class="level1 unidad" data-color="u1">
+<h1 class="unidad" data-color="u1">Unidad 1 · Números enteros</h1>
+<blockquote>
+<p><em>Operar con naturales y enteros, ubicarlos y ordenarlos en la recta, y resolver cálculos combinados y problemas con potencias y raíces de enteros.</em> <strong>Contenidos:</strong> A. Números naturales y operaciones; B. Números enteros y recta numérica; C. Adición y sustracción de enteros; D. Multiplicación y división; E. Potenciación de enteros y propiedades; F. Radicación de enteros y propiedades. <strong>Conocimientos previos:</strong> las cuatro operaciones con naturales y el sentido de las cantidades negativas (temperatura, deudas, niveles). <strong>Resultados esperados:</strong> el alumno aplica reglas de signos, jerarquía de operaciones y propiedades, y justifica sus resultados.</p>
+</blockquote>
+<section id="s1" class="level2">
+<h2>Semana 1 · Bienvenida: naturales y números enteros</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Operar con naturales aplicando la jerarquía de las operaciones, y ubicar y comparar números enteros en la recta numérica.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 1, págs. 5 a 14 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 1.1: Naturales y primeros enteros</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s1" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Operaciones con naturales</td>
+<td>Diagnóstico y resolución guiada</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Jerarquía de operaciones y problemas</td>
+<td>Cálculo mental y con calculadora</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Enteros en contextos y en la recta numérica</td>
+<td>Situaciones reales y ubicación en la recta</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Orden y comparación de enteros</td>
+<td>Ejercicios individuales y análisis de errores</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Integración de naturales y enteros</td>
+<td>Práctica para consolidar la semana</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s1" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U1_S1.pdf" target="_blank" rel="noopener"><b>Semana 1</b> · Bienvenida: naturales y números enteros<small>Unidad 1, semana 1 de 4 · teoría, ejercicios y solucionario · PDF · 161 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s1" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=w016sdtyv1w" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/w016sdtyv1w/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=w016sdtyv1w"><small>Clases 1 y 2 · Jerarquía de operaciones con naturales · Daniel Carreón</small>OPERACIONES COMBINADAS Super facil - Para principiantes</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=9k2qOCgkLAM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/9k2qOCgkLAM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=9k2qOCgkLAM"><small>Clase 3 · Enteros en contextos y recta numérica</small>Números enteros. Cómo se representan y cómo se ordenan. Ejercicios resueltos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=tXcoK3SXEfA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/tXcoK3SXEfA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=tXcoK3SXEfA"><small>Clase 4 · Orden y comparación de enteros</small>Comparar y ordenar números enteros</span></a></p>
+</section>
+<section id="hoja-s1" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=1" target="_blank" rel="noopener"><b>Hoja 1.1</b> · Naturales y primeros enteros<small>Se abre en la página 1 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s2" class="level2">
+<h2>Semana 2 · Operaciones con enteros: reglas de signos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Operar con números enteros (sumar, restar, multiplicar y dividir) aplicando las reglas de los signos.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 1, págs. 12 a 20 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 1.2: Operaciones con enteros</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s2" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Adición de enteros</td>
+<td>Explicación con recta numérica</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Sustracción de enteros y paréntesis</td>
+<td>Resolución guiada</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Problemas con enteros</td>
+<td>Resolución de problemas y errores frecuentes</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Multiplicación de enteros</td>
+<td>Explicación y práctica de la regla de los signos</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>División de enteros</td>
+<td>Práctica individual; relación inversa con la multiplicación</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s2" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U1_S2.pdf" target="_blank" rel="noopener"><b>Semana 2</b> · Operaciones con enteros: reglas de signos<small>Unidad 1, semana 2 de 4 · teoría, ejercicios y solucionario · PDF · 131 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s2" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=6MwdfLuIyNI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/6MwdfLuIyNI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=6MwdfLuIyNI"><small>Clase 1 · Adición de enteros con la recta numérica</small>SUMA Y RESTA DE NÚMEROS ENTEROS EN LA RECTA Super facil - Para principiantes</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=yPC7JImJVv8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/yPC7JImJVv8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=yPC7JImJVv8"><small>Clase 2 · Sustracción y supresión de paréntesis</small>Sumar y Restar Números Enteros con Paréntesis</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=gYvcKdBEIjU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/gYvcKdBEIjU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=gYvcKdBEIjU"><small>Clases 4 y 5 · Regla de los signos</small>MULTIPLICACIÓN y DIVISIÓN de NÚMEROS ENTEROS</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=4D6hflOo4ag" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/4D6hflOo4ag/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=4D6hflOo4ag"><small>Clases 4 y 5 · Ejercicios resueltos paso a paso</small>Cómo resolver la MULTIPLICACIÓN y DIVISIÓN de números enteros</span></a></p>
+</section>
+<section id="hoja-s2" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=2" target="_blank" rel="noopener"><b>Hoja 1.2</b> · Operaciones con enteros<small>Se abre en la página 2 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s3" class="level2">
+<h2>Semana 3 · Potenciación y radicación de enteros</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Calcular potencias y raíces de números enteros y aplicar sus propiedades.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 1, págs. 21 a 24 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 1.3: Potenciación y radicación</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s3" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Integración de las operaciones con enteros</td>
+<td>Cálculos combinados con la jerarquía</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Potenciación: definición y signo</td>
+<td>Explicación y ejemplos</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Propiedades de la potenciación</td>
+<td>Práctica guiada</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Radicación: definición y raíces exactas</td>
+<td>Explicación y ejemplos</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Propiedades de la radicación</td>
+<td>Práctica y análisis de errores</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s3" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U1_S3.pdf" target="_blank" rel="noopener"><b>Semana 3</b> · Potenciación y radicación de enteros<small>Unidad 1, semana 3 de 4 · teoría, ejercicios y solucionario · PDF · 138 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s3" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=zGwhh4tcyV4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/zGwhh4tcyV4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=zGwhh4tcyV4"><small>Clase 2 · Potencias de base positiva y negativa</small>Como calcular potencias de números POSITIVOS y NEGATIVOS. Potenciación de números enteros.</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Wq_e27tIFKA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Wq_e27tIFKA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Wq_e27tIFKA"><small>Clase 2 · Dudas frecuentes con el signo</small>Potencias con base negativa</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=CerloA1iEjQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/CerloA1iEjQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=CerloA1iEjQ"><small>Clase 3 · Producto, cociente y potencia de potencia</small>Propiedades de la potenciación</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=-JReQS_EulQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/-JReQS_EulQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=-JReQS_EulQ"><small>Clase 4 · Raíces con números positivos y negativos</small>Radicación de números enteros</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=iTRceGxDn8I" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/iTRceGxDn8I/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=iTRceGxDn8I"><small>Clase 5 · Propiedades de la raíz</small>Propiedades de la radicación de números enteros</span></a></p>
+</section>
+<section id="hoja-s3" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=2" target="_blank" rel="noopener"><b>Hoja 1.3</b> · Potenciación y radicación<small>Se abre en la página 2 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s4" class="level2">
+<h2>Semana 4 · Integración y cierre de la unidad</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Integrar y comprobar los aprendizajes de la unidad: jerarquía de operaciones, reglas de los signos, potencias y raíces de enteros y sus propiedades.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 1, págs. 25 a 26 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 1.4: Integración de la unidad</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s4" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Potencia y raíz: integración y errores frecuentes</td>
+<td>Práctica: distinguir potencia de raíz</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Cálculos combinados y problemas</td>
+<td>Problemas de integración</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Repasar lo aprendido (p. 25)</td>
+<td>Repaso guiado</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Evaluación escrita</td>
+<td>Prueba individual</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Devolución y recuperación</td>
+<td>Corrección y recuperación de errores</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s4" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U1_S4.pdf" target="_blank" rel="noopener"><b>Semana 4</b> · Integración y cierre de la unidad<small>Unidad 1, semana 4 de 4 · teoría, ejercicios y solucionario · PDF · 134 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s4" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=4Bv69YLcxpI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/4Bv69YLcxpI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=4Bv69YLcxpI"><small>Clases 1 y 2 · Cálculos combinados con potencias y raíces</small>OPERACIONES COMBINADAS DE NÚMEROS ENTEROS CON POTENCIAS Y RAÍCES</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=60KsExPWGvU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/60KsExPWGvU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=60KsExPWGvU"><small>Clase 2 · Jerarquía y signos en los cálculos combinados · Matemática Profe Ruben</small>Operaciones Combinadas con potencias y raíces en números enteros</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=v0aI_tJ2Ess" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/v0aI_tJ2Ess/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=v0aI_tJ2Ess"><small>Clase 3 · Repaso con paréntesis y corchetes</small>Operaciones combinadas números enteros con corchetes y paréntesis</span></a></p>
+</section>
+<section id="hoja-s4" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=3" target="_blank" rel="noopener"><b>Hoja 1.4</b> · Integración de la unidad<small>Se abre en la página 3 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="u2" class="level1 unidad" data-color="u2">
+<h1 class="unidad" data-color="u2">Unidad 2 · Números racionales</h1>
+<blockquote>
+<p><em>Reconocer y representar racionales, operar con ellos, usar aproximaciones y notación científica, y resolver cálculos combinados.</em> <strong>Contenidos:</strong> A. El conjunto de los números racionales (densidad, racional como cociente); B. Aproximación y notación científica; C. Adición y sustracción en Q; D. Multiplicación y división; E. Potenciación en Q; F. Radicación y cálculos combinados. <strong>Conocimientos previos:</strong> operaciones con enteros, jerarquía, potencia y raíz de enteros (Unidad 1). <strong>Resultados esperados:</strong> opera en Q con fracciones y decimales, elige la representación más conveniente y resuelve problemas.</p>
+</blockquote>
+<section id="s5" class="level2">
+<h2>Semana 5 · Números racionales: fracciones, decimales y aproximación</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Reconocer, comparar y aproximar números racionales, pasando de una forma de escritura a otra.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 2, págs. 27 a 32 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 2.1: El conjunto Q y aproximaciones</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s5" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Fracciones: equivalencia y simplificación</td>
+<td>Diagnóstico y resolución guiada</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>El racional como cociente; expresión decimal finita o periódica</td>
+<td>Pasajes entre formas</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Recta numérica, orden y densidad en Q</td>
+<td>Ubicación y comparación</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Aproximación: redondeo y truncamiento</td>
+<td>Ejercicios con calculadora</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Notación científica</td>
+<td>Explicación y práctica</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s5" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U2_S1.pdf" target="_blank" rel="noopener"><b>Semana 5</b> · Números racionales: fracciones, decimales y aproximación<small>Unidad 2, semana 1 de 4 · teoría, ejercicios y solucionario · PDF · 220 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s5" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=7KfQ9oX5aZo" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/7KfQ9oX5aZo/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=7KfQ9oX5aZo"><small>Clase 1 · Fracciones equivalentes y simplificación</small>Fracciones Equivalentes: Amplificación y simplificación</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=nlOr40xU2RY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/nlOr40xU2RY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=nlOr40xU2RY"><small>Clase 2 · Racional como cociente y pasajes entre formas</small>CONCEPTO DE NÚMEROS RACIONALES + CONVERSIÓN DE DECIMAL A FRACCIÓN Y FRACCIÓN A DECIMAL</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=FbtZfP5ALGQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/FbtZfP5ALGQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=FbtZfP5ALGQ"><small>Clase 2 · Expresión decimal finita y periódica</small>¿Cómo pasar de fracción a número decimal? - Decimal finito y decimal periódico</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=xoL3W33JEvk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/xoL3W33JEvk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=xoL3W33JEvk"><small>Clase 3 · Fracciones en la recta numérica</small>Cómo ubicamos fracciones en la recta numérica</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=NcwBfSL9Zoc" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/NcwBfSL9Zoc/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=NcwBfSL9Zoc"><small>Clase 3 · Densidad de los racionales (mirar del minuto 0:25 al 4:53)</small>Propiedad de densidad. Fracciones y decimales 2</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Lh-qyZoZIbA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Lh-qyZoZIbA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Lh-qyZoZIbA"><small>Clase 4 · Redondeo y truncamiento</small>APROXIMACIÓN de NÚMEROS DECIMALES por REDONDEO y TRUNCAMIENTO</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=g71cLnCVt4M" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/g71cLnCVt4M/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=g71cLnCVt4M"><small>Clase 5 · Notación científica</small>Cómo escribir números en NOTACIÓN CIENTÍFICA</span></a></p>
+</section>
+<section id="hoja-s5" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=3" target="_blank" rel="noopener"><b>Hoja 2.1</b> · El conjunto Q y aproximaciones<small>Se abre en la página 3 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s6" class="level2">
+<h2>Semana 6 · Operaciones con fracciones y decimales</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Sumar, restar, multiplicar y dividir números racionales, y resolver problemas con fracciones y decimales.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 2, págs. 33 a 38 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 2.2: Operaciones en Q</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s6" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Suma y resta con igual y distinto denominador</td>
+<td>Explicación y práctica guiada</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Operaciones combinadas y problemas</td>
+<td>Problemas de contexto</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Multiplicación de racionales</td>
+<td>Explicación y práctica</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>División e inverso multiplicativo</td>
+<td>Práctica individual</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Integración de las cuatro operaciones</td>
+<td>Práctica y detección de errores frecuentes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s6" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U2_S2.pdf" target="_blank" rel="noopener"><b>Semana 6</b> · Operaciones con fracciones y decimales<small>Unidad 2, semana 2 de 4 · teoría, ejercicios y solucionario · PDF · 273 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s6" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=qJtoI1ipxs8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/qJtoI1ipxs8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=qJtoI1ipxs8"><small>Clase 1 · Suma y resta con distinto denominador</small>SUMA Y RESTA DE FRACCIONES CON DIFERENTE DENOMINADOR Super facil - Para principiantes</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=dEmFDqHZDbg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/dEmFDqHZDbg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=dEmFDqHZDbg"><small>Clases 1 y 2 · Igual y distinto denominador, con problemas</small>Suma y resta de fracciones | Ejercicios resueltos paso a paso</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=5wjoL-Ed6yw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/5wjoL-Ed6yw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=5wjoL-Ed6yw"><small>Clase 2 · Jerarquía con paréntesis y corchetes</small>OPERACIONES COMBINADAS CON FRACCIONES</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=UildQorYmK0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/UildQorYmK0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=UildQorYmK0"><small>Clases 3 y 4 · Multiplicación y división de fracciones</small>MULTIPLICACION Y DIVISION DE FRACCIONES Super facil - Para principiantes</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=WxP7sO7msjo" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/WxP7sO7msjo/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=WxP7sO7msjo"><small>Clase 4 · Dividir multiplicando por el inverso</small>Division de Fracciones con INVERSO Multiplicativo</span></a></p>
+</section>
+<section id="hoja-s6" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=4" target="_blank" rel="noopener"><b>Hoja 2.2</b> · Operaciones en Q<small>Se abre en la página 4 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s7" class="level2">
+<h2>Semana 7 · Potenciación y radicación en Q, cálculos combinados</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Calcular potencias y raíces de números racionales, aplicar sus propiedades (incluido el exponente negativo) y resolver cálculos combinados respetando la jerarquía.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 2, págs. 39 a 42 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 2.3: Potenciación, radicación y cálculos combinados en Q</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s7" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Potenciación en Q</td>
+<td>Explicación y ejemplos</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Propiedades y exponente entero (incluido el negativo)</td>
+<td>Práctica guiada</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Radicación en Q</td>
+<td>Explicación y práctica</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Cálculos combinados</td>
+<td>Resolución guiada paso a paso</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Cálculos combinados y problemas</td>
+<td>Problemas con calculadora</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s7" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U2_S3.pdf" target="_blank" rel="noopener"><b>Semana 7</b> · Potenciación y radicación en Q, cálculos combinados<small>Unidad 2, semana 3 de 4 · teoría, ejercicios y solucionario · PDF · 258 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s7" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=_89T7oSGR_s" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_89T7oSGR_s/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_89T7oSGR_s"><small>Clase 1 · Potencias de fracciones</small>POTENCIACIÓN DE NUMEROS RACIONALES - BASE POSITIVA Y NEGATIVA</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=CXp0ae9vRLs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/CXp0ae9vRLs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=CXp0ae9vRLs"><small>Clase 2 · Exponente negativo en enteros y fracciones</small>Potencias con exponente negativo [PASO A PASO]</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=HR-G0bZAzH0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/HR-G0bZAzH0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=HR-G0bZAzH0"><small>Clase 2 · Propiedades con enteros y fracciones</small>Propiedades de la potenciación</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Jb61jCEm4cQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Jb61jCEm4cQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Jb61jCEm4cQ"><small>Clase 3 · Raíces de fracciones y decimales</small>Radicación de Números Racionales paso a paso</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=gbiLQfkKLmM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/gbiLQfkKLmM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=gbiLQfkKLmM"><small>Clases 4 y 5 · Cálculos combinados con racionales</small>Operaciones combinadas con fracciones y paréntesis: Paso a paso</span></a></p>
+</section>
+<section id="hoja-s7" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=4" target="_blank" rel="noopener"><b>Hoja 2.3</b> · Potenciación, radicación y cálculos combinados en Q<small>Se abre en la página 4 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s8" class="level2">
+<h2>Semana 8 · Integración y cierre de la unidad</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Integrar y comprobar los aprendizajes de la unidad: representación, orden y aproximación de racionales, operaciones, potencias y raíces, y resolución de problemas.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 2, págs. ______ a ______ (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 2.4: Integración de la unidad</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s8" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Integración de los contenidos de la unidad (A a F)</td>
+<td>Práctica: conecta fracciones, decimales, potencias y raíces</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Problemas de integración</td>
+<td>Resolución de problemas</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Repasar lo aprendido</td>
+<td>Repaso guiado</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Evaluación escrita</td>
+<td>Prueba individual</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Devolución y recuperación</td>
+<td>Corrección y recuperación de errores</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s8" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U2_S4.pdf" target="_blank" rel="noopener"><b>Semana 8</b> · Integración y cierre de la unidad<small>Unidad 2, semana 4 de 4 · teoría, ejercicios y solucionario · PDF · 257 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s8" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=BuQ295CF6qM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/BuQ295CF6qM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=BuQ295CF6qM"><small>Clase 1 · Cálculos combinados con fracciones y decimales</small>Matemáticas Operaciones combinadas con fracciones y decimales</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=FYetdr_S2Xc" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/FYetdr_S2Xc/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=FYetdr_S2Xc"><small>Clases 1 y 3 · Jerarquía con paréntesis y corchetes</small>Como Resolver Operaciones Combinadas con Fracciones Parentesis y Corchetes Orden Jerarquia</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=siOllEiZFjw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/siOllEiZFjw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=siOllEiZFjw"><small>Clase 2 · Problemas con números racionales</small>1º y 2º Secundaria. Problemas en Q</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=hYGrUoerXv8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/hYGrUoerXv8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=hYGrUoerXv8"><small>Clase 2 · Cómo plantear y resolver problemas</small>Como resolver PROBLEMAS con FRACCIONES para SECUNDARIA</span></a></p>
+</section>
+<section id="hoja-s8" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=5" target="_blank" rel="noopener"><b>Hoja 2.4</b> · Integración de la unidad<small>Se abre en la página 5 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="u3" class="level1 unidad" data-color="u3">
+<h1 class="unidad" data-color="u3">Unidad 3 · Expresiones algebraicas y ecuaciones</h1>
+<blockquote>
+<p><em>Traducir al lenguaje simbólico, operar con expresiones algebraicas, resolver ecuaciones con enteros y fracciones, e iniciar el trabajo con inecuaciones.</em> <strong>Contenidos:</strong> A. Lenguaje simbólico; B. Expresiones algebraicas; C. Ecuaciones con números enteros; D. Ecuaciones con fracciones e inecuaciones, propiedad distributiva. <strong>Conocimientos previos:</strong> operaciones en Z y Q, propiedades de las operaciones. <strong>Resultados esperados:</strong> plantea y resuelve ecuaciones, verifica soluciones y resuelve problemas.</p>
+</blockquote>
+<section id="s9" class="level2">
+<h2>Semana 9 · Lenguaje simbólico y expresiones algebraicas</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Traducir y manejar expresiones algebraicas.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 3, págs. 45 a 50 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 3.1: Lenguaje simbólico y expresiones algebraicas</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s9" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Lenguaje coloquial y simbólico</td>
+<td>Traducciones guiadas</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Fórmulas y generalización</td>
+<td>Búsqueda de regularidades</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Expresiones algebraicas y valor numérico</td>
+<td>Cálculo de valores</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Términos semejantes y simplificación</td>
+<td>Práctica guiada</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Expresiones equivalentes; propiedad distributiva y factor común (noción)</td>
+<td>Práctica y errores frecuentes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s9" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U3_S1.pdf" target="_blank" rel="noopener"><b>Semana 9</b> · Lenguaje simbólico y expresiones algebraicas<small>Unidad 3, semana 1 de 4 · teoría, ejercicios y solucionario · PDF · 229 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s9" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=ywHl6f9qvKI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/ywHl6f9qvKI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=ywHl6f9qvKI"><small>Clase 1 · Lenguaje coloquial y simbólico</small>Traducir al lenguaje algebraico: más de 30 ejemplos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=zwK8i1Bi8iY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/zwK8i1Bi8iY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=zwK8i1Bi8iY"><small>Clase 2 · Fórmulas y generalización</small>Patrones numéricos: expresión general para el término n</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Cd5lSNN8928" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Cd5lSNN8928/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Cd5lSNN8928"><small>Clases 3 y 4 · Valor numérico y términos semejantes</small>Reducción de términos semejantes y su valor numérico</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=SSCKh3Vh-k0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/SSCKh3Vh-k0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=SSCKh3Vh-k0"><small>Clase 5 · Expresiones equivalentes</small>Propiedad distributiva (quitar paréntesis, sacar factor común)</span></a></p>
+</section>
+<section id="hoja-s9" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=5" target="_blank" rel="noopener"><b>Hoja 3.1</b> · Lenguaje simbólico y expresiones algebraicas<small>Se abre en la página 5 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s10" class="level2">
+<h2>Semana 10 · Ecuaciones con números enteros</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Resolver ecuaciones y problemas con enteros.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 3, págs. 51 a 54 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 3.2: Ecuaciones con números enteros</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s10" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6</td>
+<td>Concepto de ecuación y solución</td>
+<td>Explicación y verificación</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>Resolución por operaciones inversas</td>
+<td>Resolución guiada</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>Paréntesis y términos semejantes</td>
+<td>Práctica individual</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>Problemas con ecuaciones</td>
+<td>Planteo y resolución</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>Conjunto solución: una, infinitas o ninguna solución; integración y errores</td>
+<td>Práctica</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s10" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U3_S2.pdf" target="_blank" rel="noopener"><b>Semana 10</b> · Ecuaciones con números enteros<small>Unidad 3, semana 2 de 4 · teoría, ejercicios y solucionario · PDF · 243 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s10" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=siLhHLo2Iiw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/siLhHLo2Iiw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=siLhHLo2Iiw"><small>Clases 6 y 7 · Qué es una ecuación y cómo se resuelve</small>Solución de ecuaciones de primer grado</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=LC-VwBfWNb8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/LC-VwBfWNb8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=LC-VwBfWNb8"><small>Clase 8 · Paréntesis y términos semejantes</small>Ecuaciones de primer grado con paréntesis y números enteros</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=MOGO3yK7Srs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/MOGO3yK7Srs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=MOGO3yK7Srs"><small>Clase 9 · Problemas con ecuaciones</small>Resolviendo problemas con ecuaciones de primer grado</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=fvd-MGdTfag" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/fvd-MGdTfag/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=fvd-MGdTfag"><small>Clase 10 · Conjunto solución</small>Ecuaciones con infinitas soluciones y sin solución</span></a></p>
+</section>
+<section id="hoja-s10" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=6" target="_blank" rel="noopener"><b>Hoja 3.2</b> · Ecuaciones con números enteros<small>Se abre en la página 6 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s11" class="level2">
+<h2>Semana 11 · Ecuaciones con fracciones e inecuaciones</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Resolver ecuaciones con fracciones y reconocer inecuaciones.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 3, págs. 55 a 58 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 3.3: Ecuaciones con fracciones e inecuaciones</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s11" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>Ecuaciones con fracciones</td>
+<td>Explicación y ejemplos</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Práctica con fracciones</td>
+<td>Práctica guiada</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>Problemas con fracciones</td>
+<td>Resolución de problemas</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>Inecuaciones: concepto y solución</td>
+<td>Explicación y recta numérica</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>Resolución de inecuaciones</td>
+<td>Práctica y representación</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s11" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U3_S3.pdf" target="_blank" rel="noopener"><b>Semana 11</b> · Ecuaciones con fracciones e inecuaciones<small>Unidad 3, semana 3 de 4 · teoría, ejercicios y solucionario · PDF · 271 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s11" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=gJ-Ms7WjLbs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/gJ-Ms7WjLbs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=gJ-Ms7WjLbs"><small>Clases 11 y 12 · Ecuaciones con fracciones (con m.c.m.)</small>Ecuaciones de primer grado con denominadores: paso a paso</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=VMXR4fUMbgg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/VMXR4fUMbgg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=VMXR4fUMbgg"><small>Clase 13 · Problemas con fracciones</small>Problema de ecuaciones: la mitad de un número más su tercera parte es 15</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=YOmE8NFYGIY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/YOmE8NFYGIY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=YOmE8NFYGIY"><small>Clase 14 · Inecuaciones: concepto y solución</small>Inecuaciones: ¿qué son? ¿cómo se resuelven? ¿cómo se representan en la recta numérica?</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=5z9V-cDV9mI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/5z9V-cDV9mI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=5z9V-cDV9mI"><small>Clase 15 · Resolución y representación</small>Inecuaciones de primer grado</span></a></p>
+</section>
+<section id="hoja-s11" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=6" target="_blank" rel="noopener"><b>Hoja 3.3</b> · Ecuaciones con fracciones e inecuaciones<small>Se abre en la página 6 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s12" class="level2">
+<h2>Semana 12 · Integración y ampliación</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Validar divisibilidad con álgebra, usar distributiva y factor común, y resolver ecuaciones con fracciones e inecuaciones indicando el conjunto solución.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Repaso de toda la unidad.</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 3.4: Integración de la unidad</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s12" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>16</td>
+<td>Divisibilidad con expresiones algebraicas</td>
+<td>Práctica y validación con letras</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>Propiedad distributiva y factor común (ampliación)</td>
+<td>Práctica y errores frecuentes</td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>Ecuaciones con fracciones e inecuaciones; conjunto solución</td>
+<td>Integración, repaso y problemas</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>Evaluación escrita</td>
+<td>Prueba individual</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>Devolución y recuperación</td>
+<td>Corrección</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s12" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U3_S4.pdf" target="_blank" rel="noopener"><b>Semana 12</b> · Integración y ampliación<small>Unidad 3, semana 4 de 4 · teoría, ejercicios y solucionario · PDF · 288 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s12" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=picqCM-W7XU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/picqCM-W7XU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=picqCM-W7XU"><small>Clase 16 · Divisibilidad con expresiones algebraicas</small>Cómo expresar un número par e impar (lenguaje algebraico)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=qMSZ2ZUb6BE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/qMSZ2ZUb6BE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=qMSZ2ZUb6BE"><small>Clase 16 · Demostración con álgebra</small>¿Por qué un número es divisible por 3 si la suma de sus cifras lo es?</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=uymWXmTVyl8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/uymWXmTVyl8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=uymWXmTVyl8"><small>Clase 17 · Distributiva y factor común</small>Propiedad distributiva y factor común explicados</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=fvd-MGdTfag" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/fvd-MGdTfag/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=fvd-MGdTfag"><small>Clase 18 · Conjunto solución</small>Ecuaciones con infinitas soluciones y sin solución</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=gJ-Ms7WjLbs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/gJ-Ms7WjLbs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=gJ-Ms7WjLbs"><small>Clase 18 · Ecuaciones con fracciones</small>Ecuaciones de primer grado con denominadores: paso a paso</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=YOmE8NFYGIY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/YOmE8NFYGIY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=YOmE8NFYGIY"><small>Clase 18 · Inecuaciones</small>Inecuaciones: ¿qué son? ¿cómo se resuelven? ¿cómo se representan en la recta numérica?</span></a></p>
+</section>
+<section id="hoja-s12" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=7" target="_blank" rel="noopener"><b>Hoja 3.4</b> · Integración de la unidad<small>Se abre en la página 7 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="u4" class="level1 unidad" data-color="u4">
+<h1 class="unidad" data-color="u4">Unidad 4 · Funciones</h1>
+<blockquote>
+<p><em>Interpretar y producir gráficos cartesianos, reconocer funciones, y trabajar con función lineal y proporcionalidad directa e inversa.</em> <strong>Contenidos:</strong> A. Ejes cartesianos y gráficos; B. Funciones y función lineal; C. Función de proporcionalidad directa; D. Función de proporcionalidad inversa. <strong>Conocimientos previos:</strong> operaciones en Q, ecuaciones y valor numérico (Unidad 3). <strong>Resultados esperados:</strong> pasa entre tabla, gráfico y fórmula, e interpreta situaciones de variación.</p>
+</blockquote>
+<section id="s13" class="level2">
+<h2>Semana 13 · Ejes cartesianos y gráficos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Interpretar y producir gráficos cartesianos.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 4, págs. 61 a 64 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 4.1: Ejes cartesianos y gráficos</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s13" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Ejes cartesianos y pares ordenados</td>
+<td>Ubicación de puntos</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Lectura e interpretación de gráficos</td>
+<td>Análisis de gráficos de situaciones</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Variables y su relación</td>
+<td>Identificar variable dependiente e independiente</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Tablas, gráficos y fórmulas</td>
+<td>Pasaje entre las tres formas de representar</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Producción de gráficos</td>
+<td>Construcción de gráficos y análisis de errores frecuentes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s13" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U4_S1.pdf" target="_blank" rel="noopener"><b>Semana 13</b> · Ejes cartesianos y gráficos<small>Unidad 4, semana 1 de 4 · teoría, ejercicios y solucionario · PDF · 149 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s13" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=pdS_y13geRo" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/pdS_y13geRo/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=pdS_y13geRo"><small>Clase 1 · Ejes cartesianos y pares ordenados</small>Plano Cartesiano (cuadrantes, ubicar puntos o pares ordenados)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=P1QtOl-2xv4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/P1QtOl-2xv4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=P1QtOl-2xv4"><small>Clases 2 y 3 · Lectura de gráficos y variables</small>Funciones: qué es una función, variable dependiente e independiente y cómo representar una función</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=C9FzMs11cG0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/C9FzMs11cG0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=C9FzMs11cG0"><small>Clase 3 · Identificar las variables en un problema</small>Variable independiente y variable dependiente</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=DFTmL7ds2yE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/DFTmL7ds2yE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=DFTmL7ds2yE"><small>Clases 4 y 5 · Tablas, gráficos y producción de gráficos</small>Construcción de un gráfico con una tabla de valores (1.º ESO)</span></a></p>
+</section>
+<section id="hoja-s13" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=8" target="_blank" rel="noopener"><b>Hoja 4.1</b> · Ejes cartesianos y gráficos<small>Se abre en la página 8 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s14" class="level2">
+<h2>Semana 14 · Funciones y función lineal</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Reconocer funciones y trabajar con la función lineal.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 4, págs. 65 a 68 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 4.2: Funciones y función lineal</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s14" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6</td>
+<td>Concepto de función</td>
+<td>Ejemplos y contraejemplos</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>Función lineal: fórmula, tabla y gráfico</td>
+<td>Construcción guiada</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>Elementos de la función lineal</td>
+<td>Análisis de gráficos</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>De la fórmula al gráfico y viceversa</td>
+<td>Práctica individual</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>Problemas con funciones lineales</td>
+<td>Resolución de problemas</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s14" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U4_S2.pdf" target="_blank" rel="noopener"><b>Semana 14</b> · Funciones y función lineal<small>Unidad 4, semana 2 de 4 · teoría, ejercicios y solucionario · PDF · 149 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s14" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=krJuAmjarHg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/krJuAmjarHg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=krJuAmjarHg"><small>Clase 6 · Concepto de función: ejemplos y no funciones</small>¿Qué es una función? Conceptos y condiciones de función</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=uSd2swC-SuQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/uSd2swC-SuQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=uSd2swC-SuQ"><small>Clases 7 y 8 · Fórmula, tabla, gráfico y elementos de la función lineal</small>Función lineal: su gráfica (pendiente, ordenada y raíz)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=SFxXo_UZUp0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/SFxXo_UZUp0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=SFxXo_UZUp0"><small>Clases 9 y 10 · De la fórmula al gráfico y problemas</small>Gráfico de función lineal. Pendiente y ordenada al origen</span></a></p>
+</section>
+<section id="hoja-s14" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=8" target="_blank" rel="noopener"><b>Hoja 4.2</b> · Funciones y función lineal<small>Se abre en la página 8 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s15" class="level2">
+<h2>Semana 15 · Proporcionalidad directa e inversa</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Distinguir y representar ambas relaciones.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 4, págs. 69 a 72 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 4.3: Proporcionalidad directa e inversa</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s15" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>Proporcionalidad directa y constante</td>
+<td>Tablas y fórmulas</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Gráfico de la proporcionalidad directa y problemas</td>
+<td>Construcción y problemas</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>Proporcionalidad inversa</td>
+<td>Tablas y fórmulas</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>Gráfico de la proporcionalidad inversa</td>
+<td>Construcción de gráficos</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>Comparación entre directa e inversa</td>
+<td>Clasificación de situaciones</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s15" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U4_S3.pdf" target="_blank" rel="noopener"><b>Semana 15</b> · Proporcionalidad directa e inversa<small>Unidad 4, semana 3 de 4 · teoría, ejercicios y solucionario · PDF · 144 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s15" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=kwlMJA1I_go" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/kwlMJA1I_go/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=kwlMJA1I_go"><small>Clase 11 · Proporcionalidad directa y constante</small>Proporcionalidad directa (tablas y constante de proporcionalidad)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=t5FGQQ52LLg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/t5FGQQ52LLg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=t5FGQQ52LLg"><small>Clase 12 · Gráfico y problemas</small>Proporcionalidad directa: tabla y gráfica</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=M9clb_NuzVg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/M9clb_NuzVg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=M9clb_NuzVg"><small>Clases 13 y 15 · Proporcionalidad inversa y comparación con la directa</small>Proporcionalidad directa e inversa: cómo armar gráficos y tablas</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=CrH6Hs15l28" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/CrH6Hs15l28/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=CrH6Hs15l28"><small>Clase 14 · Gráfico de la proporcionalidad inversa</small>Función de proporcionalidad inversa: representación. Hipérbola</span></a></p>
+</section>
+<section id="hoja-s15" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=9" target="_blank" rel="noopener"><b>Hoja 4.3</b> · Proporcionalidad directa e inversa<small>Se abre en la página 9 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s16" class="level2">
+<h2>Semana 16 · Integración y evaluación</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Integrar y comprobar los aprendizajes de la unidad.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 4, “Repasar lo aprendido” pag 73 y 74. (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 4.4: Integración de la unidad</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s16" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>16</td>
+<td>Integración de los temas A a D</td>
+<td>Práctica</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>Problemas de integración</td>
+<td>Resolución de problemas</td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>Repasar lo aprendido (p. 73)</td>
+<td>Repaso guiado</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>Evaluación escrita</td>
+<td>Prueba individual</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>Devolución y recuperación</td>
+<td>Corrección de errores</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s16" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U4_S4.pdf" target="_blank" rel="noopener"><b>Semana 16</b> · Integración y evaluación<small>Unidad 4, semana 4 de 4 · teoría, ejercicios y solucionario · PDF · 144 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s16" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=WLsHpksYYe4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/WLsHpksYYe4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=WLsHpksYYe4"><small>Clases 16 y 17 · Integración y problemas con funciones lineales</small>Problemas de funciones lineales</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=n_lK7PsxXfY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/n_lK7PsxXfY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=n_lK7PsxXfY"><small>Clases 16 y 17 · Problemas de integración</small>Problemas de proporcionalidad directa e inversa</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Ds7Sdw0Esbw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Ds7Sdw0Esbw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Ds7Sdw0Esbw"><small>Clase 18 · Repaso: de las tablas a los problemas</small>Ejercicios de proporcionalidad directa e inversa (paso a paso)</span></a></p>
+</section>
+<section id="hoja-s16" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=10" target="_blank" rel="noopener"><b>Hoja 4.4</b> · Integración de la unidad<small>Se abre en la página 10 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="u5" class="level1 unidad" data-color="u1">
+<h1 class="unidad" data-color="u1">Unidad 5 · Segmentos, circunferencias y ángulos</h1>
+<blockquote>
+<p><em>Construir mediatrices, bisectrices, paralelas y perpendiculares con instrumentos; medir y clasificar ángulos; operar en el sistema sexagesimal; reconocer pares de ángulos y calcular ángulos entre dos rectas y una transversal.</em> <strong>Contenidos:</strong> A. Mediatriz de un segmento y circunferencia; B. Posiciones relativas de dos rectas en el plano; C. Sistema sexagesimal; D. Ángulos, clasificación y bisectriz; E. Pares de ángulos especiales; F. Ángulos determinados por dos rectas y una transversal. <strong>Conocimientos previos:</strong> ecuaciones simples (Unidad 3), operaciones con decimales y fracciones, uso de regla y escuadra. <strong>Resultados esperados:</strong> el alumno construye con compás y transportador, justifica propiedades y calcula ángulos planteando ecuaciones.</p>
+</blockquote>
+<section id="s17" class="level2">
+<h2>Semana 17 · Mediatriz, circunferencia y rectas paralelas y perpendiculares</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Construir la mediatriz de un segmento y rectas paralelas y perpendiculares con regla, escuadra y compás, y reconocer los elementos de la circunferencia.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 5, págs. 75 a 78 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>regla, escuadra, compás, lápiz y goma.</td>
+</tr>
+<tr class="even">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 5.1: Mediatriz, circunferencia y posiciones de rectas</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s17" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>A. Mediatriz de un segmento y equidistancia</td>
+<td>Construcción con regla y compás</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>A. Circunferencia y sus elementos</td>
+<td>Trazado y denominación de elementos</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>A. Problemas de construcción</td>
+<td>Puntos equidistantes de dos puntos o de un centro</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>B. Posiciones relativas de dos rectas</td>
+<td>Clasificación: paralelas, secantes y perpendiculares</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>B. Construcción de paralelas y perpendiculares</td>
+<td>Trazado con escuadra y con compás; integración A y B</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s17" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U5_S1.pdf" target="_blank" rel="noopener"><b>Semana 17</b> · Mediatriz, circunferencia y rectas paralelas y perpendiculares<small>Unidad 5, semana 1 de 4 · teoría, ejercicios y solucionario · PDF · 207 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s17" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=Htus_9eHLjE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Htus_9eHLjE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Htus_9eHLjE"><small>Clases 1 y 3 · Mediatriz y equidistancia</small>Mediatriz de un segmento (paso a paso)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=IADdZ8LXWPg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/IADdZ8LXWPg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=IADdZ8LXWPg"><small>Clase 2 · Centro, radio, diámetro, cuerda y arco · Juliana la Profe</small>Circunferencia: concepto y elementos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=wFNh_wx_79o" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/wFNh_wx_79o/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=wFNh_wx_79o"><small>Clases 4 y 5 · Posiciones relativas y trazado · Arturo Geometría</small>Paralelas y perpendiculares con escuadra y cartabón</span></a></p>
+</section>
+<section id="hoja-s17" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=10" target="_blank" rel="noopener"><b>Hoja 5.1</b> · Mediatriz, circunferencia y posiciones de rectas<small>Se abre en la página 10 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s18" class="level2">
+<h2>Semana 18 · Sistema sexagesimal, medición de ángulos y bisectriz</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Medir, clasificar y operar con ángulos en el sistema sexagesimal, y construir la bisectriz de un ángulo.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 5, págs. 79 a 82 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>transportador, regla, compás, lápiz y goma (la calculadora, solo para verificar).</td>
+</tr>
+<tr class="even">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 5.2: Sistema sexagesimal, ángulos y bisectriz</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s18" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6</td>
+<td>C. Sistema sexagesimal: grado, minuto y segundo</td>
+<td>Equivalencias y ejemplos</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>C. Pasajes entre formas de escritura</td>
+<td>Ejercicios de conversión</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>C. Suma y resta de ángulos sexagesimales</td>
+<td>Práctica guiada</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>D. Ángulos: medición y clasificación</td>
+<td>Medición con transportador</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>D. Bisectriz de un ángulo</td>
+<td>Construcción con compás y con transportador; integración</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s18" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U5_S2.pdf" target="_blank" rel="noopener"><b>Semana 18</b> · Sistema sexagesimal, medición de ángulos y bisectriz<small>Unidad 5, semana 2 de 4 · teoría, ejercicios y solucionario · PDF · 206 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s18" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=FOmfxccS7LI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/FOmfxccS7LI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=FOmfxccS7LI"><small>Clases 6, 7 y 8 · Grados, minutos y segundos · Julioprofe</small>Suma y resta de ángulos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=mq6qVBHdDQs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/mq6qVBHdDQs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=mq6qVBHdDQs"><small>Clase 9 · Medición y clasificación de ángulos</small>Medir ángulos con el transportador</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=eNcWfiCY-AU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/eNcWfiCY-AU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=eNcWfiCY-AU"><small>Clase 10 · Bisectriz con compás y regla · Julioprofe</small>Cómo construir la bisectriz de un ángulo y la mediatriz de un segmento</span></a></p>
+</section>
+<section id="hoja-s18" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=11" target="_blank" rel="noopener"><b>Hoja 5.2</b> · Sistema sexagesimal, ángulos y bisectriz<small>Se abre en la página 11 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s19" class="level2">
+<h2>Semana 19 · Pares de ángulos y ángulos entre paralelas y una transversal</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Reconocer pares de ángulos y calcular medidas de ángulos, planteando ecuaciones y aplicando las propiedades de las paralelas cortadas por una transversal.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 5, págs. 83 a 87 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>regla, transportador, lápiz y goma, y lápices de colores para marcar los pares de ángulos.</td>
+</tr>
+<tr class="even">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 5.3: Pares de ángulos y ángulos entre rectas</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s19" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>E. Ángulos consecutivos, adyacentes, complementarios y suplementarios</td>
+<td>Identificación en figuras</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>E. Ángulos opuestos por el vértice; cálculo con ecuaciones</td>
+<td>Planteo de ecuaciones simples</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>E. Problemas con pares de ángulos</td>
+<td>Resolución de problemas</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>F. Ángulos entre dos rectas y una transversal</td>
+<td>Identificación de correspondientes, alternos y conjugados</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>F. Paralelas cortadas por una transversal</td>
+<td>Propiedades y cálculo de medidas. Concepto</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s19" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U5_S3.pdf" target="_blank" rel="noopener"><b>Semana 19</b> · Pares de ángulos y ángulos entre paralelas y una transversal<small>Unidad 5, semana 3 de 4 · teoría, ejercicios y solucionario · PDF · 254 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s19" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=eO_SptFXzos" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/eO_SptFXzos/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=eO_SptFXzos"><small>Clase 11 · Reconocer cada par de ángulos · Prof. Mirtha Oppenlander</small>Ángulos consecutivos, adyacentes, opuestos por el vértice, complementarios y suplementarios</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=JjIK739t-xA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/JjIK739t-xA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=JjIK739t-xA"><small>Clases 12 y 13 · Calcular medidas planteando ecuaciones</small>Ángulos complementarios y suplementarios con ecuaciones</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=GKj7ESBCdSs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/GKj7ESBCdSs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=GKj7ESBCdSs"><small>Clases 14 y 15 · Correspondientes, alternos y conjugados · Profe Jimena Montes</small>Ángulos entre paralelas cortadas por una recta transversal</span></a></p>
+</section>
+<section id="hoja-s19" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=11" target="_blank" rel="noopener"><b>Hoja 5.3</b> · Pares de ángulos y ángulos entre rectas<small>Se abre en la página 11 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s20" class="level2">
+<h2>Semana 20 · Integración y evaluación</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Integrar las construcciones y los cálculos de ángulos de toda la unidad y comprobar los aprendizajes.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Repaso de toda la unidad.</td>
+</tr>
+<tr class="odd">
+<td><strong>Materiales</strong></td>
+<td>regla, escuadra, compás, transportador, lápiz y goma.</td>
+</tr>
+<tr class="even">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 5.4: Integración de la unidad</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s20" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>16</td>
+<td>Integración A a F</td>
+<td>Práctica: conecta construcciones y cálculos</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>Problemas integradores</td>
+<td>Construcción y cálculo de ángulos</td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>Repasar lo aprendido</td>
+<td>Repaso guiado</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>Evaluación escrita y práctica de construcción</td>
+<td>Prueba individual</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>Devolución y recuperación</td>
+<td>Corrección colectiva</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s20" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U5_S4.pdf" target="_blank" rel="noopener"><b>Semana 20</b> · Integración y evaluación<small>Unidad 5, semana 4 de 4 · teoría, ejercicios y solucionario · PDF · 236 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s20" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=tyxyYu-zh-c" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/tyxyYu-zh-c/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=tyxyYu-zh-c"><small>Clases 16 y 18 · Repaso de las construcciones</small>Rectas paralelas, perpendiculares y mediatriz de un segmento</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Ov7YzB_ISzE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Ov7YzB_ISzE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Ov7YzB_ISzE"><small>Clases 17 y 18 · Ejercicios con pares de ángulos</small>Cómo resolver ejercicios con ángulos (complementarios, adyacentes, opuestos por el vértice)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=yIvU7ffIClM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/yIvU7ffIClM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=yIvU7ffIClM"><small>Clases 17 y 18 · Ejercicios con paralelas y transversal</small>Ángulos formados por dos paralelas cortadas por una transversal (video 2)</span></a></p>
+</section>
+<section id="hoja-s20" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=12" target="_blank" rel="noopener"><b>Hoja 5.4</b> · Integración de la unidad<small>Se abre en la página 12 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="u6" class="level1 unidad" data-color="u2">
+<h1 class="unidad" data-color="u2">Unidad 6 · Figuras planas</h1>
+<blockquote>
+<p><em>Clasificar triángulos y cuadriláteros, aplicar sus propiedades y los criterios de igualdad, ubicar los puntos notables y calcular perímetros y áreas.</em> <strong>Contenidos:</strong> A. Triángulos y clasificación; B. Propiedades de los triángulos; C. Puntos notables de un triángulo; D. Criterios de igualdad de triángulos; E. Cuadriláteros y clasificación; F. Propiedades de los cuadriláteros; G. Circunferencia y círculo, superficie de figuras. <strong>Conocimientos previos:</strong> construcciones, mediatriz, bisectriz y ángulos entre rectas (Unidad 5), ecuaciones (Unidad 3). <strong>Resultados esperados:</strong> construye y clasifica figuras, justifica propiedades y resuelve problemas de medida.</p>
+</blockquote>
+<section id="s21" class="level2">
+<h2>Semana 21 · Triángulos: clasificación, construcción, ángulos y alturas/medianas</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Clasificar triángulos, construirlos y aplicar las propiedades de sus ángulos.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 6, págs. 91 a 94 (páginas del libro impreso). Esta semana retoma temas de 7.°: sirve de repaso. Si el diagnóstico de la clase 1 sale bien, se puede avanzar más rápido hacia la Semana 2.</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 6.1: Triángulos, ángulos y alturas</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s21" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>A. Clasificación de triángulos (por lados y por ángulos)</td>
+<td>Diagnóstico y clasificación en figuras</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>A. Construcción de triángulos y condición de existencia</td>
+<td>Regla y compás; verificar si existe</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>B. Suma de los ángulos interiores</td>
+<td>Medición y justificación</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>B. Ángulo exterior y problemas</td>
+<td>Planteo de ecuaciones</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>C. Alturas y medianas</td>
+<td>Construcción e identificación</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s21" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U6_S1.pdf" target="_blank" rel="noopener"><b>Semana 21</b> · Triángulos: clasificación, construcción, ángulos y alturas/medianas<small>Unidad 6, semana 1 de 4 · teoría, ejercicios y solucionario · PDF · 203 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s21" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=8_jsjTk6RnU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/8_jsjTk6RnU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=8_jsjTk6RnU"><small>Clase 1 · Clasificación por lados y por ángulos</small>Tipo de triángulos (julioprofe)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=luzvofr0eAg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/luzvofr0eAg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=luzvofr0eAg"><small>Clase 2 · Cuándo se puede armar un triángulo (propiedad triangular)</small>Construcción de triángulos con regla y compás</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=nKd7whEVwPc" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/nKd7whEVwPc/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=nKd7whEVwPc"><small>Clase 3 · Suma de los ángulos interiores</small>La suma de ángulos internos de un triángulo es 180°</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=FGhKlFyRQLI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/FGhKlFyRQLI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=FGhKlFyRQLI"><small>Clase 4 · Ángulo exterior de un triángulo</small>Ángulos internos y externos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=x8KbG3rSD6M" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/x8KbG3rSD6M/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=x8KbG3rSD6M"><small>Clase 5 · Alturas con regla y escuadra</small>Trazar las alturas de un triángulo y hallar el ortocentro</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=UIuN1Bj-r2I" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/UIuN1Bj-r2I/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=UIuN1Bj-r2I"><small>Clase 5 · Medianas con escuadra, cartabón y compás</small>Medianas de un triángulo y baricentro</span></a></p>
+</section>
+<section id="hoja-s21" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=13" target="_blank" rel="noopener"><b>Hoja 6.1</b> · Triángulos, ángulos y alturas<small>Se abre en la página 13 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s22" class="level2">
+<h2>Semana 22 · Puntos notables y criterios de igualdad de triángulos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Ubicar los puntos notables de un triángulo y aplicar los criterios de igualdad.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 6, págs. 95 a 98 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 6.2: Puntos notables y criterios de igualdad</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s22" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6</td>
+<td>C. Mediatrices y bisectrices del triángulo</td>
+<td>Construcción con instrumentos</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>C. Integración de puntos notables</td>
+<td>Práctica guiada</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>D. Criterios de igualdad de triángulos</td>
+<td>Explicación y ejemplos</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>D. Aplicación de los criterios</td>
+<td>Construcción y justificación</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>Integración de triángulos (A a D)</td>
+<td>Práctica</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s22" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U6_S2.pdf" target="_blank" rel="noopener"><b>Semana 22</b> · Puntos notables y criterios de igualdad de triángulos<small>Unidad 6, semana 2 de 4 · teoría, ejercicios y solucionario · PDF · 152 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s22" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=DxoT74gCzs4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/DxoT74gCzs4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=DxoT74gCzs4"><small>Clase 6 · Mediatrices con regla y compás</small>Trazar las mediatrices de un triángulo y hallar el circuncentro</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=S9D315QpSbk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/S9D315QpSbk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=S9D315QpSbk"><small>Clase 6 · Bisectrices e incentro</small>Trazar las bisectrices y hallar el incentro de un triángulo</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=hqrbkl75OFI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/hqrbkl75OFI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=hqrbkl75OFI"><small>Clase 7 · Los cuatro puntos notables</small>Puntos notables de un triángulo (Clase 6)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=NWax389nStM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/NWax389nStM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=NWax389nStM"><small>Clase 7 · Trazado de ortocentro, circuncentro, baricentro e incentro</small>Puntos notables del triángulo</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=_UP8qlM1C4s" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_UP8qlM1C4s/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_UP8qlM1C4s"><small>Clase 8 · Criterios LLL, LAL, ALA</small>Congruencia de triángulos: teorema de congruencia</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=U4MTmLvvKQ4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/U4MTmLvvKQ4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=U4MTmLvvKQ4"><small>Clases 9 y 10 · Aplicación de los criterios</small>Criterios de congruencia de triángulos (super fácil)</span></a></p>
+</section>
+<section id="hoja-s22" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=14" target="_blank" rel="noopener"><b>Hoja 6.2</b> · Puntos notables y criterios de igualdad<small>Se abre en la página 14 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s23" class="level2">
+<h2>Semana 23 · Cuadriláteros: clasificación y propiedades</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Clasificar cuadriláteros y aplicar sus propiedades.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 6, págs. 99 a 102 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 6.3: Cuadriláteros</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s23" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>E. Clasificación de cuadriláteros</td>
+<td>Clasificación en figuras</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>E. Relaciones entre cuadriláteros y construcción</td>
+<td>Construcción con instrumentos</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>F. Propiedades de los paralelogramos</td>
+<td>Medición y justificación</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>F. Rectángulo, rombo y cuadrado</td>
+<td>Análisis de diagonales</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>F. Problemas con cuadriláteros</td>
+<td>Resolución de problemas</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s23" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U6_S3.pdf" target="_blank" rel="noopener"><b>Semana 23</b> · Cuadriláteros: clasificación y propiedades<small>Unidad 6, semana 3 de 4 · teoría, ejercicios y solucionario · PDF · 187 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s23" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=GiKwrkK0XF8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/GiKwrkK0XF8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=GiKwrkK0XF8"><small>Clase 11 · Clasificación de cuadriláteros</small>Cuadriláteros: clasificación en paralelogramos, trapecios y trapezoides</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=9OdljQHZ-i0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/9OdljQHZ-i0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=9OdljQHZ-i0"><small>Clase 12 · Construcción de un paralelogramo</small>Paralelogramo con regla y compás</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=mNQJA_Vw8oo" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/mNQJA_Vw8oo/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=mNQJA_Vw8oo"><small>Clase 12 · Construcción de un rombo</small>Rombo con regla y compás</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=_kpsvgZrp4k" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_kpsvgZrp4k/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_kpsvgZrp4k"><small>Clase 13 · Propiedades de los paralelogramos</small>Paralelogramo: clasificación, propiedades, demostraciones</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=0iufWoSGJiE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/0iufWoSGJiE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=0iufWoSGJiE"><small>Clase 14 · Lados y ángulos de cada paralelogramo</small>Paralelógramos (cuadrado, rombo, rectángulo y romboide)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=S-vlDDK0uCA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/S-vlDDK0uCA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=S-vlDDK0uCA"><small>Clase 15 · Problemas con cuadriláteros</small>Aplicando las propiedades de rectángulos, cuadrados y rombos</span></a></p>
+</section>
+<section id="hoja-s23" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=14" target="_blank" rel="noopener"><b>Hoja 6.3</b> · Cuadriláteros<small>Se abre en la página 14 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s24" class="level2">
+<h2>Semana 24 · Círculo, superficie de figuras, integración y evaluación</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Calcular la longitud y el área del círculo, el perímetro y el área de figuras, e integrar y comprobar los aprendizajes de la unidad.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 6, págs. 103 a 106 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 6.4: Círculo, superficie e integración</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s24" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>16</td>
+<td>G. Circunferencia y círculo: longitud y área</td>
+<td>Uso de la calculadora con π</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>G. Superficie de figuras: perímetro y área; variación del área al variar la</td>
+<td>Problemas con figuras compuestas</td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>base o la altura Repasar lo aprendido (p. 105)</td>
+<td>Repaso integrador</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>Evaluación escrita</td>
+<td>Prueba individual</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>Devolución y recuperación</td>
+<td>Corrección</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s24" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U6_S4.pdf" target="_blank" rel="noopener"><b>Semana 24</b> · Círculo, superficie de figuras, integración y evaluación<small>Unidad 6, semana 4 de 4 · teoría, ejercicios y solucionario · PDF · 174 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s24" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=xgEhTDB3piY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/xgEhTDB3piY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=xgEhTDB3piY"><small>Clase 16 · Longitud de la circunferencia y área del círculo</small>Círculo y circunferencia: área, longitud y número pi</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=NJmgOq1rZ0Y" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/NJmgOq1rZ0Y/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=NJmgOq1rZ0Y"><small>Clase 16 · Tres problemas resueltos</small>Perímetro de una circunferencia y área de un círculo</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=IoLj7mkjDhw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/IoLj7mkjDhw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=IoLj7mkjDhw"><small>Clase 17 · Áreas de figuras</small>Resolución de problemas de área de triángulos, paralelogramos y trapecios</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=NTdCe1OWrhk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/NTdCe1OWrhk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=NTdCe1OWrhk"><small>Clase 17 · Figuras compuestas</small>Perímetro y área de figuras compuestas</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=g5zj9WWmRe4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/g5zj9WWmRe4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=g5zj9WWmRe4"><small>Clase 18 · Repaso integrador</small>Área y perímetro de todas las figuras</span></a></p>
+</section>
+<section id="hoja-s24" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=15" target="_blank" rel="noopener"><b>Hoja 6.4</b> · Círculo, superficie e integración<small>Se abre en la página 15 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="u7" class="level1 unidad" data-color="u3">
+<h1 class="unidad" data-color="u3">Unidad 7 · Rectas paralelas y perpendiculares: ángulos, Pitágoras e irracionales</h1>
+<blockquote>
+<p><em>Identificar y calcular ángulos entre paralelas y una transversal, plantear y resolver ecuaciones con medidas de ángulos, graficar rectas a partir de su fórmula y reconocer, graficar y escribir la fórmula de rectas paralelas y perpendiculares.</em> <strong>Contenidos:</strong> A. Ángulos entre paralelas y una transversal, con ecuaciones; B. Suma de los ángulos de un triángulo; C. Rectas en el plano cartesiano, rectas paralelas y perpendiculares; D. Teorema de Pitágoras, noción de número irracional. <strong>Conocimientos previos:</strong> pares de ángulos (Unidad 5), ecuaciones (Unidad 3), ejes cartesianos y función lineal (Unidad 4), triángulos (Unidad 6). <strong>Resultados esperados:</strong> el alumno justifica los cálculos de ángulos con propiedades, resuelve problemas con ecuaciones y grafica y relaciona rectas según sus fórmulas.</p>
+</blockquote>
+<section id="s25" class="level2">
+<h2>Semana 25 · Ángulos entre paralelas y una transversal</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Identificar los ángulos que se forman entre dos rectas paralelas y una transversal, aplicar sus propiedades para calcular medidas (justificando) y decidir si dos rectas son paralelas.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>págs. 87 a 90 (páginas del libro impreso). Retomamos lo visto en la Unidad 5.</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 7.1: Ángulos entre paralelas y una transversal</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s25" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Repaso: pares de ángulos, paralelas y transversal</td>
+<td>Diagnóstico con figuras y ejercicios</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Correspondientes, alternos internos y externos, conjugados</td>
+<td>Identificación en figuras y medición con transportador</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Propiedades de los ángulos entre paralelas</td>
+<td>Medición, conclusión y justificación</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Cálculo de todos los ángulos a partir de uno dado</td>
+<td>Cadenas de razonamiento justificadas</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Criterio inverso: ¿las rectas son paralelas?</td>
+<td>Decidir y construir paralelas con transportador</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s25" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U7_S1.pdf" target="_blank" rel="noopener"><b>Semana 25</b> · Ángulos entre paralelas y una transversal<small>Unidad 7, semana 1 de 4 · teoría, ejercicios y solucionario · PDF · 188 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s25" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=-zLWJYY42GU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/-zLWJYY42GU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=-zLWJYY42GU"><small>Clase 1 · Repaso de pares de ángulos</small>Tipos de ángulos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=e5ZgFK_mWwY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/e5ZgFK_mWwY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=e5ZgFK_mWwY"><small>Clase 1 · Opuestos por el vértice</small>Ángulos opuestos por el vértice</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=6BvCzr1-TBA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/6BvCzr1-TBA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=6BvCzr1-TBA"><small>Clases 2 y 3 · Nombres y propiedades</small>Ángulos especiales en rectas paralelas cortadas por una transversal (julioprofe)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=yIvU7ffIClM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/yIvU7ffIClM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=yIvU7ffIClM"><small>Clase 4 · Cálculo de ángulos</small>Ángulos formados por dos paralelas cortadas por una transversal, video 2 (ejercicios)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=wFNh_wx_79o" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/wFNh_wx_79o/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=wFNh_wx_79o"><small>Clase 5 · Trazado de paralelas</small>Paralelas y perpendiculares con escuadra y cartabón</span></a></p>
+</section>
+<section id="hoja-s25" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=15" target="_blank" rel="noopener"><b>Hoja 7.1</b> · Ángulos entre paralelas y una transversal<small>Se abre en la página 15 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s26" class="level2">
+<h2>Semana 26 · Ecuaciones con medidas de ángulos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Plantear y resolver ecuaciones con medidas de ángulos (iguales o suplementarios), verificar los resultados y justificar que los ángulos interiores de un triángulo suman 180°.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>págs. 89 a 90 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 7.2: Ángulos y ecuaciones</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s26" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6</td>
+<td>Ángulos con expresiones algebraicas: planteo de una igualdad</td>
+<td>Traducir la figura a una ecuación</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>Resolución y verificación de ecuaciones con ángulos iguales</td>
+<td>Práctica guiada</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>Ecuaciones con ángulos suplementarios (suman 180°)</td>
+<td>Planteo y resolución</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>Ángulos en triángulos: suma de los interiores y ángulo exterior</td>
+<td>Trazado de una paralela por un vértice</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>Problemas de integración y análisis de errores</td>
+<td>Problemas que combinan propiedades y ecuaciones</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s26" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U7_S2.pdf" target="_blank" rel="noopener"><b>Semana 26</b> · Ecuaciones con medidas de ángulos<small>Unidad 7, semana 2 de 4 · teoría, ejercicios y solucionario · PDF · 245 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s26" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=I87DwVXIfmg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/I87DwVXIfmg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=I87DwVXIfmg"><small>Clases 6 y 7 · Planteo y resolución con ángulos iguales</small>Ángulos entre paralelas con ecuaciones</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Q5n_grM66q0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Q5n_grM66q0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Q5n_grM66q0"><small>Clase 8 · Ecuaciones con suma 180°</small>1. Ángulos entre paralelas con ecuaciones (conjugados suplementarios)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=qrnGUYcZEEo" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/qrnGUYcZEEo/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=qrnGUYcZEEo"><small>Clase 9 · Suma de los interiores</small>Demostración de la suma de los ángulos internos de un triángulo</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=oSKvh99cLrI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/oSKvh99cLrI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=oSKvh99cLrI"><small>Clase 9 · Ángulo exterior</small>Ángulos externos de un triángulo. Demostración</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=_WiHun2-F5s" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_WiHun2-F5s/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_WiHun2-F5s"><small>Clase 10 · Problemas de integración</small>Ángulos con ecuaciones. Ejercicios resueltos pt. 2</span></a></p>
+</section>
+<section id="hoja-s26" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=16" target="_blank" rel="noopener"><b>Hoja 7.2</b> · Ángulos y ecuaciones<small>Se abre en la página 16 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s27" class="level2">
+<h2>Semana 27 · Graficar rectas: paralelas y perpendiculares</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Graficar rectas a partir de su fórmula, hallar la pendiente y la ordenada al origen, reconocer rectas paralelas por sus fórmulas, escribir la fórmula de una paralela que pasa por un punto y explorar las rectas perpendiculares.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>págs. 77 a 78 (páginas del libro impreso). Retomamos la función lineal de la Unidad 4.</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 7.3: Rectas en el plano cartesiano, paralelas y perpendiculares</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s27" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>11</td>
+<td>Repaso de ejes cartesianos y función lineal; gráfico de rectas a partir de la fórmula</td>
+<td>Tabla de valores y gráfico</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Pendiente y ordenada al origen</td>
+<td>Análisis de gráficos y cálculo con dos puntos</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>Rectas paralelas en el plano: igual pendiente y distinta ordenada</td>
+<td>Graficar pares de rectas y comparar fórmulas</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>Fórmula de una recta paralela a otra que pasa por un punto</td>
+<td>Resolución guiada: reemplazar el punto y hallar la ordenada</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>Rectas perpendiculares (exploratorio)</td>
+<td>Gráficos y trazado con escuadra</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s27" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U7_S3.pdf" target="_blank" rel="noopener"><b>Semana 27</b> · Graficar rectas: paralelas y perpendiculares<small>Unidad 7, semana 3 de 4 · teoría, ejercicios y solucionario · PDF · 260 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s27" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=uSd2swC-SuQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/uSd2swC-SuQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=uSd2swC-SuQ"><small>Clase 11 · Gráfico con tabla de valores o con pendiente y ordenada</small>Función lineal: su gráfica (pendiente, ordenada y raíz)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=RXeswNAQh5w" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/RXeswNAQh5w/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=RXeswNAQh5w"><small>Clase 12 · Pendiente y ordenada al origen</small>FyR - Gráfica de una función lineal mediante la pendiente y la ordenada al origen</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=6bc2WVim_TA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/6bc2WVim_TA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=6bc2WVim_TA"><small>Clases 13 y 15 · Pendientes de paralelas y perpendiculares</small>Rectas paralelas y perpendiculares. Ejercicios de funciones</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=BNo_QKFvDx0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/BNo_QKFvDx0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=BNo_QKFvDx0"><small>Clase 14 · Paralela que pasa por un punto</small>Pendientes de rectas paralelas. Encontrar la ecuación conociendo además un punto</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Vqo9hm1_rjw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Vqo9hm1_rjw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Vqo9hm1_rjw"><small>Clase 15 · Para ampliar (exploratorio)</small>Recta paralela y recta perpendicular a otra recta conocida (julioprofe)</span></a></p>
+</section>
+<section id="hoja-s27" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=17" target="_blank" rel="noopener"><b>Hoja 7.3</b> · Rectas en el plano cartesiano, paralelas y perpendiculares<small>Se abre en la página 17 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s28" class="level2">
+<h2>Semana 28 · Pitágoras, números irracionales y evaluación</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Enunciar y aplicar el teorema de Pitágoras, reconocer los números irracionales (como la diagonal del cuadrado) e integrar lo aprendido en la unidad para rendir la evaluación.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Repaso de toda la unidad.</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 7.4: Pitágoras, números irracionales e integración</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s28" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>16</td>
+<td>Teorema de Pitágoras: relación entre áreas de cuadrados y ternas pitagóricas</td>
+<td>Comparación de áreas de cuadrados</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>Aplicaciones de Pitágoras; noción de número irracional (diagonal del cuadrado)</td>
+<td>Resolución guiada y aproximación con calculadora</td>
+</tr>
+<tr class="odd">
+<td>18</td>
+<td>Integración: ángulos entre paralelas, rectas, Pitágoras e irracionales</td>
+<td>Práctica integradora y repaso</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>Evaluación escrita</td>
+<td>Prueba individual</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>Devolución y recuperación</td>
+<td>Corrección de errores</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s28" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U7_S4.pdf" target="_blank" rel="noopener"><b>Semana 28</b> · Pitágoras, números irracionales y evaluación<small>Unidad 7, semana 4 de 4 · teoría, ejercicios y solucionario · PDF · 240 KB</small></a></li>
+</ul>
+<p>Para ampliar: una guía visual con <strong>tres demostraciones geométricas</strong> del teorema de Pitágoras, con figuras para dibujar, recortar y armar.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Anexo_Teorema_de_Pitagoras.pdf" target="_blank" rel="noopener"><b>Anexo</b> · Demostración geométrica del teorema de Pitágoras<small>PDF · 520 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s28" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=wiBHcHcrma4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/wiBHcHcrma4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=wiBHcHcrma4"><small>Clase 16 · Áreas de los cuadrados de catetos e hipotenusa</small>Teorema de Pitágoras (explicación)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=MUlhOnIWmjg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/MUlhOnIWmjg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=MUlhOnIWmjg"><small>Clase 16 · Catetos, hipotenusa y ejemplos</small>TEOREMA DE PITÁGORAS - ¡Fácil!</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=L9ywaXsvuiU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/L9ywaXsvuiU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=L9ywaXsvuiU"><small>Clase 17 · Aplicaciones</small>Teorema de Pitágoras, hallar valor de hipotenusa y cateto</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=ToocjSafOjw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/ToocjSafOjw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=ToocjSafOjw"><small>Clase 17 · Diagonal del cuadrado e irracionales (para ampliar)</small>¿Por qué la raíz cuadrada de dos es irracional?</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=6BvCzr1-TBA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/6BvCzr1-TBA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=6BvCzr1-TBA"><small>Clase 18 · Repaso de ángulos entre paralelas</small>Ángulos especiales en rectas paralelas cortadas por una transversal (julioprofe)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=6bc2WVim_TA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/6bc2WVim_TA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=6bc2WVim_TA"><small>Clase 18 · Repaso de rectas paralelas y perpendiculares</small>Rectas paralelas y perpendiculares. Ejercicios de funciones</span></a></p>
+</section>
+<section id="hoja-s28" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=18" target="_blank" rel="noopener"><b>Hoja 7.4</b> · Pitágoras, números irracionales e integración<small>Se abre en la página 18 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="u8" class="level1 unidad" data-color="u4">
+<h1 class="unidad" data-color="u4">Unidad 8 · Cuerpos geométricos, estadística y probabilidad</h1>
+<blockquote>
+<p><em>Reconocer cuerpos y calcular su superficie y su volumen; organizar e interpretar datos, calcular parámetros de posición y probabilidades simples.</em> <strong>Contenidos:</strong> A. Poliedros y redondos; B. Superficie; C. Volumen; D. Capacidad y peso; E. Poblaciones y variables; F. Tablas y frecuencias; G. Gráficos; H. Sucesos y probabilidad. <strong>Conocimientos previos:</strong> área y perímetro de figuras planas y del círculo (Unidad 6), fracciones, decimales y porcentajes (Unidad 2), gráficos cartesianos (Unidad 4). <strong>Resultados esperados:</strong> el alumno resuelve problemas de superficie, volumen y capacidad, organiza los datos de una encuesta, elige un gráfico adecuado y calcula la probabilidad de un suceso.</p>
+</blockquote>
+<section id="s29" class="level2">
+<h2>Semana 29 · Cuerpos geométricos: clasificación y superficie</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Reconocer cuerpos geométricos (poliedros y cuerpos redondos) y calcular su superficie lateral y total.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 8, págs. 107 a 110 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 8.1: Cuerpos y superficies</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s29" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Poliedros y cuerpos redondos: clasificación y elementos</td>
+<td>Diagnóstico y clasificación con objetos de la casa</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Prismas, pirámides, cilindro, cono y esfera; desarrollos planos</td>
+<td>Armado de desarrollos con papel</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Superficie lateral y total de prismas</td>
+<td>Resolución guiada con áreas de figuras planas</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Superficie lateral y total del cilindro</td>
+<td>Práctica guiada</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Problemas de superficie e integración</td>
+<td>Problemas de contexto</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s29" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U8_S1.pdf" target="_blank" rel="noopener"><b>Semana 29</b> · Cuerpos geométricos: clasificación y superficie<small>Unidad 8, semana 1 de 4 · teoría, ejercicios y solucionario · PDF · 193 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s29" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=029b0SfdjKc" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/029b0SfdjKc/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=029b0SfdjKc"><small>Clase 1 · Poliedros y sus elementos · Jesús Chacón Chaparro</small>Repaso de poliedros</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=SnxdnRYCg3Y" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/SnxdnRYCg3Y/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=SnxdnRYCg3Y"><small>Clase 2 · Prismas y pirámides · Clases Particulares en Ávila</small>Prismas y pirámides</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Nu30WB4sdyQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Nu30WB4sdyQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Nu30WB4sdyQ"><small>Clase 2 · Cilindro, cono y esfera · Clases Particulares en Ávila</small>Cuerpos redondos</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=fhxSe81Wky4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/fhxSe81Wky4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=fhxSe81Wky4"><small>Clase 3 · Superficie de prismas · Jesús Chacón Chaparro</small>Área de prismas y pirámides</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=Ah5l6Ick00E" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Ah5l6Ick00E/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Ah5l6Ick00E"><small>Clase 4 · Superficie del cilindro · Primary-Milton Education</small>Área de cuerpos redondos</span></a></p>
+</section>
+<section id="hoja-s29" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=18" target="_blank" rel="noopener"><b>Hoja 8.1</b> · Cuerpos y superficies<small>Se abre en la página 18 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s30" class="level2">
+<h2>Semana 30 · Volumen, capacidad y peso</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Calcular el volumen de prismas y cilindros y pasar entre unidades de volumen, capacidad y peso.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 8, págs. 108 a 116 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 8.2: Volumen, capacidad y peso</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s30" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Volumen: unidad cúbica y volumen del prisma</td>
+<td>Explicación y ejemplos</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Volumen del cilindro (y pirámide y cono si hay tiempo)</td>
+<td>Práctica guiada</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Capacidad, volumen y peso: equivalencias</td>
+<td>Conversión de unidades y problemas</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Repasar lo aprendido e integración</td>
+<td>Repaso integrador</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Evaluación escrita</td>
+<td>Prueba individual</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s30" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U8_S2.pdf" target="_blank" rel="noopener"><b>Semana 30</b> · Volumen, capacidad y peso<small>Unidad 8, semana 2 de 4 · teoría, ejercicios y solucionario · PDF · 176 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s30" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=sSzSKgFdjfU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/sSzSKgFdjfU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=sSzSKgFdjfU"><small>Clase 1 · Volumen del prisma · Clases Particulares en Ávila</small>Volumen de prismas</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=V4Li3l-dgZg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/V4Li3l-dgZg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=V4Li3l-dgZg"><small>Clase 2 · Volumen del cilindro · Nueva Escuela Mexicana (SEP)</small>Volumen del cilindro</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=VpOKrHNLcEM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/VpOKrHNLcEM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=VpOKrHNLcEM"><small>Clase 2 · Opcional: pirámide y cono si hay tiempo · Daniel Carreón</small>Volumen de pirámides</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=jl5Rq_EIIhg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/jl5Rq_EIIhg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=jl5Rq_EIIhg"><small>Clase 3 · Equivalencias (mirar del minuto 0:51 al 3:57) · Nueva Escuela Mexicana (SEP)</small>Relación entre volumen y capacidad</span></a></p>
+</section>
+<section id="hoja-s30" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=19" target="_blank" rel="noopener"><b>Hoja 8.2</b> · Volumen, capacidad y peso<small>Se abre en la página 19 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s31" class="level2">
+<h2>Semana 31 · Estadística: datos, tablas, parámetros y gráficos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Organizar, resumir y representar datos: armar tablas de frecuencias, calcular media, moda y mediana, y elegir un gráfico adecuado.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 8, págs. 117 a 122 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 8.3: Datos, frecuencias y gráficos</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s31" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Población, muestra y variables (cualitativas y cuantitativas)</td>
+<td>Encuesta al curso y devolución de la Parte A</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Tabla de frecuencias absoluta, relativa y porcentual</td>
+<td>Armado de la tabla con los datos de la encuesta</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Parámetros de posición: media, moda y mediana</td>
+<td>Resolución guiada</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Gráficos de barras y circulares</td>
+<td>Construcción a partir de tablas</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Interpretación de gráficos</td>
+<td>Elección del gráfico más pertinente para comunicar los datos</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s31" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U8_S3.pdf" target="_blank" rel="noopener"><b>Semana 31</b> · Estadística: datos, tablas, parámetros y gráficos<small>Unidad 8, semana 3 de 4 · teoría, ejercicios y solucionario · PDF · 192 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s31" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=i-JRZW6i3ps" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/i-JRZW6i3ps/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=i-JRZW6i3ps"><small>Clase 1 · Población, muestra y variables</small>Población y muestra, variables cualitativas y cuantitativas</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=cyXenZEbGz4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/cyXenZEbGz4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=cyXenZEbGz4"><small>Clase 2 · Frecuencia absoluta, relativa y porcentaje · Matemáticas Profe Alex</small>Tablas de frecuencia | Ejemplo 1</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=0DA7Wtz1ddg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/0DA7Wtz1ddg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=0DA7Wtz1ddg"><small>Clase 3 · Media, moda y mediana · Daniel Carreón</small>MEDIA, MODA Y MEDIANA Super fácil | Medidas de tendencia central</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=REa8b97oOaU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/REa8b97oOaU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=REa8b97oOaU"><small>Clase 4 · Tabla de frecuencias y gráficos de barras y circular</small>FÁCIL GRÁFICO DE BARRAS Y DE PASTEL</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=UZyF8ohB1i8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/UZyF8ohB1i8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=UZyF8ohB1i8"><small>Clase 4 · Cómo construir el gráfico circular · Daniel Carreón</small>GRÁFICA CIRCULAR - Método de ELABORACIÓN | Paso a paso</span></a></p>
+</section>
+<section id="hoja-s31" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=19" target="_blank" rel="noopener"><b>Hoja 8.3</b> · Datos, frecuencias y gráficos<small>Se abre en la página 19 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+<section id="s32" class="level2">
+<h2>Semana 32 · Probabilidad: casos posibles y casos favorables</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo</strong></td>
+<td>Describir el espacio muestral de un experimento, contar casos posibles y calcular la probabilidad de un suceso simple.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Capítulo 8, págs. 123 a 128 (páginas del libro impreso).</td>
+</tr>
+<tr class="odd">
+<td><strong>Hoja de ejercitación</strong></td>
+<td>Hoja 8.4: Probabilidad y combinatoria</td>
+</tr>
+</tbody>
+</table>
+<section id="clases-s32" class="level3">
+<h3>🗓️ Clase a clase</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Clase</th>
+<th>Tema</th>
+<th>Qué vamos a hacer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Experimentos y sucesos aleatorios; espacio muestral</td>
+<td>Experimentos con dado y moneda</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Principio multiplicativo y diagramas de árbol</td>
+<td>Resolución guiada</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Probabilidad de un suceso (regla de Laplace)</td>
+<td>Problemas con casos favorables y posibles</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Repasar lo aprendido e integración</td>
+<td>Repaso integrador</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Evaluación escrita</td>
+<td>Prueba individual</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="teoria-s32" class="level3">
+<h3>📖 Teoría y ejercicios de la semana</h3>
+<p>El material de la semana tiene la explicación del tema con ejemplos, los ejercicios y, en la última página, el <strong>solucionario</strong> para comprobar las respuestas. Conviene leer la explicación antes de cada clase y resolver los ejercicios en la carpeta.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/semanas/U8_S4.pdf" target="_blank" rel="noopener"><b>Semana 32</b> · Probabilidad: casos posibles y casos favorables<small>Unidad 8, semana 4 de 4 · teoría, ejercicios y solucionario · PDF · 162 KB</small></a></li>
+</ul>
+</section>
+<section id="videos-s32" class="level3">
+<h3>🎬 Videos recomendados</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=fTIS83G7aC8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/fTIS83G7aC8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=fTIS83G7aC8"><small>Clase 1 · Experimentos, espacio muestral y sucesos</small>Experimento Aleatorio, Espacio Muestral, Evento o Suceso y Probabilidades</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=zQLNXXUnaT4" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/zQLNXXUnaT4/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=zQLNXXUnaT4"><small>Clase 2 · Contar casos posibles</small>Diagrama de Árbol - Principio de Multiplicación</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=WeeEE8o1aqM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/WeeEE8o1aqM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=WeeEE8o1aqM"><small>Clase 3 · Probabilidad de un suceso · Daniel Carreón</small>PROBABILIDAD Super fácil</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=amX33i46Yak" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/amX33i46Yak/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=amX33i46Yak"><small>Clase 3 · Práctica con dado y moneda</small>2.2 Curso de Probabilidad. Ejercicios de Espacio Muestral, Sucesos y R. de Laplace. Dado y moneda</span></a></p>
+</section>
+<section id="hoja-s32" class="level3">
+<h3>✏️ Hoja de ejercitación</h3>
+<p>Una carilla con ejercicios nuevos para practicar lo de la semana. Para los gráficos conviene usar hoja cuadriculada. Las respuestas están en el solucionario, al final de la plataforma.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Hojas_de_ejercitacion.pdf#page=20" target="_blank" rel="noopener"><b>Hoja 8.4</b> · Probabilidad y combinatoria<small>Se abre en la página 20 del cuadernillo de hojas · PDF</small></a></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="final" class="level1 unidad" data-color="u5">
+<h1 class="unidad" data-color="u5">Solucionario</h1>
+<blockquote>
+<p><em>Las respuestas de las hojas de ejercitación, para el adulto que acompaña.</em></p>
+</blockquote>
+<section id="claves" class="level2 claves">
+<h2 class="claves">🔑 Soluciones de las hojas (para el adulto que acompaña)</h2>
+<p>El solucionario tiene las respuestas y una resolución breve de cada ejercicio de las 32 hojas. En los ítems abiertos da un ejemplo posible, y en los gráficos describe cómo debe quedar. Conviene corregir junto con el alumno y pedirle que explique cómo lo pensó. Los ejercicios del material de cada semana tienen su propio solucionario en la última página de ese PDF.</p>
+<ul class="descargas">
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf" target="_blank" rel="noopener"><b>Solucionario</b> · Las 32 hojas completas<small>Respuestas y resolución breve de cada ejercicio · PDF · 868 KB</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=1" target="_blank" rel="noopener"><b>Hoja 1.1</b> · Naturales y primeros enteros<small>Se abre en la página 1 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=1" target="_blank" rel="noopener"><b>Hoja 1.2</b> · Operaciones con enteros<small>Se abre en la página 1 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=2" target="_blank" rel="noopener"><b>Hoja 1.3</b> · Potenciación y radicación<small>Se abre en la página 2 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=2" target="_blank" rel="noopener"><b>Hoja 1.4</b> · Integración de la unidad<small>Se abre en la página 2 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=2" target="_blank" rel="noopener"><b>Hoja 2.1</b> · El conjunto Q y aproximaciones<small>Se abre en la página 2 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=3" target="_blank" rel="noopener"><b>Hoja 2.2</b> · Operaciones en Q<small>Se abre en la página 3 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=3" target="_blank" rel="noopener"><b>Hoja 2.3</b> · Potenciación, radicación y cálculos combinados en Q<small>Se abre en la página 3 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=4" target="_blank" rel="noopener"><b>Hoja 2.4</b> · Integración de la unidad<small>Se abre en la página 4 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=4" target="_blank" rel="noopener"><b>Hoja 3.1</b> · Lenguaje simbólico y expresiones algebraicas<small>Se abre en la página 4 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=5" target="_blank" rel="noopener"><b>Hoja 3.2</b> · Ecuaciones con números enteros<small>Se abre en la página 5 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=5" target="_blank" rel="noopener"><b>Hoja 3.3</b> · Ecuaciones con fracciones e inecuaciones<small>Se abre en la página 5 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=6" target="_blank" rel="noopener"><b>Hoja 3.4</b> · Integración de la unidad<small>Se abre en la página 6 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=6" target="_blank" rel="noopener"><b>Hoja 4.1</b> · Ejes cartesianos y gráficos<small>Se abre en la página 6 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=7" target="_blank" rel="noopener"><b>Hoja 4.2</b> · Funciones y función lineal<small>Se abre en la página 7 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=7" target="_blank" rel="noopener"><b>Hoja 4.3</b> · Proporcionalidad directa e inversa<small>Se abre en la página 7 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=8" target="_blank" rel="noopener"><b>Hoja 4.4</b> · Integración de la unidad<small>Se abre en la página 8 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=8" target="_blank" rel="noopener"><b>Hoja 5.1</b> · Mediatriz, circunferencia y posiciones de rectas<small>Se abre en la página 8 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=8" target="_blank" rel="noopener"><b>Hoja 5.2</b> · Sistema sexagesimal, ángulos y bisectriz<small>Se abre en la página 8 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=9" target="_blank" rel="noopener"><b>Hoja 5.3</b> · Pares de ángulos y ángulos entre rectas<small>Se abre en la página 9 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=9" target="_blank" rel="noopener"><b>Hoja 5.4</b> · Integración de la unidad<small>Se abre en la página 9 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=10" target="_blank" rel="noopener"><b>Hoja 6.1</b> · Triángulos, ángulos y alturas<small>Se abre en la página 10 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=10" target="_blank" rel="noopener"><b>Hoja 6.2</b> · Puntos notables y criterios de igualdad<small>Se abre en la página 10 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=11" target="_blank" rel="noopener"><b>Hoja 6.3</b> · Cuadriláteros<small>Se abre en la página 11 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=11" target="_blank" rel="noopener"><b>Hoja 6.4</b> · Círculo, superficie e integración<small>Se abre en la página 11 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=12" target="_blank" rel="noopener"><b>Hoja 7.1</b> · Ángulos entre paralelas y una transversal<small>Se abre en la página 12 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=12" target="_blank" rel="noopener"><b>Hoja 7.2</b> · Ángulos y ecuaciones<small>Se abre en la página 12 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=13" target="_blank" rel="noopener"><b>Hoja 7.3</b> · Rectas en el plano cartesiano, paralelas y perpendiculares<small>Se abre en la página 13 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=13" target="_blank" rel="noopener"><b>Hoja 7.4</b> · Pitágoras, números irracionales e integración<small>Se abre en la página 13 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=14" target="_blank" rel="noopener"><b>Hoja 8.1</b> · Cuerpos y superficies<small>Se abre en la página 14 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=14" target="_blank" rel="noopener"><b>Hoja 8.2</b> · Volumen, capacidad y peso<small>Se abre en la página 14 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=14" target="_blank" rel="noopener"><b>Hoja 8.3</b> · Datos, frecuencias y gráficos<small>Se abre en la página 14 del solucionario</small></a></li>
+<li><a href="bibliografia/matematica/Solucionario_hojas.pdf#page=15" target="_blank" rel="noopener"><b>Hoja 8.4</b> · Probabilidad y combinatoria<small>Se abre en la página 15 del solucionario</small></a></li>
+</ul>
+</section>
+</section>
+
+  </div>
+</main>
+<a class="arriba" href="#top" title="Volver arriba">↑</a>
+<script>
+(function(){
+  // cerrar menú al navegar en celular
+  document.querySelectorAll('#side a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu')));
+  // heredar color de la unidad en tarjetas
+  document.querySelectorAll('section.level1').forEach(u=>{
+    const c=u.getAttribute('data-color');
+    if(c) u.querySelectorAll('section.level2').forEach(s=>{s.style.setProperty('--c','var(--'+c+')');s.style.setProperty('--cs','var(--'+c+'s)')});
+  });
+  // claves plegables
+  const cl=document.querySelector('section.claves');
+  if(cl){cl.classList.add('cerrado');const b=document.createElement('button');b.className='toggle-claves';b.textContent='👩‍🏫 Mostrar claves (adulto que acompaña)';
+    cl.querySelector('h2').after(b);b.onclick=()=>{cl.classList.toggle('cerrado');b.textContent=cl.classList.contains('cerrado')?'👩‍🏫 Mostrar claves (adulto que acompaña)':'Ocultar claves';};}
+  // progreso + menú activo
+  const bar=document.querySelector('#progress div');
+  const links=[...document.querySelectorAll('#side a[href^="#"]')];
+  const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  function onScroll(){
+    const h=document.documentElement; bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+    let cur=secs[0]; for(const s of secs){ if(s.getBoundingClientRect().top<120) cur=s; }
+    links.forEach(a=>a.classList.toggle('on',cur&&a.getAttribute('href')==='#'+cur.id));
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  // descargar toda la bibliografía (de a un archivo, con pausa para que el navegador no las bloquee)
+  const bd=document.getElementById('btn-descargas');
+  if(bd){const txt=bd.textContent;bd.onclick=async()=>{
+    const as=[...document.querySelectorAll('ul.descargas a[download]')];bd.disabled=true;
+    for(let i=0;i<as.length;i++){bd.textContent='Descargando '+(i+1)+' de '+as.length+'…';as[i].click();await new Promise(r=>setTimeout(r,900));}
+    bd.textContent='✅ Listo: revisá tu carpeta de Descargas';setTimeout(()=>{bd.textContent=txt;bd.disabled=false;},5000);
+  };}
+})();
+</script>
+</body>
+</html>
