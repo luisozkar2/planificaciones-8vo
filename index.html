@@ -130,6 +130,8 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding:0 0 40px}
 const MATERIAS = [
   {
     nombre: "Historia 1",
+    materia: "Historia",
+    tutoras: ["loreS"],
     sub: "Del Paleolítico al Feudalismo",
     icono: "🏺",
     desc: "Un viaje de miles de años por las primeras sociedades, los grandes imperios y la Edad Media.",
@@ -139,6 +141,8 @@ const MATERIAS = [
   },
   {
     nombre: "Geografía 1",
+    materia: "Geografía",
+    tutoras: ["jesi", "loreT"],
     sub: "Ambientes, territorios y población",
     icono: "🌎",
     desc: "Mapas, montañas, ríos, selvas, desiertos, ciudades y millones de personas en movimiento.",
@@ -148,6 +152,8 @@ const MATERIAS = [
   },
   {
     nombre: "FEC 1",
+    materia: "FEC",
+    tutoras: ["jesi"],
     sub: "Formación Ética y Ciudadana",
     icono: "⚖️",
     desc: "Estado, derechos, igualdad y cuidado de uno y de los otros: aprender a vivir juntos como ciudadanos.",
@@ -157,6 +163,8 @@ const MATERIAS = [
   },
   {
     nombre: "Lengua 1",
+    materia: "Lengua",
+    tutoras: ["lau", "ale"],
     sub: "Prácticas del Lenguaje · anual",
     icono: "📖",
     desc: "Mitos, cuentos, poesía, teatro, noticias y reseñas: un año para leer, escribir y conocer cómo funciona nuestra lengua.",
@@ -166,6 +174,8 @@ const MATERIAS = [
   },
   {
     nombre: "Matemática 1",
+    materia: "Matemática",
+    tutoras: ["cris"],
     sub: "8.° grado · anual",
     icono: "📐",
     desc: "Números, álgebra, funciones, geometría, estadística y probabilidad: un año para entender por qué funciona cada cuenta.",
@@ -175,6 +185,8 @@ const MATERIAS = [
   },
   {
     nombre: "Biología 1",
+    materia: "Biología",
+    tutoras: ["caro", "noe"],
     sub: "Evolución, células y genética",
     icono: "🧬",
     desc: "Evolución, células, nutrición y genética: 30 semanas para entender cómo funcionan y cómo cambian los seres vivos.",
@@ -184,6 +196,8 @@ const MATERIAS = [
   },
   {
     nombre: "Música 1",
+    materia: "Música",
+    tutoras: ["debi"],
     sub: "12 semanas · 2 h por semana",
     icono: "🎵",
     desc: "El sonido, el ritmo, la forma y la textura, y un viaje por el folklore argentino para aprender a escuchar con atención.",
@@ -193,6 +207,8 @@ const MATERIAS = [
   },
   {
     nombre: "Arte 1",
+    materia: "Arte",
+    tutoras: ["andrea"],
     sub: "Arte plástica · 1.er trimestre",
     icono: "🎨",
     desc: "Simetría, fondo y figura, perspectiva y color: trabajos prácticos para aprender a componer una obra.",
@@ -202,6 +218,8 @@ const MATERIAS = [
   },
   {
     nombre: "Inglés 1",
+    materia: "Inglés",
+    tutoras: ["agus", "lau", "ale"],
     sub: "8.° grado · 30 semanas",
     icono: "💬",
     desc: "Saludos, la familia, la casa, los gustos y las rutinas: 30 semanas para animarse a hablar, leer y escribir en inglés.",
@@ -212,17 +230,31 @@ const MATERIAS = [
 ];
 
 /* =========================================================================
-   TUTOR POR WHATSAPP
-   Número en formato internacional, solo dígitos y sin "+":
-   54 (Argentina) + 9 (celular) + 11 (característica) + número sin el 15.
-   Si se deja vacío (""), el botón de WhatsApp no aparece.
+   TUTORAS POR WHATSAPP
+   Cada materia tiene en «tutoras» la lista de las que la atienden (claves de
+   abajo). El botón muestra el nombre corto y abre WhatsApp con el mensaje.
+   Número: solo dígitos, 54 (Argentina) + 9 (celular) + característica sin 0
+   + número sin el 15. Para sacar a una tutora de una materia, borrá su clave.
    ========================================================================= */
-const WHATSAPP_TUTOR = "5491158641170";
+const TUTORAS = {
+  loreS:  { nombre: "Lore",   tel: "5491166505315" },  // Lore Sosa · Historia
+  loreT:  { nombre: "Lore",   tel: "5491133231132" },  // Lore Taibo · Ciencias Sociales
+  jesi:   { nombre: "Jesi",   tel: "5491158641170" },  // Jesi Medina · FEC y Geografía
+  noe:    { nombre: "Noe",    tel: "5491166659548" },  // Noe Ojeda · Físico-química y Biología
+  lau:    { nombre: "Lau",    tel: "5491166659542" },  // Lau Divano · Inglés y Lengua
+  ale:    { nombre: "Ale",    tel: "5491166645694" },  // Ale Fernández · Inglés y Lengua
+  caro:   { nombre: "Caro",   tel: "5491168361486" },  // Caro Gauna · Biología
+  cris:   { nombre: "Cris",   tel: "5491135583855" },  // Cris Puccio · Matemática
+  agus:   { nombre: "Agus",   tel: "5491161366759" },  // Agus Divano · Inglés
+  andrea: { nombre: "Andrea", tel: "5491156194119" },  // Andrea Guerrero · Arte
+  debi:   { nombre: "Debi",   tel: "5491127031789" }   // Debi Gómez · Música
+};
+const MENSAJE = materia => "Hola, necesito ayuda para la materia: " + materia + ", me podes ayudar?";
 
 (function(){
   const cont = document.getElementById('materias');
   const ICONO_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>';
-  const linkWa = m => 'https://wa.me/' + WHATSAPP_TUTOR + '?text=' + encodeURIComponent('Hola, necesito ayuda con ' + m.nombre + '.');
+  const linkWa = (t, m) => 'https://wa.me/' + t.tel + '?text=' + encodeURIComponent(MENSAJE(m.materia));
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   cont.innerHTML = MATERIAS.map(m => {
     const pronto = !m.archivo;
@@ -230,9 +262,8 @@ const WHATSAPP_TUTOR = "5491158641170";
     const ir = pronto
       ? `<span class="ir">Próximamente</span>`
       : `<a class="ir" href="${esc(m.archivo)}">Entrar →</a>`;
-    const wa = (WHATSAPP_TUTOR && !pronto)
-      ? `<a class="wa" href="${esc(linkWa(m))}" target="_blank" rel="noopener" title="Escribirle a un tutor de ${esc(m.nombre)} por WhatsApp">${ICONO_WA}Tutor</a>`
-      : '';
+    const wa = pronto ? '' : (m.tutoras || []).map(k => TUTORAS[k]).filter(Boolean).map(t =>
+      `<a class="wa" href="${esc(linkWa(t, m))}" target="_blank" rel="noopener" title="Escribirle a ${esc(t.nombre)} por WhatsApp (${esc(m.materia)})">${ICONO_WA}${esc(t.nombre)}</a>`).join('');
     return `<div class="materia${pronto ? ' pronto' : ''}" style="--c:${esc(m.color)};--cs:${esc(m.suave)}">
       <div class="ico">${esc(m.icono)}</div>
       <h2>${esc(m.nombre)}</h2>
