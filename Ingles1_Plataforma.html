@@ -1,0 +1,2110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inglés 1 · Hello, world!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee; --card:#ffffff; --ink:#1f2330; --muted:#5d6475; --line:#e6e1d8;
+  --u1:#3b5bdb; --u1s:#e8edfc;
+  --u2:#e0782f; --u2s:#fff1e6;
+  --u3:#2e9b4e; --u3s:#e5f6ea;
+  --u4:#d23f7a; --u4s:#fdeaf2;
+  --u5:#6a4bc4; --u5s:#efeafc;
+  --acc:#2f6fd6; --accs:#e7effd;
+  --gold:#f2b632; --biblia:#fff8e1; --biblia-b:#e8b923;
+  --radius:18px; --side:290px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+@media (max-width:980px){html{scroll-padding-top:76px}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Nunito,system-ui,sans-serif}
+a{color:var(--acc)}
+h1,h2,h3,h4{font-family:Fredoka,Nunito,sans-serif;line-height:1.2;margin:1.4em 0 .5em}
+
+/* ---------- barra lateral ---------- */
+#side{position:fixed;inset:0 auto 0 0;width:var(--side);background:#1d2233;color:#cfd5e6;overflow-y:auto;padding:22px 14px 40px;z-index:20}
+#side .logo{display:flex;gap:10px;align-items:center;padding:4px 8px 18px;border-bottom:1px solid #303750;margin-bottom:12px}
+#side .logo span{font-size:30px}
+#side .logo b{font-family:Fredoka;font-size:20px;color:#fff;display:block;line-height:1.1}
+#side .logo small{color:#8f98b3;font-size:12px}
+#side a{display:block;text-decoration:none;color:inherit;border-radius:10px;padding:6px 10px;font-size:14px;line-height:1.3}
+#side a:hover{background:#2a3149;color:#fff}
+#side a.on{background:#fff;color:#1d2233;font-weight:700}
+#side .nav-u{margin-top:14px;font-family:Fredoka;font-weight:600;color:#fff;font-size:15px}
+#side .nav-u b{display:inline-block;background:var(--gold);color:#1d2233;border-radius:7px;padding:0 6px;margin-right:6px;font-size:13px}
+#side .nav-s{display:flex;gap:8px;padding-left:14px}
+#side .nav-s i{font-style:normal;min-width:22px;height:22px;border-radius:50%;background:#303750;color:#fff;font-size:11px;display:grid;place-items:center;font-weight:800;flex:none}
+#side .nav-x{color:var(--gold)}
+#burger{display:none}
+#mtop{display:none;position:fixed;top:0;left:0;right:0;height:64px;background:#1d2233;color:#fff;z-index:35;align-items:center;padding-left:70px;font-family:Fredoka;font-size:18px}
+
+/* ---------- contenido ---------- */
+main{margin-left:var(--side);padding:0 0 80px}
+.wrap{max-width:900px;margin:0 auto;padding:0 28px}
+#progress{position:fixed;top:0;z-index:36;left:var(--side);right:0;height:5px;background:transparent;z-index:30}
+#progress div{height:100%;width:0;background:linear-gradient(90deg,var(--u1),var(--u2),var(--u3),var(--u4));border-radius:0 4px 4px 0}
+
+.hero{background:radial-gradient(circle at 85% 20%,#3b4a7a 0,#1d2233 60%);color:#fff;padding:64px 28px 56px;position:relative;overflow:hidden}
+.hero .wrap{position:relative}
+.hero .chip{display:inline-block;background:var(--gold);color:#1d2233;font-weight:800;border-radius:99px;padding:4px 14px;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.hero h1{font-size:clamp(32px,5vw,52px);margin:.35em 0 .2em}
+.hero p{font-size:19px;color:#d6dcf0;max-width:640px;margin:0}
+.hero .deco{position:absolute;right:-10px;top:-20px;font-size:120px;opacity:.18;letter-spacing:-20px;user-select:none}
+.hero .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .stats div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:10px 16px;font-size:14px}
+.hero .stats b{font-family:Fredoka;font-size:26px;display:block;color:#fff;line-height:1}
+
+/* secciones de unidad */
+section.level1{--c:var(--acc);--cs:var(--accs)}
+section.level1[data-color=u1]{--c:var(--u1);--cs:var(--u1s)}
+section.level1[data-color=u2]{--c:var(--u2);--cs:var(--u2s)}
+section.level1[data-color=u3]{--c:var(--u3);--cs:var(--u3s)}
+section.level1[data-color=u4]{--c:var(--u4);--cs:var(--u4s)}
+section.level1[data-color=u5]{--c:var(--u5);--cs:var(--u5s)}
+section.level1>h1{background:var(--c);color:#fff;margin:56px 0 0;padding:34px 30px 28px;border-radius:var(--radius) var(--radius) 0 0;font-size:clamp(26px,3.6vw,36px)}
+section.level1>blockquote{margin:0 0 30px;background:var(--cs);border-radius:0 0 var(--radius) var(--radius);padding:18px 30px 20px;border:2px solid var(--c);border-top:0;font-size:16px}
+section.level1>blockquote p{margin:.35em 0}
+
+/* tarjetas de semana */
+section.level2{background:var(--card);border-radius:var(--radius);padding:8px 34px 30px;margin:0 0 34px;box-shadow:0 2px 0 var(--line),0 10px 30px -18px rgba(30,35,60,.35);border-top:8px solid var(--c,var(--acc))}
+#intro{border-top-color:var(--gold)}
+section.level2>h2{font-size:28px;margin-top:26px;color:var(--c,var(--ink))}
+section.level2>h2:before{content:attr(data-badge);}
+section.level2>table:first-of-type{background:var(--cs,#f5f5f5);border-radius:12px;overflow:hidden;font-size:15px}
+section.level2>table:first-of-type thead,section.level2>table:first-of-type colgroup{display:none}
+section.level2>table:first-of-type{table-layout:auto}
+section.level2>table:first-of-type td:first-child{width:170px;font-weight:700;color:var(--c,var(--ink))}
+section.level3>h3, section.level2>h3{font-size:21px;border-bottom:2px dashed var(--line);padding-bottom:6px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:15px;display:block;overflow-x:auto}
+@media (min-width:700px){table{display:table}}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--cs,#f2f2f2);font-family:Fredoka;font-weight:600}
+blockquote{margin:16px 0}
+
+/* recuadro bíblico */
+.biblia{background:var(--biblia);border:2px solid var(--biblia-b);border-radius:16px;padding:6px 22px 10px 22px;margin:26px 0;position:relative}
+.biblia:before{content:"🕊️";position:absolute;top:-18px;left:18px;font-size:26px;background:var(--biblia);border-radius:50%;padding:0 6px}
+.biblia p:first-child{margin-top:18px}
+
+/* fotos */
+figure.foto{margin:24px 0;background:#f2efe9;border-radius:16px;overflow:hidden}
+.foto-marco{position:relative;min-height:60px;background:#e9e4da}
+.foto-marco img{display:block;width:100%;max-height:440px;object-fit:cover}
+.foto-fallback{display:none}
+.sin-foto .foto-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:180px;text-decoration:none;font-size:42px;background:repeating-linear-gradient(45deg,#ece6db,#ece6db 12px,#e4ddd0 12px,#e4ddd0 24px)}
+.sin-foto .foto-fallback span{font-size:15px;font-weight:800;background:#fff;border-radius:99px;padding:4px 14px}
+figcaption{padding:10px 16px 12px;font-size:14.5px;color:#3c4253;font-style:italic}
+figcaption .glink{font-style:normal;font-size:13px;white-space:nowrap;margin-left:4px}
+
+/* video */
+a.video{display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;margin:8px 0;max-width:560px;transition:.15s}
+a.video:hover{border-color:#e33;transform:translateY(-2px)}
+.vthumb{flex:none;width:136px;aspect-ratio:16/9;border-radius:10px;background:#222 center/cover;display:grid;place-items:center}
+.vthumb b{background:#e33;color:#fff;border-radius:10px;padding:2px 12px;font-size:14px}
+.vtxt{font-weight:700;font-size:15px;line-height:1.3}
+.vtxt small{display:block;color:#e33;font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+/* pruebas */
+section.prueba{background:#fff;border:2px dashed var(--c,var(--acc));border-top-width:8px;border-top-style:solid}
+section.prueba>h2{display:flex;align-items:center;gap:10px}
+section.claves{border-top-color:#1d2233}
+.toggle-claves{font:700 15px Nunito;background:#1d2233;color:#fff;border:0;border-radius:99px;padding:10px 18px;cursor:pointer;margin:6px 0 10px}
+section.claves.cerrado>*:not(h2):not(.toggle-claves){display:none}
+
+.arriba{position:fixed;right:18px;bottom:18px;background:#1d2233;color:#fff;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:15}
+
+/* descargas de bibliografía */
+ul.descargas{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
+ul.descargas a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px 10px 46px;position:relative;font-size:15.5px;line-height:1.35;transition:.15s}
+ul.descargas a:before{content:"📄";position:absolute;left:14px;top:10px;font-size:20px}
+ul.descargas a:hover{border-color:var(--acc);transform:translateY(-2px)}
+ul.descargas b{color:var(--acc)}
+ul.descargas small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.btn-descargas{font:700 15px Nunito;background:var(--acc);color:#fff;border:0;border-radius:99px;padding:12px 20px;cursor:pointer;margin:6px 0 10px}
+.btn-descargas:disabled{opacity:.6;cursor:wait}
+
+@media (max-width:980px){
+  :root{--side:0px}
+  #side{transform:translateX(-100%);width:290px;transition:.25s}
+  body.menu #side{transform:none}
+  #burger{display:grid;place-items:center;position:fixed;top:11px;left:10px;z-index:40;width:46px;height:42px;border-radius:12px;border:0;background:#303750;color:#fff;font-size:22px}
+  .wrap{padding:0 16px}
+  section.level2{padding:6px 18px 22px}
+  section.level1>h1{padding:26px 18px 20px}
+  section.level1>blockquote{padding:14px 18px}
+  .hero{padding:80px 16px 40px}
+  section.level2>table:first-of-type,section.level2>table:first-of-type tbody,section.level2>table:first-of-type tr,section.level2>table:first-of-type td{display:block;width:auto!important;border:0}
+  section.level2>table:first-of-type td:first-child{padding-bottom:0}
+  section.level2>table:first-of-type tr{border-bottom:1px solid var(--line)}
+  main{padding-top:64px}
+  #mtop{display:flex}
+  .vthumb{width:104px}
+}
+@media print{
+  @page{size:A4;margin:14mm 13mm 16mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #side,#burger,#progress,.arriba,.toggle-claves,#mtop,.hero .deco,.btn-descargas{display:none!important}
+  main{margin:0!important;padding:0!important} body{background:#fff;font-size:10.5pt;line-height:1.5}
+  .wrap{max-width:none;padding:0}
+  .hero{padding:60mm 10mm 20mm;min-height:250mm;break-after:page;border-radius:0}
+  .hero h1{font-size:40pt}
+  section.level1{break-before:page}
+  section.level1>h1{margin-top:0}
+  section.level2{box-shadow:none;break-before:page;padding:2mm 6mm 4mm;margin:0;border-radius:10px}
+  section.level1>section.level2:first-of-type{break-before:avoid}
+  #intro{break-before:avoid}
+  h2,h3{break-after:avoid}
+  table,figure,.biblia,a.video,li{break-inside:avoid}
+  figure.foto .foto-marco img{max-height:85mm}
+  .sin-foto .foto-fallback{height:28mm;font-size:22pt}
+  section.claves.cerrado>*{display:block!important}
+  section.claves.cerrado>table{display:table!important}
+  a{color:inherit;text-decoration:none}
+  a.video{border:1px solid #ccc;max-width:none}
+  a.video .vtxt:after{content:attr(data-url);display:block;font-weight:400;font-size:8pt;color:#555;word-break:break-all}
+  figcaption .glink{display:none}
+}
+</style>
+</head>
+<body>
+<button id="burger" aria-label="Menú" onclick="document.body.classList.toggle('menu')">☰</button>
+<div id="mtop">💬 Inglés 1</div>
+<div id="progress"><div></div></div>
+<nav id="side">
+  <div class="logo"><span>💬</span><div><b>Inglés 1</b><small>8.° grado · 30 semanas</small></div></div>
+  <a href="index.html">📚 Todas las materias</a>
+  <a href="#top">⬆️ Portada</a>
+  <a class="nav-s nav-x" href="#intro">Welcome to English!</a>
+  <a class="nav-s nav-x" href="#descargas">📥 Descargar bibliografía</a>
+<a class="nav-u" href="#u1"><b>U1</b> Hello</a>
+<a class="nav-s" href="#s1"><i>1</i>Hello!</a>
+<a class="nav-s" href="#s2"><i>2</i>Personal information</a>
+<a class="nav-s" href="#s3"><i>3</i>Questions and possessives</a>
+<a class="nav-s" href="#s4"><i>4</i>People from other countries</a>
+<a class="nav-s nav-x" href="#p1">📝 Diagnóstico 1</a>
+<a class="nav-u" href="#u2"><b>U2</b> My Things</a>
+<a class="nav-s" href="#s5"><i>5</i>Have got</a>
+<a class="nav-s" href="#s6"><i>6</i>My things</a>
+<a class="nav-s" href="#s7"><i>7</i>Describing things</a>
+<a class="nav-s" href="#s8"><i>8</i>An online catalogue</a>
+<a class="nav-s nav-x" href="#p2">📝 Diagnóstico 2</a>
+<a class="nav-u" href="#u3"><b>U3</b> Family and Home</a>
+<a class="nav-s" href="#s9"><i>9</i>My family</a>
+<a class="nav-s" href="#s10"><i>10</i>My house</a>
+<a class="nav-s" href="#s11"><i>11</i>Where is it?</a>
+<a class="nav-s" href="#s12"><i>12</i>Small homes in Tokyo</a>
+<a class="nav-s nav-x" href="#p3">📝 Diagnóstico 3</a>
+<a class="nav-u" href="#u4"><b>U4</b> Fun Time</a>
+<a class="nav-s" href="#s13"><i>13</i>Free time</a>
+<a class="nav-s" href="#s14"><i>14</i>Food and drinks</a>
+<a class="nav-s" href="#s15"><i>15</i>Invitations</a>
+<a class="nav-s" href="#s16"><i>16</i>Help, thanks and sorry</a>
+<a class="nav-s nav-x" href="#p4">📝 Diagnóstico 4</a>
+<a class="nav-u" href="#u5"><b>U5</b> Everyday Life</a>
+<a class="nav-s" href="#s17"><i>17</i>My day</a>
+<a class="nav-s" href="#s18"><i>18</i>He, she, it</a>
+<a class="nav-s" href="#s19"><i>19</i>Questions about routines</a>
+<a class="nav-s" href="#s20"><i>20</i>A typical school day</a>
+<a class="nav-s nav-x" href="#p5">📝 Diagnóstico 5</a>
+<a class="nav-u" href="#u6"><b>U6</b> iSucceed 2</a>
+<a class="nav-s" href="#s21"><i>21</i>One world</a>
+<a class="nav-s" href="#s22"><i>22</i>Home</a>
+<a class="nav-s" href="#s23"><i>23</i>John Lennon&#x27;s house</a>
+<a class="nav-s" href="#s24"><i>24</i>Habits</a>
+<a class="nav-s" href="#s25"><i>25</i>Our food</a>
+<a class="nav-s nav-x" href="#p6">📝 Diagnóstico 6</a>
+<a class="nav-s" href="#s26"><i>26</i>Sport</a>
+<a class="nav-s" href="#s27"><i>27</i>Opinions and clothes</a>
+<a class="nav-s" href="#s28"><i>28</i>What are you wearing?</a>
+<a class="nav-s" href="#s29"><i>29</i>Music</a>
+<a class="nav-s" href="#s30"><i>30</i>Weather and holidays</a>
+<a class="nav-s nav-x" href="#p7">📝 Diagnóstico 7</a>
+</nav>
+<main>
+  <header class="hero" id="top">
+    <div class="deco">💬🌍🎧</div>
+    <div class="wrap">
+      <span class="chip">8.º grado · 1.º año NES · CABA</span>
+      <h1>Hello, world!</h1>
+      <p>Saludos, la familia, la casa, los gustos, las rutinas y mucho más: 30 semanas para animarse a hablar, leer y escribir en inglés. Todo, mirado con los anteojos de la Biblia.</p>
+      <div class="stats">
+        <div><b>6</b>unidades</div><div><b>30</b>semanas</div><div><b>46</b>videos</div><div><b>7</b>diagnósticos</div>
+      </div>
+    </div>
+  </header>
+  <div class="wrap">
+  <section id="intro" class="level2">
+<h2>Welcome to English!</h2>
+<p>En estas <strong>30 semanas</strong> vamos a aprender a presentarnos, hablar de nuestras cosas, nuestra familia y
+nuestra casa, contar lo que nos gusta y lo que hacemos todos los días. Las primeras 20 semanas siguen el programa de
+Inglés de 1.er año de la escuela con el libro <em>On the Pulse Starter</em> (Macmillan); las últimas 10 repasan y amplían
+con el Workbook de <em>iSucceed in English 2</em> (Pearson).</p>
+<section id="los-cuatro-anteojos-de-la-cosmovisión-bíblica" class="level3">
+<h3>Los cuatro anteojos de la cosmovisión bíblica</h3>
+<p>En cada semana vas a encontrar un recuadro <strong>🕊️ Mirada bíblica</strong>. Aprender otro idioma es abrir una puerta hacia otras personas: la Biblia muestra a un Dios que habla a cada pueblo en su propia lengua. Para leerlo usamos cuatro «anteojos»:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Anteojo</th>
+<th>Qué pregunta hacemos</th>
+<th>Ejemplo en esta materia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>🌱 <strong>Creación</strong></td>
+<td>¿Qué hay de bueno en esto, que refleja que fuimos hechos a imagen de Dios?</td>
+<td>La variedad de lenguas y culturas de los pueblos (Hechos 17:26; HM 1, p. 6)</td>
+</tr>
+<tr class="even">
+<td>💔 <strong>Caída</strong></td>
+<td>¿Dónde aparece el orgullo, el error o el mal uso de lo que Dios nos dio?</td>
+<td>Babel: el orgullo que dividió a la humanidad y la confusión de las lenguas (Génesis 11)</td>
+</tr>
+<tr class="odd">
+<td>✝️ <strong>Redención</strong></td>
+<td>¿Cómo obra Dios para rescatar y restaurar?</td>
+<td>Pentecostés: cada uno oyó el evangelio «en nuestra lengua en la que hemos nacido» (Hechos 2:8)</td>
+</tr>
+<tr class="even">
+<td>👑 <strong>Propósito</strong></td>
+<td>¿Qué me enseña esto para vivir hoy?</td>
+<td>Aprender inglés para comunicarnos, servir y compartir la buena noticia con personas de otros países</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cómo-está-organizada-cada-semana" class="level3">
+<h3>Cómo está organizada cada semana</h3>
+<ul>
+<li><strong>Ritmo sugerido: 3 encuentros por semana.</strong> 1) Video y vocabulario o gramática. 2) Ejercicios del libro.
+3) Lectura, escritura o la tarea final.</li>
+<li><strong>📖 Para trabajar:</strong> el tema y las páginas del libro. En <em>On the Pulse</em>, «SB» son las páginas de la
+unidad (pp. 4-83) y «WB» las del Workbook del final del libro (pp. 84-119).</li>
+<li><strong>🎬 Videos:</strong> uno a tres videos de YouTube por semana. Ninguno de los dos libros trae audio para usar en
+casa: los videos sirven para escuchar inglés, y los ejercicios con auriculares se saltean o se leen en voz alta entre un
+adulto y el chico.</li>
+<li><strong>🎵 Song of the week:</strong> las canciones del programa de la escuela, en su semana.</li>
+<li><strong>✏️ Producción / tarea:</strong> al cierre de cada unidad hay una <em>final task</em>: un texto corto o un
+proyecto que junta lo aprendido.</li>
+<li><strong>🕊️ Mirada bíblica:</strong> un recuadro que relaciona el tema de la semana con la Biblia, y una pregunta para conversar en familia.</li>
+</ul>
+<p>Hay <strong>7 diagnósticos</strong> en el año, en las semanas 4, 8, 12, 16, 20, 25 y 30. Algunos ejercicios del iSucceed
+dicen «Student's Book page…»: no hace falta ese libro, el video de la semana reemplaza la explicación.</p>
+</section>
+<section id="mapa-del-año" class="level3">
+<h3>Mapa del año</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Tema</th>
+<th>Contenido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#s1">1</a></td>
+<td>Hello!</td>
+<td>Saludos, números, alfabeto (dar el mail deletreando), colores y días.</td>
+</tr>
+<tr class="even">
+<td><a href="#s2">2</a></td>
+<td>Personal information</td>
+<td>Información personal (nombre, edad, nacionalidad, ciudad), países, continentes y nacionalidades; <em>to be</em> afirmativo y negativo.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s3">3</a></td>
+<td>Questions and possessives</td>
+<td><em>To be</em> interrogativo; preguntas con <em>What, Who, Where, Where… from?, How old?</em>; adjetivos posesivos; adjetivos <em>small, big, nice, modern, old</em>.</td>
+</tr>
+<tr class="even">
+<td><a href="#s4">4</a></td>
+<td>People from other countries</td>
+<td>Lecturas: personas de otros países que se presentan.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s5">5</a></td>
+<td>Have got</td>
+<td><em>Have got / has got</em> afirmativo, negativo e interrogativo; reciclar <em>to be</em>.</td>
+</tr>
+<tr class="even">
+<td><a href="#s6">6</a></td>
+<td>My things</td>
+<td>«Mis cosas» (<em>watch, trainers, cell phone, jacket…</em>); sustantivos en singular y plural.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s7">7</a></td>
+<td>Describing things</td>
+<td>Adjetivos para cosas (<em>expensive, cheap, new, old, fast, slow…</em>), adjetivo + sustantivo, colores, <em>and</em> y <em>but</em>.</td>
+</tr>
+<tr class="even">
+<td><a href="#s8">8</a></td>
+<td>An online catalogue</td>
+<td>Reading: un catálogo online y el vocabulario web (<em>home, favorites, image, print</em>).</td>
+</tr>
+<tr class="odd">
+<td><a href="#s9">9</a></td>
+<td>My family</td>
+<td>La familia; reciclar <em>have got</em> y <em>to be</em>; <em>who / where / what</em>.</td>
+</tr>
+<tr class="even">
+<td><a href="#s10">10</a></td>
+<td>My house</td>
+<td><em>There is / there are</em> afirmativo y negativo; ambientes de la casa.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s11">11</a></td>
+<td>Where is it?</td>
+<td><em>There is / are</em> interrogativo; preposiciones <em>in, on, under</em>; cosas de la casa; <em>because</em>.</td>
+</tr>
+<tr class="even">
+<td><a href="#s12">12</a></td>
+<td>Small homes in Tokyo</td>
+<td>Reading: casas compactas en Tokio.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s13">13</a></td>
+<td>Free time</td>
+<td>Actividades de tiempo libre; <em>I like / I don't like</em>; presente simple afirmativo y negativo.</td>
+</tr>
+<tr class="even">
+<td><a href="#s14">14</a></td>
+<td>Food and drinks</td>
+<td>Comidas y bebidas; expresar gustos y preferencias.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s15">15</a></td>
+<td>Invitations</td>
+<td>Invitar, aceptar y rechazar (<em>Would you like…? / I'd love to / I'm sorry, I can't / Let's…</em>); pedir permiso (<em>Can I…?</em>).</td>
+</tr>
+<tr class="even">
+<td><a href="#s16">16</a></td>
+<td>Help, thanks and sorry</td>
+<td>Pedir y ofrecer ayuda, agradecer, disculparse.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s17">17</a></td>
+<td>My day</td>
+<td>Rutinas (<em>get up, have breakfast, get dressed…</em>); días de la semana; la hora.</td>
+</tr>
+<tr class="even">
+<td><a href="#s18">18</a></td>
+<td>He, she, it</td>
+<td>Presente simple con todas las personas (<em>he, she, it</em> con -s); preposiciones de tiempo (<em>on Sundays, at 7.00</em>).</td>
+</tr>
+<tr class="odd">
+<td><a href="#s19">19</a></td>
+<td>Questions about routines</td>
+<td>Presente simple interrogativo, todas las personas.</td>
+</tr>
+<tr class="even">
+<td><a href="#s20">20</a></td>
+<td>A typical school day</td>
+<td>Integración de la unidad.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s21">21</a></td>
+<td>One world</td>
+<td><em>0 Introduction + 1 One world.</em> Repaso: alfabeto, números, <em>have got</em>, la hora, países y nacionalidades, <em>to be</em>, posesivos.</td>
+</tr>
+<tr class="even">
+<td><a href="#s22">22</a></td>
+<td>Home</td>
+<td><em>2 Home.</em> Casa y muebles, <em>there is / there are</em>, preposiciones de lugar (<em>next to, behind, between, opposite…</em>).</td>
+</tr>
+<tr class="odd">
+<td><a href="#s23">23</a></td>
+<td>John Lennon&#x27;s house</td>
+<td><em>2 Home.</em> <em>There is / are</em> en preguntas, preguntar dónde está algo; la casa de John Lennon.</td>
+</tr>
+<tr class="even">
+<td><a href="#s24">24</a></td>
+<td>Habits</td>
+<td><em>3 Habits.</em> Rutinas, presente simple y su ortografía, adverbios de frecuencia, preposiciones de tiempo, rutinas escolares.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s25">25</a></td>
+<td>Our food</td>
+<td><em>4 Our food.</em> Comidas y bebidas, presente simple negativo e interrogativo, <em>how often</em>, preguntar por hábitos.</td>
+</tr>
+<tr class="even">
+<td><a href="#s26">26</a></td>
+<td>Sport</td>
+<td><em>5 Sport.</em> Deportes con <em>play / go / do</em>, <em>can</em> para habilidad y permiso, adverbios de modo, <em>love / like / can't stand / hate</em>, pronombres objeto.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s27">27</a></td>
+<td>Opinions and clothes</td>
+<td><em>5 Sport.</em> Pedir y dar opiniones; hobbies poco comunes. <em>6 Our clothes:</em> ropa y precios.</td>
+</tr>
+<tr class="even">
+<td><a href="#s28">28</a></td>
+<td>What are you wearing?</td>
+<td><em>6 Our clothes.</em> Presente continuo (afirmativo, negativo, preguntas), comprar ropa, uniformes escolares.</td>
+</tr>
+<tr class="odd">
+<td><a href="#s29">29</a></td>
+<td>Music</td>
+<td><em>7 Music.</em> Géneros musicales y emociones, pasado de <em>to be</em> (<em>was / were</em>), <em>there was / there were</em>, hablar de emociones.</td>
+</tr>
+<tr class="even">
+<td><a href="#s30">30</a></td>
+<td>Weather and holidays</td>
+<td><em>8 Weather.</em> El clima y la temperatura, pasado simple regular e irregular, hablar de las vacaciones.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notas-bibliográficas" class="level3">
+<h3>Notas bibliográficas</h3>
+<ul>
+<li><strong>On the Pulse Starter</strong> · 2.ª edición, Macmillan. Student's Book con el Workbook al final. Trae temas que el
+programa no pide (estaciones, <em>can</em> para habilidades, animales, partes del cuerpo): quedan como optativos.</li>
+<li><strong>iSucceed in English 2</strong> · Workbook, Pearson. Las respuestas de los repasos están en las páginas 78-79.</li>
+<li><strong>Fichas propias</strong> · Los temas del programa que el libro no trae (continentes, plurales, ambientes de la
+casa, preposiciones y muebles, comidas, la lectura de las casas de Tokio, el catálogo online y la lectura del voluntario)
+se trabajan con una ficha aparte, con su video.</li>
+<li><strong>Videos</strong> · Son públicos en YouTube. <strong>Conviene que el adulto que acompaña los mire antes</strong>.</li>
+<li><strong>Biblia</strong> · Las citas siguen la versión <strong>Reina-Valera 1960</strong>. Cuando no es cita textual, se indica la referencia para que el estudiante la busque y la lea.</li>
+<li><strong>HM</strong> · <em>Historia mundial</em>, Unidad 1 «Del Edén a Israel» (traducción al español de <em>History of the World in Christian Perspective</em>). Se cita por capítulo y página del archivo: <a href="bibliografia/comun/HM_Cap1_El_comienzo.pdf" target="_blank" rel="noopener">HM 1 «El comienzo»</a>, <a href="bibliografia/comun/HM_Cap2_De_Sumeria_a_Canaan.pdf" target="_blank" rel="noopener">HM 2 «De Sumeria a Canaán»</a>, <a href="bibliografia/comun/HM_Cap3_Descenso_a_Egipto.pdf" target="_blank" rel="noopener">HM 3 «Descenso a Egipto»</a> y <a href="bibliografia/comun/HM_Cap4_Israel_en_su_tierra.pdf" target="_blank" rel="noopener">HM 4 «Israel en su tierra»</a>. Esos capítulos usan una cronología corta, basada en las genealogías bíblicas; cuando una fecha no coincide con la de un libro de texto, conviene compararlas.</li>
+</ul>
+</section>
+<section id="descargas" class="level3">
+<h3>📥 Descargar la bibliografía</h3>
+<p>Acá están la planificación y los dos libros. Podés bajarlos de a uno o todos juntos con el botón. Si el navegador
+pregunta si permitís <strong>descargar varios archivos</strong>, respondé que sí.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/Planificacion_anual_Ingles_8.pdf" download><b>Planificación</b> · Planificación anual de Inglés 8.° grado<small>Las 30 semanas con los enlaces a los videos · PDF · 265 KB</small></a></li>
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" download><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book y Workbook, semanas 1 a 20 · PDF · 18,2 MB</small></a></li>
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" download><b>Workbook</b> · iSucceed in English 2 (Pearson)<small>Semanas 21 a 30 · PDF · 14,5 MB</small></a></li>
+</ul>
+<button type="button" class="btn-descargas" id="btn-descargas">📥 Descargar todo (3 archivos · 33 MB)</button>
+</section>
+</section>
+
+<section id="u1" class="level1 unidad" data-color="u1">
+<h1 class="unidad" data-color="u1">Unidad 1 · Hello</h1>
+<blockquote>
+<p><em>Presentarse, saludar, deletrear, decir la edad y la nacionalidad, y hacer preguntas sobre otros.</em> <strong>Semanas 1 a 4.</strong> <strong>Versículo de la unidad:</strong> “Y de una sangre ha hecho todo el linaje de los hombres, para que habiten sobre toda la faz de la tierra” (Hechos 17:26).</p>
+</blockquote>
+<section id="s1" class="level2">
+<h2>Week 1 · Hello!</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Saludos, números, alfabeto (dar el mail deletreando), colores y días.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>&quot;Hello!&quot; SB 4-7</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Deletrear su nombre y un mail inventado.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Génesis 11:1-9 · Hechos 2:1-11 · HM 1, p. 6</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s1" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Saludos, números, alfabeto (dar el mail deletreando), colores y días.</p>
+<p><strong>Páginas:</strong> &quot;Hello!&quot; SB 4-7.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s1" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>De Babel a Pentecostés</strong></p>
+<p>Después de Babel, los pueblos se dispersaron llevando idiomas distintos, y el idioma se volvió una fuente de división (HM 1, p. 6). Por eso aprender otra lengua es un pequeño puente entre personas.</p>
+<p>En Pentecostés pasó lo contrario de Babel: gente de muchos países escuchó a los apóstoles, y cada uno decía “¿Cómo, pues, les oímos nosotros hablar cada uno en nuestra lengua en la que hemos nacido?” (Hechos 2:8). Dios no borra los idiomas: los usa para que todos lo conozcan.</p>
+<p><strong>Para conversar:</strong> ¿Cómo se dice «hola» en los idiomas que conocés? ¿Por qué creés que Dios quiso hablar a cada pueblo en su lengua?</p>
+</div>
+</section>
+<section id="videos-s1" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=I_tRSrPru94" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/I_tRSrPru94/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=I_tRSrPru94"><small>YouTube</small>How to introduce yourself (BBC)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=bGetqbqDVaA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/bGetqbqDVaA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=bGetqbqDVaA"><small>YouTube</small>Big Numbers Song</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="cancion-s1" class="level3">
+<h3>🎵 Song of the week</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=nwxTFO49Bwg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/nwxTFO49Bwg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=nwxTFO49Bwg"><small>Canción</small>Hello, Goodbye</span></a></p>
+<p>Escuchala con la letra, buscá las palabras que ya conocés y cantala.</p>
+</section>
+<section id="tarea-s1" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Deletrear su nombre y un mail inventado.</p>
+</section>
+</section>
+<section id="s2" class="level2">
+<h2>Week 2 · Personal information</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Información personal (nombre, edad, nacionalidad, ciudad), países, continentes y nacionalidades; <em>to be</em> afirmativo y negativo.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U1 SB 8-11 · WB 84-86</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Ficha personal en inglés. Continentes: ficha propia.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Hechos 2:9-11 · Hechos 17:26</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s2" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Información personal (nombre, edad, nacionalidad, ciudad), países, continentes y nacionalidades; <em>to be</em> afirmativo y negativo.</p>
+<p><strong>Páginas:</strong> U1 SB 8-11 · WB 84-86.</p>
+<p><em>«Ficha propia»: este tema no está en el libro y se trabaja con una ficha aparte.</em></p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s2" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Todas las naciones</strong></p>
+<p>En Pentecostés había en Jerusalén gente de muchísimos lugares: partos, medos, elamitas, habitantes de Mesopotamia, de Egipto, de Roma, cretenses y árabes (Hechos 2:9-11). ¡Una lista de nacionalidades como la que estudiamos esta semana!</p>
+<p>Pablo enseñó que Dios “de una sangre ha hecho todo el linaje de los hombres” (Hechos 17:26). Distintos países y nacionalidades, pero una sola familia humana.</p>
+<p><strong>Para conversar:</strong> Elegí tres países y decí su nacionalidad en inglés. ¿Conocés a alguien de otro país?</p>
+</div>
+</section>
+<section id="videos-s2" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=mKxKVi0N6yc" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/mKxKVi0N6yc/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=mKxKVi0N6yc"><small>YouTube</small>Verb to be: am, is, are</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=6Co-P43_N-U" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/6Co-P43_N-U/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=6Co-P43_N-U"><small>YouTube</small>Countries and nationalities</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s2" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Ficha personal en inglés. Continentes: ficha propia.</p>
+</section>
+</section>
+<section id="s3" class="level2">
+<h2>Week 3 · Questions and possessives</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>To be</em> interrogativo; preguntas con <em>What, Who, Where, Where… from?, How old?</em>; adjetivos posesivos; adjetivos <em>small, big, nice, modern, old</em>.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U1 SB 12-15 · U2 SB 20-23 (posesivos) · WB 86-88</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Entrevista a un compañero con las 5 preguntas.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Génesis 3:9 · Mateo 16:15</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s3" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>To be</em> interrogativo; preguntas con <em>What, Who, Where, Where… from?, How old?</em>; adjetivos posesivos; adjetivos <em>small, big, nice, modern, old</em>.</p>
+<p><strong>Páginas:</strong> U1 SB 12-15 · U2 SB 20-23 (posesivos) · WB 86-88.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s3" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Las preguntas de Dios</strong></p>
+<p>La primera pregunta de la Biblia la hace Dios: “¿Dónde estás tú?” (Génesis 3:9). Es una pregunta con <em>Where</em>. Dios ya sabía dónde estaba Adán: la pregunta era una invitación a volver.</p>
+<p>Jesús también hacía preguntas. A sus discípulos les preguntó: “Y vosotros, ¿quién decís que soy yo?” (Mateo 16:15). Es la pregunta con <em>Who</em> más importante de la historia.</p>
+<p><strong>Para conversar:</strong> Traducí al inglés: «¿Dónde estás?» y «¿Quién soy yo?». ¿Cómo responderías vos la pregunta de Jesús?</p>
+</div>
+</section>
+<section id="videos-s3" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=Dr8GIp94GgA" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/Dr8GIp94GgA/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=Dr8GIp94GgA"><small>YouTube</small>Subject pronouns</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=rF070hPFbas" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/rF070hPFbas/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=rF070hPFbas"><small>YouTube</small>Possessive adjectives</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s3" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Entrevista a un compañero con las 5 preguntas.</p>
+</section>
+</section>
+<section id="s4" class="level2">
+<h2>Week 4 · People from other countries</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Lecturas: personas de otros países que se presentan.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U1 SB 16-19 (&quot;An online profile&quot;, proyecto Trivia Quiz) · WB 88-89</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td><strong>Final task:</strong> un e-mail a un amigo imaginario de otro país con su información personal. Al terminar la semana: Diagnóstico 1.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Rut 1:16 · Hebreos 13:2</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s4" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Lecturas: personas de otros países que se presentan.</p>
+<p><strong>Páginas:</strong> U1 SB 16-19 (&quot;An online profile&quot;, proyecto Trivia Quiz) · WB 88-89.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s4" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Recibir al que viene de otro país</strong></p>
+<p>Rut era moabita, de otro pueblo, y eligió quedarse con Noemí: “tu pueblo será mi pueblo, y tu Dios mi Dios” (Rut 1:16). Llegó a ser bisabuela del rey David.</p>
+<p>La Biblia pide tratar bien a los extranjeros: “No os olvidéis de la hospitalidad, porque por ella algunos, sin saberlo, hospedaron ángeles” (Hebreos 13:2). Escribirle a un amigo de otro país es una forma de abrir la puerta.</p>
+<p><strong>Para conversar:</strong> Si llegara a tu curso alguien que no habla español, ¿cómo lo harías sentir bienvenido?</p>
+</div>
+</section>
+<section id="videos-s4" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=RLs9lIy5WT0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/RLs9lIy5WT0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=RLs9lIy5WT0"><small>YouTube</small>Nice to meet you (A1)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s4" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p><strong>Final task:</strong> un e-mail a un amigo imaginario de otro país con su información personal.</p>
+</section>
+</section>
+<section id="p1" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 1 · Week 4</h2>
+<p><strong>Evalúa:</strong> Unidad 1 «Hello»: <em>to be</em> en todas sus formas, posesivos, países y nacionalidades, preguntas con Wh-, números.</p>
+<p>Es una evaluación corta para hacer al terminar la semana. La prepara el docente o el adulto que acompaña, con los temas de arriba.</p>
+</section>
+</section>
+<section id="u2" class="level1 unidad" data-color="u2">
+<h1 class="unidad" data-color="u2">Unidad 2 · My Things</h1>
+<blockquote>
+<p><em>Hablar de lo que tenemos y describir objetos.</em> <strong>Semanas 5 a 8.</strong> <strong>Versículo de la unidad:</strong> “Mirad, y guardaos de toda avaricia; porque la vida del hombre no consiste en la abundancia de los bienes que posee” (Lucas 12:15).</p>
+</blockquote>
+<section id="s5" class="level2">
+<h2>Week 5 · Have got</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>Have got / has got</em> afirmativo, negativo e interrogativo; reciclar <em>to be</em>.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U2 SB 24-27 · WB 92-93</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Lista: qué tiene y qué no tiene.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>1 Corintios 4:7 · Santiago 1:17</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s5" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>Have got / has got</em> afirmativo, negativo e interrogativo; reciclar <em>to be</em>.</p>
+<p><strong>Páginas:</strong> U2 SB 24-27 · WB 92-93.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s5" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>¿Qué tenés que no hayas recibido?</strong></p>
+<p>Esta semana decimos lo que <em>have got</em>: lo que tenemos. Pablo hace una pregunta que da para pensar: “¿o qué tienes que no hayas recibido?” (1 Corintios 4:7).</p>
+<p>Todo lo que tenemos, de alguna manera, lo recibimos: de nuestra familia, de otros y, en último término, de Dios. “Toda buena dádiva y todo don perfecto desciende de lo alto” (Santiago 1:17). Por eso la respuesta es la gratitud.</p>
+<p><strong>Para conversar:</strong> Escribí tres oraciones con <em>I have got…</em> de cosas por las que estás agradecido.</p>
+</div>
+</section>
+<section id="videos-s5" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=t9MwMrawF_M" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/t9MwMrawF_M/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=t9MwMrawF_M"><small>YouTube</small>Have got / Has got</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s5" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Lista: qué tiene y qué no tiene.</p>
+</section>
+</section>
+<section id="s6" class="level2">
+<h2>Week 6 · My things</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>«Mis cosas» (<em>watch, trainers, cell phone, jacket…</em>); sustantivos en singular y plural.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U4 SB 46-49 (tecnología) · &quot;Hello!&quot; SB 6 (útiles) · plurales: ficha propia</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Inventario de su mochila y su cuarto, en plural.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Mateo 6:19-21</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s6" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>«Mis cosas» (<em>watch, trainers, cell phone, jacket…</em>); sustantivos en singular y plural.</p>
+<p><strong>Páginas:</strong> U4 SB 46-49 (tecnología) · &quot;Hello!&quot; SB 6 (útiles) · plurales: ficha propia.</p>
+<p><em>«Ficha propia»: este tema no está en el libro y se trabaja con una ficha aparte.</em></p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s6" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>El tesoro y el corazón</strong></p>
+<p>Hacemos el inventario de la mochila y del cuarto. Jesús habló de otro tipo de inventario: “No os hagáis tesoros en la tierra, donde la polilla y el orín corrompen” (Mateo 6:19).</p>
+<p>Las cosas se rompen, se pierden o pasan de moda. Jesús concluye: “porque donde esté vuestro tesoro, allí estará también vuestro corazón” (Mateo 6:21). No está mal tener cosas; el problema es que se vuelvan lo más importante.</p>
+<p><strong>Para conversar:</strong> ¿Cuál es tu objeto favorito? ¿Hay algo que valga más que cualquier cosa que tengas?</p>
+</div>
+</section>
+<section id="videos-s6" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=wFwosor2gsE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/wFwosor2gsE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=wFwosor2gsE"><small>YouTube</small>Clothes in English</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=2ZrY25gl8Kw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/2ZrY25gl8Kw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=2ZrY25gl8Kw"><small>YouTube</small>Classroom objects</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s6" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Inventario de su mochila y su cuarto, en plural.</p>
+</section>
+</section>
+<section id="s7" class="level2">
+<h2>Week 7 · Describing things</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Adjetivos para cosas (<em>expensive, cheap, new, old, fast, slow…</em>), adjetivo + sustantivo, colores, <em>and</em> y <em>but</em>.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U2 SB 24-25 (adjetivos) · &quot;Hello!&quot; SB 5 (orden adjetivo + sustantivo)</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Describir 5 objetos con <em>and / but</em>.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Salmo 145:8 · Efesios 4:29</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s7" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Adjetivos para cosas (<em>expensive, cheap, new, old, fast, slow…</em>), adjetivo + sustantivo, colores, <em>and</em> y <em>but</em>.</p>
+<p><strong>Páginas:</strong> U2 SB 24-25 (adjetivos) · &quot;Hello!&quot; SB 5 (orden adjetivo + sustantivo).</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s7" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Adjetivos que describen a Dios</strong></p>
+<p>Los adjetivos describen cómo son las cosas y las personas. La Biblia usa muchos adjetivos para Dios: “Clemente y misericordioso es Jehová, Lento para la ira, y grande en misericordia” (Salmo 145:8).</p>
+<p>Los adjetivos que usamos para describir a otros pueden construir o lastimar: “Ninguna palabra corrompida salga de vuestra boca, sino la que sea buena para la necesaria edificación” (Efesios 4:29).</p>
+<p><strong>Para conversar:</strong> Escribí en inglés tres adjetivos que describan a Dios (por ejemplo, <em>good</em>, <em>kind</em>…) y tres para alguien de tu familia.</p>
+</div>
+</section>
+<section id="videos-s7" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=sEDy0wGaXJY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/sEDy0wGaXJY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=sEDy0wGaXJY"><small>YouTube</small>Adjectives for kids</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="cancion-s7" class="level3">
+<h3>🎵 Song of the week</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=zIYOJ_hSs0o" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/zIYOJ_hSs0o/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=zIYOJ_hSs0o"><small>Canción</small>You&#x27;ve Got a Friend in Me</span></a></p>
+<p>Escuchala con la letra, buscá las palabras que ya conocés y cantala.</p>
+</section>
+<section id="tarea-s7" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Describir 5 objetos con <em>and / but</em>.</p>
+</section>
+</section>
+<section id="s8" class="level2">
+<h2>Week 8 · An online catalogue</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Reading: un catálogo online y el vocabulario web (<em>home, favorites, image, print</em>).</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Ficha propia (catálogo) · U2 SB 30-31 Progress Check</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td><strong>Final task:</strong> escribir sobre su objeto favorito. Al terminar la semana: Diagnóstico 2.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Filipenses 4:11-12 · Hebreos 13:5</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s8" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Reading: un catálogo online y el vocabulario web (<em>home, favorites, image, print</em>).</p>
+<p><strong>Páginas:</strong> Ficha propia (catálogo) · U2 SB 30-31 Progress Check.</p>
+<p><em>«Ficha propia»: este tema no está en el libro y se trabaja con una ficha aparte.</em></p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s8" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Estar contentos con lo que tenemos</strong></p>
+<p>Un catálogo online está hecho para que queramos comprar más. Pablo aprendió otra cosa: “he aprendido a contentarme, cualquiera que sea mi situación” (Filipenses 4:11).</p>
+<p>“Sean vuestras costumbres sin avaricia, contentos con lo que tenéis ahora; porque él dijo: No te desampararé, ni te dejaré” (Hebreos 13:5). El contentamiento nace de saber que Dios está con nosotros.</p>
+<p><strong>Para conversar:</strong> ¿Por qué las publicidades nos hacen sentir que nos falta algo? ¿Qué te ayuda a estar contento?</p>
+</div>
+</section>
+<section id="tarea-s8" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p><strong>Final task:</strong> escribir sobre su objeto favorito.</p>
+</section>
+</section>
+<section id="p2" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 2 · Week 8</h2>
+<p><strong>Evalúa:</strong> Unidad 2 «My Things»: <em>have got</em>, plurales, adjetivos para objetos, <em>and / but</em>, colores.</p>
+<p>Es una evaluación corta para hacer al terminar la semana. La prepara el docente o el adulto que acompaña, con los temas de arriba.</p>
+</section>
+</section>
+<section id="u3" class="level1 unidad" data-color="u3">
+<h1 class="unidad" data-color="u3">Unidad 3 · Family and Home</h1>
+<blockquote>
+<p><em>Presentar a la familia y describir la casa: qué hay y dónde está.</em> <strong>Semanas 9 a 12.</strong> <strong>Versículo de la unidad:</strong> “Pero yo y mi casa serviremos a Jehová” (Josué 24:15).</p>
+</blockquote>
+<section id="s9" class="level2">
+<h2>Week 9 · My family</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>La familia; reciclar <em>have got</em> y <em>to be</em>; <em>who / where / what</em>.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U2 SB 20-23 y 28-29 (&quot;A description of a family&quot;) · WB 90-91, 94</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Proyecto «Family tree riddle» (U2 SB 30-31).</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Efesios 6:1-3 · Mateo 1:1-16</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s9" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>La familia; reciclar <em>have got</em> y <em>to be</em>; <em>who / where / what</em>.</p>
+<p><strong>Páginas:</strong> U2 SB 20-23 y 28-29 (&quot;A description of a family&quot;) · WB 90-91, 94.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s9" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>La familia y el árbol genealógico</strong></p>
+<p>La familia es un diseño de Dios. Pablo escribe: “Hijos, obedeced en el Señor a vuestros padres, porque esto es justo. Honra a tu padre y a tu madre” (Efesios 6:1-2).</p>
+<p>El Nuevo Testamento empieza con un árbol genealógico: el de Jesús (Mateo 1:1-16), con abuelos, bisabuelos y hasta mujeres de otros pueblos, como Rut. Cada familia tiene una historia, y Dios obra a través de ella.</p>
+<p><strong>Para conversar:</strong> Armá tu <em>family tree</em> en inglés. ¿Qué historia de tu familia te gustaría que no se olvide?</p>
+</div>
+</section>
+<section id="videos-s9" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=uqNzV213Wc8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/uqNzV213Wc8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=uqNzV213Wc8"><small>YouTube</small>Members of the family</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=v9EU41cuhHY" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/v9EU41cuhHY/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=v9EU41cuhHY"><small>YouTube</small>How to describe your family (BBC)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s9" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Proyecto «Family tree riddle» (U2 SB 30-31).</p>
+</section>
+</section>
+<section id="s10" class="level2">
+<h2>Week 10 · My house</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>There is / there are</em> afirmativo y negativo; ambientes de la casa.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U5 SB 58-61 · WB 108-110 · ambientes: ficha propia</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Plano de su casa con los nombres en inglés.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Juan 14:2</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s10" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>There is / there are</em> afirmativo y negativo; ambientes de la casa.</p>
+<p><strong>Páginas:</strong> U5 SB 58-61 · WB 108-110 · ambientes: ficha propia.</p>
+<p><em>«Ficha propia»: este tema no está en el libro y se trabaja con una ficha aparte.</em></p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s10" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Una casa con muchas habitaciones</strong></p>
+<p>Esta semana usamos <em>there is / there are</em> para describir la casa. Jesús describió la casa de su Padre: “En la casa de mi Padre muchas moradas hay; si así no fuera, yo os lo hubiera dicho; voy, pues, a preparar lugar para vosotros” (Juan 14:2).</p>
+<p>Muchas biblias en inglés traducen «moradas» como <em>rooms</em>: en la casa de Dios hay lugar preparado para cada uno de los que lo siguen.</p>
+<p><strong>Para conversar:</strong> Describí tu casa con <em>there is / there are</em>. ¿Qué te dice que Jesús prepare un lugar para vos?</p>
+</div>
+</section>
+<section id="videos-s10" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=j3llK722RVQ" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/j3llK722RVQ/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=j3llK722RVQ"><small>YouTube</small>There is / there are (Mr Pea)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=uGw2aFLry0s" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/uGw2aFLry0s/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=uGw2aFLry0s"><small>YouTube</small>House vocabulary</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s10" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Plano de su casa con los nombres en inglés.</p>
+</section>
+</section>
+<section id="s11" class="level2">
+<h2>Week 11 · Where is it?</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>There is / are</em> interrogativo; preposiciones <em>in, on, under</em>; cosas de la casa; <em>because</em>.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U5 SB 62-63 · preposiciones y muebles: ficha propia</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Juego: esconder un objeto y adivinar dónde está.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Mateo 5:15 · Lucas 15:8-9</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s11" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>There is / are</em> interrogativo; preposiciones <em>in, on, under</em>; cosas de la casa; <em>because</em>.</p>
+<p><strong>Páginas:</strong> U5 SB 62-63 · preposiciones y muebles: ficha propia.</p>
+<p><em>«Ficha propia»: este tema no está en el libro y se trabaja con una ficha aparte.</em></p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s11" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>On, in, under</strong></p>
+<p>Jesús usó las preposiciones para enseñar: “Ni se enciende una luz y se pone debajo de un almud, sino sobre el candelero, y alumbra a todos los que están en casa” (Mateo 5:15). La luz no va <em>under</em>, va <em>on</em>.</p>
+<p>También contó de una mujer que perdió una moneda y barrió la casa buscándola hasta encontrarla, y después hizo fiesta con sus vecinas (Lucas 15:8-9). Así busca Dios a cada persona.</p>
+<p><strong>Para conversar:</strong> Jugá a esconder un objeto y dar pistas en inglés con <em>in, on, under</em>. ¿Qué enseña la parábola de la moneda perdida?</p>
+</div>
+</section>
+<section id="videos-s11" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=vLo9sD49CXo" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/vLo9sD49CXo/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=vLo9sD49CXo"><small>YouTube</small>Where is my dinosaur? (preposiciones)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=eUPOGjAEwqg" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/eUPOGjAEwqg/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=eUPOGjAEwqg"><small>YouTube</small>There is / There are</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="cancion-s11" class="level3">
+<h3>🎵 Song of the week</h3>
+<p>🔎 <a href="https://www.youtube.com/results?search_query=Nick+Jonas+Who+I+Am+lyrics" target="_blank" rel="noopener">Buscar en YouTube: <strong>Who I Am (Nick Jonas)</strong></a><br><em>Es una búsqueda: elegí un video con la letra, y conviene que un adulto lo mire antes.</em></p>
+<p>Escuchala con la letra, buscá las palabras que ya conocés y cantala.</p>
+</section>
+<section id="tarea-s11" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Juego: esconder un objeto y adivinar dónde está.</p>
+</section>
+</section>
+<section id="s12" class="level2">
+<h2>Week 12 · Small homes in Tokyo</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Reading: casas compactas en Tokio.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Ficha propia (lectura)</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td><strong>Final task:</strong> describir su habitación favorita y lo que hay en ella. Al terminar la semana: Diagnóstico 3.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Proverbios 24:3 · Proverbios 15:16</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s12" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Reading: casas compactas en Tokio.</p>
+<p><strong>Páginas:</strong> Ficha propia (lectura).</p>
+<p><em>«Ficha propia»: este tema no está en el libro y se trabaja con una ficha aparte.</em></p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s12" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Una casa pequeña, un hogar grande</strong></p>
+<p>En Tokio muchas familias viven en casas muy pequeñas y aprovechan cada rincón. La Biblia dice que lo que sostiene una casa no es su tamaño: “Con sabiduría se edificará la casa, Y con prudencia se afirmará” (Proverbios 24:3).</p>
+<p>“Mejor es lo poco con el temor de Jehová, Que el gran tesoro donde hay turbación” (Proverbios 15:16). Un hogar con amor y paz vale más que una casa enorme.</p>
+<p><strong>Para conversar:</strong> ¿Qué hace que una casa sea un hogar? Escribí tres ideas en inglés.</p>
+</div>
+</section>
+<section id="videos-s12" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=aOSJZbHoiY8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/aOSJZbHoiY8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=aOSJZbHoiY8"><small>YouTube</small>Rooms of the house</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s12" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p><strong>Final task:</strong> describir su habitación favorita y lo que hay en ella.</p>
+</section>
+</section>
+<section id="p3" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 3 · Week 12</h2>
+<p><strong>Evalúa:</strong> Unidad 3 «Family and Home»: familia, <em>there is / there are</em>, <em>in / on / under</em>, ambientes y cosas de la casa.</p>
+<p>Es una evaluación corta para hacer al terminar la semana. La prepara el docente o el adulto que acompaña, con los temas de arriba.</p>
+</section>
+</section>
+<section id="u4" class="level1 unidad" data-color="u4">
+<h1 class="unidad" data-color="u4">Unidad 4 · Fun Time</h1>
+<blockquote>
+<p><em>Hablar de gustos, comidas y tiempo libre; invitar, aceptar, rechazar y pedir permiso.</em> <strong>Semanas 13 a 16.</strong> <strong>Versículo de la unidad:</strong> “Este es el día que hizo Jehová; Nos gozaremos y alegraremos en él” (Salmo 118:24).</p>
+</blockquote>
+<section id="s13" class="level2">
+<h2>Week 13 · Free time</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Actividades de tiempo libre; <em>I like / I don't like</em>; presente simple afirmativo y negativo.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U4 SB 46-47 · U3 SB 36-37 · WB 98, 102</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Encuesta: qué les gusta hacer a 5 personas.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Eclesiastés 3:4 · Génesis 2:2-3</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s13" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Actividades de tiempo libre; <em>I like / I don't like</em>; presente simple afirmativo y negativo.</p>
+<p><strong>Páginas:</strong> U4 SB 46-47 · U3 SB 36-37 · WB 98, 102.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s13" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Tiempo para disfrutar</strong></p>
+<p>La Biblia no está en contra del tiempo libre: hay “tiempo de llorar, y tiempo de reír; tiempo de endechar, y tiempo de bailar” (Eclesiastés 3:4). Hasta Dios descansó el séptimo día, y lo bendijo (Génesis 2:2-3).</p>
+<p>Jugar, hacer deporte, leer o dibujar son regalos para disfrutar. Lo importante es que el tiempo libre nos haga bien y no nos aleje de Dios ni de los demás.</p>
+<p><strong>Para conversar:</strong> Escribí en inglés tres cosas que te gusta hacer en tu tiempo libre (<em>I like…</em>). ¿Cuál hacés con tu familia?</p>
+</div>
+</section>
+<section id="videos-s13" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=2p32l220EtU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/2p32l220EtU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=2p32l220EtU"><small>YouTube</small>Free time activities</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=wUF33157hYI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/wUF33157hYI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=wUF33157hYI"><small>YouTube</small>Likes and dislikes (BBC)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s13" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Encuesta: qué les gusta hacer a 5 personas.</p>
+</section>
+</section>
+<section id="s14" class="level2">
+<h2>Week 14 · Food and drinks</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Comidas y bebidas; expresar gustos y preferencias.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Ficha propia (el libro no trae comidas)</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Su menú ideal: lo que le gusta y lo que no.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Salmo 34:8 · Juan 6:11</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s14" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Comidas y bebidas; expresar gustos y preferencias.</p>
+<p><strong>Páginas:</strong> Ficha propia (el libro no trae comidas).</p>
+<p><em>«Ficha propia»: este tema no está en el libro y se trabaja con una ficha aparte.</em></p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s14" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Gustad y ved</strong></p>
+<p>Esta semana decimos qué comidas nos gustan. La Biblia usa el gusto para hablar de Dios: “Gustad, y ved que es bueno Jehová” (Salmo 34:8). A Dios se lo conoce «probando», confiando en Él.</p>
+<p>Antes de repartir los panes, Jesús dio gracias (Juan 6:11). Agradecer la comida es reconocer que viene de Dios.</p>
+<p><strong>Para conversar:</strong> ¿Cómo se dice tu comida favorita en inglés? ¿En tu familia acostumbran dar gracias antes de comer?</p>
+</div>
+</section>
+<section id="videos-s14" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=yezpvLy6eRM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/yezpvLy6eRM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=yezpvLy6eRM"><small>YouTube</small>Food and drinks</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s14" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Su menú ideal: lo que le gusta y lo que no.</p>
+</section>
+</section>
+<section id="s15" class="level2">
+<h2>Week 15 · Invitations</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Invitar, aceptar y rechazar (<em>Would you like…? / I'd love to / I'm sorry, I can't / Let's…</em>); pedir permiso (<em>Can I…?</em>).</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U4 SB 52-53 (&quot;Inviting someone out&quot;) · WB 106</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Diálogos cortos en pareja.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Lucas 14:16-24 · Apocalipsis 3:20</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s15" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Invitar, aceptar y rechazar (<em>Would you like…? / I'd love to / I'm sorry, I can't / Let's…</em>); pedir permiso (<em>Can I…?</em>).</p>
+<p><strong>Páginas:</strong> U4 SB 52-53 (&quot;Inviting someone out&quot;) · WB 106.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s15" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Una invitación que no conviene rechazar</strong></p>
+<p>Jesús contó de un hombre que hizo una gran cena e invitó a muchos, pero todos pusieron excusas: uno compró un campo, otro bueyes, otro se había casado (Lucas 14:16-24). ¡Un montón de <em>I'm sorry, I can't</em>!</p>
+<p>Jesús también nos invita: “He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él, y cenaré con él, y él conmigo” (Apocalipsis 3:20).</p>
+<p><strong>Para conversar:</strong> Escribí un diálogo en inglés: una invitación y una respuesta. ¿Qué respondés vos a la invitación de Jesús?</p>
+</div>
+</section>
+<section id="videos-s15" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=_T-QqInTVAw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/_T-QqInTVAw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=_T-QqInTVAw"><small>YouTube</small>Would you like…?</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=jkNt2LT2s-o" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/jkNt2LT2s-o/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=jkNt2LT2s-o"><small>YouTube</small>Usos de can (permiso)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="cancion-s15" class="level3">
+<h3>🎵 Song of the week</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=IcfIjfq_3Tk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/IcfIjfq_3Tk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=IcfIjfq_3Tk"><small>Canción</small>I Want to Hold Your Hand</span></a></p>
+<p>Escuchala con la letra, buscá las palabras que ya conocés y cantala.</p>
+</section>
+<section id="tarea-s15" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Diálogos cortos en pareja.</p>
+</section>
+</section>
+<section id="s16" class="level2">
+<h2>Week 16 · Help, thanks and sorry</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Pedir y ofrecer ayuda, agradecer, disculparse.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Ficha propia · U4 SB 56-57 (Memory game)</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td><strong>Final task:</strong> representar una invitación completa (invitar, aceptar o rechazar, agradecer). Al terminar la semana: Diagnóstico 4.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Lucas 17:11-19 · 1 Tesalonicenses 5:18</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s16" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Pedir y ofrecer ayuda, agradecer, disculparse.</p>
+<p><strong>Páginas:</strong> Ficha propia · U4 SB 56-57 (Memory game).</p>
+<p><em>«Ficha propia»: este tema no está en el libro y se trabaja con una ficha aparte.</em></p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s16" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Thank you</strong></p>
+<p>Jesús sanó a diez leprosos, pero solo uno volvió a darle las gracias. Jesús preguntó: ¿y los otros nueve? (Lucas 17:11-19). Decir <em>thank you</em> parece poco, pero dice mucho.</p>
+<p>“Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús” (1 Tesalonicenses 5:18). Pedir ayuda, agradecer y pedir perdón (<em>sorry</em>) son palabras que sanan relaciones.</p>
+<p><strong>Para conversar:</strong> ¿A quién te gustaría decirle <em>thank you</em> esta semana? ¿Y <em>sorry</em>?</p>
+</div>
+</section>
+<section id="tarea-s16" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p><strong>Final task:</strong> representar una invitación completa (invitar, aceptar o rechazar, agradecer).</p>
+</section>
+</section>
+<section id="p4" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 4 · Week 16</h2>
+<p><strong>Evalúa:</strong> Unidad 4 «Fun Time»: <em>like / don't like</em>, presente simple afirmativo y negativo, comidas, invitar y pedir permiso.</p>
+<p>Es una evaluación corta para hacer al terminar la semana. La prepara el docente o el adulto que acompaña, con los temas de arriba.</p>
+</section>
+</section>
+<section id="u5" class="level1 unidad" data-color="u5">
+<h1 class="unidad" data-color="u5">Unidad 5 · Everyday Life</h1>
+<blockquote>
+<p><em>Contar la rutina, decir la hora y usar el presente simple con todas las personas.</em> <strong>Semanas 17 a 20.</strong> <strong>Versículo de la unidad:</strong> “Oh Jehová, de mañana oirás mi voz; De mañana me presentaré delante de ti, y esperaré” (Salmo 5:3).</p>
+</blockquote>
+<section id="s17" class="level2">
+<h2>Week 17 · My day</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Rutinas (<em>get up, have breakfast, get dressed…</em>); días de la semana; la hora.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U3 SB 34-35 · WB 96-97</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Reloj de su día con las horas.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Marcos 1:35 · Daniel 6:10 · Salmo 5:3</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s17" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Rutinas (<em>get up, have breakfast, get dressed…</em>); días de la semana; la hora.</p>
+<p><strong>Páginas:</strong> U3 SB 34-35 · WB 96-97.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s17" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Una rutina con lugar para Dios</strong></p>
+<p>Jesús tenía su rutina: “Levantándose muy de mañana, siendo aún muy oscuro, salió y se fue a un lugar desierto, y allí oraba” (Marcos 1:35). Daniel oraba tres veces al día, aun cuando estaba prohibido (Daniel 6:10).</p>
+<p>Las rutinas ordenan el día. Incluir un momento para hablar con Dios es una buena costumbre para empezar: “De mañana me presentaré delante de ti, y esperaré” (Salmo 5:3).</p>
+<p><strong>Para conversar:</strong> Escribí tu rutina de la mañana en inglés. ¿En qué momento podrías incluir un rato para orar o leer la Biblia?</p>
+</div>
+</section>
+<section id="videos-s17" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=qD1pnquN_DM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/qD1pnquN_DM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=qD1pnquN_DM"><small>YouTube</small>My Day: daily routine</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=4jn2-Jv7DoE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/4jn2-Jv7DoE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=4jn2-Jv7DoE"><small>YouTube</small>How to tell the time (British Council)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s17" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Reloj de su día con las horas.</p>
+</section>
+</section>
+<section id="s18" class="level2">
+<h2>Week 18 · He, she, it</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Presente simple con todas las personas (<em>he, she, it</em> con -s); preposiciones de tiempo (<em>on Sundays, at 7.00</em>).</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U4 SB 48-51 · U3 SB 40 (&quot;at, in, from… to…&quot;) · WB 102-104</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>La rutina de un familiar en tercera persona.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>1 Juan 4:8 · Lamentaciones 3:22-23</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s18" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Presente simple con todas las personas (<em>he, she, it</em> con -s); preposiciones de tiempo (<em>on Sundays, at 7.00</em>).</p>
+<p><strong>Páginas:</strong> U4 SB 48-51 · U3 SB 40 (&quot;at, in, from… to…&quot;) · WB 102-104.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s18" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Verdades que siempre son ciertas</strong></p>
+<p>El presente simple se usa para rutinas y también para verdades generales, que siempre son ciertas. La Biblia tiene una así, cortita: “Dios es amor” (1 Juan 4:8). En inglés: <em>God is love</em>.</p>
+<p>Su cuidado también es una rutina que no falla: “Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron sus misericordias. Nuevas son cada mañana; grande es tu fidelidad” (Lamentaciones 3:22-23).</p>
+<p><strong>Para conversar:</strong> Escribí en inglés tres verdades sobre Dios en presente simple (por ejemplo, <em>God loves us</em>).</p>
+</div>
+</section>
+<section id="videos-s18" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=o8xOJPKfraU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/o8xOJPKfraU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=o8xOJPKfraU"><small>YouTube</small>Presente simple: s, es, ies</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s18" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>La rutina de un familiar en tercera persona.</p>
+</section>
+</section>
+<section id="s19" class="level2">
+<h2>Week 19 · Questions about routines</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Presente simple interrogativo, todas las personas.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U3 SB 36-39 (&quot;Online interviews&quot;) · U4 SB 50-51 · WB 98-100</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Reading: «What does a teen volunteer do?» (ficha propia).</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Marcos 10:45 · 1 Timoteo 4:12</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s19" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Presente simple interrogativo, todas las personas.</p>
+<p><strong>Páginas:</strong> U3 SB 36-39 (&quot;Online interviews&quot;) · U4 SB 50-51 · WB 98-100.</p>
+<p><em>«Ficha propia»: este tema no está en el libro y se trabaja con una ficha aparte.</em></p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s19" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Jóvenes que sirven</strong></p>
+<p>Esta semana leemos sobre un adolescente voluntario. Jesús dijo de sí mismo: “el Hijo del Hombre no vino para ser servido, sino para servir” (Marcos 10:45).</p>
+<p>Y Pablo le escribió a un joven, Timoteo: “Ninguno tenga en poco tu juventud, sino sé ejemplo de los creyentes en palabra, conducta, amor, espíritu, fe y pureza” (1 Timoteo 4:12). No hace falta ser adulto para ayudar.</p>
+<p><strong>Para conversar:</strong> ¿En qué podrías ayudar vos en tu barrio, tu iglesia o tu escuela?</p>
+</div>
+</section>
+<section id="videos-s19" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=nvVdIJ0las0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/nvVdIJ0las0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=nvVdIJ0las0"><small>YouTube</small>Simple Present (Ellii)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="cancion-s19" class="level3">
+<h3>🎵 Song of the week</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=QSwDEL2sssU" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/QSwDEL2sssU/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=QSwDEL2sssU"><small>Canción</small>Island in the Sun</span></a></p>
+<p>Escuchala con la letra, buscá las palabras que ya conocés y cantala.</p>
+</section>
+<section id="tarea-s19" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Reading: «What does a teen volunteer do?» (ficha propia).</p>
+</section>
+</section>
+<section id="s20" class="level2">
+<h2>Week 20 · A typical school day</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td>Integración de la unidad.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>U3 SB 40-45 (&quot;A typical school day&quot;, Consolidation A)</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td><strong>Final task:</strong> su rutina diaria de lunes a viernes. Al terminar la semana: Diagnóstico 5.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Lucas 2:52 · Colosenses 3:23</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s20" class="level3">
+<h3>📖 Para trabajar</h3>
+<p>Integración de la unidad.</p>
+<p><strong>Páginas:</strong> U3 SB 40-45 (&quot;A typical school day&quot;, Consolidation A).</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/On_the_Pulse_Starter_SB_WB.pdf" target="_blank" rel="noopener"><b>Libro</b> · On the Pulse Starter (Macmillan)<small>Student's Book + Workbook · PDF · 18,2 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s20" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Crecer en todo</strong></p>
+<p>Un día de escuela tiene materias, recreos, amigos y tareas. De Jesús a nuestra edad dice la Biblia: “Y Jesús crecía en sabiduría y en estatura, y en gracia para con Dios y los hombres” (Lucas 2:52). Creció en todo.</p>
+<p>“Y todo lo que hagáis, hacedlo de corazón, como para el Señor y no para los hombres” (Colosenses 3:23). También aprender inglés.</p>
+<p><strong>Para conversar:</strong> Describí tu día de escuela en inglés. ¿En qué te gustaría crecer este año?</p>
+</div>
+</section>
+<section id="videos-s20" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=wtTAdfyejH0" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/wtTAdfyejH0/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=wtTAdfyejH0"><small>YouTube</small>Present simple (Mr Pea)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s20" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p><strong>Final task:</strong> su rutina diaria de lunes a viernes.</p>
+</section>
+</section>
+<section id="p5" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 5 · Week 20</h2>
+<p><strong>Evalúa:</strong> Unidad 5 «Everyday Life»: rutinas, la hora, preposiciones de tiempo, presente simple completo.</p>
+<p>Es una evaluación corta para hacer al terminar la semana. La prepara el docente o el adulto que acompaña, con los temas de arriba.</p>
+</section>
+</section>
+<section id="u6" class="level1 unidad" data-color="u1">
+<h1 class="unidad" data-color="u1">Repaso y ampliación · iSucceed in English 2</h1>
+<blockquote>
+<p><em>Con el programa terminado, el Workbook de iSucceed repasa lo visto y suma ropa, presente continuo, pasado y clima. Las respuestas de los repasos están en sus páginas 78-79.</em> <strong>Semanas 21 a 30.</strong> <strong>Versículo de la unidad:</strong> “Por tanto, id, y haced discípulos a todas las naciones” (Mateo 28:19).</p>
+</blockquote>
+<section id="s21" class="level2">
+<h2>Week 21 · One world</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>0 Introduction + 1 One world.</em> Repaso: alfabeto, números, <em>have got</em>, la hora, países y nacionalidades, <em>to be</em>, posesivos.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 4-15</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Texto sobre una ciudad de Argentina (p. 14) y Review Unit 1 (p. 15).</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Salmo 24:1 · Jeremías 29:7</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s21" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>0 Introduction + 1 One world.</em> Repaso: alfabeto, números, <em>have got</em>, la hora, países y nacionalidades, <em>to be</em>, posesivos.</p>
+<p><strong>Páginas:</strong> Workbook págs. 4-15.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s21" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Un solo mundo</strong></p>
+<p>“De Jehová es la tierra y su plenitud; El mundo, y los que en él habitan” (Salmo 24:1). Todos los países y ciudades le pertenecen.</p>
+<p>A los israelitas que vivían lejos de su tierra, Dios les pidió: “procurad la paz de la ciudad... y rogad por ella a Jehová; porque en su paz tendréis vosotros paz” (Jeremías 29:7). Esta semana escribís sobre una ciudad argentina: también podés orar por ella.</p>
+<p><strong>Para conversar:</strong> ¿Qué ciudad argentina elegiste? Escribí una oración en inglés pidiendo algo bueno para ella.</p>
+</div>
+</section>
+<section id="videos-s21" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=6Co-P43_N-U" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/6Co-P43_N-U/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=6Co-P43_N-U"><small>YouTube</small>Countries and nationalities</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s21" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Texto sobre una ciudad de Argentina (p. 14) y Review Unit 1 (p. 15).</p>
+</section>
+</section>
+<section id="s22" class="level2">
+<h2>Week 22 · Home</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>2 Home.</em> Casa y muebles, <em>there is / there are</em>, preposiciones de lugar (<em>next to, behind, between, opposite…</em>).</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 16-19</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Ubicar los muebles de su cuarto con preposiciones.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>2 Reyes 4:8-10</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s22" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>2 Home.</em> Casa y muebles, <em>there is / there are</em>, preposiciones de lugar (<em>next to, behind, between, opposite…</em>).</p>
+<p><strong>Páginas:</strong> Workbook págs. 16-19.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s22" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Una habitación preparada</strong></p>
+<p>Una mujer de Sunem vio que el profeta Eliseo pasaba seguido por su casa y le dijo a su marido: hagamos “un pequeño aposento de paredes, y pongamos allí cama, mesa, silla y candelero” (2 Reyes 4:10). ¡Una lista de muebles en la Biblia!</p>
+<p>Preparar un lugar para alguien es una forma de cariño y de hospitalidad.</p>
+<p><strong>Para conversar:</strong> Ubicá los muebles de tu cuarto en inglés con <em>next to, behind, between</em>. ¿Para quién prepararías una habitación?</p>
+</div>
+</section>
+<section id="videos-s22" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=aOSJZbHoiY8" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/aOSJZbHoiY8/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=aOSJZbHoiY8"><small>YouTube</small>Rooms of the house</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=DHb4-CCif7U" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/DHb4-CCif7U/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=DHb4-CCif7U"><small>YouTube</small>Prepositions: on, in, under, by</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s22" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Ubicar los muebles de su cuarto con preposiciones.</p>
+</section>
+</section>
+<section id="s23" class="level2">
+<h2>Week 23 · John Lennon&#x27;s house</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>2 Home.</em> <em>There is / are</em> en preguntas, preguntar dónde está algo; la casa de John Lennon.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 19-23</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Describir su casa (p. 22) y Review Unit 2 (p. 23).</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Lucas 9:58</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s23" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>2 Home.</em> <em>There is / are</em> en preguntas, preguntar dónde está algo; la casa de John Lennon.</p>
+<p><strong>Páginas:</strong> Workbook págs. 19-23.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s23" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>El que no tenía dónde recostar la cabeza</strong></p>
+<p>Conocemos la casa de John Lennon, una de las estrellas de la música. Jesús, en cambio, dijo: “Las zorras tienen guaridas, y las aves de los cielos nidos; mas el Hijo del Hombre no tiene dónde recostar la cabeza” (Lucas 9:58).</p>
+<p>El Hijo de Dios vivió con sencillez y dependió de la hospitalidad de otros. Lo importante no era su casa, sino su misión: acercarnos a Dios.</p>
+<p><strong>Para conversar:</strong> Describí tu casa en inglés. ¿Por qué creés que Jesús eligió vivir con tan poco?</p>
+</div>
+</section>
+<section id="videos-s23" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=uGw2aFLry0s" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/uGw2aFLry0s/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=uGw2aFLry0s"><small>YouTube</small>House vocabulary</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s23" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Describir su casa (p. 22) y Review Unit 2 (p. 23).</p>
+</section>
+</section>
+<section id="s24" class="level2">
+<h2>Week 24 · Habits</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>3 Habits.</em> Rutinas, presente simple y su ortografía, adverbios de frecuencia, preposiciones de tiempo, rutinas escolares.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 24-31</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Su mañana antes de la escuela (p. 30) y Review Unit 3 (p. 31).</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>1 Tesalonicenses 5:16-17 · Hebreos 13:5</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s24" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>3 Habits.</em> Rutinas, presente simple y su ortografía, adverbios de frecuencia, preposiciones de tiempo, rutinas escolares.</p>
+<p><strong>Páginas:</strong> Workbook págs. 24-31.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s24" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Always, never</strong></p>
+<p>Los adverbios de frecuencia dicen cada cuánto hacemos algo: <em>always, usually, sometimes, never</em>. La Biblia usa un <em>always</em>: “Estad siempre gozosos. Orad sin cesar” (1 Tesalonicenses 5:16-17).</p>
+<p>Y un <em>never</em> que consuela: Dios dijo “No te desampararé, ni te dejaré” (Hebreos 13:5). Lo que Dios promete con «nunca» no falla.</p>
+<p><strong>Para conversar:</strong> Escribí en inglés tres hábitos tuyos con <em>always, sometimes</em> y <em>never</em>.</p>
+</div>
+</section>
+<section id="videos-s24" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=eUXkj6j6Ezw" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/eUXkj6j6Ezw/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=eUXkj6j6Ezw"><small>YouTube</small>Wake Up! Daily routines</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=WC2tzXPIWMs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/WC2tzXPIWMs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=WC2tzXPIWMs"><small>YouTube</small>Adverbios de frecuencia</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s24" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Su mañana antes de la escuela (p. 30) y Review Unit 3 (p. 31).</p>
+</section>
+</section>
+<section id="s25" class="level2">
+<h2>Week 25 · Our food</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>4 Our food.</em> Comidas y bebidas, presente simple negativo e interrogativo, <em>how often</em>, preguntar por hábitos.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 32-39</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Un plato típico argentino (p. 38) y Review Unit 4 (p. 39). Al terminar la semana: Diagnóstico 6.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Mateo 6:11 · Hechos 2:46</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s25" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>4 Our food.</em> Comidas y bebidas, presente simple negativo e interrogativo, <em>how often</em>, preguntar por hábitos.</p>
+<p><strong>Páginas:</strong> Workbook págs. 32-39.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s25" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>El pan de cada día</strong></p>
+<p><em>How often?</em> En la oración que enseñó Jesús pedimos el pan “de cada día”: “El pan nuestro de cada día, dánoslo hoy” (Mateo 6:11). Dependemos de Dios todos los días, no una vez al año.</p>
+<p>Los primeros cristianos compartían la comida “con alegría y sencillez de corazón” (Hechos 2:46). Un plato típico argentino, compartido en familia, también puede ser un motivo de gratitud.</p>
+<p><strong>Para conversar:</strong> Describí en inglés tu plato argentino favorito. ¿Cada cuánto lo comés?</p>
+</div>
+</section>
+<section id="videos-s25" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=yezpvLy6eRM" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/yezpvLy6eRM/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=yezpvLy6eRM"><small>YouTube</small>Food and drinks</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=A_AJrtGtC3Y" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/A_AJrtGtC3Y/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=A_AJrtGtC3Y"><small>YouTube</small>Drinks</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s25" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Un plato típico argentino (p. 38) y Review Unit 4 (p. 39).</p>
+</section>
+</section>
+<section id="p6" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 6 · Week 25</h2>
+<p><strong>Evalúa:</strong> iSucceed 1-4: repaso del programa, más comidas y hábitos.</p>
+<p>Es una evaluación corta para hacer al terminar la semana. La prepara el docente o el adulto que acompaña, con los temas de arriba.</p>
+</section>
+<section id="s26" class="level2">
+<h2>Week 26 · Sport</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>5 Sport.</em> Deportes con <em>play / go / do</em>, <em>can</em> para habilidad y permiso, adverbios de modo, <em>love / like / can't stand / hate</em>, pronombres objeto.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 40-43</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Lo que le gusta y lo que no soporta.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Filipenses 4:13 · 1 Corintios 9:24</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s26" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>5 Sport.</em> Deportes con <em>play / go / do</em>, <em>can</em> para habilidad y permiso, adverbios de modo, <em>love / like / can't stand / hate</em>, pronombres objeto.</p>
+<p><strong>Páginas:</strong> Workbook págs. 40-43.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s26" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>I can</strong></p>
+<p>Esta semana usamos <em>can</em> para hablar de lo que sabemos hacer. Pablo escribió: “Todo lo puedo en Cristo que me fortalece” (Filipenses 4:13). No quiere decir que vamos a ganar todos los partidos, sino que Dios nos da fuerzas para lo que nos toca vivir.</p>
+<p>Pablo también usó el deporte como ejemplo: “Corred de tal manera que lo obtengáis” (1 Corintios 9:24). La constancia y el esfuerzo valen en la cancha y en la vida.</p>
+<p><strong>Para conversar:</strong> Escribí en inglés tres cosas que <em>can</em> hacer y una que todavía <em>can't</em>. ¿Qué deporte te gusta?</p>
+</div>
+</section>
+<section id="videos-s26" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=1vUTq-Pd4Vs" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/1vUTq-Pd4Vs/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=1vUTq-Pd4Vs"><small>YouTube</small>Talking about ability (BBC)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=wUF33157hYI" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/wUF33157hYI/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=wUF33157hYI"><small>YouTube</small>Likes and dislikes (BBC)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s26" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Lo que le gusta y lo que no soporta.</p>
+</section>
+</section>
+<section id="s27" class="level2">
+<h2>Week 27 · Opinions and clothes</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>5 Sport.</em> Pedir y dar opiniones; hobbies poco comunes. <em>6 Our clothes:</em> ropa y precios.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 44-49</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Describir a un amigo o familiar (p. 46) y Review Unit 5 (p. 47).</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Santiago 1:19 · 1 Pedro 3:3-4</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s27" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>5 Sport.</em> Pedir y dar opiniones; hobbies poco comunes. <em>6 Our clothes:</em> ropa y precios.</p>
+<p><strong>Páginas:</strong> Workbook págs. 44-49.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s27" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Opinar y vestirse por dentro</strong></p>
+<p>Para dar una opinión, primero hay que escuchar: “todo hombre sea pronto para oír, tardo para hablar, tardo para airarse” (Santiago 1:19).</p>
+<p>Sobre la ropa, Pedro dice que la belleza más importante no es la del peinado ni la ropa, sino la del “interno, el del corazón”, con un espíritu afable y apacible (1 Pedro 3:3-4).</p>
+<p><strong>Para conversar:</strong> Describí en inglés a un amigo: cómo se viste y cómo es por dentro. ¿Qué dice más de él?</p>
+</div>
+</section>
+<section id="videos-s27" class="level3">
+<h3>🎬 Video</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=wFwosor2gsE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/wFwosor2gsE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=wFwosor2gsE"><small>YouTube</small>Clothes in English</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s27" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Describir a un amigo o familiar (p. 46) y Review Unit 5 (p. 47).</p>
+</section>
+</section>
+<section id="s28" class="level2">
+<h2>Week 28 · What are you wearing?</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>6 Our clothes.</em> Presente continuo (afirmativo, negativo, preguntas), comprar ropa, uniformes escolares.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 50-55</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Qué tiene puesto y qué está haciendo cada uno a las 7 p. m. (p. 54) y Review Unit 6 (p. 55).</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Colosenses 3:12 · Salmo 139:2-3</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s28" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>6 Our clothes.</em> Presente continuo (afirmativo, negativo, preguntas), comprar ropa, uniformes escolares.</p>
+<p><strong>Páginas:</strong> Workbook págs. 50-55.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s28" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>La ropa que nos ponemos</strong></p>
+<p><em>What are you wearing?</em> La Biblia usa la ropa como imagen del carácter: “Vestíos, pues, como escogidos de Dios, santos y amados, de entrañable misericordia, de benignidad, de humildad, de mansedumbre, de paciencia” (Colosenses 3:12).</p>
+<p>Y el presente continuo nos recuerda que Dios ve lo que estamos haciendo ahora: “Tú has conocido mi sentarme y mi levantarme” (Salmo 139:2).</p>
+<p><strong>Para conversar:</strong> Si la bondad y la paciencia fueran ropa, ¿cuál «te pondrías» hoy? Escribilo en inglés: <em>I'm wearing kindness…</em></p>
+</div>
+</section>
+<section id="videos-s28" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=lGkxRXamy7Y" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/lGkxRXamy7Y/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=lGkxRXamy7Y"><small>YouTube</small>Present continuous (Mr Pea)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=2mnL9jPVzsk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/2mnL9jPVzsk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=2mnL9jPVzsk"><small>YouTube</small>Shopping for clothes (BBC)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s28" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Qué tiene puesto y qué está haciendo cada uno a las 7 p. m. (p. 54) y Review Unit 6 (p. 55).</p>
+</section>
+</section>
+<section id="s29" class="level2">
+<h2>Week 29 · Music</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>7 Music.</em> Géneros musicales y emociones, pasado de <em>to be</em> (<em>was / were</em>), <em>there was / there were</em>, hablar de emociones.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 56-63</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Un recital o festival que vio (p. 62) y Review Unit 7 (p. 63).</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Juan 9:25 · Salmo 30:5</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s29" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>7 Music.</em> Géneros musicales y emociones, pasado de <em>to be</em> (<em>was / were</em>), <em>there was / there were</em>, hablar de emociones.</p>
+<p><strong>Páginas:</strong> Workbook págs. 56-63.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s29" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>I was blind, but now I see</strong></p>
+<p>Un hombre que nació ciego fue sanado por Jesús y dijo: “habiendo yo sido ciego, ahora veo” (Juan 9:25). Esa frase inspiró uno de los himnos más famosos en inglés, <em>Amazing Grace</em>: «<em>I once was lost, but now am found; was blind, but now I see</em>». ¡Un ejemplo perfecto de <em>was / were</em>!</p>
+<p>La música expresa emociones, y los Salmos también: “Por la noche durará el lloro, Y a la mañana vendrá la alegría” (Salmo 30:5).</p>
+<p><strong>Para conversar:</strong> Escuchá <em>Amazing Grace</em> y buscá las palabras <em>was</em> y <em>now</em>. ¿Qué cambió en la vida del que canta?</p>
+</div>
+</section>
+<section id="videos-s29" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=vusHILTxiGk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/vusHILTxiGk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=vusHILTxiGk"><small>YouTube</small>Types of music</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=fsFPgAhDo4I" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/fsFPgAhDo4I/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=fsFPgAhDo4I"><small>YouTube</small>Was / Were</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s29" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Un recital o festival que vio (p. 62) y Review Unit 7 (p. 63).</p>
+</section>
+</section>
+<section id="s30" class="level2">
+<h2>Week 30 · Weather and holidays</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Contenido</strong></td>
+<td><em>8 Weather.</em> El clima y la temperatura, pasado simple regular e irregular, hablar de las vacaciones.</td>
+</tr>
+<tr class="even">
+<td><strong>Libro</strong></td>
+<td>Workbook págs. 64-71</td>
+</tr>
+<tr class="odd">
+<td><strong>Tarea</strong></td>
+<td>Biografía corta de un personaje (p. 70) y Review Unit 8 (p. 71). Extra: «Fun time» (pp. 72-75), «Sustainable Development Goals» (pp. 76-77) y la lista de verbos irregulares (p. 80). Al terminar la semana: Diagnóstico 7.</td>
+</tr>
+<tr class="even">
+<td><strong>Mirada bíblica</strong></td>
+<td>Marcos 4:35-41</td>
+</tr>
+</tbody>
+</table>
+<section id="para-trabajar-s30" class="level3">
+<h3>📖 Para trabajar</h3>
+<p><em>8 Weather.</em> El clima y la temperatura, pasado simple regular e irregular, hablar de las vacaciones.</p>
+<p><strong>Páginas:</strong> Workbook págs. 64-71.</p>
+<ul class="descargas">
+<li><a href="bibliografia/ingles/iSucceed_in_English_2_Workbook.pdf" target="_blank" rel="noopener"><b>Libro</b> · iSucceed in English 2 (Pearson)<small>Workbook · PDF · 14,5 MB</small></a></li>
+</ul>
+</section>
+<section id="mirada-biblica-s30" class="level3">
+<h3>🕊️ Mirada bíblica</h3>
+<div class="biblia">
+<p><strong>Aun el viento y el mar le obedecen</strong></p>
+<p>Esta semana hablamos del clima y usamos el pasado simple. La Biblia cuenta, en pasado, una tormenta: los discípulos tuvieron miedo, y Jesús “reprendió al viento, y dijo al mar: Calla, enmudece. Y cesó el viento, y se hizo grande bonanza” (Marcos 4:39).</p>
+<p>Ellos se preguntaron: “¿Quién es éste, que aun el viento y el mar le obedecen?” (Marcos 4:41). Terminamos el año sabiendo que el Señor del clima también nos acompaña a nosotros.</p>
+<p><strong>Para conversar:</strong> Contá en inglés, en pasado, algo que hiciste en tus últimas vacaciones. ¿Cómo estaba el clima?</p>
+</div>
+</section>
+<section id="videos-s30" class="level3">
+<h3>🎬 Videos</h3>
+<p><a class="video" href="https://www.youtube.com/watch?v=KBL5aXSJTlE" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/KBL5aXSJTlE/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=KBL5aXSJTlE"><small>YouTube</small>How&#x27;s the weather?</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=aPgtdZ_urZk" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/aPgtdZ_urZk/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=aPgtdZ_urZk"><small>YouTube</small>Past simple irregular verbs (British Council)</span></a></p>
+<p><a class="video" href="https://www.youtube.com/watch?v=N2StxicQois" target="_blank" rel="noopener"><span class="vthumb" style="background-image:url(https://img.youtube.com/vi/N2StxicQois/mqdefault.jpg)"><b>▶</b></span><span class="vtxt" data-url="https://www.youtube.com/watch?v=N2StxicQois"><small>YouTube</small>Talking about holidays (BBC)</span></a></p>
+<p><em>Mirá cada video dos veces: la primera para entender la idea; la segunda, repitiendo en voz alta las palabras nuevas.</em></p>
+</section>
+<section id="tarea-s30" class="level3">
+<h3>✏️ Producción / tarea</h3>
+<p>Biografía corta de un personaje (p. 70) y Review Unit 8 (p. 71). Extra: «Fun time» (pp. 72-75), «Sustainable Development Goals» (pp. 76-77) y la lista de verbos irregulares (p. 80).</p>
+</section>
+</section>
+<section id="p7" class="level2 prueba">
+<h2 class="prueba">📝 Diagnóstico 7 · Week 30</h2>
+<p><strong>Evalúa:</strong> Final: presente continuo, <em>was / were</em>, pasado simple, clima, ropa.</p>
+<p>Es una evaluación corta para hacer al terminar la semana. La prepara el docente o el adulto que acompaña, con los temas de arriba.</p>
+</section>
+</section>
+
+  </div>
+</main>
+<a class="arriba" href="#top" title="Volver arriba">↑</a>
+<script>
+(function(){
+  // cerrar menú al navegar en celular
+  document.querySelectorAll('#side a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu')));
+  // heredar color de la unidad en tarjetas
+  document.querySelectorAll('section.level1').forEach(u=>{
+    const c=u.getAttribute('data-color');
+    if(c) u.querySelectorAll('section.level2').forEach(s=>{s.style.setProperty('--c','var(--'+c+')');s.style.setProperty('--cs','var(--'+c+'s)')});
+  });
+  // claves plegables
+  const cl=document.querySelector('section.claves');
+  if(cl){cl.classList.add('cerrado');const b=document.createElement('button');b.className='toggle-claves';b.textContent='👩‍🏫 Mostrar claves (adulto que acompaña)';
+    cl.querySelector('h2').after(b);b.onclick=()=>{cl.classList.toggle('cerrado');b.textContent=cl.classList.contains('cerrado')?'👩‍🏫 Mostrar claves (adulto que acompaña)':'Ocultar claves';};}
+  // progreso + menú activo
+  const bar=document.querySelector('#progress div');
+  const links=[...document.querySelectorAll('#side a[href^="#"]')];
+  const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  function onScroll(){
+    const h=document.documentElement; bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+    let cur=secs[0]; for(const s of secs){ if(s.getBoundingClientRect().top<120) cur=s; }
+    links.forEach(a=>a.classList.toggle('on',cur&&a.getAttribute('href')==='#'+cur.id));
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  // descargar toda la bibliografía (de a un archivo, con pausa para que el navegador no las bloquee)
+  const bd=document.getElementById('btn-descargas');
+  if(bd){const txt=bd.textContent;bd.onclick=async()=>{
+    const as=[...document.querySelectorAll('ul.descargas a[download]')];bd.disabled=true;
+    for(let i=0;i<as.length;i++){bd.textContent='Descargando '+(i+1)+' de '+as.length+'…';as[i].click();await new Promise(r=>setTimeout(r,900));}
+    bd.textContent='✅ Listo: revisá tu carpeta de Descargas';setTimeout(()=>{bd.textContent=txt;bd.disabled=false;},5000);
+  };}
+})();
+</script>
+</body>
+</html>

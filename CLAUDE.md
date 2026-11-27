@@ -17,6 +17,7 @@ Sitio estático de la "Planificación 8vo año" (1.º año de secundaria, NES, C
 | [Biologia1_Plataforma.html](Biologia1_Plataforma.html) | Plataforma de Biología 1 (30 semanas en 3 secciones) |
 | [Musica1_Plataforma.html](Musica1_Plataforma.html) | Plataforma de Música 1 (12 semanas en 3 meses) |
 | [Arte1_Plataforma.html](Arte1_Plataforma.html) | Plataforma de Arte 1 (arte plástica, 1.er trimestre: 12 semanas en 3 unidades) |
+| [Ingles1_Plataforma.html](Ingles1_Plataforma.html) | Plataforma de Inglés 1 (30 semanas: 5 unidades del programa y un bloque de repaso) |
 | [tutoras.html](tutoras.html) | Staff de tutoras |
 | `bibliografia/` | PDF para descargar (ver más abajo) |
 | `tutoras/web/` | Fotos de las tutoras ya recortadas |
@@ -49,7 +50,7 @@ Todo el contenido está en español rioplatense con voseo ("fijate", "armá", "t
 
 ## Plataformas de cada materia
 
-Los ocho archivos `*_Plataforma.html` comparten la misma plantilla. El CSS (en `<style>`) y el JS (el único `<script>`, al final) son **idénticos byte a byte**, salvo la paleta de las unidades (`--u1`…`--u5` y sus variantes suaves `--uNs` en `:root`). Un cambio de diseño, de estilos o de comportamiento hay que aplicarlo en los tres archivos. Se puede verificar con `diff` sobre los bloques `<style>` y `<script>`.
+Los nueve archivos `*_Plataforma.html` comparten la misma plantilla. El CSS (en `<style>`) y el JS (el único `<script>`, al final) son **idénticos byte a byte**, salvo la paleta de las unidades (`--u1`…`--u5` y sus variantes suaves `--uNs` en `:root`). Un cambio de diseño, de estilos o de comportamiento hay que aplicarlo en los tres archivos. Se puede verificar con `diff` sobre los bloques `<style>` y `<script>`.
 
 El cuerpo usa marcado estilo Pandoc (`section.level1/2/3`, `<colgroup>`, `tr.odd/even`). El repositorio no incluye la fuente que lo generó, así que se edita el HTML directamente y se respeta ese estilo de marcado.
 
@@ -94,9 +95,16 @@ Las tres usan la misma plantilla, pero no tienen `#final` ni `#claves`. Sus unid
 - **Arte 1:** 12 semanas en 3 unidades (simetría y color; perspectiva geométrica; teoría del color). Cada semana tiene la teoría, la consigna del trabajo práctico y los pasos. Las semanas 1 a 4 muestran imágenes de ejemplo (`bibliografia/arte/img/`) con `<figure>` y estilo en línea, para no tocar el CSS compartido. Los enlaces al apunte de teoría y al PDF del trimestre usan `#page=N`.
 - Las tres se generaron con `../generador_tres/generar.py` (ver su `LEEME.txt`). Desde entonces se editan en el HTML.
 
+### Diferencias de Inglés 1
+
+- 30 semanas («Week N»): unidades `#u1`…`#u5` del programa de la escuela (Hello, My Things, Family and Home, Fun Time, Everyday Life; semanas 1-20, con *On the Pulse Starter*) y `#u6`, repaso y ampliación con el Workbook de *iSucceed in English 2* (semanas 21-30). `#u6` repite el color `u1`.
+- Cada semana tiene una tabla (Contenido / Libro / Tarea / Mirada bíblica) y las subsecciones `para-trabajar-sN`, `videos-sN`, `cancion-sN` (si hay canción) y `tarea-sN`. Los 7 diagnósticos (`#p1`…`#p7`) solo describen qué evalúan: el material original no trae los PDF, como tampoco las «fichas propias».
+- Los videos se tomaron de los enlaces del PDF de la planificación y coinciden semana por semana. La canción de la semana 11 es una búsqueda de YouTube.
+- Se generó con `../generador_ingles/generar.py`, y después se le agregó la mirada bíblica con `../mirada_biblica/insertar.py ingles`.
+
 ### Mirada bíblica en las plataformas generadas
 
-Lengua, Matemática, Biología, Música y Arte no traían mirada bíblica: se la agregó `../mirada_biblica/insertar.py`, con los textos de `lengua.py`, `matematica.py`, `biologia.py`, `musica.py` y `arte.py` de esa carpeta. El script agrega:
+Lengua, Matemática, Biología, Música, Arte e Inglés no traían mirada bíblica: se la agregó `../mirada_biblica/insertar.py`, con los textos de `lengua.py`, `matematica.py`, `biologia.py`, `musica.py`, `arte.py` e `ingles.py` de esa carpeta. El script agrega:
 
 - a la portada, el cierre «Todo, mirado con los anteojos de la Biblia.»;
 - en la introducción, «Los cuatro anteojos de la cosmovisión bíblica» (Creación, Caída, Redención y Propósito, con ejemplos de la materia), un ítem en «Cómo está organizada cada semana» y las notas de la Biblia (Reina-Valera 1960) y de HM;
@@ -129,6 +137,7 @@ Hay un bloque `@media print` completo para A4. Cada unidad y cada semana empieza
   - `geografia/`, `historia/` y `fec/`: el programa NES y los libros complementarios de cada materia.
   - `lengua/`: `Planificacion_anual_Lengua_1.pdf`, `libro/LL_NN_*.pdf` (los 16 capítulos del libro *Lengua y Literatura 1*, Serie Llaves, Mandioca), `fichas/Ficha_semana_NN.pdf` (32), `diagnosticos/Diagnostico_N.pdf` (6) y `diagnosticos/claves/Diagnostico_N_Clave.pdf` (6).
   - `biologia/`, `musica/` y `arte/`: libro y planificación de Biología; plan de estudio de Música (.docx); PDF del trimestre, apunte de teoría e imágenes de ejemplo de Arte. Los originales están en `Escritorio\PLANIFICACION 8tvo\Biologia`, `\Musica` y `\Arte`.
+  - `ingles/`: planificación anual, *On the Pulse Starter* (Student's Book + Workbook, escaneado) y el Workbook de *iSucceed in English 2*. Los originales están en `../ingles/`.
   - `matematica/`: `Programa_Matematica_8.pdf`, `Planificacion_semana_a_semana.pdf`, `Libro_Matematica_F2_Effenberger.pdf`, `Hojas_de_ejercitacion.pdf`, `Solucionario_hojas.pdf`, `Anexo_Teorema_de_Pitagoras.pdf` y `semanas/U#_S#.pdf` (32).
 - Los originales están fuera del repositorio: en `../bibliografia Geografia/`, `../bibliografia de historia/` y `../bibliografia fec/`; los de Lengua en `Escritorio\PLANIFICACION 8tvo\Lengua 1 - Material para familias\`, y los de Matemática en `Escritorio\PLANIFICACION 8tvo\8vo Home\`.
 - Si agregás o quitás un PDF, actualizá en esa plataforma la lista `ul.descargas`, el tamaño de cada archivo y el texto del botón ("Descargar todo (N archivos · X MB)").
