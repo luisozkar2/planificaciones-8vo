@@ -68,7 +68,7 @@ El cuerpo usa marcado estilo Pandoc (`section.level1/2/3`, `<colgroup>`, `tr.odd
 Lengua usa la misma plantilla, pero su contenido está organizado de otra manera:
 
 - Es anual: 32 semanas en tres unidades (`#u1` Bloque I · Literatura, semanas 1-15; `#u2` Bloque II · Estudio y ciudadanía, 16-25; `#u3` Ortografía y proyecto final «Mi antología», 26-31). La semana 32, la evaluación final, está en `#final`, junto con `#claves`. No tiene `#pf`.
-- No tiene recuadros bíblicos ni "Mirada bíblica": el material original no los incluye.
+- La mirada bíblica no venía en el material original: se agregó después (ver «Mirada bíblica en las plataformas generadas»).
 - La tabla de cada semana tiene las filas Lectura y teoría / Gramática u Ortografía / Proyecto / Cierre / Videos. Las subsecciones tienen ids únicos con sufijo: `para-leer-sN`, `gramatica-sN` u `ortografia-sN`, `videos-sN`, `cierre-sN` y `ficha-sN`. El cierre puede incluir un taller con dos propuestas (`<h4>Propuesta N · …</h4>` + `<ol>`).
 - Las "pruebas" son los 6 diagnósticos (`section.prueba#p1…#p6`, después de las semanas 4, 8, 12, 19, 23 y 29). Cada uno es un enlace a su PDF; `#claves` enlaza los PDF de las claves.
 - Los enlaces a PDF dentro de las semanas, los diagnósticos y las claves usan `ul.descargas` **sin** el atributo `download` (se abren en otra pestaña). Así el botón "Descargar todo", que toma `ul.descargas a[download]`, baja solo la lista de `#descargas` (la planificación y los 16 capítulos).
@@ -77,7 +77,7 @@ Lengua usa la misma plantilla, pero su contenido está organizado de otra manera
 ### Diferencias de Matemática 1
 
 - 8 unidades (`#u1`…`#u8`) de 4 semanas (`#s1`…`#s32`). La paleta solo define `u1`…`u5`, así que las unidades 5 a 8 repiten los colores `u1`…`u4`. `#final` (color `u5`) contiene solo `#claves`, el solucionario de las hojas. No hay `pN`: la cuarta semana de cada unidad es de integración y evaluación.
-- No tiene recuadros bíblicos.
+- La mirada bíblica se agregó después (ver «Mirada bíblica en las plataformas generadas»).
 - Cada semana tiene una tabla (Objetivo / Libro / Materiales / Hoja de ejercitación) y las subsecciones `clases-sN` (tabla de las 5 clases), `teoria-sN` (enlace al PDF de la semana, que trae teoría, ejercicios y su propio solucionario), `videos-sN` (la etiqueta chica dice para qué clase es cada video) y `hoja-sN`.
 - La teoría **no** está pasada a HTML: queda en `bibliografia/matematica/semanas/U#_S#.pdf`, porque tiene fórmulas, tablas y figuras y su formato cambia entre unidades.
 - Las hojas de ejercitación y sus soluciones están todas en un PDF cada una (`Hojas_de_ejercitacion.pdf`, `Solucionario_hojas.pdf`). Cada hoja se enlaza con `#page=N` a la página donde empieza.
@@ -87,12 +87,23 @@ Lengua usa la misma plantilla, pero su contenido está organizado de otra manera
 
 ### Diferencias de Biología, Música y Arte
 
-Las tres usan la misma plantilla, pero no tienen recuadros bíblicos, ni `#final`, ni `#claves`. Sus unidades son `#u1`…`#u3` y las subsecciones de cada semana tienen ids con sufijo (`para-leer-sN`, `videos-sN`, `trabajo-sN`, etc.).
+Las tres usan la misma plantilla, pero no tienen `#final` ni `#claves`. Sus unidades son `#u1`…`#u3` y las subsecciones de cada semana tienen ids con sufijo (`para-leer-sN`, `videos-sN`, `trabajo-sN`, etc.).
 
 - **Biología 1:** 30 semanas en tres secciones (evolución 1-11, células y nutrición 12-22, genética y nutrición humana 23-30). Cada semana tiene las páginas del libro, un resumen, un video y una "evaluación rápida" de 2 preguntas. Todo sale del .docx de la planificación. El libro (`Libro_Biologia_1_NES_Santillana.pdf`, unos 86 MB) está escaneado. El título del .docx dice "Biología 2", pero el libro es *Biología 1* NES de Santillana.
 - **Música 1:** 12 semanas en 3 meses, con 2 h por semana. La teoría está escrita en la página. Las semanas 9 a 12 no tienen teoría nueva: enlazan a la de semanas anteriores. Tres de los "videos" son búsquedas de YouTube, no un video fijo. Los libros recomendados no están para descargar. En el .docx original, la teoría del mes 2 repite por error la del mes 1; en la página se usa la teoría correcta de ritmo, forma y textura.
 - **Arte 1:** 12 semanas en 3 unidades (simetría y color; perspectiva geométrica; teoría del color). Cada semana tiene la teoría, la consigna del trabajo práctico y los pasos. Las semanas 1 a 4 muestran imágenes de ejemplo (`bibliografia/arte/img/`) con `<figure>` y estilo en línea, para no tocar el CSS compartido. Los enlaces al apunte de teoría y al PDF del trimestre usan `#page=N`.
 - Las tres se generaron con `../generador_tres/generar.py` (ver su `LEEME.txt`). Desde entonces se editan en el HTML.
+
+### Mirada bíblica en las plataformas generadas
+
+Lengua, Matemática, Biología, Música y Arte no traían mirada bíblica: se la agregó `../mirada_biblica/insertar.py`, con los textos de `lengua.py`, `matematica.py`, `biologia.py`, `musica.py` y `arte.py` de esa carpeta. El script agrega:
+
+- a la portada, el cierre «Todo, mirado con los anteojos de la Biblia.»;
+- en la introducción, «Los cuatro anteojos de la cosmovisión bíblica» (Creación, Caída, Redención y Propósito, con ejemplos de la materia), un ítem en «Cómo está organizada cada semana» y las notas de la Biblia (Reina-Valera 1960) y de HM;
+- un «Versículo de la unidad» en el `<blockquote>` de cada unidad;
+- en cada semana, una fila «Mirada bíblica» en el cuadro y una subsección `mirada-biblica-sN` con un `div.biblia` (título, uno o dos párrafos y «Para conversar»), justo después de la primera subsección.
+
+Criterios de los textos: las citas textuales van entre comillas y son de la Reina-Valera 1960; si no es textual, se da solo la referencia. HM se cita por capítulo y página del archivo. En Biología, cuando la teoría de la evolución y Génesis responden distinto, se dice con claridad y se invita a comparar las fuentes, como en Historia. **No se nombra al autor de la guía temática de grado 8** en ningún texto (tampoco en este archivo, que también se publica). Si se vuelve a generar una de estas plataformas, hay que volver a ejecutar `insertar.py <materia>`; si la página ya tiene la mirada bíblica, el script no la duplica.
 
 ### Componentes de contenido reutilizables
 
