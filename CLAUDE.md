@@ -34,6 +34,15 @@ Todo el contenido está en español rioplatense con voseo ("fijate", "armá", "t
 - Las advertencias de git sobre LF/CRLF son normales en este repositorio y no requieren acción.
 - GitHub admite archivos de hasta 100 MB con `git push`, pero la subida desde la web admite solo 25 MB. El PDF más grande, el de Santillana, pesa unos 90 MB.
 
+## Ingreso al sitio (usuario y contraseña)
+
+- Todas las páginas (`index.html`, `tutoras.html` y las `*_Plataforma.html`) cargan [acceso.js](acceso.js) en el `<head>`, junto con `<meta name="robots" content="noindex">`. Si el visitante no ingresó, el script lo manda a [login.html](login.html)`?volver=<página>`, y después de ingresar vuelve ahí. `volver` solo acepta páginas `.html` internas.
+- Es **una sola cuenta compartida** por todas las familias. `acceso.js` guarda solo el SHA-256 de `usuario-en-minúsculas:contraseña:planificacion-8vo`, **nunca la contraseña** (que tampoco va en este archivo ni en los commits). Para cambiarla, se reemplaza `HASH` en `acceso.js` (el comentario del archivo explica cómo calcularlo con Node). Al cambiar el hash, todas las sesiones guardadas dejan de valer.
+- La sesión dura mientras el navegador está abierto (`sessionStorage`) o 30 días si se marca «Recordarme» (`localStorage`). «🔒 Cerrar sesión», al pie de `index.html` y `tutoras.html`, llama a `cerrarSesion()`.
+- **Es solo una barrera visual:** los PDF, las fotos y el HTML siguen accesibles con el enlace directo, y el repositorio de GitHub es público. Si se necesita seguridad real, hay que mudar el sitio a un hosting con control en el servidor (por ejemplo, Cloudflare Pages con una función que pida las credenciales) y poner el repositorio en privado.
+- `robots.txt` pide a los buscadores no indexar el sitio.
+- **Toda página nueva tiene que incluir** `<script src="acceso.js"></script>` en el `<head>`. Las plataformas generadas lo heredan, porque los generadores copian la cabecera de `Historia1_Plataforma.html`. `login.html` lo carga con `window.ACCESO_LOGIN = true` para que no redirija.
+
 ## Pantalla de inicio (`index.html`)
 
 - Las tarjetas de materias se generan desde la lista `MATERIAS`, al principio de su `<script>`. Para sumar una materia, se agrega un objeto. Con `archivo: ""`, la tarjeta aparece como "Próximamente", sin enlace ni botón de tutor. Si cambian el título, el color o las estadísticas de una plataforma, actualizá también su tarjeta.
